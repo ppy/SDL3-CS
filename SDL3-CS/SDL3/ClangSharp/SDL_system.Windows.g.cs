@@ -32,11 +32,6 @@ namespace SDL
     {
     }
 
-    [StructLayout(LayoutKind.Explicit)]
-    public partial struct _XEvent
-    {
-    }
-
     public partial struct XTaskQueueObject
     {
     }

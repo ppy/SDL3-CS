@@ -23,19 +23,15 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    [StructLayout(LayoutKind.Explicit)]
-    public partial struct _XEvent
-    {
-    }
-
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetX11EventHook([NativeTypeName("SDL_X11EventHook")] delegate* unmanaged[Cdecl]<void*, _XEvent*, int> callback, void* userdata);
+        public static extern void SDL_SetX11EventHook([NativeTypeName("SDL_X11EventHook")] delegate* unmanaged[Cdecl]<void*, IntPtr, int> callback, void* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]

@@ -28,11 +28,6 @@ using System.Runtime.Versioning;
 
 namespace SDL
 {
-    [StructLayout(LayoutKind.Explicit)]
-    public partial struct _XEvent
-    {
-    }
-
     public enum SDL_WinRT_Path
     {
         SDL_WINRT_PATH_INSTALLED_LOCATION,
