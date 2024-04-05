@@ -100,7 +100,8 @@ namespace SDL
         SDL_PACKEDLAYOUT_1010102,
     }
 
-    public enum SDL_PixelFormatEnum
+    [NativeTypeName("int")]
+    public enum SDL_PixelFormatEnum : uint
     {
         SDL_PIXELFORMAT_UNKNOWN,
         SDL_PIXELFORMAT_INDEX1LSB = ((1 << 28) | ((SDL_PIXELTYPE_INDEX1) << 24) | ((SDL_BITMAPORDER_4321) << 20) | ((0) << 16) | ((1) << 8) | ((0) << 0)),
@@ -169,15 +170,15 @@ namespace SDL
         SDL_PIXELFORMAT_XRGB32 = SDL_PIXELFORMAT_BGRX8888,
         SDL_PIXELFORMAT_BGRX32 = SDL_PIXELFORMAT_XRGB8888,
         SDL_PIXELFORMAT_XBGR32 = SDL_PIXELFORMAT_RGBX8888,
-        SDL_PIXELFORMAT_YV12 = unchecked(((uint)((byte)('Y')) << 0) | ((uint)((byte)('V')) << 8) | ((uint)((byte)('1')) << 16) | ((uint)((byte)('2')) << 24)),
-        SDL_PIXELFORMAT_IYUV = unchecked(((uint)((byte)('I')) << 0) | ((uint)((byte)('Y')) << 8) | ((uint)((byte)('U')) << 16) | ((uint)((byte)('V')) << 24)),
-        SDL_PIXELFORMAT_YUY2 = unchecked(((uint)((byte)('Y')) << 0) | ((uint)((byte)('U')) << 8) | ((uint)((byte)('Y')) << 16) | ((uint)((byte)('2')) << 24)),
-        SDL_PIXELFORMAT_UYVY = unchecked(((uint)((byte)('U')) << 0) | ((uint)((byte)('Y')) << 8) | ((uint)((byte)('V')) << 16) | ((uint)((byte)('Y')) << 24)),
-        SDL_PIXELFORMAT_YVYU = unchecked(((uint)((byte)('Y')) << 0) | ((uint)((byte)('V')) << 8) | ((uint)((byte)('Y')) << 16) | ((uint)((byte)('U')) << 24)),
-        SDL_PIXELFORMAT_NV12 = unchecked(((uint)((byte)('N')) << 0) | ((uint)((byte)('V')) << 8) | ((uint)((byte)('1')) << 16) | ((uint)((byte)('2')) << 24)),
-        SDL_PIXELFORMAT_NV21 = unchecked(((uint)((byte)('N')) << 0) | ((uint)((byte)('V')) << 8) | ((uint)((byte)('2')) << 16) | ((uint)((byte)('1')) << 24)),
-        SDL_PIXELFORMAT_P010 = unchecked(((uint)((byte)('P')) << 0) | ((uint)((byte)('0')) << 8) | ((uint)((byte)('1')) << 16) | ((uint)((byte)('0')) << 24)),
-        SDL_PIXELFORMAT_EXTERNAL_OES = unchecked(((uint)((byte)('O')) << 0) | ((uint)((byte)('E')) << 8) | ((uint)((byte)('S')) << 16) | ((uint)((byte)(' ')) << 24)),
+        SDL_PIXELFORMAT_YV12 = (unchecked(((uint)((byte)('Y')) << 0) | ((uint)((byte)('V')) << 8) | ((uint)((byte)('1')) << 16) | ((uint)((byte)('2')) << 24))),
+        SDL_PIXELFORMAT_IYUV = (unchecked(((uint)((byte)('I')) << 0) | ((uint)((byte)('Y')) << 8) | ((uint)((byte)('U')) << 16) | ((uint)((byte)('V')) << 24))),
+        SDL_PIXELFORMAT_YUY2 = (unchecked(((uint)((byte)('Y')) << 0) | ((uint)((byte)('U')) << 8) | ((uint)((byte)('Y')) << 16) | ((uint)((byte)('2')) << 24))),
+        SDL_PIXELFORMAT_UYVY = (unchecked(((uint)((byte)('U')) << 0) | ((uint)((byte)('Y')) << 8) | ((uint)((byte)('V')) << 16) | ((uint)((byte)('Y')) << 24))),
+        SDL_PIXELFORMAT_YVYU = (unchecked(((uint)((byte)('Y')) << 0) | ((uint)((byte)('V')) << 8) | ((uint)((byte)('Y')) << 16) | ((uint)((byte)('U')) << 24))),
+        SDL_PIXELFORMAT_NV12 = (unchecked(((uint)((byte)('N')) << 0) | ((uint)((byte)('V')) << 8) | ((uint)((byte)('1')) << 16) | ((uint)((byte)('2')) << 24))),
+        SDL_PIXELFORMAT_NV21 = (unchecked(((uint)((byte)('N')) << 0) | ((uint)((byte)('V')) << 8) | ((uint)((byte)('2')) << 16) | ((uint)((byte)('1')) << 24))),
+        SDL_PIXELFORMAT_P010 = (unchecked(((uint)((byte)('P')) << 0) | ((uint)((byte)('0')) << 8) | ((uint)((byte)('1')) << 16) | ((uint)((byte)('0')) << 24))),
+        SDL_PIXELFORMAT_EXTERNAL_OES = (unchecked(((uint)((byte)('O')) << 0) | ((uint)((byte)('E')) << 8) | ((uint)((byte)('S')) << 16) | ((uint)((byte)(' ')) << 24))),
     }
 
     public enum SDL_ColorType
@@ -262,19 +263,20 @@ namespace SDL
         SDL_CHROMA_LOCATION_TOPLEFT = 3,
     }
 
-    public enum SDL_Colorspace
+    [NativeTypeName("int")]
+    public enum SDL_Colorspace : uint
     {
         SDL_COLORSPACE_UNKNOWN,
-        SDL_COLORSPACE_SRGB = unchecked(((uint)(SDL_COLOR_TYPE_RGB) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_NONE) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_SRGB) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_IDENTITY) << 0)),
-        SDL_COLORSPACE_SRGB_LINEAR = unchecked(((uint)(SDL_COLOR_TYPE_RGB) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_NONE) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_LINEAR) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_IDENTITY) << 0)),
-        SDL_COLORSPACE_HDR10 = unchecked(((uint)(SDL_COLOR_TYPE_RGB) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_NONE) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT2020) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_PQ) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_IDENTITY) << 0)),
-        SDL_COLORSPACE_JPEG = unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_NONE) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT601) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT601) << 0)),
-        SDL_COLORSPACE_BT601_LIMITED = unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_LIMITED) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT601) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT601) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT601) << 0)),
-        SDL_COLORSPACE_BT601_FULL = unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT601) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT601) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT601) << 0)),
-        SDL_COLORSPACE_BT709_LIMITED = unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_LIMITED) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT709) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT709) << 0)),
-        SDL_COLORSPACE_BT709_FULL = unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT709) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT709) << 0)),
-        SDL_COLORSPACE_BT2020_LIMITED = unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_LIMITED) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT2020) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_PQ) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT2020_NCL) << 0)),
-        SDL_COLORSPACE_BT2020_FULL = unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT2020) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_PQ) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT2020_NCL) << 0)),
+        SDL_COLORSPACE_SRGB = (unchecked(((uint)(SDL_COLOR_TYPE_RGB) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_NONE) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_SRGB) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_IDENTITY) << 0))),
+        SDL_COLORSPACE_SRGB_LINEAR = (unchecked(((uint)(SDL_COLOR_TYPE_RGB) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_NONE) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_LINEAR) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_IDENTITY) << 0))),
+        SDL_COLORSPACE_HDR10 = (unchecked(((uint)(SDL_COLOR_TYPE_RGB) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_NONE) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT2020) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_PQ) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_IDENTITY) << 0))),
+        SDL_COLORSPACE_JPEG = (unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_NONE) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT601) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT601) << 0))),
+        SDL_COLORSPACE_BT601_LIMITED = (unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_LIMITED) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT601) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT601) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT601) << 0))),
+        SDL_COLORSPACE_BT601_FULL = (unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT601) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT601) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT601) << 0))),
+        SDL_COLORSPACE_BT709_LIMITED = (unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_LIMITED) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT709) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT709) << 0))),
+        SDL_COLORSPACE_BT709_FULL = (unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT709) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_BT709) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT709) << 0))),
+        SDL_COLORSPACE_BT2020_LIMITED = (unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_LIMITED) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT2020) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_PQ) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT2020_NCL) << 0))),
+        SDL_COLORSPACE_BT2020_FULL = (unchecked(((uint)(SDL_COLOR_TYPE_YCBCR) << 28) | ((uint)(SDL_COLOR_RANGE_FULL) << 24) | ((uint)(SDL_CHROMA_LOCATION_LEFT) << 20) | ((uint)(SDL_COLOR_PRIMARIES_BT2020) << 10) | ((uint)(SDL_TRANSFER_CHARACTERISTICS_PQ) << 5) | ((uint)(SDL_MATRIX_COEFFICIENTS_BT2020_NCL) << 0))),
         SDL_COLORSPACE_RGB_DEFAULT = SDL_COLORSPACE_SRGB,
         SDL_COLORSPACE_YUV_DEFAULT = SDL_COLORSPACE_JPEG,
     }
