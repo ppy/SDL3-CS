@@ -57,7 +57,7 @@ namespace SDL
         public static extern void SDL_UnlockProperties([NativeTypeName("SDL_PropertiesID")] uint props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetPropertyWithCleanup([NativeTypeName("SDL_PropertiesID")] uint props, [NativeTypeName("const char *")] sbyte* name, void* value, [NativeTypeName("void (*)(void *, void *) __attribute__((cdecl))")] delegate* unmanaged[Cdecl]<void*, void*, void> cleanup, void* userdata);
+        public static extern int SDL_SetPropertyWithCleanup([NativeTypeName("SDL_PropertiesID")] uint props, [NativeTypeName("const char *")] sbyte* name, void* value, [NativeTypeName("void (*)(void *, void *)")] delegate* unmanaged[Cdecl]<void*, void*, void> cleanup, void* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetProperty([NativeTypeName("SDL_PropertiesID")] uint props, [NativeTypeName("const char *")] sbyte* name, void* value);

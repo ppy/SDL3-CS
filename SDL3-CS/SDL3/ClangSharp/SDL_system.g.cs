@@ -27,10 +27,6 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public partial struct tagMSG
-    {
-    }
-
     [StructLayout(LayoutKind.Explicit)]
     public partial struct _XEvent
     {
@@ -38,16 +34,6 @@ namespace SDL
 
     public static unsafe partial class SDL3
     {
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetWindowsMessageHook([NativeTypeName("SDL_WindowsMessageHook")] delegate* unmanaged[Cdecl]<void*, tagMSG*, int> callback, void* userdata);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_Direct3D9GetAdapterIndex([NativeTypeName("SDL_DisplayID")] uint displayID);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_DXGIGetOutputInfo([NativeTypeName("SDL_DisplayID")] uint displayID, int* adapterIndex, int* outputIndex);
-
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_SetX11EventHook([NativeTypeName("SDL_X11EventHook")] delegate* unmanaged[Cdecl]<void*, _XEvent*, int> callback, void* userdata);
 

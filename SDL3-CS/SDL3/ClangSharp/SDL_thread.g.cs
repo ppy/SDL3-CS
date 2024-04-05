@@ -42,10 +42,10 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Thread* SDL_CreateThread([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<void*, int> fn, [NativeTypeName("const char *")] sbyte* name, void* data, [NativeTypeName("pfnSDL_CurrentBeginThread")] delegate* unmanaged[Cdecl]<void*, uint, delegate* unmanaged[Stdcall]<void*, uint>, void*, uint, uint*, nuint> pfnBeginThread, [NativeTypeName("pfnSDL_CurrentEndThread")] delegate* unmanaged[Cdecl]<uint, void> pfnEndThread);
+        public static extern SDL_Thread* SDL_CreateThread([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<void*, int> fn, [NativeTypeName("const char *")] sbyte* name, void* data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Thread* SDL_CreateThreadWithStackSize([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<void*, int> fn, [NativeTypeName("const char *")] sbyte* name, [NativeTypeName("const size_t")] nuint stacksize, void* data, [NativeTypeName("pfnSDL_CurrentBeginThread")] delegate* unmanaged[Cdecl]<void*, uint, delegate* unmanaged[Stdcall]<void*, uint>, void*, uint, uint*, nuint> pfnBeginThread, [NativeTypeName("pfnSDL_CurrentEndThread")] delegate* unmanaged[Cdecl]<uint, void> pfnEndThread);
+        public static extern SDL_Thread* SDL_CreateThreadWithStackSize([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<void*, int> fn, [NativeTypeName("const char *")] sbyte* name, [NativeTypeName("const size_t")] nuint stacksize, void* data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -76,15 +76,9 @@ namespace SDL
         public static extern void* SDL_GetTLS([NativeTypeName("SDL_TLSID")] uint id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetTLS([NativeTypeName("SDL_TLSID")] uint id, [NativeTypeName("const void *")] void* value, [NativeTypeName("void (*)(void *) __attribute__((cdecl))")] delegate* unmanaged[Cdecl]<void*, void> destructor);
+        public static extern int SDL_SetTLS([NativeTypeName("SDL_TLSID")] uint id, [NativeTypeName("const void *")] void* value, [NativeTypeName("void (*)(void *)")] delegate* unmanaged[Cdecl]<void*, void> destructor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CleanupTLS();
-
-        [NativeTypeName("#define SDL_beginthread _beginthreadex")]
-        public static readonly delegate*<void*, uint, delegate* unmanaged[Stdcall]<void*, uint>, void*, uint, uint*, nuint> SDL_beginthread = &_beginthreadex;
-
-        [NativeTypeName("#define SDL_endthread _endthreadex")]
-        public static readonly delegate*<uint, void> SDL_endthread = &_endthreadex;
     }
 }

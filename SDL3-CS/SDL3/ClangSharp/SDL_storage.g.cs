@@ -29,34 +29,34 @@ namespace SDL
 {
     public unsafe partial struct SDL_StorageInterface
     {
-        [NativeTypeName("int (*)(void *) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *)")]
         public delegate* unmanaged[Cdecl]<void*, int> close;
 
-        [NativeTypeName("SDL_bool (*)(void *) __attribute__((cdecl))")]
+        [NativeTypeName("SDL_bool (*)(void *)")]
         public delegate* unmanaged[Cdecl]<void*, int> ready;
 
-        [NativeTypeName("int (*)(void *, const char *, SDL_EnumerateDirectoryCallback, void *) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, const char *, SDL_EnumerateDirectoryCallback, void *)")]
         public delegate* unmanaged[Cdecl]<void*, sbyte*, delegate* unmanaged[Cdecl]<void*, sbyte*, sbyte*, int>, void*, int> enumerate;
 
-        [NativeTypeName("int (*)(void *, const char *, SDL_PathInfo *) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, const char *, SDL_PathInfo *)")]
         public delegate* unmanaged[Cdecl]<void*, sbyte*, SDL_PathInfo*, int> info;
 
-        [NativeTypeName("int (*)(void *, const char *, void *, Uint64) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, const char *, void *, Uint64)")]
         public delegate* unmanaged[Cdecl]<void*, sbyte*, void*, ulong, int> read_file;
 
-        [NativeTypeName("int (*)(void *, const char *, const void *, Uint64) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, const char *, const void *, Uint64)")]
         public delegate* unmanaged[Cdecl]<void*, sbyte*, void*, ulong, int> write_file;
 
-        [NativeTypeName("int (*)(void *, const char *) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, const char *)")]
         public delegate* unmanaged[Cdecl]<void*, sbyte*, int> mkdir;
 
-        [NativeTypeName("int (*)(void *, const char *) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, const char *)")]
         public delegate* unmanaged[Cdecl]<void*, sbyte*, int> remove;
 
-        [NativeTypeName("int (*)(void *, const char *, const char *) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, const char *, const char *)")]
         public delegate* unmanaged[Cdecl]<void*, sbyte*, sbyte*, int> rename;
 
-        [NativeTypeName("Uint64 (*)(void *) __attribute__((cdecl))")]
+        [NativeTypeName("Uint64 (*)(void *)")]
         public delegate* unmanaged[Cdecl]<void*, ulong> space_remaining;
     }
 
