@@ -335,3 +335,5 @@ fabric.properties
 # inspectcode
 inspectcodereport.xml
 inspectcode
+
+sdl.json
