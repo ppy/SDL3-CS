@@ -41,8 +41,5 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
         public static extern void SDL_GDKSuspendComplete();
-
-        [NativeTypeName("#define main SDL_main")]
-        public static readonly delegate*<int, sbyte**, int> main = &SDL_main;
     }
 }
