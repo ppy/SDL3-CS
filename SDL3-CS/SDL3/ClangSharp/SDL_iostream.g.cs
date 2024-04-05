@@ -40,19 +40,19 @@ namespace SDL
 
     public unsafe partial struct SDL_IOStreamInterface
     {
-        [NativeTypeName("Sint64 (*)(void *) __attribute__((cdecl))")]
+        [NativeTypeName("Sint64 (*)(void *)")]
         public delegate* unmanaged[Cdecl]<void*, long> size;
 
-        [NativeTypeName("Sint64 (*)(void *, Sint64, int) __attribute__((cdecl))")]
+        [NativeTypeName("Sint64 (*)(void *, Sint64, int)")]
         public delegate* unmanaged[Cdecl]<void*, long, int, long> seek;
 
-        [NativeTypeName("size_t (*)(void *, void *, size_t, SDL_IOStatus *) __attribute__((cdecl))")]
+        [NativeTypeName("size_t (*)(void *, void *, size_t, SDL_IOStatus *)")]
         public delegate* unmanaged[Cdecl]<void*, void*, nuint, SDL_IOStatus*, nuint> read;
 
-        [NativeTypeName("size_t (*)(void *, const void *, size_t, SDL_IOStatus *) __attribute__((cdecl))")]
+        [NativeTypeName("size_t (*)(void *, const void *, size_t, SDL_IOStatus *)")]
         public delegate* unmanaged[Cdecl]<void*, void*, nuint, SDL_IOStatus*, nuint> write;
 
-        [NativeTypeName("int (*)(void *) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *)")]
         public delegate* unmanaged[Cdecl]<void*, int> close;
     }
 

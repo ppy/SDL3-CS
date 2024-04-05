@@ -123,6 +123,9 @@ base_command = [
     "--libraryPath", "SDL3",
     "--methodClassName", "SDL3",
     "--namespace", "SDL",
+
+    "--additional",
+    "--undefine-macro=_WIN32",
 ]
 
 

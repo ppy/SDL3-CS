@@ -77,16 +77,16 @@ namespace SDL
         public static extern int SDL_setenv([NativeTypeName("const char *")] sbyte* name, [NativeTypeName("const char *")] sbyte* value, int overwrite);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_qsort(void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(const void *, const void *) __attribute__((cdecl))")] delegate* unmanaged[Cdecl]<void*, void*, int> compare);
+        public static extern void SDL_qsort(void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(const void *, const void *)")] delegate* unmanaged[Cdecl]<void*, void*, int> compare);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_bsearch([NativeTypeName("const void *")] void* key, [NativeTypeName("const void *")] void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(const void *, const void *) __attribute__((cdecl))")] delegate* unmanaged[Cdecl]<void*, void*, int> compare);
+        public static extern void* SDL_bsearch([NativeTypeName("const void *")] void* key, [NativeTypeName("const void *")] void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(const void *, const void *)")] delegate* unmanaged[Cdecl]<void*, void*, int> compare);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_qsort_r(void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(void *, const void *, const void *) __attribute__((cdecl))")] delegate* unmanaged[Cdecl]<void*, void*, void*, int> compare, void* userdata);
+        public static extern void SDL_qsort_r(void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(void *, const void *, const void *)")] delegate* unmanaged[Cdecl]<void*, void*, void*, int> compare, void* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_bsearch_r([NativeTypeName("const void *")] void* key, [NativeTypeName("const void *")] void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(void *, const void *, const void *) __attribute__((cdecl))")] delegate* unmanaged[Cdecl]<void*, void*, void*, int> compare, void* userdata);
+        public static extern void* SDL_bsearch_r([NativeTypeName("const void *")] void* key, [NativeTypeName("const void *")] void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(void *, const void *, const void *)")] delegate* unmanaged[Cdecl]<void*, void*, void*, int> compare, void* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_abs(int x);
@@ -612,17 +612,17 @@ namespace SDL
         [NativeTypeName("#define SDL_FLT_EPSILON 1.1920928955078125e-07F")]
         public const float SDL_FLT_EPSILON = 1.1920928955078125e-07F;
 
-        [NativeTypeName("#define SDL_PRIs64 \"I64d\"")]
-        public static ReadOnlySpan<byte> SDL_PRIs64 => "I64d"u8;
+        [NativeTypeName("#define SDL_PRIs64 \"lld\"")]
+        public static ReadOnlySpan<byte> SDL_PRIs64 => "lld"u8;
 
-        [NativeTypeName("#define SDL_PRIu64 \"I64u\"")]
-        public static ReadOnlySpan<byte> SDL_PRIu64 => "I64u"u8;
+        [NativeTypeName("#define SDL_PRIu64 \"llu\"")]
+        public static ReadOnlySpan<byte> SDL_PRIu64 => "llu"u8;
 
-        [NativeTypeName("#define SDL_PRIx64 \"I64x\"")]
-        public static ReadOnlySpan<byte> SDL_PRIx64 => "I64x"u8;
+        [NativeTypeName("#define SDL_PRIx64 \"llx\"")]
+        public static ReadOnlySpan<byte> SDL_PRIx64 => "llx"u8;
 
-        [NativeTypeName("#define SDL_PRIX64 \"I64X\"")]
-        public static ReadOnlySpan<byte> SDL_PRIX64 => "I64X"u8;
+        [NativeTypeName("#define SDL_PRIX64 \"llX\"")]
+        public static ReadOnlySpan<byte> SDL_PRIX64 => "llX"u8;
 
         [NativeTypeName("#define SDL_PRIs32 \"d\"")]
         public static ReadOnlySpan<byte> SDL_PRIs32 => "d"u8;

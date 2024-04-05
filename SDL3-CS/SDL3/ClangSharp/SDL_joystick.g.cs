@@ -91,22 +91,22 @@ namespace SDL
 
         public void* userdata;
 
-        [NativeTypeName("void (*)(void *) __attribute__((cdecl))")]
+        [NativeTypeName("void (*)(void *)")]
         public delegate* unmanaged[Cdecl]<void*, void> Update;
 
-        [NativeTypeName("void (*)(void *, int) __attribute__((cdecl))")]
+        [NativeTypeName("void (*)(void *, int)")]
         public delegate* unmanaged[Cdecl]<void*, int, void> SetPlayerIndex;
 
-        [NativeTypeName("int (*)(void *, Uint16, Uint16) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, Uint16, Uint16)")]
         public delegate* unmanaged[Cdecl]<void*, ushort, ushort, int> Rumble;
 
-        [NativeTypeName("int (*)(void *, Uint16, Uint16) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, Uint16, Uint16)")]
         public delegate* unmanaged[Cdecl]<void*, ushort, ushort, int> RumbleTriggers;
 
-        [NativeTypeName("int (*)(void *, Uint8, Uint8, Uint8) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, Uint8, Uint8, Uint8)")]
         public delegate* unmanaged[Cdecl]<void*, byte, byte, byte, int> SetLED;
 
-        [NativeTypeName("int (*)(void *, const void *, int) __attribute__((cdecl))")]
+        [NativeTypeName("int (*)(void *, const void *, int)")]
         public delegate* unmanaged[Cdecl]<void*, void*, int, int> SendEffect;
     }
 
