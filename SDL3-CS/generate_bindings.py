@@ -11,8 +11,10 @@ Prerequisites:
 This script should be run manually.
 """
 
+import json
 import pathlib
 import subprocess
+import sys
 
 SDL_root = pathlib.Path("../../SDL")
 SDL_include_root = SDL_root / "include"
@@ -24,12 +26,13 @@ csproj_root = pathlib.Path(".")
 class Header:
     """Represents a SDL header file that is used in ClangSharp generation."""
 
-    def __init__(self, base: str, name: str):
+    def __init__(self, base: str, name: str, output_suffix=None):
         assert base == SDL3_header_base
         assert name.startswith("SDL")
         assert not name.endswith(".h")
         self.base = base
         self.name = name
+        self.output_suffix = output_suffix
 
     def __str__(self):
         return self.input_file()
@@ -44,11 +47,16 @@ class Header:
 
     def output_file(self):
         """Location of generated C# file."""
-        return csproj_root / f"{self.base}/ClangSharp/{self.name}.g.cs"
+        if self.output_suffix is None:
+            return csproj_root / f"{self.base}/ClangSharp/{self.name}.g.cs"
+        else:
+            return csproj_root / f"{self.base}/ClangSharp/{self.name}.{self.output_suffix}.g.cs"
 
     def rsp_files(self):
         """Location of ClangSharp response files."""
         yield csproj_root / f"{self.base}/{self.name}.rsp"
+        if self.output_suffix is not None:
+            yield csproj_root / f"{self.base}/{self.name}.{self.output_suffix}.rsp"
 
 
 def add(s: str):
@@ -112,6 +120,45 @@ headers = [
     add("SDL3/SDL_vulkan.h"),
 ]
 
+
+def get_sdl_api_dump():
+    subprocess.run([
+        sys.executable,
+        SDL_root / "src" / "dynapi" / "gendynapi.py",
+        "--dump"
+    ])
+
+    with open("sdl.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def all_funcs_from_header(sdl_api, header):
+    for f in sdl_api:
+        if f["header"] == header.sdl_api_name():
+            yield f
+
+
+def get_text(file_paths):
+    text = ""
+    for path in file_paths:
+        with open(path, "r", encoding="utf-8") as f:
+            text += f.read()
+
+    return text
+
+
+def check_generated_functions(sdl_api, header, generated_file_paths):
+    """Checks that the generated C# files contain the expected function definitions."""
+    all_files_text = get_text(generated_file_paths)
+
+    for func in all_funcs_from_header(sdl_api, header):
+        name = func["name"]
+        found = f"{name}(" in all_files_text
+
+        if not found:
+            print(f"[⚠️ Warning] Function {name} not found in generated files:", *generated_file_paths)
+
+
 base_command = [
     "dotnet", "tool", "run", "ClangSharpPInvokeGenerator",
     "--headerFile", csproj_root / "SDL.licenseheader",
@@ -144,11 +191,15 @@ def run_clangsharp(command, header: Header):
             cmd.append(f"@{rsp}")
 
     subprocess.run(cmd)
+    return header.output_file()
 
 
 def main():
+    sdl_api = get_sdl_api_dump()
+
     for header in headers:
-        run_clangsharp(base_command, header)
+        output_file = run_clangsharp(base_command, header)
+        check_generated_functions(sdl_api, header, [output_file])
 
 
 if __name__ == "__main__":
