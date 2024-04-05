@@ -13,6 +13,7 @@ This script should be run manually.
 
 import json
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -90,7 +91,6 @@ headers = [
     add("SDL3/SDL_loadso.h"),
     add("SDL3/SDL_locale.h"),
     add("SDL3/SDL_log.h"),
-    add("SDL3/SDL_main.h"),
     add("SDL3/SDL_messagebox.h"),
     add("SDL3/SDL_metal.h"),
     add("SDL3/SDL_misc.h"),
@@ -110,7 +110,6 @@ headers = [
     add("SDL3/SDL_stdinc.h"),
     add("SDL3/SDL_storage.h"),
     add("SDL3/SDL_surface.h"),
-    add("SDL3/SDL_system.h"),
     add("SDL3/SDL_thread.h"),
     add("SDL3/SDL_time.h"),
     add("SDL3/SDL_timer.h"),
@@ -194,12 +193,62 @@ def run_clangsharp(command, header: Header):
     return header.output_file()
 
 
+# regex for ClangSharp-generated SDL functions
+generated_function_regex = re.compile(r"public static extern \w+\** (SDL_\w+)\(")
+
+
+def get_generated_functions(file):
+    with open(file, "r", encoding="utf-8") as f:
+        for match in generated_function_regex.finditer(f.read()):
+            yield match.group(1)
+
+
+def generate_platform_specific_headers(sdl_api, header: Header, platforms):
+    all_functions = list(all_funcs_from_header(sdl_api, header))
+
+    print(f"💠 {header} platform agnostic")
+    platform_agnostic_cs = run_clangsharp(base_command, header)
+    platform_agnostic_functions = list(get_generated_functions(platform_agnostic_cs))
+    output_files = [platform_agnostic_cs]
+
+    for (defines, suffix, platform_name) in platforms:
+        command = base_command + ["--define-macro"] + defines
+
+        if platform_agnostic_functions:
+            command.append("--exclude")
+            command.extend(platform_agnostic_functions)
+
+        if all_functions:
+            command.append("--with-attribute")
+            for f in all_functions:
+                command.append(f'{f["name"]}=SupportedOSPlatform("{platform_name}")')
+
+        print(f"💠 {header} for {suffix}")
+        header.output_suffix = suffix
+        output_files.append(run_clangsharp(command, header))
+
+    check_generated_functions(sdl_api, header, output_files)
+
+
 def main():
     sdl_api = get_sdl_api_dump()
 
     for header in headers:
         output_file = run_clangsharp(base_command, header)
         check_generated_functions(sdl_api, header, [output_file])
+
+    generate_platform_specific_headers(sdl_api, add("SDL3/SDL_main.h"), [
+        (["SDL_PLATFORM_WIN32", "SDL_PLATFORM_WINGDK"], "Windows", "Windows"),
+    ])
+
+    generate_platform_specific_headers(sdl_api, add("SDL3/SDL_system.h"), [
+        # define macro, output_suffix, [SupportedOSPlatform]
+        (["SDL_PLATFORM_ANDROID"], "Android", "Android"),
+        (["SDL_PLATFORM_IOS"], "iOS", "iOS"),
+        (["SDL_PLATFORM_LINUX"], "Linux", "Linux"),
+        (["SDL_PLATFORM_WIN32", "SDL_PLATFORM_WINGDK"], "Windows", "Windows"),
+        (["SDL_PLATFORM_WINRT"], "WinRT", "Windows"),
+    ])
 
 
 if __name__ == "__main__":
