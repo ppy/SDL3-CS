@@ -517,11 +517,6 @@ namespace SDL
             return 0;
         }
 
-        public static int SDL_size_mul_overflow_builtin([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
-        {
-            return (__builtin_mul_overflow(a, b, ret)) ? 1 : 0 == 0 ? 0 : -1;
-        }
-
         public static int SDL_size_add_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
         {
             if (b > 0xffffffffffffffffUL - a)
@@ -532,19 +527,6 @@ namespace SDL
             *ret = a + b;
             return 0;
         }
-
-        public static int SDL_size_add_overflow_builtin([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
-        {
-            return (__builtin_add_overflow(a, b, ret)) ? 1 : 0 == 0 ? 0 : -1;
-        }
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern byte __builtin_mul_overflow(__arglist);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern byte __builtin_add_overflow(__arglist);
 
         [NativeTypeName("#define SDL_SIZE_MAX SIZE_MAX")]
         public const ulong SDL_SIZE_MAX = 0xffffffffffffffffUL;
@@ -635,15 +617,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PRIX32 \"X\"")]
         public static ReadOnlySpan<byte> SDL_PRIX32 => "X"u8;
-
-        [NativeTypeName("#define SDL_memcpy memcpy")]
-        public static readonly delegate*<void*, void*, nuint, void*> SDL_memcpy = &memcpy;
-
-        [NativeTypeName("#define SDL_memmove memmove")]
-        public static readonly delegate*<void*, void*, nuint, void*> SDL_memmove = &memmove;
-
-        [NativeTypeName("#define SDL_memset memset")]
-        public static readonly delegate*<void*, int, nuint, void*> SDL_memset = &memset;
 
         [NativeTypeName("#define SDL_PI_D 3.141592653589793238462643383279502884")]
         public const double SDL_PI_D = 3.141592653589793238462643383279502884;

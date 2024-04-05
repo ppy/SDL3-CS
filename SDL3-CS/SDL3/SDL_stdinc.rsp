@@ -1,0 +1,12 @@
+# Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
+# See the LICENCE file in the repository root for full licence text.
+
+# Prevent SDL memory functions from being defined to compiler intrinsic ones
+--define-macro
+SDL_SLOW_MEMCPY
+SDL_SLOW_MEMMOVE
+SDL_SLOW_MEMSET
+
+# Prevent SDL from using compiler intrinsics __builtin_mul_overflow and __builtin_add_overflow.
+--additional
+--undefine-macro=__has_builtin
