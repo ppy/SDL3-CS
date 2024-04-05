@@ -28,11 +28,6 @@ using System.Runtime.Versioning;
 
 namespace SDL
 {
-    [StructLayout(LayoutKind.Explicit)]
-    public partial struct _XEvent
-    {
-    }
-
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
