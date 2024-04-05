@@ -46,6 +46,10 @@ class Header:
         """Location of generated C# file."""
         return csproj_root / f"{self.base}/ClangSharp/{self.name}.g.cs"
 
+    def rsp_files(self):
+        """Location of ClangSharp response files."""
+        yield csproj_root / f"{self.base}/{self.name}.rsp"
+
 
 def add(s: str):
     base, name = s.split("/")
@@ -134,6 +138,10 @@ def run_clangsharp(command, header: Header):
         "--file", header.input_file(),
         "--output", header.output_file(),
     ]
+
+    for rsp in header.rsp_files():
+        if rsp.is_file():
+            cmd.append(f"@{rsp}")
 
     subprocess.run(cmd)
 
