@@ -37,8 +37,7 @@ namespace SDL
 
     public partial struct SDL_Finger
     {
-        [NativeTypeName("SDL_FingerID")]
-        public ulong id;
+        public SDL_FingerID id;
 
         public float x;
 
@@ -50,26 +49,25 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_TouchID *")]
-        public static extern ulong* SDL_GetTouchDevices(int* count);
+        public static extern SDL_TouchID* SDL_GetTouchDevices(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetTouchDeviceName([NativeTypeName("SDL_TouchID")] ulong touchID);
+        public static extern byte* SDL_GetTouchDeviceName(SDL_TouchID touchID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_TouchDeviceType SDL_GetTouchDeviceType([NativeTypeName("SDL_TouchID")] ulong touchID);
+        public static extern SDL_TouchDeviceType SDL_GetTouchDeviceType(SDL_TouchID touchID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetNumTouchFingers([NativeTypeName("SDL_TouchID")] ulong touchID);
+        public static extern int SDL_GetNumTouchFingers(SDL_TouchID touchID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Finger* SDL_GetTouchFinger([NativeTypeName("SDL_TouchID")] ulong touchID, int index);
+        public static extern SDL_Finger* SDL_GetTouchFinger(SDL_TouchID touchID, int index);
 
         [NativeTypeName("#define SDL_TOUCH_MOUSEID ((SDL_MouseID)-1)")]
-        public const uint SDL_TOUCH_MOUSEID = unchecked((uint)(-1));
+        public const SDL_MouseID SDL_TOUCH_MOUSEID = ((SDL_MouseID)(-1));
 
         [NativeTypeName("#define SDL_MOUSE_TOUCHID ((SDL_TouchID)-1)")]
-        public const ulong SDL_MOUSE_TOUCHID = unchecked((ulong)(-1));
+        public const SDL_TouchID SDL_MOUSE_TOUCHID = ((SDL_TouchID)(-1));
     }
 }

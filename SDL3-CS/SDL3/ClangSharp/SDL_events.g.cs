@@ -162,8 +162,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_DisplayID")]
-        public uint displayID;
+        public SDL_DisplayID displayID;
 
         [NativeTypeName("Sint32")]
         public int data1;
@@ -179,8 +178,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
         [NativeTypeName("Sint32")]
         public int data1;
@@ -199,8 +197,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_KeyboardID")]
-        public uint which;
+        public SDL_KeyboardID which;
     }
 
     public partial struct SDL_KeyboardEvent
@@ -213,11 +210,9 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
-        [NativeTypeName("SDL_KeyboardID")]
-        public uint which;
+        public SDL_KeyboardID which;
 
         [NativeTypeName("Uint8")]
         public byte state;
@@ -244,8 +239,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
         [NativeTypeName("char *")]
         public byte* text;
@@ -267,8 +261,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
         [NativeTypeName("char *")]
         public byte* text;
@@ -284,8 +277,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_MouseID")]
-        public uint which;
+        public SDL_MouseID which;
     }
 
     public partial struct SDL_MouseMotionEvent
@@ -298,11 +290,9 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
-        [NativeTypeName("SDL_MouseID")]
-        public uint which;
+        public SDL_MouseID which;
 
         [NativeTypeName("Uint32")]
         public uint state;
@@ -326,11 +316,9 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
-        [NativeTypeName("SDL_MouseID")]
-        public uint which;
+        public SDL_MouseID which;
 
         [NativeTypeName("Uint8")]
         public byte button;
@@ -359,11 +347,9 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
-        [NativeTypeName("SDL_MouseID")]
-        public uint which;
+        public SDL_MouseID which;
 
         public float x;
 
@@ -386,8 +372,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         [NativeTypeName("Uint8")]
         public byte axis;
@@ -418,8 +403,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         [NativeTypeName("Uint8")]
         public byte ball;
@@ -450,8 +434,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         [NativeTypeName("Uint8")]
         public byte hat;
@@ -476,8 +459,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         [NativeTypeName("Uint8")]
         public byte button;
@@ -502,8 +484,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
     }
 
     public partial struct SDL_JoyBatteryEvent
@@ -516,8 +497,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         public SDL_PowerState state;
 
@@ -534,8 +514,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         [NativeTypeName("Uint8")]
         public byte axis;
@@ -566,8 +545,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         [NativeTypeName("Uint8")]
         public byte button;
@@ -592,8 +570,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
     }
 
     public partial struct SDL_GamepadTouchpadEvent
@@ -606,8 +583,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         [NativeTypeName("Sint32")]
         public int touchpad;
@@ -632,8 +608,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_JoystickID")]
-        public uint which;
+        public SDL_JoystickID which;
 
         [NativeTypeName("Sint32")]
         public int sensor;
@@ -661,8 +636,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_AudioDeviceID")]
-        public uint which;
+        public SDL_AudioDeviceID which;
 
         [NativeTypeName("Uint8")]
         public byte iscapture;
@@ -687,8 +661,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_CameraDeviceID")]
-        public uint which;
+        public SDL_CameraDeviceID which;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -710,11 +683,9 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_TouchID")]
-        public ulong touchID;
+        public SDL_TouchID touchID;
 
-        [NativeTypeName("SDL_FingerID")]
-        public ulong fingerID;
+        public SDL_FingerID fingerID;
 
         public float x;
 
@@ -726,8 +697,7 @@ namespace SDL
 
         public float pressure;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
     }
 
     public partial struct SDL_PenTipEvent
@@ -740,11 +710,9 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
-        [NativeTypeName("SDL_PenID")]
-        public uint which;
+        public SDL_PenID which;
 
         [NativeTypeName("Uint8")]
         public byte tip;
@@ -779,11 +747,9 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
-        [NativeTypeName("SDL_PenID")]
-        public uint which;
+        public SDL_PenID which;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -818,11 +784,9 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
-        [NativeTypeName("SDL_PenID")]
-        public uint which;
+        public SDL_PenID which;
 
         [NativeTypeName("Uint8")]
         public byte button;
@@ -857,8 +821,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
         public float x;
 
@@ -892,8 +855,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_SensorID")]
-        public uint which;
+        public SDL_SensorID which;
 
         [NativeTypeName("float[6]")]
         public _data_e__FixedBuffer data;
@@ -930,8 +892,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        [NativeTypeName("SDL_WindowID")]
-        public uint windowID;
+        public SDL_WindowID windowID;
 
         [NativeTypeName("Sint32")]
         public int code;
@@ -1076,12 +1037,10 @@ namespace SDL
         public static extern int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_eventaction action, [NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_HasEvent([NativeTypeName("Uint32")] uint type);
+        public static extern SDL_bool SDL_HasEvent([NativeTypeName("Uint32")] uint type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_HasEvents([NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
+        public static extern SDL_bool SDL_HasEvents([NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_FlushEvent([NativeTypeName("Uint32")] uint type);
@@ -1090,16 +1049,13 @@ namespace SDL
         public static extern void SDL_FlushEvents([NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_PollEvent(SDL_Event* @event);
+        public static extern SDL_bool SDL_PollEvent(SDL_Event* @event);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_WaitEvent(SDL_Event* @event);
+        public static extern SDL_bool SDL_WaitEvent(SDL_Event* @event);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_WaitEventTimeout(SDL_Event* @event, [NativeTypeName("Sint32")] int timeoutMS);
+        public static extern SDL_bool SDL_WaitEventTimeout(SDL_Event* @event, [NativeTypeName("Sint32")] int timeoutMS);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_PushEvent(SDL_Event* @event);
@@ -1108,8 +1064,7 @@ namespace SDL
         public static extern void SDL_SetEventFilter([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_GetEventFilter([NativeTypeName("SDL_EventFilter *")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int>* filter, [NativeTypeName("void **")] IntPtr* userdata);
+        public static extern SDL_bool SDL_GetEventFilter([NativeTypeName("SDL_EventFilter *")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int>* filter, [NativeTypeName("void **")] IntPtr* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_AddEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int> filter, [NativeTypeName("void*")] IntPtr userdata);
@@ -1121,11 +1076,10 @@ namespace SDL
         public static extern void SDL_FilterEvents([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetEventEnabled([NativeTypeName("Uint32")] uint type, [NativeTypeName("SDL_bool")] int enabled);
+        public static extern void SDL_SetEventEnabled([NativeTypeName("Uint32")] uint type, SDL_bool enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_EventEnabled([NativeTypeName("Uint32")] uint type);
+        public static extern SDL_bool SDL_EventEnabled([NativeTypeName("Uint32")] uint type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]

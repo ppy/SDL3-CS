@@ -326,37 +326,33 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_HapticID *")]
-        public static extern uint* SDL_GetHaptics(int* count);
+        public static extern SDL_HapticID* SDL_GetHaptics(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetHapticInstanceName([NativeTypeName("SDL_HapticID")] uint instance_id);
+        public static extern byte* SDL_GetHapticInstanceName(SDL_HapticID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Haptic* SDL_OpenHaptic([NativeTypeName("SDL_HapticID")] uint instance_id);
+        public static extern SDL_Haptic* SDL_OpenHaptic(SDL_HapticID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Haptic* SDL_GetHapticFromInstanceID([NativeTypeName("SDL_HapticID")] uint instance_id);
+        public static extern SDL_Haptic* SDL_GetHapticFromInstanceID(SDL_HapticID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_HapticID")]
-        public static extern uint SDL_GetHapticInstanceID(SDL_Haptic* haptic);
+        public static extern SDL_HapticID SDL_GetHapticInstanceID(SDL_Haptic* haptic);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         public static extern byte* SDL_GetHapticName(SDL_Haptic* haptic);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_IsMouseHaptic();
+        public static extern SDL_bool SDL_IsMouseHaptic();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Haptic* SDL_OpenHapticFromMouse();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_IsJoystickHaptic(SDL_Joystick* joystick);
+        public static extern SDL_bool SDL_IsJoystickHaptic(SDL_Joystick* joystick);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Haptic* SDL_OpenHapticFromJoystick(SDL_Joystick* joystick);
@@ -378,8 +374,7 @@ namespace SDL
         public static extern int SDL_GetNumHapticAxes(SDL_Haptic* haptic);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_HapticEffectSupported(SDL_Haptic* haptic, [NativeTypeName("const SDL_HapticEffect *")] SDL_HapticEffect* effect);
+        public static extern SDL_bool SDL_HapticEffectSupported(SDL_Haptic* haptic, [NativeTypeName("const SDL_HapticEffect *")] SDL_HapticEffect* effect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_CreateHapticEffect(SDL_Haptic* haptic, [NativeTypeName("const SDL_HapticEffect *")] SDL_HapticEffect* effect);
@@ -415,8 +410,7 @@ namespace SDL
         public static extern int SDL_StopHapticEffects(SDL_Haptic* haptic);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_HapticRumbleSupported(SDL_Haptic* haptic);
+        public static extern SDL_bool SDL_HapticRumbleSupported(SDL_Haptic* haptic);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_InitHapticRumble(SDL_Haptic* haptic);

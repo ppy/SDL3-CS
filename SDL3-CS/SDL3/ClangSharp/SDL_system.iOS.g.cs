@@ -37,7 +37,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("iOS")]
-        public static extern void SDL_iPhoneSetEventPump([NativeTypeName("SDL_bool")] int enabled);
+        public static extern void SDL_iPhoneSetEventPump(SDL_bool enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("iOS")]

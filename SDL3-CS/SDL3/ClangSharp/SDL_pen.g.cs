@@ -65,40 +65,37 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_PenID *")]
-        public static extern uint* SDL_GetPens(int* count);
+        public static extern SDL_PenID* SDL_GetPens(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_GetPenStatus([NativeTypeName("SDL_PenID")] uint instance_id, float* x, float* y, float* axes, [NativeTypeName("size_t")] nuint num_axes);
+        public static extern uint SDL_GetPenStatus(SDL_PenID instance_id, float* x, float* y, float* axes, [NativeTypeName("size_t")] nuint num_axes);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_PenID")]
-        public static extern uint SDL_GetPenFromGUID(SDL_GUID guid);
+        public static extern SDL_PenID SDL_GetPenFromGUID(SDL_GUID guid);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GUID SDL_GetPenGUID([NativeTypeName("SDL_PenID")] uint instance_id);
+        public static extern SDL_GUID SDL_GetPenGUID(SDL_PenID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_PenConnected([NativeTypeName("SDL_PenID")] uint instance_id);
+        public static extern SDL_bool SDL_PenConnected(SDL_PenID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetPenName([NativeTypeName("SDL_PenID")] uint instance_id);
+        public static extern byte* SDL_GetPenName(SDL_PenID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_GetPenCapabilities([NativeTypeName("SDL_PenID")] uint instance_id, SDL_PenCapabilityInfo* capabilities);
+        public static extern uint SDL_GetPenCapabilities(SDL_PenID instance_id, SDL_PenCapabilityInfo* capabilities);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_PenSubtype SDL_GetPenType([NativeTypeName("SDL_PenID")] uint instance_id);
+        public static extern SDL_PenSubtype SDL_GetPenType(SDL_PenID instance_id);
 
         [NativeTypeName("#define SDL_PEN_INVALID ((SDL_PenID)0)")]
-        public const uint SDL_PEN_INVALID = ((uint)(0));
+        public const SDL_PenID SDL_PEN_INVALID = ((SDL_PenID)(0));
 
         [NativeTypeName("#define SDL_PEN_MOUSEID ((SDL_MouseID)-2)")]
-        public const uint SDL_PEN_MOUSEID = unchecked((uint)(-2));
+        public const SDL_MouseID SDL_PEN_MOUSEID = ((SDL_MouseID)(-2));
 
         [NativeTypeName("#define SDL_PEN_INFO_UNKNOWN (-1)")]
         public const int SDL_PEN_INFO_UNKNOWN = (-1);
