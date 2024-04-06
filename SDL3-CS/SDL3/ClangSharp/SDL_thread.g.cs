@@ -25,6 +25,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace SDL
 {
@@ -43,9 +44,11 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [UnsupportedOSPlatform("windows")]
         public static extern SDL_Thread* SDL_CreateThread([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<IntPtr, int> fn, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [UnsupportedOSPlatform("windows")]
         public static extern SDL_Thread* SDL_CreateThreadWithStackSize([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<IntPtr, int> fn, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const size_t")] nuint stacksize, [NativeTypeName("void*")] IntPtr data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
