@@ -19,5 +19,7 @@ namespace SDL
     {
         [Macro]
         public static uint SDL_FOURCC(byte A, byte B, byte C, byte D) => (uint)((A << 0) | (B << 8) | (C << 16) | (D << 24));
+
+        public static unsafe void SDL_free(void* mem) => SDL_free((IntPtr)mem);
     }
 }
