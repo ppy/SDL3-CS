@@ -205,15 +205,6 @@ namespace SDL
         [NativeTypeName("#define SDL_AUDIO_F32BE 0x9120")]
         public const int SDL_AUDIO_F32BE = 0x9120;
 
-        [NativeTypeName("#define SDL_AUDIO_S16 SDL_AUDIO_S16LE")]
-        public const int SDL_AUDIO_S16 = 0x8010;
-
-        [NativeTypeName("#define SDL_AUDIO_S32 SDL_AUDIO_S32LE")]
-        public const int SDL_AUDIO_S32 = 0x8020;
-
-        [NativeTypeName("#define SDL_AUDIO_F32 SDL_AUDIO_F32LE")]
-        public const int SDL_AUDIO_F32 = 0x8120;
-
         [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_OUTPUT ((SDL_AudioDeviceID) 0xFFFFFFFF)")]
         public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_OUTPUT = ((SDL_AudioDeviceID)(0xFFFFFFFF));
 

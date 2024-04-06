@@ -20,4 +20,16 @@ namespace SDL
         SDL_AUDIO_F32LE = SDL3.SDL_AUDIO_F32LE,
         SDL_AUDIO_F32BE = SDL3.SDL_AUDIO_F32BE,
     }
+
+    public static partial class SDL3
+    {
+        [Constant]
+        public static readonly SDL_AudioFormat SDL_AUDIO_S16 = BitConverter.IsLittleEndian ? SDL_AudioFormat.SDL_AUDIO_S16LE : SDL_AudioFormat.SDL_AUDIO_S16BE;
+
+        [Constant]
+        public static readonly SDL_AudioFormat SDL_AUDIO_S32 = BitConverter.IsLittleEndian ? SDL_AudioFormat.SDL_AUDIO_S32LE : SDL_AudioFormat.SDL_AUDIO_S32BE;
+
+        [Constant]
+        public static readonly SDL_AudioFormat SDL_AUDIO_F32 = BitConverter.IsLittleEndian ? SDL_AudioFormat.SDL_AUDIO_F32LE : SDL_AudioFormat.SDL_AUDIO_F32BE;
+    }
 }
