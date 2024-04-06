@@ -414,11 +414,11 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
-        public static extern delegate* unmanaged[Cdecl]<void> SDL_GL_GetProcAddress([NativeTypeName("const char *")] byte* proc);
+        public static extern IntPtr SDL_GL_GetProcAddress([NativeTypeName("const char *")] byte* proc);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
-        public static extern delegate* unmanaged[Cdecl]<void> SDL_EGL_GetProcAddress([NativeTypeName("const char *")] byte* proc);
+        public static extern IntPtr SDL_EGL_GetProcAddress([NativeTypeName("const char *")] byte* proc);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_GL_UnloadLibrary();

@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -46,7 +47,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
-        public static extern delegate* unmanaged[Cdecl]<void> SDL_Vulkan_GetVkGetInstanceProcAddr();
+        public static extern IntPtr SDL_Vulkan_GetVkGetInstanceProcAddr();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Vulkan_UnloadLibrary();
