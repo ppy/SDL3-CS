@@ -166,7 +166,6 @@ base_command = [
     "latest-codegen",
     "windows-types",
     "generate-macro-bindings",
-    "log-potential-typedef-remappings",
 
     "--file-directory", SDL_include_root,
     "--include-directory", SDL_include_root,
