@@ -28,7 +28,7 @@ using static SDL.SDL_Scancode;
 
 namespace SDL
 {
-    public enum SDL_KeyCode
+    public enum SDL_Keycode
     {
         SDLK_UNKNOWN = 0,
         SDLK_RETURN = '\r',

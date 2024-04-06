@@ -3,3 +3,7 @@
 
 --with-attribute
 SDL_Keymod=Flags
+
+# Remap the C `SDL_KeyCode` enum to the `SDL_Keycode` typedef
+--remap
+SDL_KeyCode=SDL_Keycode
