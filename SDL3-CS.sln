@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS", "SDL3-CS\SDL3-CS.csproj", "{3AEE5979-6974-4BD6-9BB1-1409B0BB469B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS.SourceGeneration", "SDL3-CS.SourceGeneration\SDL3-CS.SourceGeneration.csproj", "{432C86D0-D371-4D01-BFFE-01D2CDCCA7B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,5 +30,9 @@ Global
 		{3AEE5979-6974-4BD6-9BB1-1409B0BB469B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AEE5979-6974-4BD6-9BB1-1409B0BB469B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AEE5979-6974-4BD6-9BB1-1409B0BB469B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{432C86D0-D371-4D01-BFFE-01D2CDCCA7B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{432C86D0-D371-4D01-BFFE-01D2CDCCA7B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{432C86D0-D371-4D01-BFFE-01D2CDCCA7B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{432C86D0-D371-4D01-BFFE-01D2CDCCA7B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
