@@ -175,6 +175,7 @@ base_command = [
     "--namespace", "SDL",
 
     "--remap",
+    "void*=IntPtr",
     "char=byte",
     "wchar_t *=IntPtr",  # wchar_t has a platform-defined size
 

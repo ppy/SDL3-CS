@@ -89,25 +89,26 @@ namespace SDL
         [NativeTypeName("const char *")]
         public byte* name;
 
-        public void* userdata;
+        [NativeTypeName("void*")]
+        public IntPtr userdata;
 
         [NativeTypeName("void (*)(void *)")]
-        public delegate* unmanaged[Cdecl]<void*, void> Update;
+        public delegate* unmanaged[Cdecl]<IntPtr, void> Update;
 
         [NativeTypeName("void (*)(void *, int)")]
-        public delegate* unmanaged[Cdecl]<void*, int, void> SetPlayerIndex;
+        public delegate* unmanaged[Cdecl]<IntPtr, int, void> SetPlayerIndex;
 
         [NativeTypeName("int (*)(void *, Uint16, Uint16)")]
-        public delegate* unmanaged[Cdecl]<void*, ushort, ushort, int> Rumble;
+        public delegate* unmanaged[Cdecl]<IntPtr, ushort, ushort, int> Rumble;
 
         [NativeTypeName("int (*)(void *, Uint16, Uint16)")]
-        public delegate* unmanaged[Cdecl]<void*, ushort, ushort, int> RumbleTriggers;
+        public delegate* unmanaged[Cdecl]<IntPtr, ushort, ushort, int> RumbleTriggers;
 
         [NativeTypeName("int (*)(void *, Uint8, Uint8, Uint8)")]
-        public delegate* unmanaged[Cdecl]<void*, byte, byte, byte, int> SetLED;
+        public delegate* unmanaged[Cdecl]<IntPtr, byte, byte, byte, int> SetLED;
 
         [NativeTypeName("int (*)(void *, const void *, int)")]
-        public delegate* unmanaged[Cdecl]<void*, void*, int, int> SendEffect;
+        public delegate* unmanaged[Cdecl]<IntPtr, IntPtr, int, int> SendEffect;
     }
 
     public static unsafe partial class SDL3
@@ -303,7 +304,7 @@ namespace SDL
         public static extern int SDL_SetJoystickLED(SDL_Joystick* joystick, [NativeTypeName("Uint8")] byte red, [NativeTypeName("Uint8")] byte green, [NativeTypeName("Uint8")] byte blue);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SendJoystickEffect(SDL_Joystick* joystick, [NativeTypeName("const void *")] void* data, int size);
+        public static extern int SDL_SendJoystickEffect(SDL_Joystick* joystick, [NativeTypeName("const void *")] IntPtr data, int size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CloseJoystick(SDL_Joystick* joystick);

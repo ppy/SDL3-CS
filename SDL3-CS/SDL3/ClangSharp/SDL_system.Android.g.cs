@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -31,12 +32,14 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("void*")]
         [SupportedOSPlatform("Android")]
-        public static extern void* SDL_AndroidGetJNIEnv();
+        public static extern IntPtr SDL_AndroidGetJNIEnv();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("void*")]
         [SupportedOSPlatform("Android")]
-        public static extern void* SDL_AndroidGetActivity();
+        public static extern IntPtr SDL_AndroidGetActivity();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
@@ -77,7 +80,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_AndroidRequestPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_AndroidRequestPermissionCallback")] delegate* unmanaged[Cdecl]<void*, byte*, int, void> cb, void* userdata);
+        public static extern int SDL_AndroidRequestPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_AndroidRequestPermissionCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, int, void> cb, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]

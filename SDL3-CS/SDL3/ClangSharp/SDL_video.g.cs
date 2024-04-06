@@ -35,7 +35,7 @@ namespace SDL
         SDL_SYSTEM_THEME_DARK,
     }
 
-    public unsafe partial struct SDL_DisplayMode
+    public partial struct SDL_DisplayMode
     {
         [NativeTypeName("SDL_DisplayID")]
         public uint displayID;
@@ -50,7 +50,8 @@ namespace SDL
 
         public float refresh_rate;
 
-        public void* driverdata;
+        [NativeTypeName("void*")]
+        public IntPtr driverdata;
     }
 
     public enum SDL_DisplayOrientation
@@ -235,7 +236,8 @@ namespace SDL
         public static extern SDL_DisplayMode* SDL_GetWindowFullscreenMode(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_GetWindowICCProfile(SDL_Window* window, [NativeTypeName("size_t *")] nuint* size);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_GetWindowICCProfile(SDL_Window* window, [NativeTypeName("size_t *")] nuint* size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]
@@ -400,7 +402,7 @@ namespace SDL
         public static extern int SDL_ShowWindowSystemMenu(SDL_Window* window, int x, int y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowHitTest(SDL_Window* window, [NativeTypeName("SDL_HitTest")] delegate* unmanaged[Cdecl]<SDL_Window*, SDL_Point*, void*, SDL_HitTestResult> callback, void* callback_data);
+        public static extern int SDL_SetWindowHitTest(SDL_Window* window, [NativeTypeName("SDL_HitTest")] delegate* unmanaged[Cdecl]<SDL_Window*, SDL_Point*, IntPtr, SDL_HitTestResult> callback, [NativeTypeName("void*")] IntPtr callback_data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetWindowShape(SDL_Window* window, SDL_Surface* shape);
@@ -450,29 +452,29 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_GLContext")]
-        public static extern void* SDL_GL_CreateContext(SDL_Window* window);
+        public static extern IntPtr SDL_GL_CreateContext(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_MakeCurrent(SDL_Window* window, [NativeTypeName("SDL_GLContext")] void* context);
+        public static extern int SDL_GL_MakeCurrent(SDL_Window* window, [NativeTypeName("SDL_GLContext")] IntPtr context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GL_GetCurrentWindow();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_GLContext")]
-        public static extern void* SDL_GL_GetCurrentContext();
+        public static extern IntPtr SDL_GL_GetCurrentContext();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_EGLDisplay")]
-        public static extern void* SDL_EGL_GetCurrentEGLDisplay();
+        public static extern IntPtr SDL_EGL_GetCurrentEGLDisplay();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_EGLConfig")]
-        public static extern void* SDL_EGL_GetCurrentEGLConfig();
+        public static extern IntPtr SDL_EGL_GetCurrentEGLConfig();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_EGLSurface")]
-        public static extern void* SDL_EGL_GetWindowEGLSurface(SDL_Window* window);
+        public static extern IntPtr SDL_EGL_GetWindowEGLSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_EGL_SetEGLAttributeCallbacks([NativeTypeName("SDL_EGLAttribArrayCallback")] delegate* unmanaged[Cdecl]<nint*> platformAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> surfaceAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> contextAttribCallback);
@@ -487,7 +489,7 @@ namespace SDL
         public static extern int SDL_GL_SwapWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_DeleteContext([NativeTypeName("SDL_GLContext")] void* context);
+        public static extern int SDL_GL_DeleteContext([NativeTypeName("SDL_GLContext")] IntPtr context);
 
         [NativeTypeName("#define SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER \"SDL.video.wayland.wl_display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER => "SDL.video.wayland.wl_display"u8;

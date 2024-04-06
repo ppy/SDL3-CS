@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -65,12 +66,14 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_AtomicCompareAndSwapPointer(void** a, void* oldval, void* newval);
+        public static extern int SDL_AtomicCompareAndSwapPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr oldval, [NativeTypeName("void*")] IntPtr newval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_AtomicSetPtr(void** a, void* v);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_AtomicSetPtr([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr v);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_AtomicGetPtr(void** a);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_AtomicGetPtr([NativeTypeName("void **")] IntPtr* a);
     }
 }

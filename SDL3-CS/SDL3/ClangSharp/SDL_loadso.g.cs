@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -30,13 +31,14 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_LoadObject([NativeTypeName("const char *")] byte* sofile);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_LoadObject([NativeTypeName("const char *")] byte* sofile);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
-        public static extern delegate* unmanaged[Cdecl]<void> SDL_LoadFunction(void* handle, [NativeTypeName("const char *")] byte* name);
+        public static extern delegate* unmanaged[Cdecl]<void> SDL_LoadFunction([NativeTypeName("void*")] IntPtr handle, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_UnloadObject(void* handle);
+        public static extern void SDL_UnloadObject([NativeTypeName("void*")] IntPtr handle);
     }
 }
