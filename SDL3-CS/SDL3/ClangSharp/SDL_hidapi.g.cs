@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public partial struct SDL_hid_device_
+    public partial struct SDL_hid_device
     {
     }
 
@@ -102,54 +102,52 @@ namespace SDL
         public static extern void SDL_hid_free_enumeration(SDL_hid_device_info* devs);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_hid_device *")]
-        public static extern SDL_hid_device_* SDL_hid_open([NativeTypeName("unsigned short")] ushort vendor_id, [NativeTypeName("unsigned short")] ushort product_id, [NativeTypeName("const wchar_t *")] ushort* serial_number);
+        public static extern SDL_hid_device* SDL_hid_open([NativeTypeName("unsigned short")] ushort vendor_id, [NativeTypeName("unsigned short")] ushort product_id, [NativeTypeName("const wchar_t *")] ushort* serial_number);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_hid_device *")]
-        public static extern SDL_hid_device_* SDL_hid_open_path([NativeTypeName("const char *")] sbyte* path);
+        public static extern SDL_hid_device* SDL_hid_open_path([NativeTypeName("const char *")] sbyte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_write([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("const unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
+        public static extern int SDL_hid_write(SDL_hid_device* dev, [NativeTypeName("const unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_read_timeout([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length, int milliseconds);
+        public static extern int SDL_hid_read_timeout(SDL_hid_device* dev, [NativeTypeName("unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length, int milliseconds);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_read([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
+        public static extern int SDL_hid_read(SDL_hid_device* dev, [NativeTypeName("unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_set_nonblocking([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, int nonblock);
+        public static extern int SDL_hid_set_nonblocking(SDL_hid_device* dev, int nonblock);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_send_feature_report([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("const unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
+        public static extern int SDL_hid_send_feature_report(SDL_hid_device* dev, [NativeTypeName("const unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_get_feature_report([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
+        public static extern int SDL_hid_get_feature_report(SDL_hid_device* dev, [NativeTypeName("unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_get_input_report([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
+        public static extern int SDL_hid_get_input_report(SDL_hid_device* dev, [NativeTypeName("unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_close([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev);
+        public static extern int SDL_hid_close(SDL_hid_device* dev);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_get_manufacturer_string([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("wchar_t *")] ushort* @string, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern int SDL_hid_get_manufacturer_string(SDL_hid_device* dev, [NativeTypeName("wchar_t *")] ushort* @string, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_get_product_string([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("wchar_t *")] ushort* @string, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern int SDL_hid_get_product_string(SDL_hid_device* dev, [NativeTypeName("wchar_t *")] ushort* @string, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_get_serial_number_string([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("wchar_t *")] ushort* @string, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern int SDL_hid_get_serial_number_string(SDL_hid_device* dev, [NativeTypeName("wchar_t *")] ushort* @string, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_get_indexed_string([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, int string_index, [NativeTypeName("wchar_t *")] ushort* @string, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern int SDL_hid_get_indexed_string(SDL_hid_device* dev, int string_index, [NativeTypeName("wchar_t *")] ushort* @string, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_hid_device_info* SDL_hid_get_device_info([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev);
+        public static extern SDL_hid_device_info* SDL_hid_get_device_info(SDL_hid_device* dev);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_hid_get_report_descriptor([NativeTypeName("SDL_hid_device *")] SDL_hid_device_* dev, [NativeTypeName("unsigned char *")] byte* buf, [NativeTypeName("size_t")] nuint buf_size);
+        public static extern int SDL_hid_get_report_descriptor(SDL_hid_device* dev, [NativeTypeName("unsigned char *")] byte* buf, [NativeTypeName("size_t")] nuint buf_size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_hid_ble_scan([NativeTypeName("SDL_bool")] int active);
