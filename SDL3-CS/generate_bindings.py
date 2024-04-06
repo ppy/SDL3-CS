@@ -216,6 +216,7 @@ base_command = [
     "void*=IntPtr",
     "char=byte",
     "wchar_t *=IntPtr",  # wchar_t has a platform-defined size
+    typedef("SDL_Keycode"),
 
     "--define-macro",
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
