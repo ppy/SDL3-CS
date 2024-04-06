@@ -37,7 +37,7 @@ namespace SDL
     public unsafe partial struct SDL_RendererInfo
     {
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("Uint32")]
         public uint flags;
@@ -98,13 +98,13 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetRenderDriver(int index);
+        public static extern byte* SDL_GetRenderDriver(int index);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_CreateWindowAndRenderer(int width, int height, [NativeTypeName("SDL_WindowFlags")] uint window_flags, SDL_Window** window, SDL_Renderer** renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, [NativeTypeName("const char *")] sbyte* name, [NativeTypeName("Uint32")] uint flags);
+        public static extern SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, [NativeTypeName("const char *")] byte* name, [NativeTypeName("Uint32")] uint flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Renderer* SDL_CreateRendererWithProperties([NativeTypeName("SDL_PropertiesID")] uint props);

@@ -51,7 +51,7 @@ namespace SDL
         public int buttonID;
 
         [NativeTypeName("const char *")]
-        public sbyte* text;
+        public byte* text;
     }
 
     public partial struct SDL_MessageBoxColor
@@ -96,10 +96,10 @@ namespace SDL
         public SDL_Window* window;
 
         [NativeTypeName("const char *")]
-        public sbyte* title;
+        public byte* title;
 
         [NativeTypeName("const char *")]
-        public sbyte* message;
+        public byte* message;
 
         public int numbuttons;
 
@@ -116,6 +116,6 @@ namespace SDL
         public static extern int SDL_ShowMessageBox([NativeTypeName("const SDL_MessageBoxData *")] SDL_MessageBoxData* messageboxdata, int* buttonid);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ShowSimpleMessageBox([NativeTypeName("Uint32")] uint flags, [NativeTypeName("const char *")] sbyte* title, [NativeTypeName("const char *")] sbyte* message, SDL_Window* window);
+        public static extern int SDL_ShowSimpleMessageBox([NativeTypeName("Uint32")] uint flags, [NativeTypeName("const char *")] byte* title, [NativeTypeName("const char *")] byte* message, SDL_Window* window);
     }
 }

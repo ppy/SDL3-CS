@@ -42,7 +42,7 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_Vulkan_LoadLibrary([NativeTypeName("const char *")] sbyte* path);
+        public static extern int SDL_Vulkan_LoadLibrary([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
@@ -53,7 +53,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *const *")]
-        public static extern sbyte** SDL_Vulkan_GetInstanceExtensions([NativeTypeName("Uint32 *")] uint* count);
+        public static extern byte** SDL_Vulkan_GetInstanceExtensions([NativeTypeName("Uint32 *")] uint* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]

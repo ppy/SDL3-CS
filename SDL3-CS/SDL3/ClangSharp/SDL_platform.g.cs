@@ -31,6 +31,6 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetPlatform();
+        public static extern byte* SDL_GetPlatform();
     }
 }

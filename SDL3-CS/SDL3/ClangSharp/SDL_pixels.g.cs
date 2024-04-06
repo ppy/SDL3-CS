@@ -386,7 +386,7 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetPixelFormatName(SDL_PixelFormatEnum format);
+        public static extern byte* SDL_GetPixelFormatName(SDL_PixelFormatEnum format);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]

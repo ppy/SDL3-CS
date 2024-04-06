@@ -58,11 +58,11 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetCameraDriver(int index);
+        public static extern byte* SDL_GetCameraDriver(int index);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetCurrentCameraDriver();
+        public static extern byte* SDL_GetCurrentCameraDriver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_CameraDeviceID *")]
@@ -73,7 +73,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern sbyte* SDL_GetCameraDeviceName([NativeTypeName("SDL_CameraDeviceID")] uint instance_id);
+        public static extern byte* SDL_GetCameraDeviceName([NativeTypeName("SDL_CameraDeviceID")] uint instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_CameraPosition SDL_GetCameraDevicePosition([NativeTypeName("SDL_CameraDeviceID")] uint instance_id);

@@ -64,7 +64,7 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Android")]
-        public static extern sbyte* SDL_AndroidGetInternalStoragePath();
+        public static extern byte* SDL_AndroidGetInternalStoragePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
@@ -73,15 +73,15 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Android")]
-        public static extern sbyte* SDL_AndroidGetExternalStoragePath();
+        public static extern byte* SDL_AndroidGetExternalStoragePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_AndroidRequestPermission([NativeTypeName("const char *")] sbyte* permission, [NativeTypeName("SDL_AndroidRequestPermissionCallback")] delegate* unmanaged[Cdecl]<void*, sbyte*, int, void> cb, void* userdata);
+        public static extern int SDL_AndroidRequestPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_AndroidRequestPermissionCallback")] delegate* unmanaged[Cdecl]<void*, byte*, int, void> cb, void* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_AndroidShowToast([NativeTypeName("const char *")] sbyte* message, int duration, int gravity, int xoffset, int yoffset);
+        public static extern int SDL_AndroidShowToast([NativeTypeName("const char *")] byte* message, int duration, int gravity, int xoffset, int yoffset);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]

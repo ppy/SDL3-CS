@@ -42,14 +42,14 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Thread* SDL_CreateThread([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<void*, int> fn, [NativeTypeName("const char *")] sbyte* name, void* data);
+        public static extern SDL_Thread* SDL_CreateThread([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<void*, int> fn, [NativeTypeName("const char *")] byte* name, void* data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Thread* SDL_CreateThreadWithStackSize([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<void*, int> fn, [NativeTypeName("const char *")] sbyte* name, [NativeTypeName("const size_t")] nuint stacksize, void* data);
+        public static extern SDL_Thread* SDL_CreateThreadWithStackSize([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<void*, int> fn, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const size_t")] nuint stacksize, void* data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetThreadName(SDL_Thread* thread);
+        public static extern byte* SDL_GetThreadName(SDL_Thread* thread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_ThreadID")]

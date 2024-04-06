@@ -33,9 +33,9 @@ namespace SDL
         public static extern void SDL_SetMainReady();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_RunApp(int argc, [NativeTypeName("char *[]")] sbyte** argv, [NativeTypeName("SDL_main_func")] delegate* unmanaged[Cdecl]<int, sbyte**, int> mainFunction, void* reserved);
+        public static extern int SDL_RunApp(int argc, [NativeTypeName("char *[]")] byte** argv, [NativeTypeName("SDL_main_func")] delegate* unmanaged[Cdecl]<int, byte**, int> mainFunction, void* reserved);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_EnterAppMainCallbacks(int argc, [NativeTypeName("char *[]")] sbyte** argv, [NativeTypeName("SDL_AppInit_func")] delegate* unmanaged[Cdecl]<void**, int, sbyte**, int> appinit, [NativeTypeName("SDL_AppIterate_func")] delegate* unmanaged[Cdecl]<void*, int> appiter, [NativeTypeName("SDL_AppEvent_func")] delegate* unmanaged[Cdecl]<void*, SDL_Event*, int> appevent, [NativeTypeName("SDL_AppQuit_func")] delegate* unmanaged[Cdecl]<void*, void> appquit);
+        public static extern int SDL_EnterAppMainCallbacks(int argc, [NativeTypeName("char *[]")] byte** argv, [NativeTypeName("SDL_AppInit_func")] delegate* unmanaged[Cdecl]<void**, int, byte**, int> appinit, [NativeTypeName("SDL_AppIterate_func")] delegate* unmanaged[Cdecl]<void*, int> appiter, [NativeTypeName("SDL_AppEvent_func")] delegate* unmanaged[Cdecl]<void*, SDL_Event*, int> appevent, [NativeTypeName("SDL_AppQuit_func")] delegate* unmanaged[Cdecl]<void*, void> appquit);
     }
 }

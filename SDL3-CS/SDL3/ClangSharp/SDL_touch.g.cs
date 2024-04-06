@@ -55,7 +55,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetTouchDeviceName([NativeTypeName("SDL_TouchID")] ulong touchID);
+        public static extern byte* SDL_GetTouchDeviceName([NativeTypeName("SDL_TouchID")] ulong touchID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_TouchDeviceType SDL_GetTouchDeviceType([NativeTypeName("SDL_TouchID")] ulong touchID);

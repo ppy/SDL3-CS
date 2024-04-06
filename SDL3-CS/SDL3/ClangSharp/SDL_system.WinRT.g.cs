@@ -55,7 +55,7 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Windows")]
-        public static extern sbyte* SDL_WinRTGetFSPathUTF8(SDL_WinRT_Path pathType);
+        public static extern byte* SDL_WinRTGetFSPathUTF8(SDL_WinRT_Path pathType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
