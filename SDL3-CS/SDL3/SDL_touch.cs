@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using JetBrains.Annotations;
 
 namespace SDL
 {
@@ -19,6 +20,7 @@ namespace SDL
         [Constant]
         public const SDL_TouchID SDL_MOUSE_TOUCHID = unchecked((SDL_TouchID)(-1));
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_TouchID>? SDL_GetTouchDevices()
         {
             int count;

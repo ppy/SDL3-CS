@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using JetBrains.Annotations;
 
 namespace SDL
 {
@@ -54,6 +55,7 @@ namespace SDL
         [Macro]
         public static bool SDL_WINDOWPOS_ISCENTERED(int X) => (((X) & 0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK);
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_DisplayID>? SDL_GetDisplays()
         {
             int count;
@@ -61,6 +63,7 @@ namespace SDL
             return SDLArray.Create(array, count);
         }
 
+        [MustDisposeResource]
         public static unsafe SDLPointerArray<SDL_DisplayMode>? SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID)
         {
             int count;

@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using JetBrains.Annotations;
 
 namespace SDL
 {
@@ -59,6 +60,7 @@ namespace SDL
         [Macro]
         public static int SDL_AUDIO_FRAMESIZE(SDL_AudioSpec x) => SDL_AUDIO_BYTESIZE((x).format) * (x).channels;
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioOutputDevices()
         {
             int count;
@@ -66,6 +68,7 @@ namespace SDL
             return SDLArray.Create(array, count);
         }
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioCaptureDevices()
         {
             int count;

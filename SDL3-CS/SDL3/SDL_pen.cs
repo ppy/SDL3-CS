@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using JetBrains.Annotations;
 
 namespace SDL
 {
@@ -34,6 +35,7 @@ namespace SDL
         [Macro]
         public static SDL_PEN_CAPABILITIES SDL_PEN_AXIS_CAPABILITY(SDL_PenAxis axis) => SDL_PEN_CAPABILITY((int)axis + SDL_PEN_FLAG_AXIS_BIT_OFFSET);
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_PenID>? SDL_GetPens()
         {
             int count;
