@@ -67,17 +67,17 @@ namespace SDL
     {
         public static SDL_bool SDL_PointInRect([NativeTypeName("const SDL_Point *")] SDL_Point* p, [NativeTypeName("const SDL_Rect *")] SDL_Rect* r)
         {
-            return ((p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? 1 : 0;
+            return ((p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectEmpty([NativeTypeName("const SDL_Rect *")] SDL_Rect* r)
         {
-            return ((r == null) || (r->w <= 0) || (r->h <= 0)) ? 1 : 0;
+            return ((r == null) || (r->w <= 0) || (r->h <= 0)) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectsEqual([NativeTypeName("const SDL_Rect *")] SDL_Rect* a, [NativeTypeName("const SDL_Rect *")] SDL_Rect* b)
         {
-            return ((a) != null && (b) != null && (a->x == b->x) && (a->y == b->y) && (a->w == b->w) && (a->h == b->h)) ? 1 : 0;
+            return ((a) != null && (b) != null && (a->x == b->x) && (a->y == b->y) && (a->w == b->w) && (a->h == b->h)) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -97,17 +97,17 @@ namespace SDL
 
         public static SDL_bool SDL_PointInRectFloat([NativeTypeName("const SDL_FPoint *")] SDL_FPoint* p, [NativeTypeName("const SDL_FRect *")] SDL_FRect* r)
         {
-            return ((p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? 1 : 0;
+            return ((p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectEmptyFloat([NativeTypeName("const SDL_FRect *")] SDL_FRect* r)
         {
-            return ((r == null) || (r->w <= 0.0f) || (r->h <= 0.0f)) ? 1 : 0;
+            return ((r == null) || (r->w <= 0.0f) || (r->h <= 0.0f)) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectsEqualEpsilon([NativeTypeName("const SDL_FRect *")] SDL_FRect* a, [NativeTypeName("const SDL_FRect *")] SDL_FRect* b, [NativeTypeName("const float")] float epsilon)
         {
-            return ((a) != null && (b) != null && ((a == b) || ((SDL_fabsf(a->x - b->x) <= epsilon) && (SDL_fabsf(a->y - b->y) <= epsilon) && (SDL_fabsf(a->w - b->w) <= epsilon) && (SDL_fabsf(a->h - b->h) <= epsilon)))) ? 1 : 0;
+            return ((a) != null && (b) != null && ((a == b) || ((SDL_fabsf(a->x - b->x) <= epsilon) && (SDL_fabsf(a->y - b->y) <= epsilon) && (SDL_fabsf(a->w - b->w) <= epsilon) && (SDL_fabsf(a->h - b->h) <= epsilon)))) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectsEqualFloat([NativeTypeName("const SDL_FRect *")] SDL_FRect* a, [NativeTypeName("const SDL_FRect *")] SDL_FRect* b)
