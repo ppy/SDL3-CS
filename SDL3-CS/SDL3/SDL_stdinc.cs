@@ -14,4 +14,10 @@ namespace SDL
 
     [Typedef]
     public enum SDL_Time : Int64;
+
+    public partial class SDL3
+    {
+        [Macro]
+        public static uint SDL_FOURCC(byte A, byte B, byte C, byte D) => (uint)((A << 0) | (B << 8) | (C << 16) | (D << 24));
+    }
 }

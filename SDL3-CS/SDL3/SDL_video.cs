@@ -39,4 +39,19 @@ namespace SDL
         SDL_WINDOW_TRANSPARENT = SDL3.SDL_WINDOW_TRANSPARENT,
         SDL_WINDOW_NOT_FOCUSABLE = SDL3.SDL_WINDOW_NOT_FOCUSABLE,
     }
+
+    public static partial class SDL3
+    {
+        [Macro]
+        public static int SDL_WINDOWPOS_UNDEFINED_DISPLAY(int X) => (int)(SDL_WINDOWPOS_UNDEFINED_MASK | (X));
+
+        [Macro]
+        public static bool SDL_WINDOWPOS_ISUNDEFINED(int X) => (((X) & 0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK);
+
+        [Macro]
+        public static int SDL_WINDOWPOS_CENTERED_DISPLAY(int X) => (int)(SDL_WINDOWPOS_CENTERED_MASK | (X));
+
+        [Macro]
+        public static bool SDL_WINDOWPOS_ISCENTERED(int X) => (((X) & 0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK);
+    }
 }
