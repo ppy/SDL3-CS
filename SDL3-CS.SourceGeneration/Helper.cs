@@ -11,6 +11,9 @@ namespace SDL3.SourceGeneration
 {
     public static class Helper
     {
+        /// <remarks>
+        /// Needs to match <c>unsafe_prefix</c> in generate_bindings.py.
+        /// </remarks>
         public const string UnsafePrefix = "Unsafe_";
 
         public static bool IsVoid(this TypeSyntax type) => type is PredefinedTypeSyntax predefined

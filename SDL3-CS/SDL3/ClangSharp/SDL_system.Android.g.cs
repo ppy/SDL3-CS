@@ -61,19 +61,19 @@ namespace SDL
         [SupportedOSPlatform("Android")]
         public static extern void SDL_AndroidBackButton();
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_AndroidGetInternalStoragePath", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Android")]
-        public static extern byte* SDL_AndroidGetInternalStoragePath();
+        public static extern byte* Unsafe_SDL_AndroidGetInternalStoragePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
         public static extern int SDL_AndroidGetExternalStorageState([NativeTypeName("Uint32 *")] uint* state);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_AndroidGetExternalStoragePath", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Android")]
-        public static extern byte* SDL_AndroidGetExternalStoragePath();
+        public static extern byte* Unsafe_SDL_AndroidGetExternalStoragePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]

@@ -48,9 +48,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_SensorID* SDL_GetSensors(int* count);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetSensorInstanceName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetSensorInstanceName(SDL_SensorID instance_id);
+        public static extern byte* Unsafe_SDL_GetSensorInstanceName(SDL_SensorID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_SensorType SDL_GetSensorInstanceType(SDL_SensorID instance_id);
@@ -67,9 +67,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID SDL_GetSensorProperties(SDL_Sensor* sensor);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetSensorName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetSensorName(SDL_Sensor* sensor);
+        public static extern byte* Unsafe_SDL_GetSensorName(SDL_Sensor* sensor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_SensorType SDL_GetSensorType(SDL_Sensor* sensor);

@@ -52,10 +52,10 @@ namespace SDL
         [SupportedOSPlatform("Windows")]
         public static extern IntPtr SDL_WinRTGetFSPathUNICODE(SDL_WinRT_Path pathType);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_WinRTGetFSPathUTF8", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Windows")]
-        public static extern byte* SDL_WinRTGetFSPathUTF8(SDL_WinRT_Path pathType);
+        public static extern byte* Unsafe_SDL_WinRTGetFSPathUTF8(SDL_WinRT_Path pathType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]

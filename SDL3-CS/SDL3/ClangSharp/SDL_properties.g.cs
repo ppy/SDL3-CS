@@ -83,9 +83,9 @@ namespace SDL
         [return: NativeTypeName("void*")]
         public static extern IntPtr SDL_GetProperty(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr default_value);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetStringProperty", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetStringProperty(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* default_value);
+        public static extern byte* Unsafe_SDL_GetStringProperty(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* default_value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Sint64")]

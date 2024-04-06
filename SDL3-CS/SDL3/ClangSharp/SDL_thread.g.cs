@@ -51,9 +51,9 @@ namespace SDL
         [UnsupportedOSPlatform("windows")]
         public static extern SDL_Thread* SDL_CreateThreadWithStackSize([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<IntPtr, int> fn, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const size_t")] nuint stacksize, [NativeTypeName("void*")] IntPtr data);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetThreadName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetThreadName(SDL_Thread* thread);
+        public static extern byte* Unsafe_SDL_GetThreadName(SDL_Thread* thread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_ThreadID SDL_GetCurrentThreadID();
