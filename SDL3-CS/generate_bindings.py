@@ -174,6 +174,9 @@ base_command = [
     "--methodClassName", "SDL3",
     "--namespace", "SDL",
 
+    "--remap",
+    "wchar_t *=IntPtr",  # wchar_t has a platform-defined size
+
     "--additional",
     "--undefine-macro=_WIN32",
 ]

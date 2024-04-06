@@ -158,47 +158,47 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
-        public static extern nuint SDL_wcslen([NativeTypeName("const wchar_t *")] ushort* wstr);
+        public static extern nuint SDL_wcslen([NativeTypeName("const wchar_t *")] IntPtr wstr);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
-        public static extern nuint SDL_wcsnlen([NativeTypeName("const wchar_t *")] ushort* wstr, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern nuint SDL_wcsnlen([NativeTypeName("const wchar_t *")] IntPtr wstr, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
-        public static extern nuint SDL_wcslcpy([NativeTypeName("wchar_t *")] ushort* dst, [NativeTypeName("const wchar_t *")] ushort* src, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern nuint SDL_wcslcpy([NativeTypeName("wchar_t *")] IntPtr dst, [NativeTypeName("const wchar_t *")] IntPtr src, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
-        public static extern nuint SDL_wcslcat([NativeTypeName("wchar_t *")] ushort* dst, [NativeTypeName("const wchar_t *")] ushort* src, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern nuint SDL_wcslcat([NativeTypeName("wchar_t *")] IntPtr dst, [NativeTypeName("const wchar_t *")] IntPtr src, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("wchar_t *")]
-        public static extern ushort* SDL_wcsdup([NativeTypeName("const wchar_t *")] ushort* wstr);
+        public static extern IntPtr SDL_wcsdup([NativeTypeName("const wchar_t *")] IntPtr wstr);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("wchar_t *")]
-        public static extern ushort* SDL_wcsstr([NativeTypeName("const wchar_t *")] ushort* haystack, [NativeTypeName("const wchar_t *")] ushort* needle);
+        public static extern IntPtr SDL_wcsstr([NativeTypeName("const wchar_t *")] IntPtr haystack, [NativeTypeName("const wchar_t *")] IntPtr needle);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("wchar_t *")]
-        public static extern ushort* SDL_wcsnstr([NativeTypeName("const wchar_t *")] ushort* haystack, [NativeTypeName("const wchar_t *")] ushort* needle, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern IntPtr SDL_wcsnstr([NativeTypeName("const wchar_t *")] IntPtr haystack, [NativeTypeName("const wchar_t *")] IntPtr needle, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_wcscmp([NativeTypeName("const wchar_t *")] ushort* str1, [NativeTypeName("const wchar_t *")] ushort* str2);
+        public static extern int SDL_wcscmp([NativeTypeName("const wchar_t *")] IntPtr str1, [NativeTypeName("const wchar_t *")] IntPtr str2);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_wcsncmp([NativeTypeName("const wchar_t *")] ushort* str1, [NativeTypeName("const wchar_t *")] ushort* str2, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern int SDL_wcsncmp([NativeTypeName("const wchar_t *")] IntPtr str1, [NativeTypeName("const wchar_t *")] IntPtr str2, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_wcscasecmp([NativeTypeName("const wchar_t *")] ushort* str1, [NativeTypeName("const wchar_t *")] ushort* str2);
+        public static extern int SDL_wcscasecmp([NativeTypeName("const wchar_t *")] IntPtr str1, [NativeTypeName("const wchar_t *")] IntPtr str2);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_wcsncasecmp([NativeTypeName("const wchar_t *")] ushort* str1, [NativeTypeName("const wchar_t *")] ushort* str2, [NativeTypeName("size_t")] nuint maxlen);
+        public static extern int SDL_wcsncasecmp([NativeTypeName("const wchar_t *")] IntPtr str1, [NativeTypeName("const wchar_t *")] IntPtr str2, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("long")]
-        public static extern int SDL_wcstol([NativeTypeName("const wchar_t *")] ushort* str, [NativeTypeName("wchar_t **")] ushort** endp, int @base);
+        public static extern int SDL_wcstol([NativeTypeName("const wchar_t *")] IntPtr str, [NativeTypeName("wchar_t **")] IntPtr* endp, int @base);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
@@ -343,13 +343,13 @@ namespace SDL
         public static extern int SDL_snprintf([NativeTypeName("char *")] sbyte* text, [NativeTypeName("size_t")] nuint maxlen, [NativeTypeName("const char *")] sbyte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_swprintf([NativeTypeName("wchar_t *")] ushort* text, [NativeTypeName("size_t")] nuint maxlen, [NativeTypeName("const wchar_t *")] ushort* fmt, __arglist);
+        public static extern int SDL_swprintf([NativeTypeName("wchar_t *")] IntPtr text, [NativeTypeName("size_t")] nuint maxlen, [NativeTypeName("const wchar_t *")] IntPtr fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_vsnprintf([NativeTypeName("char *")] sbyte* text, [NativeTypeName("size_t")] nuint maxlen, [NativeTypeName("const char *")] sbyte* fmt, [NativeTypeName("va_list")] sbyte* ap);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_vswprintf([NativeTypeName("wchar_t *")] ushort* text, [NativeTypeName("size_t")] nuint maxlen, [NativeTypeName("const wchar_t *")] ushort* fmt, [NativeTypeName("va_list")] sbyte* ap);
+        public static extern int SDL_vswprintf([NativeTypeName("wchar_t *")] IntPtr text, [NativeTypeName("size_t")] nuint maxlen, [NativeTypeName("const wchar_t *")] IntPtr fmt, [NativeTypeName("va_list")] sbyte* ap);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_asprintf([NativeTypeName("char **")] sbyte** strp, [NativeTypeName("const char *")] sbyte* fmt, __arglist);
