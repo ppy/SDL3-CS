@@ -23,10 +23,12 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    [Flags]
     public enum SDL_InitFlags
     {
         SDL_INIT_TIMER = 0x00000001,
