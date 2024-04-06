@@ -12,4 +12,8 @@
     <ProjectReference Include="..\SDL3-CS.SourceGeneration\SDL3-CS.SourceGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+  </ItemGroup>
+
 </Project>

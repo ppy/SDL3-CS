@@ -3,10 +3,12 @@
 
 using System;
 using System.Diagnostics;
+using JetBrains.Annotations;
 
 namespace SDL
 {
     // T* can't be used as a type parameter, so this has to be a separate class
+    [MustDisposeResource]
     public sealed unsafe class SDLPointerArray<T> : IDisposable
         where T : unmanaged
     {

@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using JetBrains.Annotations;
 
 namespace SDL
 {
@@ -32,6 +33,7 @@ namespace SDL
         [Macro]
         public static SDLButtonMask SDL_BUTTON(SDLButton button) => (SDLButtonMask)(1 << ((int)button - 1));
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_MouseID>? SDL_GetMice()
         {
             int count;

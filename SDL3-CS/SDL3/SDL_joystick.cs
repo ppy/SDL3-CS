@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using JetBrains.Annotations;
 
 namespace SDL
 {
@@ -10,6 +11,7 @@ namespace SDL
 
     public static partial class SDL3
     {
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_JoystickID>? SDL_GetJoysticks()
         {
             int count;

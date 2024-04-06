@@ -2,9 +2,11 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using JetBrains.Annotations;
 
 namespace SDL
 {
+    [MustDisposeResource]
     public sealed unsafe class SDLArray<T> : IDisposable
         where T : unmanaged
     {
@@ -41,6 +43,7 @@ namespace SDL
 
     internal static unsafe class SDLArray
     {
+        [MustDisposeResource]
         internal static SDLArray<T>? Create<T>(T* array, int count)
             where T : unmanaged
         {
@@ -50,6 +53,7 @@ namespace SDL
             return new SDLArray<T>(array, count);
         }
 
+        [MustDisposeResource]
         internal static SDLPointerArray<T>? Create<T>(T** array, int count)
             where T : unmanaged
         {
@@ -58,6 +62,5 @@ namespace SDL
 
             return new SDLPointerArray<T>(array, count);
         }
-
     }
 }
