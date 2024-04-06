@@ -217,6 +217,9 @@ base_command = [
     "char=byte",
     "wchar_t *=IntPtr",  # wchar_t has a platform-defined size
 
+    "--define-macro",
+    "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
+
     "--additional",
     "--undefine-macro=_WIN32",
 ]

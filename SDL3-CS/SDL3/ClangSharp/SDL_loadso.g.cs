@@ -36,7 +36,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
-        public static extern delegate* unmanaged[Cdecl]<void> SDL_LoadFunction([NativeTypeName("void*")] IntPtr handle, [NativeTypeName("const char *")] byte* name);
+        public static extern IntPtr SDL_LoadFunction([NativeTypeName("void*")] IntPtr handle, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_UnloadObject([NativeTypeName("void*")] IntPtr handle);
