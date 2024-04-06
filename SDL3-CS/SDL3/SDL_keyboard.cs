@@ -7,4 +7,9 @@ namespace SDL
 {
     [Typedef]
     public enum SDL_KeyboardID : UInt32;
+
+    public partial struct SDL_Keysym
+    {
+        public SDL_Keymod Mod => (SDL_Keymod)mod;
+    }
 }
