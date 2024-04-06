@@ -7,4 +7,14 @@ namespace SDL
 {
     [Typedef]
     public enum SDL_SensorID : UInt32;
+
+    public static partial class SDL3
+    {
+        public static unsafe SDLArray<SDL_SensorID>? SDL_GetSensors()
+        {
+            int count;
+            var array = SDL_GetSensors(&count);
+            return SDLArray.Create(array, count);
+        }
+    }
 }

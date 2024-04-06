@@ -53,5 +53,19 @@ namespace SDL
 
         [Macro]
         public static bool SDL_WINDOWPOS_ISCENTERED(int X) => (((X) & 0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK);
+
+        public static unsafe SDLArray<SDL_DisplayID>? SDL_GetDisplays()
+        {
+            int count;
+            var array = SDL_GetDisplays(&count);
+            return SDLArray.Create(array, count);
+        }
+
+        public static unsafe SDLPointerArray<SDL_DisplayMode>? SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID)
+        {
+            int count;
+            var array = SDL_GetFullscreenDisplayModes(displayID, &count);
+            return SDLArray.Create(array, count);
+        }
     }
 }

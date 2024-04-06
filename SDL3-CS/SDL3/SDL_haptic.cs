@@ -7,4 +7,14 @@ namespace SDL
 {
     [Typedef]
     public enum SDL_HapticID : UInt32;
+
+    public static partial class SDL3
+    {
+        public static unsafe SDLArray<SDL_HapticID>? SDL_GetHaptics()
+        {
+            int count;
+            var array = SDL_GetHaptics(&count);
+            return SDLArray.Create(array, count);
+        }
+    }
 }

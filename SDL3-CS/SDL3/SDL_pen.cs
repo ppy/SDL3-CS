@@ -33,5 +33,12 @@ namespace SDL
 
         [Macro]
         public static SDL_PEN_CAPABILITIES SDL_PEN_AXIS_CAPABILITY(SDL_PenAxis axis) => SDL_PEN_CAPABILITY((int)axis + SDL_PEN_FLAG_AXIS_BIT_OFFSET);
+
+        public static unsafe SDLArray<SDL_PenID>? SDL_GetPens()
+        {
+            int count;
+            var array = SDL_GetPens(&count);
+            return SDLArray.Create(array, count);
+        }
     }
 }

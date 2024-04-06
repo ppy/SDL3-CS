@@ -12,4 +12,14 @@ namespace SDL
     {
         public SDL_Keymod Mod => (SDL_Keymod)mod;
     }
+
+    public static partial class SDL3
+    {
+        public static unsafe SDLArray<SDL_KeyboardID>? SDL_GetKeyboards()
+        {
+            int count;
+            var array = SDL_GetKeyboards(&count);
+            return SDLArray.Create(array, count);
+        }
+    }
 }
