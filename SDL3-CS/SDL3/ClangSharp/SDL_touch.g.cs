@@ -63,11 +63,5 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Finger* SDL_GetTouchFinger(SDL_TouchID touchID, int index);
-
-        [NativeTypeName("#define SDL_TOUCH_MOUSEID ((SDL_MouseID)-1)")]
-        public const SDL_MouseID SDL_TOUCH_MOUSEID = ((SDL_MouseID)(-1));
-
-        [NativeTypeName("#define SDL_MOUSE_TOUCHID ((SDL_TouchID)-1)")]
-        public const SDL_TouchID SDL_MOUSE_TOUCHID = ((SDL_TouchID)(-1));
     }
 }

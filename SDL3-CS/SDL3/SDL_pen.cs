@@ -7,4 +7,10 @@ namespace SDL
 {
     [Typedef]
     public enum SDL_PenID : UInt32;
+
+    public static partial class SDL3
+    {
+        [Constant]
+        public const SDL_MouseID SDL_PEN_MOUSEID = unchecked((SDL_MouseID)(-2));
+    }
 }

@@ -10,4 +10,13 @@ namespace SDL
 
     [Typedef]
     public enum SDL_TouchID : UInt64;
+
+    public static partial class SDL3
+    {
+        [Constant]
+        public const SDL_MouseID SDL_TOUCH_MOUSEID = unchecked((SDL_MouseID)(-1));
+
+        [Constant]
+        public const SDL_TouchID SDL_MOUSE_TOUCHID = unchecked((SDL_TouchID)(-1));
+    }
 }
