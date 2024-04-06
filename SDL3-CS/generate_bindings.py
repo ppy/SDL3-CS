@@ -7,6 +7,7 @@ Generates C# bindings for SDL3 using ClangSharp.
 Prerequisites:
 - run `dotnet tool restore` (to install ClangSharpPInvokeGenerator)
 - https://github.com/libsdl-org/SDL checked out alongside this repository
+- git apply `SDL-use-proper-types.patch` to SDL repo
 
 This script should be run manually.
 """

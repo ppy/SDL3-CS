@@ -541,11 +541,11 @@ namespace SDL
         [NativeTypeName("#define SDL_SIZE_MAX SIZE_MAX")]
         public const ulong SDL_SIZE_MAX = 0xffffffffffffffffUL;
 
-        [NativeTypeName("#define SDL_FALSE 0")]
-        public const int SDL_FALSE = 0;
+        [NativeTypeName("#define SDL_FALSE (SDL_bool)0")]
+        public const SDL_bool SDL_FALSE = (SDL_bool)(0);
 
-        [NativeTypeName("#define SDL_TRUE 1")]
-        public const int SDL_TRUE = 1;
+        [NativeTypeName("#define SDL_TRUE (SDL_bool)1")]
+        public const SDL_bool SDL_TRUE = (SDL_bool)(1);
 
         [NativeTypeName("#define SDL_MAX_SINT8 ((Sint8)0x7F)")]
         public const sbyte SDL_MAX_SINT8 = ((sbyte)(0x7F));
