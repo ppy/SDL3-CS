@@ -65,32 +65,29 @@ namespace SDL
         public static extern byte* SDL_GetCurrentCameraDriver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_CameraDeviceID *")]
-        public static extern uint* SDL_GetCameraDevices(int* count);
+        public static extern SDL_CameraDeviceID* SDL_GetCameraDevices(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_CameraSpec* SDL_GetCameraDeviceSupportedFormats([NativeTypeName("SDL_CameraDeviceID")] uint devid, int* count);
+        public static extern SDL_CameraSpec* SDL_GetCameraDeviceSupportedFormats(SDL_CameraDeviceID devid, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern byte* SDL_GetCameraDeviceName([NativeTypeName("SDL_CameraDeviceID")] uint instance_id);
+        public static extern byte* SDL_GetCameraDeviceName(SDL_CameraDeviceID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_CameraPosition SDL_GetCameraDevicePosition([NativeTypeName("SDL_CameraDeviceID")] uint instance_id);
+        public static extern SDL_CameraPosition SDL_GetCameraDevicePosition(SDL_CameraDeviceID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Camera* SDL_OpenCameraDevice([NativeTypeName("SDL_CameraDeviceID")] uint instance_id, [NativeTypeName("const SDL_CameraSpec *")] SDL_CameraSpec* spec);
+        public static extern SDL_Camera* SDL_OpenCameraDevice(SDL_CameraDeviceID instance_id, [NativeTypeName("const SDL_CameraSpec *")] SDL_CameraSpec* spec);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetCameraPermissionState(SDL_Camera* camera);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_CameraDeviceID")]
-        public static extern uint SDL_GetCameraInstanceID(SDL_Camera* camera);
+        public static extern SDL_CameraDeviceID SDL_GetCameraInstanceID(SDL_Camera* camera);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_PropertiesID")]
-        public static extern uint SDL_GetCameraProperties(SDL_Camera* camera);
+        public static extern SDL_PropertiesID SDL_GetCameraProperties(SDL_Camera* camera);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetCameraFormat(SDL_Camera* camera, SDL_CameraSpec* spec);

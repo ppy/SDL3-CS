@@ -58,14 +58,11 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong size;
 
-        [NativeTypeName("SDL_Time")]
-        public long create_time;
+        public SDL_Time create_time;
 
-        [NativeTypeName("SDL_Time")]
-        public long modify_time;
+        public SDL_Time modify_time;
 
-        [NativeTypeName("SDL_Time")]
-        public long access_time;
+        public SDL_Time access_time;
     }
 
     public static unsafe partial class SDL3

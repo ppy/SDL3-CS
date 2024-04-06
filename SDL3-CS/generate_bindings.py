@@ -59,6 +59,13 @@ class Header:
         if self.output_suffix is not None:
             yield csproj_root / f"{self.base}/{self.name}.{self.output_suffix}.rsp"
 
+    def cs_file(self):
+        """Location of the manually-written C# file that implements some parts of the header."""
+        if self.output_suffix is None:
+            return csproj_root / f"{self.base}/{self.name}.cs"
+        else:
+            return csproj_root / f"{self.base}/{self.name}.{self.output_suffix}.cs"
+
 
 def add(s: str):
     base, name = s.split("/")
@@ -158,6 +165,22 @@ def check_generated_functions(sdl_api, header, generated_file_paths):
             print(f"[⚠️ Warning] Function {name} not found in generated files:", *generated_file_paths)
 
 
+typedef_enum_regex = re.compile(r"\[Typedef]\s*public enum (SDL_\w+)", re.MULTILINE)
+
+
+def get_typedefs():
+    for header in headers:
+        cs_file = header.cs_file()
+        if cs_file.is_file():
+            with open(cs_file, "r", encoding="utf-8") as f:
+                for match in typedef_enum_regex.finditer(f.read()):
+                    yield match.group(1)
+
+
+def typedef(t):
+    return f"{t}={t}"
+
+
 base_command = [
     "dotnet", "tool", "run", "ClangSharpPInvokeGenerator",
     "--headerFile", csproj_root / "SDL.licenseheader",
@@ -236,6 +259,13 @@ def generate_platform_specific_headers(sdl_api, header: Header, platforms):
 
 def main():
     sdl_api = get_sdl_api_dump()
+
+    # typedefs are added globally as their types appear outside of the defining header
+    typedefs = list(get_typedefs())
+    if typedefs:
+        base_command.append("--remap")
+        for type_name in typedefs:
+            base_command.append(typedef(type_name))
 
     for header in headers:
         output_file = run_clangsharp(base_command, header)

@@ -34,7 +34,7 @@ namespace SDL
         public delegate* unmanaged[Cdecl]<IntPtr, int> close;
 
         [NativeTypeName("SDL_bool (*)(void *)")]
-        public delegate* unmanaged[Cdecl]<IntPtr, int> ready;
+        public delegate* unmanaged[Cdecl]<IntPtr, SDL_bool> ready;
 
         [NativeTypeName("int (*)(void *, const char *, SDL_EnumerateDirectoryCallback, void *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, byte*, delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, int>, IntPtr, int> enumerate;
@@ -68,10 +68,10 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Storage* SDL_OpenTitleStorage([NativeTypeName("const char *")] byte* @override, [NativeTypeName("SDL_PropertiesID")] uint props);
+        public static extern SDL_Storage* SDL_OpenTitleStorage([NativeTypeName("const char *")] byte* @override, SDL_PropertiesID props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Storage* SDL_OpenUserStorage([NativeTypeName("const char *")] byte* org, [NativeTypeName("const char *")] byte* app, [NativeTypeName("SDL_PropertiesID")] uint props);
+        public static extern SDL_Storage* SDL_OpenUserStorage([NativeTypeName("const char *")] byte* org, [NativeTypeName("const char *")] byte* app, SDL_PropertiesID props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Storage* SDL_OpenFileStorage([NativeTypeName("const char *")] byte* path);
@@ -83,8 +83,7 @@ namespace SDL
         public static extern int SDL_CloseStorage(SDL_Storage* storage);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_StorageReady(SDL_Storage* storage);
+        public static extern SDL_bool SDL_StorageReady(SDL_Storage* storage);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetStorageFileSize(SDL_Storage* storage, [NativeTypeName("const char *")] byte* path, [NativeTypeName("Uint64 *")] ulong* length);

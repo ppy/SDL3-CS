@@ -102,13 +102,13 @@ namespace SDL
         public static extern byte* SDL_GetRenderDriver(int index);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_CreateWindowAndRenderer(int width, int height, [NativeTypeName("SDL_WindowFlags")] uint window_flags, SDL_Window** window, SDL_Renderer** renderer);
+        public static extern int SDL_CreateWindowAndRenderer(int width, int height, SDL_WindowFlags window_flags, SDL_Window** window, SDL_Renderer** renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, [NativeTypeName("const char *")] byte* name, [NativeTypeName("Uint32")] uint flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Renderer* SDL_CreateRendererWithProperties([NativeTypeName("SDL_PropertiesID")] uint props);
+        public static extern SDL_Renderer* SDL_CreateRendererWithProperties(SDL_PropertiesID props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Renderer* SDL_CreateSoftwareRenderer(SDL_Surface* surface);
@@ -123,8 +123,7 @@ namespace SDL
         public static extern int SDL_GetRendererInfo(SDL_Renderer* renderer, SDL_RendererInfo* info);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_PropertiesID")]
-        public static extern uint SDL_GetRendererProperties(SDL_Renderer* renderer);
+        public static extern SDL_PropertiesID SDL_GetRendererProperties(SDL_Renderer* renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetRenderOutputSize(SDL_Renderer* renderer, int* w, int* h);
@@ -139,11 +138,10 @@ namespace SDL
         public static extern SDL_Texture* SDL_CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Texture* SDL_CreateTextureWithProperties(SDL_Renderer* renderer, [NativeTypeName("SDL_PropertiesID")] uint props);
+        public static extern SDL_Texture* SDL_CreateTextureWithProperties(SDL_Renderer* renderer, SDL_PropertiesID props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_PropertiesID")]
-        public static extern uint SDL_GetTextureProperties(SDL_Texture* texture);
+        public static extern SDL_PropertiesID SDL_GetTextureProperties(SDL_Texture* texture);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Renderer* SDL_GetRendererFromTexture(SDL_Texture* texture);
@@ -233,8 +231,7 @@ namespace SDL
         public static extern int SDL_GetRenderViewport(SDL_Renderer* renderer, SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_RenderViewportSet(SDL_Renderer* renderer);
+        public static extern SDL_bool SDL_RenderViewportSet(SDL_Renderer* renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetRenderClipRect(SDL_Renderer* renderer, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect);
@@ -243,8 +240,7 @@ namespace SDL
         public static extern int SDL_GetRenderClipRect(SDL_Renderer* renderer, SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_RenderClipEnabled(SDL_Renderer* renderer);
+        public static extern SDL_bool SDL_RenderClipEnabled(SDL_Renderer* renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetRenderScale(SDL_Renderer* renderer, float scaleX, float scaleY);

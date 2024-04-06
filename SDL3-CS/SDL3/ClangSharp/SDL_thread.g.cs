@@ -56,12 +56,10 @@ namespace SDL
         public static extern byte* SDL_GetThreadName(SDL_Thread* thread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_ThreadID")]
-        public static extern ulong SDL_GetCurrentThreadID();
+        public static extern SDL_ThreadID SDL_GetCurrentThreadID();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_ThreadID")]
-        public static extern ulong SDL_GetThreadID(SDL_Thread* thread);
+        public static extern SDL_ThreadID SDL_GetThreadID(SDL_Thread* thread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetThreadPriority(SDL_ThreadPriority priority);
@@ -73,15 +71,14 @@ namespace SDL
         public static extern void SDL_DetachThread(SDL_Thread* thread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_TLSID")]
-        public static extern uint SDL_CreateTLS();
+        public static extern SDL_TLSID SDL_CreateTLS();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_GetTLS([NativeTypeName("SDL_TLSID")] uint id);
+        public static extern IntPtr SDL_GetTLS(SDL_TLSID id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetTLS([NativeTypeName("SDL_TLSID")] uint id, [NativeTypeName("const void *")] IntPtr value, [NativeTypeName("void (*)(void *)")] delegate* unmanaged[Cdecl]<IntPtr, void> destructor);
+        public static extern int SDL_SetTLS(SDL_TLSID id, [NativeTypeName("const void *")] IntPtr value, [NativeTypeName("void (*)(void *)")] delegate* unmanaged[Cdecl]<IntPtr, void> destructor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CleanupTLS();

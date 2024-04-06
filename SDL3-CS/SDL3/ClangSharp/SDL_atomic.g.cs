@@ -36,8 +36,7 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_TryLockSpinlock([NativeTypeName("SDL_SpinLock *")] int* @lock);
+        public static extern SDL_bool SDL_TryLockSpinlock([NativeTypeName("SDL_SpinLock *")] int* @lock);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_LockSpinlock([NativeTypeName("SDL_SpinLock *")] int* @lock);
@@ -52,8 +51,7 @@ namespace SDL
         public static extern void SDL_MemoryBarrierAcquireFunction();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_AtomicCompareAndSwap(SDL_AtomicInt* a, int oldval, int newval);
+        public static extern SDL_bool SDL_AtomicCompareAndSwap(SDL_AtomicInt* a, int oldval, int newval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_AtomicSet(SDL_AtomicInt* a, int v);
@@ -65,8 +63,7 @@ namespace SDL
         public static extern int SDL_AtomicAdd(SDL_AtomicInt* a, int v);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_AtomicCompareAndSwapPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr oldval, [NativeTypeName("void*")] IntPtr newval);
+        public static extern SDL_bool SDL_AtomicCompareAndSwapPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr oldval, [NativeTypeName("void*")] IntPtr newval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]

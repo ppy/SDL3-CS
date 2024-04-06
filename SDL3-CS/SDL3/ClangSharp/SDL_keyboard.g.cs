@@ -31,8 +31,7 @@ namespace SDL
     {
         public SDL_Scancode scancode;
 
-        [NativeTypeName("SDL_Keycode")]
-        public int sym;
+        public SDL_Keycode sym;
 
         [NativeTypeName("Uint16")]
         public ushort mod;
@@ -44,16 +43,14 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_HasKeyboard();
+        public static extern SDL_bool SDL_HasKeyboard();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_KeyboardID *")]
-        public static extern uint* SDL_GetKeyboards(int* count);
+        public static extern SDL_KeyboardID* SDL_GetKeyboards(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetKeyboardInstanceName([NativeTypeName("SDL_KeyboardID")] uint instance_id);
+        public static extern byte* SDL_GetKeyboardInstanceName(SDL_KeyboardID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GetKeyboardFocus();
@@ -72,11 +69,10 @@ namespace SDL
         public static extern void SDL_SetModState(SDL_Keymod modstate);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_Keycode")]
-        public static extern int SDL_GetKeyFromScancode(SDL_Scancode scancode);
+        public static extern SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Scancode SDL_GetScancodeFromKey([NativeTypeName("SDL_Keycode")] int key);
+        public static extern SDL_Scancode SDL_GetScancodeFromKey(SDL_Keycode key);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -87,18 +83,16 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetKeyName([NativeTypeName("SDL_Keycode")] int key);
+        public static extern byte* SDL_GetKeyName(SDL_Keycode key);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_Keycode")]
-        public static extern int SDL_GetKeyFromName([NativeTypeName("const char *")] byte* name);
+        public static extern SDL_Keycode SDL_GetKeyFromName([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_StartTextInput();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_TextInputActive();
+        public static extern SDL_bool SDL_TextInputActive();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_StopTextInput();
@@ -110,11 +104,9 @@ namespace SDL
         public static extern int SDL_SetTextInputRect([NativeTypeName("const SDL_Rect *")] SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_HasScreenKeyboardSupport();
+        public static extern SDL_bool SDL_HasScreenKeyboardSupport();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_ScreenKeyboardShown(SDL_Window* window);
+        public static extern SDL_bool SDL_ScreenKeyboardShown(SDL_Window* window);
     }
 }
