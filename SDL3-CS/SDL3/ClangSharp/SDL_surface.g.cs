@@ -108,13 +108,13 @@ namespace SDL
         public static extern SDL_Surface* SDL_LoadBMP_IO(SDL_IOStream* src, [NativeTypeName("SDL_bool")] int closeio);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* SDL_LoadBMP([NativeTypeName("const char *")] sbyte* file);
+        public static extern SDL_Surface* SDL_LoadBMP([NativeTypeName("const char *")] byte* file);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SaveBMP_IO(SDL_Surface* surface, SDL_IOStream* dst, [NativeTypeName("SDL_bool")] int closeio);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SaveBMP(SDL_Surface* surface, [NativeTypeName("const char *")] sbyte* file);
+        public static extern int SDL_SaveBMP(SDL_Surface* surface, [NativeTypeName("const char *")] byte* file);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetSurfaceRLE(SDL_Surface* surface, int flag);

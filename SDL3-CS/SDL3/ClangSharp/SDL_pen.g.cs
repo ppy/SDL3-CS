@@ -85,7 +85,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetPenName([NativeTypeName("SDL_PenID")] uint instance_id);
+        public static extern byte* SDL_GetPenName([NativeTypeName("SDL_PenID")] uint instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]

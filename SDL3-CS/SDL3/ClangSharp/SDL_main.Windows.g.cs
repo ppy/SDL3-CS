@@ -32,7 +32,7 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern int SDL_RegisterApp([NativeTypeName("const char *")] sbyte* name, [NativeTypeName("Uint32")] uint style, void* hInst);
+        public static extern int SDL_RegisterApp([NativeTypeName("const char *")] byte* name, [NativeTypeName("Uint32")] uint style, void* hInst);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]

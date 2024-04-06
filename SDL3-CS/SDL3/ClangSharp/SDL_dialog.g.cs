@@ -30,21 +30,21 @@ namespace SDL
     public unsafe partial struct SDL_DialogFileFilter
     {
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("const char *")]
-        public sbyte* pattern;
+        public byte* pattern;
     }
 
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_ShowOpenFileDialog([NativeTypeName("SDL_DialogFileCallback")] delegate* unmanaged[Cdecl]<void*, sbyte**, int, void> callback, void* userdata, SDL_Window* window, [NativeTypeName("const SDL_DialogFileFilter *")] SDL_DialogFileFilter* filters, [NativeTypeName("const char *")] sbyte* default_location, [NativeTypeName("SDL_bool")] int allow_many);
+        public static extern void SDL_ShowOpenFileDialog([NativeTypeName("SDL_DialogFileCallback")] delegate* unmanaged[Cdecl]<void*, byte**, int, void> callback, void* userdata, SDL_Window* window, [NativeTypeName("const SDL_DialogFileFilter *")] SDL_DialogFileFilter* filters, [NativeTypeName("const char *")] byte* default_location, [NativeTypeName("SDL_bool")] int allow_many);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_ShowSaveFileDialog([NativeTypeName("SDL_DialogFileCallback")] delegate* unmanaged[Cdecl]<void*, sbyte**, int, void> callback, void* userdata, SDL_Window* window, [NativeTypeName("const SDL_DialogFileFilter *")] SDL_DialogFileFilter* filters, [NativeTypeName("const char *")] sbyte* default_location);
+        public static extern void SDL_ShowSaveFileDialog([NativeTypeName("SDL_DialogFileCallback")] delegate* unmanaged[Cdecl]<void*, byte**, int, void> callback, void* userdata, SDL_Window* window, [NativeTypeName("const SDL_DialogFileFilter *")] SDL_DialogFileFilter* filters, [NativeTypeName("const char *")] byte* default_location);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_ShowOpenFolderDialog([NativeTypeName("SDL_DialogFileCallback")] delegate* unmanaged[Cdecl]<void*, sbyte**, int, void> callback, void* userdata, SDL_Window* window, [NativeTypeName("const char *")] sbyte* default_location, [NativeTypeName("SDL_bool")] int allow_many);
+        public static extern void SDL_ShowOpenFolderDialog([NativeTypeName("SDL_DialogFileCallback")] delegate* unmanaged[Cdecl]<void*, byte**, int, void> callback, void* userdata, SDL_Window* window, [NativeTypeName("const char *")] byte* default_location, [NativeTypeName("SDL_bool")] int allow_many);
     }
 }

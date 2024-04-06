@@ -63,7 +63,7 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_IOStream* SDL_IOFromFile([NativeTypeName("const char *")] sbyte* file, [NativeTypeName("const char *")] sbyte* mode);
+        public static extern SDL_IOStream* SDL_IOFromFile([NativeTypeName("const char *")] byte* file, [NativeTypeName("const char *")] byte* mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_IOStream* SDL_IOFromMem(void* mem, [NativeTypeName("size_t")] nuint size);
@@ -109,17 +109,17 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
-        public static extern nuint SDL_IOprintf(SDL_IOStream* context, [NativeTypeName("const char *")] sbyte* fmt, __arglist);
+        public static extern nuint SDL_IOprintf(SDL_IOStream* context, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
-        public static extern nuint SDL_IOvprintf(SDL_IOStream* context, [NativeTypeName("const char *")] sbyte* fmt, [NativeTypeName("va_list")] sbyte* ap);
+        public static extern nuint SDL_IOvprintf(SDL_IOStream* context, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* ap);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void* SDL_LoadFile_IO(SDL_IOStream* src, [NativeTypeName("size_t *")] nuint* datasize, [NativeTypeName("SDL_bool")] int closeio);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_LoadFile([NativeTypeName("const char *")] sbyte* file, [NativeTypeName("size_t *")] nuint* datasize);
+        public static extern void* SDL_LoadFile([NativeTypeName("const char *")] byte* file, [NativeTypeName("size_t *")] nuint* datasize);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]

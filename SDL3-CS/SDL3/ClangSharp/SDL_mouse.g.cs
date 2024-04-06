@@ -74,7 +74,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetMouseInstanceName([NativeTypeName("SDL_MouseID")] uint instance_id);
+        public static extern byte* SDL_GetMouseInstanceName([NativeTypeName("SDL_MouseID")] uint instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GetMouseFocus();

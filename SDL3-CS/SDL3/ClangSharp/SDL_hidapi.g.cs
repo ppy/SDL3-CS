@@ -44,7 +44,7 @@ namespace SDL
     public unsafe partial struct SDL_hid_device_info
     {
         [NativeTypeName("char *")]
-        public sbyte* path;
+        public byte* path;
 
         [NativeTypeName("unsigned short")]
         public ushort vendor_id;
@@ -106,7 +106,7 @@ namespace SDL
         public static extern SDL_hid_device* SDL_hid_open([NativeTypeName("unsigned short")] ushort vendor_id, [NativeTypeName("unsigned short")] ushort product_id, [NativeTypeName("const wchar_t *")] IntPtr serial_number);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_hid_device* SDL_hid_open_path([NativeTypeName("const char *")] sbyte* path);
+        public static extern SDL_hid_device* SDL_hid_open_path([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_hid_write(SDL_hid_device* dev, [NativeTypeName("const unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);

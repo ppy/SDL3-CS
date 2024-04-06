@@ -331,7 +331,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetHapticInstanceName([NativeTypeName("SDL_HapticID")] uint instance_id);
+        public static extern byte* SDL_GetHapticInstanceName([NativeTypeName("SDL_HapticID")] uint instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Haptic* SDL_OpenHaptic([NativeTypeName("SDL_HapticID")] uint instance_id);
@@ -345,7 +345,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetHapticName(SDL_Haptic* haptic);
+        public static extern byte* SDL_GetHapticName(SDL_Haptic* haptic);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]

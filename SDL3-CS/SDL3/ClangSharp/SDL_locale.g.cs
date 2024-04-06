@@ -30,10 +30,10 @@ namespace SDL
     public unsafe partial struct SDL_Locale
     {
         [NativeTypeName("const char *")]
-        public sbyte* language;
+        public byte* language;
 
         [NativeTypeName("const char *")]
-        public sbyte* country;
+        public byte* country;
     }
 
     public static unsafe partial class SDL3

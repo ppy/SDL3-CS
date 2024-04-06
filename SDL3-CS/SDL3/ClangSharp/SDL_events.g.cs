@@ -247,7 +247,7 @@ namespace SDL
         public uint windowID;
 
         [NativeTypeName("char *")]
-        public sbyte* text;
+        public byte* text;
 
         [NativeTypeName("Sint32")]
         public int start;
@@ -270,7 +270,7 @@ namespace SDL
         public uint windowID;
 
         [NativeTypeName("char *")]
-        public sbyte* text;
+        public byte* text;
     }
 
     public partial struct SDL_MouseDeviceEvent
@@ -864,10 +864,10 @@ namespace SDL
         public float y;
 
         [NativeTypeName("char *")]
-        public sbyte* source;
+        public byte* source;
 
         [NativeTypeName("char *")]
-        public sbyte* data;
+        public byte* data;
     }
 
     public partial struct SDL_ClipboardEvent

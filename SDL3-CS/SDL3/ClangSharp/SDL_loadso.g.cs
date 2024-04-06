@@ -30,11 +30,11 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_LoadObject([NativeTypeName("const char *")] sbyte* sofile);
+        public static extern void* SDL_LoadObject([NativeTypeName("const char *")] byte* sofile);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
-        public static extern delegate* unmanaged[Cdecl]<void> SDL_LoadFunction(void* handle, [NativeTypeName("const char *")] sbyte* name);
+        public static extern delegate* unmanaged[Cdecl]<void> SDL_LoadFunction(void* handle, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_UnloadObject(void* handle);

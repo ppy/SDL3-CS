@@ -30,38 +30,38 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetClipboardText([NativeTypeName("const char *")] sbyte* text);
+        public static extern int SDL_SetClipboardText([NativeTypeName("const char *")] byte* text);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern sbyte* SDL_GetClipboardText();
+        public static extern byte* SDL_GetClipboardText();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]
         public static extern int SDL_HasClipboardText();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetPrimarySelectionText([NativeTypeName("const char *")] sbyte* text);
+        public static extern int SDL_SetPrimarySelectionText([NativeTypeName("const char *")] byte* text);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern sbyte* SDL_GetPrimarySelectionText();
+        public static extern byte* SDL_GetPrimarySelectionText();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]
         public static extern int SDL_HasPrimarySelectionText();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetClipboardData([NativeTypeName("SDL_ClipboardDataCallback")] delegate* unmanaged[Cdecl]<void*, sbyte*, nuint*, void*> callback, [NativeTypeName("SDL_ClipboardCleanupCallback")] delegate* unmanaged[Cdecl]<void*, void> cleanup, void* userdata, [NativeTypeName("const char **")] sbyte** mime_types, [NativeTypeName("size_t")] nuint num_mime_types);
+        public static extern int SDL_SetClipboardData([NativeTypeName("SDL_ClipboardDataCallback")] delegate* unmanaged[Cdecl]<void*, byte*, nuint*, void*> callback, [NativeTypeName("SDL_ClipboardCleanupCallback")] delegate* unmanaged[Cdecl]<void*, void> cleanup, void* userdata, [NativeTypeName("const char **")] byte** mime_types, [NativeTypeName("size_t")] nuint num_mime_types);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_ClearClipboardData();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_GetClipboardData([NativeTypeName("const char *")] sbyte* mime_type, [NativeTypeName("size_t *")] nuint* size);
+        public static extern void* SDL_GetClipboardData([NativeTypeName("const char *")] byte* mime_type, [NativeTypeName("size_t *")] nuint* size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_HasClipboardData([NativeTypeName("const char *")] sbyte* mime_type);
+        public static extern int SDL_HasClipboardData([NativeTypeName("const char *")] byte* mime_type);
     }
 }

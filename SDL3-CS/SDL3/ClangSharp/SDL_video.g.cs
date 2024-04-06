@@ -153,11 +153,11 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetVideoDriver(int index);
+        public static extern byte* SDL_GetVideoDriver(int index);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetCurrentVideoDriver();
+        public static extern byte* SDL_GetCurrentVideoDriver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_SystemTheme SDL_GetSystemTheme();
@@ -176,7 +176,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetDisplayName([NativeTypeName("SDL_DisplayID")] uint displayID);
+        public static extern byte* SDL_GetDisplayName([NativeTypeName("SDL_DisplayID")] uint displayID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetDisplayBounds([NativeTypeName("SDL_DisplayID")] uint displayID, SDL_Rect* rect);
@@ -242,7 +242,7 @@ namespace SDL
         public static extern uint SDL_GetWindowPixelFormat(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Window* SDL_CreateWindow([NativeTypeName("const char *")] sbyte* title, int w, int h, [NativeTypeName("SDL_WindowFlags")] uint flags);
+        public static extern SDL_Window* SDL_CreateWindow([NativeTypeName("const char *")] byte* title, int w, int h, [NativeTypeName("SDL_WindowFlags")] uint flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_CreatePopupWindow(SDL_Window* parent, int offset_x, int offset_y, int w, int h, [NativeTypeName("SDL_WindowFlags")] uint flags);
@@ -269,11 +269,11 @@ namespace SDL
         public static extern uint SDL_GetWindowFlags(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowTitle(SDL_Window* window, [NativeTypeName("const char *")] sbyte* title);
+        public static extern int SDL_SetWindowTitle(SDL_Window* window, [NativeTypeName("const char *")] byte* title);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetWindowTitle(SDL_Window* window);
+        public static extern byte* SDL_GetWindowTitle(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetWindowIcon(SDL_Window* window, SDL_Surface* icon);
@@ -422,22 +422,22 @@ namespace SDL
         public static extern int SDL_DisableScreenSaver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_LoadLibrary([NativeTypeName("const char *")] sbyte* path);
+        public static extern int SDL_GL_LoadLibrary([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
-        public static extern delegate* unmanaged[Cdecl]<void> SDL_GL_GetProcAddress([NativeTypeName("const char *")] sbyte* proc);
+        public static extern delegate* unmanaged[Cdecl]<void> SDL_GL_GetProcAddress([NativeTypeName("const char *")] byte* proc);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
-        public static extern delegate* unmanaged[Cdecl]<void> SDL_EGL_GetProcAddress([NativeTypeName("const char *")] sbyte* proc);
+        public static extern delegate* unmanaged[Cdecl]<void> SDL_EGL_GetProcAddress([NativeTypeName("const char *")] byte* proc);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_GL_UnloadLibrary();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]
-        public static extern int SDL_GL_ExtensionSupported([NativeTypeName("const char *")] sbyte* extension);
+        public static extern int SDL_GL_ExtensionSupported([NativeTypeName("const char *")] byte* extension);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_GL_ResetAttributes();

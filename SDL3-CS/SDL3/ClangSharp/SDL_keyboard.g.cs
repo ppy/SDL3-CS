@@ -53,7 +53,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetKeyboardInstanceName([NativeTypeName("SDL_KeyboardID")] uint instance_id);
+        public static extern byte* SDL_GetKeyboardInstanceName([NativeTypeName("SDL_KeyboardID")] uint instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GetKeyboardFocus();
@@ -80,18 +80,18 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetScancodeName(SDL_Scancode scancode);
+        public static extern byte* SDL_GetScancodeName(SDL_Scancode scancode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Scancode SDL_GetScancodeFromName([NativeTypeName("const char *")] sbyte* name);
+        public static extern SDL_Scancode SDL_GetScancodeFromName([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* SDL_GetKeyName([NativeTypeName("SDL_Keycode")] int key);
+        public static extern byte* SDL_GetKeyName([NativeTypeName("SDL_Keycode")] int key);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_Keycode")]
-        public static extern int SDL_GetKeyFromName([NativeTypeName("const char *")] sbyte* name);
+        public static extern int SDL_GetKeyFromName([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_StartTextInput();
