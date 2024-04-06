@@ -1,5 +1,308 @@
+diff --git a/include/SDL3/SDL.h b/include/SDL3/SDL.h
+index b178d2ade..5c54b9ab5 100644
+--- a/include/SDL3/SDL.h
++++ b/include/SDL3/SDL.h
+@@ -29,6 +29,8 @@
+ #ifndef SDL_h_
+ #define SDL_h_
+ 
++#error Don't build with enum type changes
++
+ #include <SDL3/SDL_stdinc.h>
+ #include <SDL3/SDL_assert.h>
+ #include <SDL3/SDL_atomic.h>
+diff --git a/include/SDL3/SDL_events.h b/include/SDL3/SDL_events.h
+index 0fddf1f24..36b98b569 100644
+--- a/include/SDL3/SDL_events.h
++++ b/include/SDL3/SDL_events.h
+@@ -244,7 +244,7 @@ typedef enum
+  */
+ typedef struct SDL_CommonEvent
+ {
+-    Uint32 type;        /**< Event type, shared with all events, Uint32 to cover user events which are not in the SDL_EventType enumeration */
++    SDL_EventType type;        /**< Event type, shared with all events, Uint32 to cover user events which are not in the SDL_EventType enumeration */
+     Uint32 reserved;
+     Uint64 timestamp;   /**< In nanoseconds, populated using SDL_GetTicksNS() */
+ } SDL_CommonEvent;
+@@ -726,7 +726,7 @@ typedef struct SDL_QuitEvent
+  */
+ typedef struct SDL_UserEvent
+ {
+-    Uint32 type;        /**< ::SDL_EVENT_USER through ::SDL_EVENT_LAST-1, Uint32 because these are not in the SDL_EventType enumeration */
++    SDL_EventType type;        /**< ::SDL_EVENT_USER through ::SDL_EVENT_LAST-1, Uint32 because these are not in the SDL_EventType enumeration */
+     Uint32 reserved;
+     Uint64 timestamp;   /**< In nanoseconds, populated using SDL_GetTicksNS() */
+     SDL_WindowID windowID; /**< The associated window if any */
+@@ -741,7 +741,7 @@ typedef struct SDL_UserEvent
+  */
+ typedef union SDL_Event
+ {
+-    Uint32 type;                            /**< Event type, shared with all events, Uint32 to cover user events which are not in the SDL_EventType enumeration */
++    SDL_EventType type;                            /**< Event type, shared with all events, Uint32 to cover user events which are not in the SDL_EventType enumeration */
+     SDL_CommonEvent common;                 /**< Common event data */
+     SDL_DisplayEvent display;               /**< Display event data */
+     SDL_WindowEvent window;                 /**< Window event data */
+@@ -868,7 +868,7 @@ typedef enum
+  * \sa SDL_PumpEvents
+  * \sa SDL_PushEvent
+  */
+-extern DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_eventaction action, Uint32 minType, Uint32 maxType);
++extern DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL_eventaction action, SDL_EventType minType, SDL_EventType maxType);
+ /* @} */
+ 
+ /**
+@@ -885,7 +885,7 @@ extern DECLSPEC int SDLCALL SDL_PeepEvents(SDL_Event *events, int numevents, SDL
+  *
+  * \sa SDL_HasEvents
+  */
+-extern DECLSPEC SDL_bool SDLCALL SDL_HasEvent(Uint32 type);
++extern DECLSPEC SDL_bool SDLCALL SDL_HasEvent(SDL_EventType type);
+ 
+ 
+ /**
+@@ -904,7 +904,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_HasEvent(Uint32 type);
+  *
+  * \sa SDL_HasEvents
+  */
+-extern DECLSPEC SDL_bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType);
++extern DECLSPEC SDL_bool SDLCALL SDL_HasEvents(SDL_EventType minType, SDL_EventType maxType);
+ 
+ /**
+  * Clear events of a specific type from the event queue.
+@@ -930,7 +930,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_HasEvents(Uint32 minType, Uint32 maxType);
+  *
+  * \sa SDL_FlushEvents
+  */
+-extern DECLSPEC void SDLCALL SDL_FlushEvent(Uint32 type);
++extern DECLSPEC void SDLCALL SDL_FlushEvent(SDL_EventType type);
+ 
+ /**
+  * Clear events of a range of types from the event queue.
+@@ -955,7 +955,7 @@ extern DECLSPEC void SDLCALL SDL_FlushEvent(Uint32 type);
+  *
+  * \sa SDL_FlushEvent
+  */
+-extern DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType);
++extern DECLSPEC void SDLCALL SDL_FlushEvents(SDL_EventType minType, SDL_EventType maxType);
+ 
+ /**
+  * Poll for currently pending events.
+@@ -1234,7 +1234,7 @@ extern DECLSPEC void SDLCALL SDL_FilterEvents(SDL_EventFilter filter, void *user
+  *
+  * \sa SDL_IsEventEnabled
+  */
+-extern DECLSPEC void SDLCALL SDL_SetEventEnabled(Uint32 type, SDL_bool enabled);
++extern DECLSPEC void SDLCALL SDL_SetEventEnabled(SDL_EventType type, SDL_bool enabled);
+ 
+ /**
+  * Query the state of processing events by type.
+@@ -1246,7 +1246,7 @@ extern DECLSPEC void SDLCALL SDL_SetEventEnabled(Uint32 type, SDL_bool enabled);
+  *
+  * \sa SDL_SetEventEnabled
+  */
+-extern DECLSPEC SDL_bool SDLCALL SDL_EventEnabled(Uint32 type);
++extern DECLSPEC SDL_bool SDLCALL SDL_EventEnabled(SDL_EventType type);
+ 
+ /**
+  * Allocate a set of user-defined events, and return the beginning event
+diff --git a/include/SDL3/SDL_init.h b/include/SDL3/SDL_init.h
+index d1b925270..30cc4a8b7 100644
+--- a/include/SDL3/SDL_init.h
++++ b/include/SDL3/SDL_init.h
+@@ -110,7 +110,7 @@ typedef enum
+  * \sa SDL_SetMainReady
+  * \sa SDL_WasInit
+  */
+-extern DECLSPEC int SDLCALL SDL_Init(Uint32 flags);
++extern DECLSPEC int SDLCALL SDL_Init(SDL_InitFlags flags);
+ 
+ /**
+  * Compatibility function to initialize the SDL library.
+@@ -127,7 +127,7 @@ extern DECLSPEC int SDLCALL SDL_Init(Uint32 flags);
+  * \sa SDL_Quit
+  * \sa SDL_QuitSubSystem
+  */
+-extern DECLSPEC int SDLCALL SDL_InitSubSystem(Uint32 flags);
++extern DECLSPEC int SDLCALL SDL_InitSubSystem(SDL_InitFlags flags);
+ 
+ /**
+  * Shut down specific SDL subsystems.
+@@ -142,7 +142,7 @@ extern DECLSPEC int SDLCALL SDL_InitSubSystem(Uint32 flags);
+  * \sa SDL_InitSubSystem
+  * \sa SDL_Quit
+  */
+-extern DECLSPEC void SDLCALL SDL_QuitSubSystem(Uint32 flags);
++extern DECLSPEC void SDLCALL SDL_QuitSubSystem(SDL_InitFlags flags);
+ 
+ /**
+  * Get a mask of the specified subsystems which are currently initialized.
+@@ -156,7 +156,7 @@ extern DECLSPEC void SDLCALL SDL_QuitSubSystem(Uint32 flags);
+  * \sa SDL_Init
+  * \sa SDL_InitSubSystem
+  */
+-extern DECLSPEC Uint32 SDLCALL SDL_WasInit(Uint32 flags);
++extern DECLSPEC SDL_InitFlags SDLCALL SDL_WasInit(SDL_InitFlags flags);
+ 
+ /**
+  * Clean up all initialized subsystems.
+diff --git a/include/SDL3/SDL_log.h b/include/SDL3/SDL_log.h
+index 99d2f2c36..eef01cac7 100644
+--- a/include/SDL3/SDL_log.h
++++ b/include/SDL3/SDL_log.h
+@@ -135,7 +135,7 @@ extern DECLSPEC void SDLCALL SDL_LogSetAllPriority(SDL_LogPriority priority);
+  * \sa SDL_LogResetPriorities
+  * \sa SDL_LogSetAllPriority
+  */
+-extern DECLSPEC void SDLCALL SDL_LogSetPriority(int category,
++extern DECLSPEC void SDLCALL SDL_LogSetPriority(SDL_LogCategory category,
+                                                 SDL_LogPriority priority);
+ 
+ /**
+@@ -148,7 +148,7 @@ extern DECLSPEC void SDLCALL SDL_LogSetPriority(int category,
+  *
+  * \sa SDL_LogSetPriority
+  */
+-extern DECLSPEC SDL_LogPriority SDLCALL SDL_LogGetPriority(int category);
++extern DECLSPEC SDL_LogPriority SDLCALL SDL_LogGetPriority(SDL_LogCategory category);
+ 
+ /**
+  * Reset all priorities to default.
+@@ -201,7 +201,7 @@ extern DECLSPEC void SDLCALL SDL_Log(SDL_PRINTF_FORMAT_STRING const char *fmt, .
+  * \sa SDL_LogMessageV
+  * \sa SDL_LogWarn
+  */
+-extern DECLSPEC void SDLCALL SDL_LogVerbose(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
++extern DECLSPEC void SDLCALL SDL_LogVerbose(SDL_LogCategory category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
+ 
+ /**
+  * Log a message with SDL_LOG_PRIORITY_DEBUG.
+@@ -222,7 +222,7 @@ extern DECLSPEC void SDLCALL SDL_LogVerbose(int category, SDL_PRINTF_FORMAT_STRI
+  * \sa SDL_LogVerbose
+  * \sa SDL_LogWarn
+  */
+-extern DECLSPEC void SDLCALL SDL_LogDebug(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
++extern DECLSPEC void SDLCALL SDL_LogDebug(SDL_LogCategory category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
+ 
+ /**
+  * Log a message with SDL_LOG_PRIORITY_INFO.
+@@ -243,7 +243,7 @@ extern DECLSPEC void SDLCALL SDL_LogDebug(int category, SDL_PRINTF_FORMAT_STRING
+  * \sa SDL_LogVerbose
+  * \sa SDL_LogWarn
+  */
+-extern DECLSPEC void SDLCALL SDL_LogInfo(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
++extern DECLSPEC void SDLCALL SDL_LogInfo(SDL_LogCategory category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
+ 
+ /**
+  * Log a message with SDL_LOG_PRIORITY_WARN.
+@@ -264,7 +264,7 @@ extern DECLSPEC void SDLCALL SDL_LogInfo(int category, SDL_PRINTF_FORMAT_STRING
+  * \sa SDL_LogMessageV
+  * \sa SDL_LogVerbose
+  */
+-extern DECLSPEC void SDLCALL SDL_LogWarn(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
++extern DECLSPEC void SDLCALL SDL_LogWarn(SDL_LogCategory category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
+ 
+ /**
+  * Log a message with SDL_LOG_PRIORITY_ERROR.
+@@ -285,7 +285,7 @@ extern DECLSPEC void SDLCALL SDL_LogWarn(int category, SDL_PRINTF_FORMAT_STRING
+  * \sa SDL_LogVerbose
+  * \sa SDL_LogWarn
+  */
+-extern DECLSPEC void SDLCALL SDL_LogError(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
++extern DECLSPEC void SDLCALL SDL_LogError(SDL_LogCategory category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
+ 
+ /**
+  * Log a message with SDL_LOG_PRIORITY_CRITICAL.
+@@ -306,7 +306,7 @@ extern DECLSPEC void SDLCALL SDL_LogError(int category, SDL_PRINTF_FORMAT_STRING
+  * \sa SDL_LogVerbose
+  * \sa SDL_LogWarn
+  */
+-extern DECLSPEC void SDLCALL SDL_LogCritical(int category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
++extern DECLSPEC void SDLCALL SDL_LogCritical(SDL_LogCategory category, SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(2);
+ 
+ /**
+  * Log a message with the specified category and priority.
+@@ -328,7 +328,7 @@ extern DECLSPEC void SDLCALL SDL_LogCritical(int category, SDL_PRINTF_FORMAT_STR
+  * \sa SDL_LogVerbose
+  * \sa SDL_LogWarn
+  */
+-extern DECLSPEC void SDLCALL SDL_LogMessage(int category,
++extern DECLSPEC void SDLCALL SDL_LogMessage(SDL_LogCategory category,
+                                             SDL_LogPriority priority,
+                                             SDL_PRINTF_FORMAT_STRING const char *fmt, ...) SDL_PRINTF_VARARG_FUNC(3);
+ 
+@@ -351,7 +351,7 @@ extern DECLSPEC void SDLCALL SDL_LogMessage(int category,
+  * \sa SDL_LogVerbose
+  * \sa SDL_LogWarn
+  */
+-extern DECLSPEC void SDLCALL SDL_LogMessageV(int category,
++extern DECLSPEC void SDLCALL SDL_LogMessageV(SDL_LogCategory category,
+                                              SDL_LogPriority priority,
+                                              SDL_PRINTF_FORMAT_STRING const char *fmt, va_list ap) SDL_PRINTF_VARARG_FUNCV(3);
+ 
+@@ -365,7 +365,7 @@ extern DECLSPEC void SDLCALL SDL_LogMessageV(int category,
+  * \param priority the priority of the message
+  * \param message the message being output
+  */
+-typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, int category, SDL_LogPriority priority, const char *message);
++typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, SDL_LogCategory category, SDL_LogPriority priority, const char *message);
+ 
+ /**
+  * Get the current log output function.
+diff --git a/include/SDL3/SDL_messagebox.h b/include/SDL3/SDL_messagebox.h
+index 3d6855275..2b540a3fa 100644
+--- a/include/SDL3/SDL_messagebox.h
++++ b/include/SDL3/SDL_messagebox.h
+@@ -58,7 +58,7 @@ typedef enum
+  */
+ typedef struct
+ {
+-    Uint32 flags;       /**< ::SDL_MessageBoxButtonFlags */
++    SDL_MessageBoxButtonFlags flags;       /**< ::SDL_MessageBoxButtonFlags */
+     int buttonID;       /**< User defined button id (value returned via SDL_ShowMessageBox) */
+     const char *text;   /**< The UTF-8 button text */
+ } SDL_MessageBoxButtonData;
+@@ -94,7 +94,7 @@ typedef struct
+  */
+ typedef struct
+ {
+-    Uint32 flags;                       /**< ::SDL_MessageBoxFlags */
++    SDL_MessageBoxFlags flags;                       /**< ::SDL_MessageBoxFlags */
+     SDL_Window *window;                 /**< Parent window, can be NULL */
+     const char *title;                  /**< UTF-8 title */
+     const char *message;                /**< UTF-8 message text */
+@@ -180,7 +180,7 @@ extern DECLSPEC int SDLCALL SDL_ShowMessageBox(const SDL_MessageBoxData *message
+  *
+  * \sa SDL_ShowMessageBox
+  */
+-extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(Uint32 flags, const char *title, const char *message, SDL_Window *window);
++extern DECLSPEC int SDLCALL SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, const char *title, const char *message, SDL_Window *window);
+ 
+ 
+ /* Ends C function definitions when using C++ */
+diff --git a/include/SDL3/SDL_render.h b/include/SDL3/SDL_render.h
+index 5024931e7..f1f61be21 100644
+--- a/include/SDL3/SDL_render.h
++++ b/include/SDL3/SDL_render.h
+@@ -80,7 +80,7 @@ typedef enum
+ typedef struct SDL_RendererInfo
+ {
+     const char *name;           /**< The name of the renderer */
+-    Uint32 flags;               /**< Supported ::SDL_RendererFlags */
++    SDL_RendererFlags flags;               /**< Supported ::SDL_RendererFlags */
+     int num_texture_formats;    /**< The number of available texture formats */
+     SDL_PixelFormatEnum texture_formats[16]; /**< The available texture formats */
+     int max_texture_width;      /**< The maximum texture width */
+@@ -225,7 +225,7 @@ extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(int width, int height, S
+  * \sa SDL_GetRenderDriver
+  * \sa SDL_GetRendererInfo
+  */
+-extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name, Uint32 flags);
++extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window *window, const char *name, SDL_RendererFlags flags);
+ 
+ /**
+  * Create a 2D rendering context for a window, with the specified properties.
 diff --git a/include/SDL3/SDL_stdinc.h b/include/SDL3/SDL_stdinc.h
-index e6a387c31..46c225953 100644
+index e6a387c31..8aafb96c8 100644
 --- a/include/SDL3/SDL_stdinc.h
 +++ b/include/SDL3/SDL_stdinc.h
 @@ -132,8 +132,8 @@ char *alloca();
@@ -13,3 +316,15 @@ index e6a387c31..46c225953 100644
  typedef int SDL_bool;
  
  /**
+@@ -192,8 +192,8 @@ typedef uint64_t Uint64;
+  * They can be converted between POSIX time_t values with SDL_NS_TO_SECONDS() and SDL_SECONDS_TO_NS(),
+  * and between Windows FILETIME values with SDL_TimeToWindows() and SDL_TimeFromWindows().
+  */
+-#define SDL_MAX_TIME SDL_MAX_SINT64
+-#define SDL_MIN_TIME SDL_MIN_SINT64
++#define SDL_MAX_TIME (SDL_Time)SDL_MAX_SINT64
++#define SDL_MIN_TIME (SDL_Time)SDL_MIN_SINT64
+ typedef Sint64 SDL_Time;
+ 
+ /* @} *//* Basic data types */
+ 

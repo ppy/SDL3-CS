@@ -69,10 +69,10 @@ namespace SDL
         public static extern void SDL_LogSetAllPriority(SDL_LogPriority priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogSetPriority(int category, SDL_LogPriority priority);
+        public static extern void SDL_LogSetPriority(SDL_LogCategory category, SDL_LogPriority priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_LogPriority SDL_LogGetPriority(int category);
+        public static extern SDL_LogPriority SDL_LogGetPriority(SDL_LogCategory category);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_LogResetPriorities();
@@ -81,34 +81,34 @@ namespace SDL
         public static extern void SDL_Log([NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogVerbose(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
+        public static extern void SDL_LogVerbose(SDL_LogCategory category, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogDebug(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
+        public static extern void SDL_LogDebug(SDL_LogCategory category, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogInfo(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
+        public static extern void SDL_LogInfo(SDL_LogCategory category, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogWarn(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
+        public static extern void SDL_LogWarn(SDL_LogCategory category, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogError(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
+        public static extern void SDL_LogError(SDL_LogCategory category, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogCritical(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
+        public static extern void SDL_LogCritical(SDL_LogCategory category, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogMessage(int category, SDL_LogPriority priority, [NativeTypeName("const char *")] byte* fmt, __arglist);
+        public static extern void SDL_LogMessage(SDL_LogCategory category, SDL_LogPriority priority, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogMessageV(int category, SDL_LogPriority priority, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* ap);
+        public static extern void SDL_LogMessageV(SDL_LogCategory category, SDL_LogPriority priority, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* ap);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_GetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction *")] delegate* unmanaged[Cdecl]<IntPtr, int, SDL_LogPriority, byte*, void>* callback, [NativeTypeName("void **")] IntPtr* userdata);
+        public static extern void SDL_GetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction *")] delegate* unmanaged[Cdecl]<IntPtr, SDL_LogCategory, SDL_LogPriority, byte*, void>* callback, [NativeTypeName("void **")] IntPtr* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction")] delegate* unmanaged[Cdecl]<IntPtr, int, SDL_LogPriority, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_SetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction")] delegate* unmanaged[Cdecl]<IntPtr, SDL_LogCategory, SDL_LogPriority, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [NativeTypeName("#define SDL_MAX_LOG_MESSAGE 4096")]
         public const int SDL_MAX_LOG_MESSAGE = 4096;
