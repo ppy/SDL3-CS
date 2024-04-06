@@ -18,6 +18,9 @@ import re
 import subprocess
 import sys
 
+# Needs to match SDL3.SourceGeneration.Helper.UnsafePrefix
+unsafe_prefix = "Unsafe_"
+
 SDL_root = pathlib.Path("../../SDL")
 SDL_include_root = SDL_root / "include"
 SDL3_header_base = "SDL3"  # base folder of header files
@@ -282,6 +285,12 @@ def generate_platform_specific_headers(sdl_api, header: Header, platforms):
     check_generated_functions(sdl_api, header, output_files)
 
 
+def get_string_returning_functions(sdl_api):
+    for f in sdl_api:
+        if f["retval"] in ("const char*", "char*"):
+            yield f
+
+
 def main():
     sdl_api = get_sdl_api_dump()
 
@@ -291,6 +300,14 @@ def main():
         base_command.append("--remap")
         for type_name in typedefs:
             base_command.append(typedef(type_name))
+
+    str_ret_funcs = list(get_string_returning_functions(sdl_api))
+    if str_ret_funcs:
+        base_command.append("--remap")
+        for func in str_ret_funcs:
+            name = func["name"]
+            # add unsafe prefix to `const char *` functions so that the source generator can make friendly overloads with the unprefixed name.
+            base_command.append(f"{name}={unsafe_prefix}{name}")
 
     for header in headers:
         output_file = run_clangsharp(base_command, header)

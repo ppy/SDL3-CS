@@ -125,13 +125,13 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_JoystickID* SDL_GetJoysticks(int* count);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetJoystickInstanceName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetJoystickInstanceName(SDL_JoystickID instance_id);
+        public static extern byte* Unsafe_SDL_GetJoystickInstanceName(SDL_JoystickID instance_id);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetJoystickInstancePath", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetJoystickInstancePath(SDL_JoystickID instance_id);
+        public static extern byte* Unsafe_SDL_GetJoystickInstancePath(SDL_JoystickID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetJoystickInstancePlayerIndex(SDL_JoystickID instance_id);
@@ -188,13 +188,13 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID SDL_GetJoystickProperties(SDL_Joystick* joystick);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetJoystickName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetJoystickName(SDL_Joystick* joystick);
+        public static extern byte* Unsafe_SDL_GetJoystickName(SDL_Joystick* joystick);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetJoystickPath", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetJoystickPath(SDL_Joystick* joystick);
+        public static extern byte* Unsafe_SDL_GetJoystickPath(SDL_Joystick* joystick);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetJoystickPlayerIndex(SDL_Joystick* joystick);
@@ -222,9 +222,9 @@ namespace SDL
         [return: NativeTypeName("Uint16")]
         public static extern ushort SDL_GetJoystickFirmwareVersion(SDL_Joystick* joystick);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetJoystickSerial", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* SDL_GetJoystickSerial(SDL_Joystick* joystick);
+        public static extern byte* Unsafe_SDL_GetJoystickSerial(SDL_Joystick* joystick);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_JoystickType SDL_GetJoystickType(SDL_Joystick* joystick);
