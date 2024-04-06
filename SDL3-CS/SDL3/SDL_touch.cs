@@ -18,5 +18,12 @@ namespace SDL
 
         [Constant]
         public const SDL_TouchID SDL_MOUSE_TOUCHID = unchecked((SDL_TouchID)(-1));
+
+        public static unsafe SDLArray<SDL_TouchID>? SDL_GetTouchDevices()
+        {
+            int count;
+            var array = SDL_GetTouchDevices(&count);
+            return SDLArray.Create(array, count);
+        }
     }
 }

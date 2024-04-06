@@ -7,4 +7,14 @@ namespace SDL
 {
     [Typedef]
     public enum SDL_JoystickID : UInt32;
+
+    public static partial class SDL3
+    {
+        public static unsafe SDLArray<SDL_JoystickID>? SDL_GetJoysticks()
+        {
+            int count;
+            var array = SDL_GetJoysticks(&count);
+            return SDLArray.Create(array, count);
+        }
+    }
 }
