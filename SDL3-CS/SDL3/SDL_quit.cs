@@ -9,7 +9,7 @@ namespace SDL
         public static unsafe bool SDL_QuitRequested()
         {
             SDL_PumpEvents();
-            return SDL_PeepEvents(null, 0, SDL_eventaction.SDL_PEEKEVENT, (uint)SDL_EventType.SDL_EVENT_QUIT, (uint)SDL_EventType.SDL_EVENT_QUIT) > 0;
+            return SDL_PeepEvents(null, 0, SDL_eventaction.SDL_PEEKEVENT, SDL_EventType.SDL_EVENT_QUIT, SDL_EventType.SDL_EVENT_QUIT) > 0;
         }
     }
 }

@@ -40,8 +40,7 @@ namespace SDL
         [NativeTypeName("const char *")]
         public byte* name;
 
-        [NativeTypeName("Uint32")]
-        public uint flags;
+        public SDL_RendererFlags flags;
 
         public int num_texture_formats;
 
@@ -105,7 +104,7 @@ namespace SDL
         public static extern int SDL_CreateWindowAndRenderer(int width, int height, SDL_WindowFlags window_flags, SDL_Window** window, SDL_Renderer** renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, [NativeTypeName("const char *")] byte* name, [NativeTypeName("Uint32")] uint flags);
+        public static extern SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, [NativeTypeName("const char *")] byte* name, SDL_RendererFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Renderer* SDL_CreateRendererWithProperties(SDL_PropertiesID props);
