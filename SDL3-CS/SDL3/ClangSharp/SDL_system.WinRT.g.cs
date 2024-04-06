@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -49,7 +50,7 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const wchar_t *")]
         [SupportedOSPlatform("Windows")]
-        public static extern ushort* SDL_WinRTGetFSPathUNICODE(SDL_WinRT_Path pathType);
+        public static extern IntPtr SDL_WinRTGetFSPathUNICODE(SDL_WinRT_Path pathType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
