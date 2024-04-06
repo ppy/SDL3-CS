@@ -40,31 +40,35 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_malloc([NativeTypeName("size_t")] nuint size);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_malloc([NativeTypeName("size_t")] nuint size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_calloc([NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_calloc([NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_realloc(void* mem, [NativeTypeName("size_t")] nuint size);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_realloc([NativeTypeName("void*")] IntPtr mem, [NativeTypeName("size_t")] nuint size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_free(void* mem);
+        public static extern void SDL_free([NativeTypeName("void*")] IntPtr mem);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_GetOriginalMemoryFunctions([NativeTypeName("SDL_malloc_func *")] delegate* unmanaged[Cdecl]<nuint, void*>* malloc_func, [NativeTypeName("SDL_calloc_func *")] delegate* unmanaged[Cdecl]<nuint, nuint, void*>* calloc_func, [NativeTypeName("SDL_realloc_func *")] delegate* unmanaged[Cdecl]<void*, nuint, void*>* realloc_func, [NativeTypeName("SDL_free_func *")] delegate* unmanaged[Cdecl]<void*, void>* free_func);
+        public static extern void SDL_GetOriginalMemoryFunctions([NativeTypeName("SDL_malloc_func *")] delegate* unmanaged[Cdecl]<nuint, IntPtr>* malloc_func, [NativeTypeName("SDL_calloc_func *")] delegate* unmanaged[Cdecl]<nuint, nuint, IntPtr>* calloc_func, [NativeTypeName("SDL_realloc_func *")] delegate* unmanaged[Cdecl]<IntPtr, nuint, IntPtr>* realloc_func, [NativeTypeName("SDL_free_func *")] delegate* unmanaged[Cdecl]<IntPtr, void>* free_func);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_GetMemoryFunctions([NativeTypeName("SDL_malloc_func *")] delegate* unmanaged[Cdecl]<nuint, void*>* malloc_func, [NativeTypeName("SDL_calloc_func *")] delegate* unmanaged[Cdecl]<nuint, nuint, void*>* calloc_func, [NativeTypeName("SDL_realloc_func *")] delegate* unmanaged[Cdecl]<void*, nuint, void*>* realloc_func, [NativeTypeName("SDL_free_func *")] delegate* unmanaged[Cdecl]<void*, void>* free_func);
+        public static extern void SDL_GetMemoryFunctions([NativeTypeName("SDL_malloc_func *")] delegate* unmanaged[Cdecl]<nuint, IntPtr>* malloc_func, [NativeTypeName("SDL_calloc_func *")] delegate* unmanaged[Cdecl]<nuint, nuint, IntPtr>* calloc_func, [NativeTypeName("SDL_realloc_func *")] delegate* unmanaged[Cdecl]<IntPtr, nuint, IntPtr>* realloc_func, [NativeTypeName("SDL_free_func *")] delegate* unmanaged[Cdecl]<IntPtr, void>* free_func);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetMemoryFunctions([NativeTypeName("SDL_malloc_func")] delegate* unmanaged[Cdecl]<nuint, void*> malloc_func, [NativeTypeName("SDL_calloc_func")] delegate* unmanaged[Cdecl]<nuint, nuint, void*> calloc_func, [NativeTypeName("SDL_realloc_func")] delegate* unmanaged[Cdecl]<void*, nuint, void*> realloc_func, [NativeTypeName("SDL_free_func")] delegate* unmanaged[Cdecl]<void*, void> free_func);
+        public static extern int SDL_SetMemoryFunctions([NativeTypeName("SDL_malloc_func")] delegate* unmanaged[Cdecl]<nuint, IntPtr> malloc_func, [NativeTypeName("SDL_calloc_func")] delegate* unmanaged[Cdecl]<nuint, nuint, IntPtr> calloc_func, [NativeTypeName("SDL_realloc_func")] delegate* unmanaged[Cdecl]<IntPtr, nuint, IntPtr> realloc_func, [NativeTypeName("SDL_free_func")] delegate* unmanaged[Cdecl]<IntPtr, void> free_func);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_aligned_alloc([NativeTypeName("size_t")] nuint alignment, [NativeTypeName("size_t")] nuint size);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_aligned_alloc([NativeTypeName("size_t")] nuint alignment, [NativeTypeName("size_t")] nuint size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_aligned_free(void* mem);
+        public static extern void SDL_aligned_free([NativeTypeName("void*")] IntPtr mem);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetNumAllocations();
@@ -77,16 +81,18 @@ namespace SDL
         public static extern int SDL_setenv([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, int overwrite);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_qsort(void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(const void *, const void *)")] delegate* unmanaged[Cdecl]<void*, void*, int> compare);
+        public static extern void SDL_qsort([NativeTypeName("void*")] IntPtr @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(const void *, const void *)")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, int> compare);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_bsearch([NativeTypeName("const void *")] void* key, [NativeTypeName("const void *")] void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(const void *, const void *)")] delegate* unmanaged[Cdecl]<void*, void*, int> compare);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_bsearch([NativeTypeName("const void *")] IntPtr key, [NativeTypeName("const void *")] IntPtr @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(const void *, const void *)")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, int> compare);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_qsort_r(void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(void *, const void *, const void *)")] delegate* unmanaged[Cdecl]<void*, void*, void*, int> compare, void* userdata);
+        public static extern void SDL_qsort_r([NativeTypeName("void*")] IntPtr @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(void *, const void *, const void *)")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, IntPtr, int> compare, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_bsearch_r([NativeTypeName("const void *")] void* key, [NativeTypeName("const void *")] void* @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(void *, const void *, const void *)")] delegate* unmanaged[Cdecl]<void*, void*, void*, int> compare, void* userdata);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_bsearch_r([NativeTypeName("const void *")] IntPtr key, [NativeTypeName("const void *")] IntPtr @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("int (*)(void *, const void *, const void *)")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, IntPtr, int> compare, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_abs(int x);
@@ -135,26 +141,30 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint16")]
-        public static extern ushort SDL_crc16([NativeTypeName("Uint16")] ushort crc, [NativeTypeName("const void *")] void* data, [NativeTypeName("size_t")] nuint len);
+        public static extern ushort SDL_crc16([NativeTypeName("Uint16")] ushort crc, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_crc32([NativeTypeName("Uint32")] uint crc, [NativeTypeName("const void *")] void* data, [NativeTypeName("size_t")] nuint len);
+        public static extern uint SDL_crc32([NativeTypeName("Uint32")] uint crc, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_memcpy(void* dst, [NativeTypeName("const void *")] void* src, [NativeTypeName("size_t")] nuint len);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_memcpy([NativeTypeName("void*")] IntPtr dst, [NativeTypeName("const void *")] IntPtr src, [NativeTypeName("size_t")] nuint len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_memmove(void* dst, [NativeTypeName("const void *")] void* src, [NativeTypeName("size_t")] nuint len);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_memmove([NativeTypeName("void*")] IntPtr dst, [NativeTypeName("const void *")] IntPtr src, [NativeTypeName("size_t")] nuint len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_memset(void* dst, int c, [NativeTypeName("size_t")] nuint len);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_memset([NativeTypeName("void*")] IntPtr dst, int c, [NativeTypeName("size_t")] nuint len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_memset4(void* dst, [NativeTypeName("Uint32")] uint val, [NativeTypeName("size_t")] nuint dwords);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_memset4([NativeTypeName("void*")] IntPtr dst, [NativeTypeName("Uint32")] uint val, [NativeTypeName("size_t")] nuint dwords);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_memcmp([NativeTypeName("const void *")] void* s1, [NativeTypeName("const void *")] void* s2, [NativeTypeName("size_t")] nuint len);
+        public static extern int SDL_memcmp([NativeTypeName("const void *")] IntPtr s1, [NativeTypeName("const void *")] IntPtr s2, [NativeTypeName("size_t")] nuint len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]

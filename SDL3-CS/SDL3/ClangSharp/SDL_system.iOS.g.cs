@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -32,7 +33,7 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("iOS")]
-        public static extern int SDL_iPhoneSetAnimationCallback(SDL_Window* window, int interval, [NativeTypeName("void (*)(void *)")] delegate* unmanaged[Cdecl]<void*, void> callback, void* callbackParam);
+        public static extern int SDL_iPhoneSetAnimationCallback(SDL_Window* window, int interval, [NativeTypeName("void (*)(void *)")] delegate* unmanaged[Cdecl]<IntPtr, void> callback, [NativeTypeName("void*")] IntPtr callbackParam);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("iOS")]

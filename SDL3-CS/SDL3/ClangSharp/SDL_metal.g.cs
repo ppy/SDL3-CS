@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -31,12 +32,13 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_MetalView")]
-        public static extern void* SDL_Metal_CreateView(SDL_Window* window);
+        public static extern IntPtr SDL_Metal_CreateView(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_Metal_DestroyView([NativeTypeName("SDL_MetalView")] void* view);
+        public static extern void SDL_Metal_DestroyView([NativeTypeName("SDL_MetalView")] IntPtr view);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_Metal_GetLayer([NativeTypeName("SDL_MetalView")] void* view);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_Metal_GetLayer([NativeTypeName("SDL_MetalView")] IntPtr view);
     }
 }

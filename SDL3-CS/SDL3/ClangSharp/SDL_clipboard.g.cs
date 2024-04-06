@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -52,13 +53,14 @@ namespace SDL
         public static extern int SDL_HasPrimarySelectionText();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetClipboardData([NativeTypeName("SDL_ClipboardDataCallback")] delegate* unmanaged[Cdecl]<void*, byte*, nuint*, void*> callback, [NativeTypeName("SDL_ClipboardCleanupCallback")] delegate* unmanaged[Cdecl]<void*, void> cleanup, void* userdata, [NativeTypeName("const char **")] byte** mime_types, [NativeTypeName("size_t")] nuint num_mime_types);
+        public static extern int SDL_SetClipboardData([NativeTypeName("SDL_ClipboardDataCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, nuint*, IntPtr> callback, [NativeTypeName("SDL_ClipboardCleanupCallback")] delegate* unmanaged[Cdecl]<IntPtr, void> cleanup, [NativeTypeName("void*")] IntPtr userdata, [NativeTypeName("const char **")] byte** mime_types, [NativeTypeName("size_t")] nuint num_mime_types);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_ClearClipboardData();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* SDL_GetClipboardData([NativeTypeName("const char *")] byte* mime_type, [NativeTypeName("size_t *")] nuint* size);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_GetClipboardData([NativeTypeName("const char *")] byte* mime_type, [NativeTypeName("size_t *")] nuint* size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_bool")]

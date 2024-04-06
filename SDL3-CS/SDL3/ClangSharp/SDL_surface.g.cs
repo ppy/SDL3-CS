@@ -59,13 +59,16 @@ namespace SDL
 
         public int pitch;
 
-        public void* pixels;
+        [NativeTypeName("void*")]
+        public IntPtr pixels;
 
-        public void* reserved;
+        [NativeTypeName("void*")]
+        public IntPtr reserved;
 
         public int locked;
 
-        public void* list_blitmap;
+        [NativeTypeName("void*")]
+        public IntPtr list_blitmap;
 
         public SDL_Rect clip_rect;
 
@@ -80,7 +83,7 @@ namespace SDL
         public static extern SDL_Surface* SDL_CreateSurface(int width, int height, SDL_PixelFormatEnum format);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* SDL_CreateSurfaceFrom(void* pixels, int width, int height, int pitch, SDL_PixelFormatEnum format);
+        public static extern SDL_Surface* SDL_CreateSurfaceFrom([NativeTypeName("void*")] IntPtr pixels, int width, int height, int pitch, SDL_PixelFormatEnum format);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroySurface(SDL_Surface* surface);
@@ -174,13 +177,13 @@ namespace SDL
         public static extern SDL_Surface* SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface* surface, SDL_PixelFormatEnum pixel_format, SDL_Colorspace colorspace, [NativeTypeName("SDL_PropertiesID")] uint props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ConvertPixels(int width, int height, SDL_PixelFormatEnum src_format, [NativeTypeName("const void *")] void* src, int src_pitch, SDL_PixelFormatEnum dst_format, void* dst, int dst_pitch);
+        public static extern int SDL_ConvertPixels(int width, int height, SDL_PixelFormatEnum src_format, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormatEnum dst_format, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormatEnum src_format, SDL_Colorspace src_colorspace, [NativeTypeName("SDL_PropertiesID")] uint src_properties, [NativeTypeName("const void *")] void* src, int src_pitch, SDL_PixelFormatEnum dst_format, SDL_Colorspace dst_colorspace, [NativeTypeName("SDL_PropertiesID")] uint dst_properties, void* dst, int dst_pitch);
+        public static extern int SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormatEnum src_format, SDL_Colorspace src_colorspace, [NativeTypeName("SDL_PropertiesID")] uint src_properties, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormatEnum dst_format, SDL_Colorspace dst_colorspace, [NativeTypeName("SDL_PropertiesID")] uint dst_properties, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormatEnum src_format, [NativeTypeName("const void *")] void* src, int src_pitch, SDL_PixelFormatEnum dst_format, void* dst, int dst_pitch);
+        public static extern int SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormatEnum src_format, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormatEnum dst_format, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_FillSurfaceRect(SDL_Surface* dst, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect, [NativeTypeName("Uint32")] uint color);
