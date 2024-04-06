@@ -23,11 +23,13 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    [Flags]
     public enum SDL_MessageBoxFlags
     {
         SDL_MESSAGEBOX_ERROR = 0x00000010,
@@ -37,6 +39,7 @@ namespace SDL
         SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT = 0x00000100,
     }
 
+    [Flags]
     public enum SDL_MessageBoxButtonFlags
     {
         SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT = 0x00000001,

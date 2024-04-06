@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using static SDL.SDL_Scancode;
 
 namespace SDL
@@ -275,6 +276,7 @@ namespace SDL
         SDLK_ENDCALL = (SDL_SCANCODE_ENDCALL | (1 << 30)),
     }
 
+    [Flags]
     public enum SDL_Keymod
     {
         SDL_KMOD_NONE = 0x0000,

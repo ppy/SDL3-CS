@@ -29,6 +29,7 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    [Flags]
     public enum SDL_RendererFlags
     {
         SDL_RENDERER_PRESENTVSYNC = 0x00000004,
