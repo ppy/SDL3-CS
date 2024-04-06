@@ -166,6 +166,21 @@ def check_generated_functions(sdl_api, header, generated_file_paths):
             print(f"[⚠️ Warning] Function {name} not found in generated files:", *generated_file_paths)
 
 
+defined_constant_regex = re.compile(r"\[Constant]\s*public (const|static readonly) \w+ (SDL_\w+) = ", re.MULTILINE)
+
+
+def get_manually_written_symbols(header):
+    """Returns symbols names whose definitions are manually written in C#."""
+    cs_file = header.cs_file()
+    if cs_file.is_file():
+        with open(cs_file, "r", encoding="utf-8") as f:
+            text = f.read()
+            for match in defined_constant_regex.finditer(text):
+                m = match.group(2)
+                assert m.startswith("SDL_")
+                yield m
+
+
 typedef_enum_regex = re.compile(r"\[Typedef]\s*public enum (SDL_\w+)", re.MULTILINE)
 
 
@@ -216,6 +231,11 @@ def run_clangsharp(command, header: Header):
     for rsp in header.rsp_files():
         if rsp.is_file():
             cmd.append(f"@{rsp}")
+
+    to_exclude = list(get_manually_written_symbols(header))
+    if to_exclude:
+        cmd.append("--exclude")
+        cmd.extend(to_exclude)
 
     subprocess.run(cmd)
     return header.output_file()

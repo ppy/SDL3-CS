@@ -94,9 +94,6 @@ namespace SDL
         [NativeTypeName("#define SDL_PEN_INVALID ((SDL_PenID)0)")]
         public const SDL_PenID SDL_PEN_INVALID = ((SDL_PenID)(0));
 
-        [NativeTypeName("#define SDL_PEN_MOUSEID ((SDL_MouseID)-2)")]
-        public const SDL_MouseID SDL_PEN_MOUSEID = ((SDL_MouseID)(-2));
-
         [NativeTypeName("#define SDL_PEN_INFO_UNKNOWN (-1)")]
         public const int SDL_PEN_INFO_UNKNOWN = (-1);
 
