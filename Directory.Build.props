@@ -18,7 +18,8 @@
     <Authors>ppy Pty Ltd</Authors>
     <Company>ppy Pty Ltd</Company>
     <Copyright>Copyright (c) 2024 ppy Pty Ltd</Copyright>
-    <Product>SDL3-CS</Product>
+    <Product>ppy.SDL3-CS</Product>
+    <PackageId>ppy.SDL3-CS</PackageId>
     <PackageReleaseNotes>Automated release.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/ppy/SDL3-CS</PackageProjectUrl>
