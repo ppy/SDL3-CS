@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  deploy:
+  pack:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,9 +19,14 @@ jobs:
       - name: Build
         run: dotnet build SDL3-CS.sln -c Release
 
-      - name: Build Packages
+      - name: Pack
         run: dotnet pack SDL3-CS/SDL3-CS.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD)
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SDL3-CS
+          path: SDL3-CS/bin/Release/ppy.*.nupkg
+
       - name: Publish tagged release to nuget.org
-        if: startsWith(github.ref, 'refs/tags/')
         run: dotnet nuget push SDL3-CS/bin/Release/ppy.*.nupkg -s https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}
