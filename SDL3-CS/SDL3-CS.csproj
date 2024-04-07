@@ -8,6 +8,18 @@
     <NoWarn>$(NoWarn);SYSLIB1054;CA1401</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup Label="NuGet">
+    <Authors>ppy Pty Ltd</Authors>
+    <Company>ppy Pty Ltd</Company>
+    <Copyright>Copyright (c) 2024 ppy Pty Ltd</Copyright>
+    <Product>ppy.SDL3-CS</Product>
+    <PackageId>ppy.SDL3-CS</PackageId>
+    <PackageReleaseNotes>Automated release.</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ppy/SDL3-CS</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ppy/SDL3-CS</RepositoryUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\SDL3-CS.SourceGeneration\SDL3-CS.SourceGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>
