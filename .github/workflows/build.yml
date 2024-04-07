@@ -1,4 +1,4 @@
-name: build-native
+name: Build Native
 on:
   workflow_dispatch:
     inputs: {}
