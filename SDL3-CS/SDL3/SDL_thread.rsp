@@ -1,0 +1,10 @@
+# Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
+# See the LICENCE file in the repository root for full licence text.
+
+--with-using
+# the SDL_CreateThread symbol name doesn't matter, it just needs to be any symbol defined in SDL_thread.h 
+SDL_CreateThread=System.Runtime.Versioning
+
+--with-attribute
+SDL_CreateThread=UnsupportedOSPlatform("windows")
+SDL_CreateThreadWithStackSize=UnsupportedOSPlatform("windows")
