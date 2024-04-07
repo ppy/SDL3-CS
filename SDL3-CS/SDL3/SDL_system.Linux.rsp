@@ -1,0 +1,6 @@
+# Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
+# See the LICENCE file in the repository root for full licence text.
+
+# Fix missing <endian.h> when cross-compiling on windows
+--define-macro
+SDL_BYTEORDER=SDL_LIL_ENDIAN
