@@ -10,7 +10,7 @@ namespace SDL3.Tests
 {
     public static class Program
     {
-        private static void Main()
+        public static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
 

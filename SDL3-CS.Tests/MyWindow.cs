@@ -3,7 +3,6 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using osu.Framework.Allocation;
 using SDL;
 using static SDL.SDL3;
 
@@ -13,15 +12,15 @@ namespace SDL3.Tests
     {
         private bool flash;
         private ObjectHandle<MyWindow> objectHandle { get; }
-        private SDL_Window* SDLWindowHandle;
-        private SDL_Renderer* Renderer;
+        private SDL_Window* sdlWindowHandle;
+        private SDL_Renderer* renderer;
         private readonly bool initSuccess;
 
-        private const SDL_InitFlags initFlags = SDL_InitFlags.SDL_INIT_VIDEO | SDL_InitFlags.SDL_INIT_GAMEPAD;
+        private const SDL_InitFlags init_flags = SDL_InitFlags.SDL_INIT_VIDEO | SDL_InitFlags.SDL_INIT_GAMEPAD;
 
         public MyWindow()
         {
-            if (SDL_InitSubSystem(initFlags) < 0)
+            if (SDL_InitSubSystem(init_flags) < 0)
                 throw new InvalidOperationException($"failed to initialise SDL. Error: {SDL_GetError()}");
 
             initSuccess = true;
@@ -42,6 +41,7 @@ namespace SDL3.Tests
         private static SDL_bool wndProc(IntPtr userdata, MSG* message)
         {
             var handle = new ObjectHandle<MyWindow>(userdata);
+
             if (handle.GetTarget(out var window))
             {
                 Console.WriteLine($"from {window}, message: {message->message}");
@@ -90,8 +90,8 @@ namespace SDL3.Tests
 
         public void Create()
         {
-            SDLWindowHandle = SDL_CreateWindow("hello"u8, 800, 600, SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY);
-            Renderer = SDL_CreateRenderer(SDLWindowHandle, (byte*)null, SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
+            sdlWindowHandle = SDL_CreateWindow("hello"u8, 800, 600, SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY);
+            renderer = SDL_CreateRenderer(sdlWindowHandle, (byte*)null, SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
         }
 
         private void handleEvent(SDL_Event e)
@@ -116,11 +116,11 @@ namespace SDL3.Tests
                             break;
 
                         case SDL_Keycode.SDLK_F10:
-                            SDL_SetWindowFullscreen(SDLWindowHandle, SDL_bool.SDL_FALSE);
+                            SDL_SetWindowFullscreen(sdlWindowHandle, SDL_bool.SDL_FALSE);
                             break;
 
                         case SDL_Keycode.SDLK_F11:
-                            SDL_SetWindowFullscreen(SDLWindowHandle, SDL_bool.SDL_TRUE);
+                            SDL_SetWindowFullscreen(sdlWindowHandle, SDL_bool.SDL_TRUE);
                             break;
 
                         case SDL_Keycode.SDLK_j:
@@ -134,6 +134,7 @@ namespace SDL3.Tests
 
                             int count;
                             var bindings = SDL_GetGamepadBindings(gamepad, &count);
+
                             for (int i = 0; i < count; i++)
                             {
                                 var binding = *bindings[i];
@@ -217,9 +218,9 @@ namespace SDL3.Tests
 
                 pollEvents();
 
-                SDL_SetRenderDrawColorFloat(Renderer, SDL_sinf(frame) / 2 + 0.5f, SDL_cosf(frame) / 2 + 0.5f, 0.3f, 1.0f);
-                SDL_RenderClear(Renderer);
-                SDL_RenderPresent(Renderer);
+                SDL_SetRenderDrawColorFloat(renderer, SDL_sinf(frame) / 2 + 0.5f, SDL_cosf(frame) / 2 + 0.5f, 0.3f, 1.0f);
+                SDL_RenderClear(renderer);
+                SDL_RenderPresent(renderer);
 
                 frame += 0.015f;
 
@@ -230,7 +231,7 @@ namespace SDL3.Tests
         public void Dispose()
         {
             if (initSuccess)
-                SDL_QuitSubSystem(initFlags);
+                SDL_QuitSubSystem(init_flags);
 
             objectHandle.Dispose();
         }

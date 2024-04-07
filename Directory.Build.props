@@ -21,7 +21,7 @@
     <Product>SDL3-CS</Product>
     <PackageReleaseNotes>Automated release.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/ppy/osu-framework</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ppy/osu-framework</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/ppy/SDL3-CS</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ppy/SDL3-CS</RepositoryUrl>
   </PropertyGroup>
 </Project>

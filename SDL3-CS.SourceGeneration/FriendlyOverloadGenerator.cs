@@ -29,6 +29,7 @@ using System;
         public void Execute(GeneratorExecutionContext context)
         {
             var finder = (UnfriendlyMethodFinder)context.SyntaxReceiver!;
+
             foreach (var kvp in finder.Methods)
             {
                 string filename = kvp.Key;
@@ -38,16 +39,16 @@ using System;
                 result.Append(file_header);
                 result.Append(
                     SyntaxFactory.NamespaceDeclaration(
-                            SyntaxFactory.IdentifierName("SDL"))
-                        .WithMembers(
-                            SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
-                                SyntaxFactory.ClassDeclaration("SDL3")
-                                    .WithModifiers(
-                                        SyntaxFactory.TokenList(
-                                            SyntaxFactory.Token(SyntaxKind.UnsafeKeyword),
-                                            SyntaxFactory.Token(SyntaxKind.PartialKeyword)))
-                                    .WithMembers(SyntaxFactory.List(foundMethods.Select(makeFriendlyMethod)))))
-                        .NormalizeWhitespace());
+                                     SyntaxFactory.IdentifierName("SDL"))
+                                 .WithMembers(
+                                     SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
+                                         SyntaxFactory.ClassDeclaration("SDL3")
+                                                      .WithModifiers(
+                                                          SyntaxFactory.TokenList(
+                                                              SyntaxFactory.Token(SyntaxKind.UnsafeKeyword),
+                                                              SyntaxFactory.Token(SyntaxKind.PartialKeyword)))
+                                                      .WithMembers(SyntaxFactory.List(foundMethods.Select(makeFriendlyMethod)))))
+                                 .NormalizeWhitespace());
 
                 context.AddSource(filename, result.ToString());
             }
@@ -64,16 +65,16 @@ using System;
                 : gm.NativeMethod.Identifier;
 
             return SyntaxFactory.MethodDeclaration(returnType, identifier)
-                .WithModifiers(
-                    SyntaxFactory.TokenList(
-                        SyntaxFactory.Token(SyntaxKind.PublicKeyword),
-                        SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
-                .WithParameterList(
-                    SyntaxFactory.ParameterList(
-                        SyntaxFactory.SeparatedList(transformParams(gm))))
-                .WithBody(
-                    SyntaxFactory.Block(
-                        makeMethodBody(gm)));
+                                .WithModifiers(
+                                    SyntaxFactory.TokenList(
+                                        SyntaxFactory.Token(SyntaxKind.PublicKeyword),
+                                        SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
+                                .WithParameterList(
+                                    SyntaxFactory.ParameterList(
+                                        SyntaxFactory.SeparatedList(transformParams(gm))))
+                                .WithBody(
+                                    SyntaxFactory.Block(
+                                        makeMethodBody(gm)));
         }
 
         private static IEnumerable<ParameterSyntax> transformParams(GeneratedMethod gm)
@@ -84,7 +85,7 @@ using System;
                 {
                     Debug.Assert(gm.RequiredChanges.HasFlag(Changes.ChangeParamsToReadOnlySpan));
                     yield return param.WithType(SyntaxFactory.ParseTypeName("ReadOnlySpan<byte>"))
-                        .WithAttributeLists(SyntaxFactory.List<AttributeListSyntax>());
+                                      .WithAttributeLists(SyntaxFactory.List<AttributeListSyntax>());
                 }
                 else
                 {
@@ -108,10 +109,10 @@ using System;
                         SyntaxFactory.ParseTypeName("byte*"),
                         SyntaxFactory.SingletonSeparatedList(
                             SyntaxFactory.VariableDeclarator(
-                                    param.Identifier.ValueText + pointer_suffix)
-                                .WithInitializer(
-                                    SyntaxFactory.EqualsValueClause(
-                                        SyntaxFactory.IdentifierName(param.Identifier))))),
+                                             param.Identifier.ValueText + pointer_suffix)
+                                         .WithInitializer(
+                                             SyntaxFactory.EqualsValueClause(
+                                                 SyntaxFactory.IdentifierName(param.Identifier))))),
                     expr);
             }
 
@@ -125,16 +126,16 @@ using System;
             if (gm.RequiredChanges.HasFlag(Changes.ChangeReturnTypeToString))
             {
                 expr = SyntaxFactory.InvocationExpression(
-                        SyntaxFactory.IdentifierName("PtrToStringUTF8"))
-                    .WithArguments(new[]
-                        {
-                            SyntaxFactory.Argument(makeFunctionCall(gm)),
-                            SyntaxFactory.Argument(SyntaxFactory.LiteralExpression(
-                                gm.RequiredChanges.HasFlag(Changes.FreeReturnedPointer)
-                                    ? SyntaxKind.TrueLiteralExpression
-                                    : SyntaxKind.FalseLiteralExpression))
-                        }
-                    );
+                                        SyntaxFactory.IdentifierName("PtrToStringUTF8"))
+                                    .WithArguments(new[]
+                                        {
+                                            SyntaxFactory.Argument(makeFunctionCall(gm)),
+                                            SyntaxFactory.Argument(SyntaxFactory.LiteralExpression(
+                                                gm.RequiredChanges.HasFlag(Changes.FreeReturnedPointer)
+                                                    ? SyntaxKind.TrueLiteralExpression
+                                                    : SyntaxKind.FalseLiteralExpression))
+                                        }
+                                    );
             }
             else
             {
@@ -150,8 +151,8 @@ using System;
         private static InvocationExpressionSyntax makeFunctionCall(GeneratedMethod gm)
         {
             return SyntaxFactory.InvocationExpression(
-                    SyntaxFactory.IdentifierName(gm.NativeMethod.Identifier))
-                .WithArguments(makeArguments(gm));
+                                    SyntaxFactory.IdentifierName(gm.NativeMethod.Identifier))
+                                .WithArguments(makeArguments(gm));
         }
 
         private static IEnumerable<ArgumentSyntax> makeArguments(GeneratedMethod gm)

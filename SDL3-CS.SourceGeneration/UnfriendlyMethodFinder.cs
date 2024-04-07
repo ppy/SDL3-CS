@@ -1,6 +1,7 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,16 +13,16 @@ namespace SDL3.SourceGeneration
 {
     public class UnfriendlyMethodFinder : ISyntaxReceiver
     {
-        public readonly Dictionary<string, List<GeneratedMethod>> Methods = new();
+        public readonly Dictionary<string, List<GeneratedMethod>> Methods = new Dictionary<string, List<GeneratedMethod>>();
 
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {
             if (syntaxNode is MethodDeclarationSyntax method)
             {
                 string name = method.Identifier.ValueText;
-                bool isUnsafe = name.StartsWith($"{Helper.UnsafePrefix}SDL_");
+                bool isUnsafe = name.StartsWith($"{Helper.UnsafePrefix}SDL_", StringComparison.Ordinal);
 
-                if (!name.StartsWith("SDL_") && !isUnsafe)
+                if (!name.StartsWith("SDL_", StringComparison.Ordinal) && !isUnsafe)
                     return;
 
                 if (method.ParameterList.Parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword)))
