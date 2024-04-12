@@ -71,38 +71,50 @@ jobs:
             libdrm-dev${{ matrix.platform.target_apt_arch }} \
             libgbm-dev${{ matrix.platform.target_apt_arch }} \
             libpulse-dev${{ matrix.platform.target_apt_arch }}
+
       - uses: actions/checkout@v4
         with:
           repository: 'libsdl-org/SDL'
           ref: 'main'
+
       - uses: actions/checkout@v4
         with:
           path: 'SDL3-CS'
+
       - name: Configure CMake
         run:  ${{ matrix.platform.cmake_configure_env }} cmake -B build ${{ matrix.platform.flags }} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
+
       - name: Build
         run: cmake --build build/ --config Release
+
       - name: Install (Windows)
         run: cmake --install build/ --prefix install_output --config Release
         if: runner.os == 'Windows'
+
       - name: Install
         run: sudo cmake --install build/ --prefix install_output --config Release
         if: runner.os != 'Windows'
+
       - name: Prepare release directory (Windows)
         run: mkdir -Force SDL3-CS/native/${{ matrix.platform.name }}
         if: runner.os == 'Windows'
+
       - name: Prepare release directory
         run: mkdir -p SDL3-CS/native/${{ matrix.platform.name }}
         if: runner.os != 'Windows'
+
       - name: Prepare release (Windows)
         run: cp install_output/bin/SDL3.dll SDL3-CS/native/${{ matrix.platform.name }}/SDL3.dll
         if: runner.os == 'Windows'
+
       - name: Prepare release (Linux)
         run: cp install_output/lib/libSDL3.so SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.so
         if: runner.os == 'Linux'
+
       - name: Prepare release (macOS)
         run: cp install_output/lib/libSDL3.dylib SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.dylib
         if: runner.os == 'macOS'
+
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
         with:
@@ -122,13 +134,17 @@ jobs:
         with:
           repository: 'libsdl-org/SDL'
           ref: 'main'
+
       - uses: actions/checkout@v4
         with:
           path: 'SDL3-CS'
+
       - name: Build (iOS)
         run: xcodebuild -project Xcode/SDL/SDL.xcodeproj -target SDL3.xcframework -configuration Release
+
       - name: Prepare release directory (iOS)
         run: mkdir -p SDL3-CS/native/ios
+
       - name: Prepare release (iOS)
         run: |
           mkdir -p SDL3-CS/native/ios/SDL3.xcframework/ios-arm64/SDL3.framework;
@@ -138,6 +154,7 @@ jobs:
           cp Xcode/SDL/build/SDL3.xcframework/ios-arm64/SDL3.framework/Info.plist                  SDL3-CS/native/ios/SDL3.xcframework/ios-arm64/SDL3.framework/Info.plist;
           cp Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/SDL3       SDL3-CS/native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/SDL3;
           cp Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist SDL3-CS/native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist;
+
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
         with:
