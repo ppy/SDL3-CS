@@ -81,6 +81,12 @@ jobs:
         with:
           path: 'SDL3-CS'
 
+      - name: Apply temporary patch
+        if: runner.os == 'Linux'
+        run: |
+          # Remove when https://github.com/libsdl-org/SDL/pull/9523 is merged.
+          git apply SDL3-CS/fix-segfault.patch
+
       - name: Configure CMake
         run:  ${{ matrix.platform.cmake_configure_env }} cmake -B build ${{ matrix.platform.flags }} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
 
