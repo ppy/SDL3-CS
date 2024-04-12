@@ -59,11 +59,6 @@
       <PackagePath>runtimes/linux-x64/native</PackagePath>
       <Pack>true</Pack>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)..\native\linux-x86\libSDL3.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <PackagePath>runtimes/linux-x86/native</PackagePath>
-      <Pack>true</Pack>
-    </Content>
     <Content Include="$(MSBuildThisFileDirectory)..\native\ios\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <PackagePath>runtimes/ios/native</PackagePath>
