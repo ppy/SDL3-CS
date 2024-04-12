@@ -143,7 +143,7 @@ jobs:
         with:
           commit-message: Update iOS SDL binaries
           title: Update iOS SDL binaries
-          body: This PR has been auto-genereated to update the iOS SDL binaries
+          body: This PR has been auto-generated to update the iOS SDL binaries
           branch: update-ios-binaries
           path: 'SDL3-CS'
         env:
