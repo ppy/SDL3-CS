@@ -45,16 +45,17 @@ namespace SDL
     public static partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_Init(SDL_InitFlags flags);
+        public static extern int SDL_Init([NativeTypeName("Uint32")] uint flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_InitSubSystem(SDL_InitFlags flags);
+        public static extern int SDL_InitSubSystem([NativeTypeName("Uint32")] uint flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_QuitSubSystem(SDL_InitFlags flags);
+        public static extern void SDL_QuitSubSystem([NativeTypeName("Uint32")] uint flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_InitFlags SDL_WasInit(SDL_InitFlags flags);
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_WasInit([NativeTypeName("Uint32")] uint flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Quit();
