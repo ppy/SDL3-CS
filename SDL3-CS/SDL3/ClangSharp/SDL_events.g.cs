@@ -142,7 +142,8 @@ namespace SDL
 
     public partial struct SDL_CommonEvent
     {
-        public SDL_EventType type;
+        [NativeTypeName("Uint32")]
+        public uint type;
 
         [NativeTypeName("Uint32")]
         public uint reserved;
@@ -882,7 +883,8 @@ namespace SDL
 
     public partial struct SDL_UserEvent
     {
-        public SDL_EventType type;
+        [NativeTypeName("Uint32")]
+        public uint type;
 
         [NativeTypeName("Uint32")]
         public uint reserved;
@@ -906,7 +908,8 @@ namespace SDL
     public partial struct SDL_Event
     {
         [FieldOffset(0)]
-        public SDL_EventType type;
+        [NativeTypeName("Uint32")]
+        public uint type;
 
         [FieldOffset(0)]
         public SDL_CommonEvent common;
@@ -1031,19 +1034,19 @@ namespace SDL
         public static extern void SDL_PumpEvents();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_eventaction action, SDL_EventType minType, SDL_EventType maxType);
+        public static extern int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_eventaction action, [NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasEvent(SDL_EventType type);
+        public static extern SDL_bool SDL_HasEvent([NativeTypeName("Uint32")] uint type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasEvents(SDL_EventType minType, SDL_EventType maxType);
+        public static extern SDL_bool SDL_HasEvents([NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_FlushEvent(SDL_EventType type);
+        public static extern void SDL_FlushEvent([NativeTypeName("Uint32")] uint type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_FlushEvents(SDL_EventType minType, SDL_EventType maxType);
+        public static extern void SDL_FlushEvents([NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_PollEvent(SDL_Event* @event);
@@ -1073,10 +1076,10 @@ namespace SDL
         public static extern void SDL_FilterEvents([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetEventEnabled(SDL_EventType type, SDL_bool enabled);
+        public static extern void SDL_SetEventEnabled([NativeTypeName("Uint32")] uint type, SDL_bool enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_EventEnabled(SDL_EventType type);
+        public static extern SDL_bool SDL_EventEnabled([NativeTypeName("Uint32")] uint type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]

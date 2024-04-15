@@ -57,9 +57,6 @@ namespace SDL
     public unsafe partial struct SDL_VirtualJoystickDesc
     {
         [NativeTypeName("Uint16")]
-        public ushort version;
-
-        [NativeTypeName("Uint16")]
         public ushort type;
 
         [NativeTypeName("Uint16")]
@@ -313,9 +310,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_IPHONE_MAX_GFORCE 5.0")]
         public const double SDL_IPHONE_MAX_GFORCE = 5.0;
-
-        [NativeTypeName("#define SDL_VIRTUAL_JOYSTICK_DESC_VERSION 1")]
-        public const int SDL_VIRTUAL_JOYSTICK_DESC_VERSION = 1;
 
         [NativeTypeName("#define SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN \"SDL.joystick.cap.mono_led\"")]
         public static ReadOnlySpan<byte> SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN => "SDL.joystick.cap.mono_led"u8;

@@ -23,7 +23,6 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -47,15 +46,10 @@ namespace SDL
 
     public static unsafe partial class SDL3
     {
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const wchar_t *")]
-        [SupportedOSPlatform("Windows")]
-        public static extern IntPtr SDL_WinRTGetFSPathUNICODE(SDL_WinRT_Path pathType);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_WinRTGetFSPathUTF8", ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_WinRTGetFSPath", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Windows")]
-        public static extern byte* Unsafe_SDL_WinRTGetFSPathUTF8(SDL_WinRT_Path pathType);
+        public static extern byte* Unsafe_SDL_WinRTGetFSPath(SDL_WinRT_Path pathType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
