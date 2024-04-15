@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <RootNamespace>SDL3_CS_Android</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedJar Include="Jars\SDL3AndroidBridge.jar" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedNativeLibrary Include="..\native\android\armeabi-v7a\libSDL3.so" />
+    <EmbeddedNativeLibrary Include="..\native\android\arm64-v8a\libSDL3.so" />
+    <EmbeddedNativeLibrary Include="..\native\android\x86\libSDL3.so" />
+    <EmbeddedNativeLibrary Include="..\native\android\x86_64\libSDL3.so" />
+  </ItemGroup>
+</Project>
