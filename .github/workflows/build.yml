@@ -165,3 +165,70 @@ jobs:
           path: 'SDL3-CS'
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+  build-android:
+    name: android
+    runs-on: ubuntu-20.04
+    env:
+        NDK_VER: 23.1.7779620
+        PLATFORM_VER: android-34
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: 'libsdl-org/SDL'
+          ref: 'main'
+
+      - uses: actions/checkout@v4
+        with:
+          path: 'SDL3-CS'
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: microsoft
+          java-version: |
+            11
+            17
+
+      - name: Install Android SDK Manager
+        uses: android-actions/setup-android@v3
+        with:
+          packages: ''
+
+      - name: Install Android SDK
+        run: |
+          sdkmanager --install "platform-tools" "platforms;$PLATFORM_VER"
+          sdkmanager --install "ndk;$NDK_VER" --channel=3
+
+      - name: Build (Android)
+        run: |
+          export PATH=$ANDROID_HOME/ndk/$NDK_VER:$PATH
+          export OUTPUT=$PWD/SDL3-CS/native/android
+          rm -rf $OUTPUT && mkdir -p $OUTPUT
+        
+          # Build SDL3
+          sed -i 's/abi=.*/abi="armeabi-v7a arm64-v8a x86 x86_64"/g' ./build-scripts/androidbuildlibs.sh
+          ./build-scripts/androidbuildlibs.sh NDK_LIBS_OUT="$OUTPUT"
+
+      - name: Build SDL3 Android Java
+        run: |
+          export JAVA_HOME=$JAVA_HOME_11_X64
+          export PATH=$JAVA_HOME_11_X64/bin:$PATH
+          export OUTPUT=$PWD/SDL3-CS/SDL3-CS-Android/Jars/
+          rm -rf $OUTPUT && mkdir -p $OUTPUT
+
+          # Build SDL3 Android Java part
+          cd android-project/app/src/main/java
+          javac -cp $ANDROID_HOME/platforms/$PLATFORM_VER/android.jar -encoding utf8 org/libsdl/app/*.java
+          jar cvf $OUTPUT/SDL3AndroidBridge.jar org/libsdl/app/*.class
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: Update Android SDL binaries
+          title: Update Android SDL binaries
+          body: This PR has been auto-generated to update the Android SDL binaries
+          branch: update-android-binaries
+          path: 'SDL3-CS'
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
