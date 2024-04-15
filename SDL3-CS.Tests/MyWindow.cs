@@ -65,7 +65,7 @@ namespace SDL3.Tests
 
         private int handleEventFromFilter(SDL_Event* e)
         {
-            switch (e->type)
+            switch (e->Type)
             {
                 case SDL_EventType.SDL_EVENT_KEY_UP:
                 case SDL_EventType.SDL_EVENT_KEY_DOWN:
@@ -91,12 +91,12 @@ namespace SDL3.Tests
         public void Create()
         {
             sdlWindowHandle = SDL_CreateWindow("hello"u8, 800, 600, SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY);
-            renderer = SDL_CreateRenderer(sdlWindowHandle, (byte*)null, SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
+            renderer = SDL_CreateRenderer(sdlWindowHandle, null, SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
         }
 
         private void handleEvent(SDL_Event e)
         {
-            switch (e.type)
+            switch (e.Type)
             {
                 case SDL_EventType.SDL_EVENT_QUIT:
                     run = false;
@@ -196,9 +196,7 @@ namespace SDL3.Tests
 
             do
             {
-                fixed (SDL_Event* buf = events)
-                    eventsRead = SDL_PeepEvents(buf, events_per_peep, SDL_eventaction.SDL_GETEVENT, SDL_EventType.SDL_EVENT_FIRST, SDL_EventType.SDL_EVENT_LAST);
-
+                eventsRead = SDL_PeepEvents(events, SDL_eventaction.SDL_GETEVENT, SDL_EventType.SDL_EVENT_FIRST, SDL_EventType.SDL_EVENT_LAST);
                 for (int i = 0; i < eventsRead; i++)
                     handleEvent(events[i]);
             } while (eventsRead == events_per_peep);

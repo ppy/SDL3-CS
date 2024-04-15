@@ -48,7 +48,8 @@ namespace SDL
 
     public unsafe partial struct SDL_MessageBoxButtonData
     {
-        public SDL_MessageBoxButtonFlags flags;
+        [NativeTypeName("Uint32")]
+        public uint flags;
 
         public int buttonID;
 
@@ -92,7 +93,8 @@ namespace SDL
 
     public unsafe partial struct SDL_MessageBoxData
     {
-        public SDL_MessageBoxFlags flags;
+        [NativeTypeName("Uint32")]
+        public uint flags;
 
         public SDL_Window* window;
 
@@ -117,6 +119,6 @@ namespace SDL
         public static extern int SDL_ShowMessageBox([NativeTypeName("const SDL_MessageBoxData *")] SDL_MessageBoxData* messageboxdata, int* buttonid);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, [NativeTypeName("const char *")] byte* title, [NativeTypeName("const char *")] byte* message, SDL_Window* window);
+        public static extern int SDL_ShowSimpleMessageBox([NativeTypeName("Uint32")] uint flags, [NativeTypeName("const char *")] byte* title, [NativeTypeName("const char *")] byte* message, SDL_Window* window);
     }
 }
