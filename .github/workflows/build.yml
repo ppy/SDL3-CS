@@ -205,7 +205,7 @@ jobs:
           export PATH=$ANDROID_HOME/ndk/$NDK_VER:$PATH
           export OUTPUT=$PWD/SDL3-CS/native/android
           rm -rf $OUTPUT && mkdir -p $OUTPUT
-        
+
           # Build SDL3
           sed -i 's/abi=.*/abi="armeabi-v7a arm64-v8a x86 x86_64"/g' ./build-scripts/androidbuildlibs.sh
           ./build-scripts/androidbuildlibs.sh NDK_LIBS_OUT="$OUTPUT"
@@ -214,7 +214,7 @@ jobs:
         run: |
           export JAVA_HOME=$JAVA_HOME_11_X64
           export PATH=$JAVA_HOME_11_X64/bin:$PATH
-          export OUTPUT=$PWD/SDL3-CS/SDL3-CS-Android/Jars/
+          export OUTPUT=$PWD/SDL3-CS/SDL3-CS.Android/Jars/
           rm -rf $OUTPUT && mkdir -p $OUTPUT
 
           # Build SDL3 Android Java part
