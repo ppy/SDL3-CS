@@ -67,7 +67,7 @@ namespace SDL
     {
         public static SDL_bool SDL_PointInRect([NativeTypeName("const SDL_Point *")] SDL_Point* p, [NativeTypeName("const SDL_Rect *")] SDL_Rect* r)
         {
-            return ((p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);
+            return ((p) != null && (r) != null && (p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectEmpty([NativeTypeName("const SDL_Rect *")] SDL_Rect* r)
@@ -97,7 +97,7 @@ namespace SDL
 
         public static SDL_bool SDL_PointInRectFloat([NativeTypeName("const SDL_FPoint *")] SDL_FPoint* p, [NativeTypeName("const SDL_FRect *")] SDL_FRect* r)
         {
-            return ((p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);
+            return ((p) != null && (r) != null && (p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectEmptyFloat([NativeTypeName("const SDL_FRect *")] SDL_FRect* r)
