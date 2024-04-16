@@ -16,6 +16,10 @@ namespace SDL3.SourceGeneration
         /// </remarks>
         public const string UnsafePrefix = "Unsafe_";
 
+        public const string Utf8StringStructName = "Utf8String";
+
+        public const string Utf8StringReadOnlySpanFieldName = "Raw";
+
         public static bool IsVoid(this TypeSyntax type) => type is PredefinedTypeSyntax predefined
                                                            && predefined.Keyword.IsKind(SyntaxKind.VoidKeyword);
 

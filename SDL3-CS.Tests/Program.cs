@@ -31,6 +31,7 @@ namespace SDL3.Tests
             Debug.Assert(SDL_GetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4) == "null byte ");
 
             SDL_SetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4, "1"u8);
+            SDL_SetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4, "1");
 
             using (var window = new MyWindow())
             {
