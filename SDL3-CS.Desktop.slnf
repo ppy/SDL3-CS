@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "SDL3-CS.sln",
+    "projects": [
+      "SDL3-CS\\SDL3-CS.csproj",
+      "SDL3-CS.SourceGeneration\\SDL3-CS.SourceGeneration.csproj",
+      "SDL3-CS.Tests\\SDL3-CS.Tests.csproj"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "SDL3-CS.sln",
+    "projects": [
+      "SDL3-CS.Android\\SDL3-CS.Android.csproj"
+    ]
+  }
+}
