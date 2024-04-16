@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDL3-CS.SourceGeneration", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDL3-CS.Tests", "SDL3-CS.Tests\SDL3-CS.Tests.csproj", "{CF980481-8227-4BED-970E-6433C83F64CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS-Android", "SDL3-CS-Android\SDL3-CS-Android.csproj", "{CA28F49C-D0BE-47D6-9E82-7A0B8C380B8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS.Android", "SDL3-CS.Android\SDL3-CS.Android.csproj", "{CA28F49C-D0BE-47D6-9E82-7A0B8C380B8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
