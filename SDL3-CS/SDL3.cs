@@ -27,17 +27,5 @@ namespace SDL
 
             return s;
         }
-
-        /// <summary>
-        /// UTF8 encodes a managed <c>string</c> to a <c>byte</c> array suitable for use in <c>ReadOnlySpan&lt;byte&gt;</c> parameters of SDL functions.
-        /// </summary>
-        /// <param name="s">The <c>string</c> to encode.</param>
-        /// <returns>A null-terminated byte array.</returns>
-        public static byte[] UTF8GetBytes(string s)
-        {
-            byte[] array = Encoding.UTF8.GetBytes(s + '\0');
-            Debug.Assert(array[^1] == '\0');
-            return array;
-        }
     }
 }
