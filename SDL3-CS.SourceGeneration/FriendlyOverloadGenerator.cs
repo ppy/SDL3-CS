@@ -83,8 +83,8 @@ using System;
             {
                 if (param.IsTypeConstCharPtr())
                 {
-                    Debug.Assert(gm.RequiredChanges.HasFlag(Changes.ChangeParamsToReadOnlySpan));
-                    yield return param.WithType(SyntaxFactory.ParseTypeName("ReadOnlySpan<byte>"))
+                    Debug.Assert(gm.RequiredChanges.HasFlag(Changes.ChangeParamsToUtf8String));
+                    yield return param.WithType(SyntaxFactory.ParseTypeName(Helper.Utf8StringStructName))
                                       .WithAttributeLists(SyntaxFactory.List<AttributeListSyntax>());
                 }
                 else
@@ -102,7 +102,7 @@ using System;
 
             foreach (var param in gm.NativeMethod.ParameterList.Parameters.Where(p => p.IsTypeConstCharPtr()).Reverse())
             {
-                Debug.Assert(gm.RequiredChanges.HasFlag(Changes.ChangeParamsToReadOnlySpan));
+                Debug.Assert(gm.RequiredChanges.HasFlag(Changes.ChangeParamsToUtf8String));
 
                 expr = SyntaxFactory.FixedStatement(
                     SyntaxFactory.VariableDeclaration(
@@ -112,7 +112,10 @@ using System;
                                              param.Identifier.ValueText + pointer_suffix)
                                          .WithInitializer(
                                              SyntaxFactory.EqualsValueClause(
-                                                 SyntaxFactory.IdentifierName(param.Identifier))))),
+                                                 SyntaxFactory.MemberAccessExpression(
+                                                     SyntaxKind.SimpleMemberAccessExpression,
+                                                     SyntaxFactory.IdentifierName(param.Identifier),
+                                                     SyntaxFactory.IdentifierName(Helper.Utf8StringReadOnlySpanFieldName)))))),
                     expr);
             }
 
@@ -161,7 +164,7 @@ using System;
             {
                 if (param.IsTypeConstCharPtr())
                 {
-                    Debug.Assert(gm.RequiredChanges.HasFlag(Changes.ChangeParamsToReadOnlySpan));
+                    Debug.Assert(gm.RequiredChanges.HasFlag(Changes.ChangeParamsToUtf8String));
                     yield return SyntaxFactory.Argument(SyntaxFactory.IdentifierName(param.Identifier.ValueText + pointer_suffix));
                 }
                 else
