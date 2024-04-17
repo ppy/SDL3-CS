@@ -662,15 +662,6 @@ namespace SDL
         public ulong timestamp;
 
         public SDL_CameraDeviceID which;
-
-        [NativeTypeName("Uint8")]
-        public byte padding1;
-
-        [NativeTypeName("Uint8")]
-        public byte padding2;
-
-        [NativeTypeName("Uint8")]
-        public byte padding3;
     }
 
     public partial struct SDL_TouchFingerEvent

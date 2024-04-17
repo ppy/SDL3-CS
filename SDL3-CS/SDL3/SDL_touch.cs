@@ -27,5 +27,13 @@ namespace SDL
             var array = SDL_GetTouchDevices(&count);
             return SDLArray.Create(array, count);
         }
+
+        [MustDisposeResource]
+        public static unsafe SDLPointerArray<SDL_Finger>? SDL_GetTouchFingers(SDL_TouchID touchID)
+        {
+            int count;
+            var array = SDL_GetTouchFingers(touchID, &count);
+            return SDLArray.Create(array, count);
+        }
     }
 }
