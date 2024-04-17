@@ -69,7 +69,7 @@ namespace SDL3.Tests
             Assert.That(s.Raw == null, "s.Raw == null");
             Assert.That(s.Raw.Length, Is.EqualTo(0));
 
-            fixed (byte* ptr = s.Raw)
+            fixed (byte* ptr = s)
             {
                 Assert.That(ptr == null, "ptr == null");
             }
@@ -79,7 +79,7 @@ namespace SDL3.Tests
         {
             Assert.That(s.Raw.Length, Is.EqualTo(expectedLength));
 
-            fixed (byte* ptr = s.Raw)
+            fixed (byte* ptr = s)
             {
                 Assert.That(ptr != null, "ptr != null");
                 Assert.That(ptr[s.Raw.Length - 1], Is.EqualTo(0));
