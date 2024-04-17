@@ -112,10 +112,7 @@ using System;
                                              param.Identifier.ValueText + pointer_suffix)
                                          .WithInitializer(
                                              SyntaxFactory.EqualsValueClause(
-                                                 SyntaxFactory.MemberAccessExpression(
-                                                     SyntaxKind.SimpleMemberAccessExpression,
-                                                     SyntaxFactory.IdentifierName(param.Identifier),
-                                                     SyntaxFactory.IdentifierName(Helper.Utf8StringReadOnlySpanFieldName)))))),
+                                                 SyntaxFactory.IdentifierName(param.Identifier))))),
                     expr);
             }
 
