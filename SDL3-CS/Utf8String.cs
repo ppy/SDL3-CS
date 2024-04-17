@@ -13,7 +13,7 @@ namespace SDL
     /// <remarks>Should only be instantiated through implicit conversions.</remarks>
     public readonly ref struct Utf8String
     {
-        public readonly ReadOnlySpan<byte> Raw;
+        internal readonly ReadOnlySpan<byte> Raw;
 
         private Utf8String(ReadOnlySpan<byte> raw)
         {
