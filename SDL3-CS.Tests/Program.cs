@@ -14,23 +14,11 @@ namespace SDL3.Tests
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            unsafe
-            {
-                // Encoding.UTF8.GetBytes can churn out null pointers and doesn't guarantee null termination
-                fixed (byte* badPointer = Encoding.UTF8.GetBytes(""))
-                    Debug.Assert(badPointer == null);
-
-                fixed (byte* pointer = UTF8GetBytes(""))
-                {
-                    Debug.Assert(pointer != null);
-                    Debug.Assert(pointer[0] == '\0');
-                }
-            }
-
             SDL_SetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4, "null byte \0 in string"u8);
             Debug.Assert(SDL_GetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4) == "null byte ");
 
             SDL_SetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4, "1"u8);
+            SDL_SetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4, "1");
 
             using (var window = new MyWindow())
             {

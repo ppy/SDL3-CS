@@ -42,7 +42,7 @@ namespace SDL3.SourceGeneration
                 foreach (var parameter in method.ParameterList.Parameters)
                 {
                     if (parameter.IsTypeConstCharPtr())
-                        changes |= Changes.ChangeParamsToReadOnlySpan;
+                        changes |= Changes.ChangeParamsToUtf8String;
                 }
 
                 if (changes != Changes.None)
