@@ -2,7 +2,6 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace SDL
@@ -10,7 +9,7 @@ namespace SDL
     /// <summary>
     /// Null pointer or a null-byte terminated UTF8 string suitable for use in native methods.
     /// </summary>
-    /// <remarks>Should only be instantiated through implicit conversions.</remarks>
+    /// <remarks>Should only be instantiated through implicit conversions or with <c>null</c>.</remarks>
     public readonly ref struct Utf8String
     {
         internal readonly ReadOnlySpan<byte> Raw;
@@ -25,11 +24,11 @@ namespace SDL
             if (str == null)
                 return new Utf8String(null);
 
-            return new Utf8String(Encoding.UTF8.GetBytes(ensureTrailingNull(str)));
-        }
+            if (str.EndsWith('\0'))
+                return new Utf8String(Encoding.UTF8.GetBytes(str));
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static string ensureTrailingNull(string str) => str.EndsWith('\0') ? str : str + '\0';
+            return new Utf8String(Encoding.UTF8.GetBytes(str + '\0'));
+        }
 
         public static implicit operator Utf8String(ReadOnlySpan<byte> raw)
         {
