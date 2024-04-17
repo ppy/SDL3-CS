@@ -109,8 +109,5 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_SetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction")] delegate* unmanaged[Cdecl]<IntPtr, SDL_LogCategory, SDL_LogPriority, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
-
-        [NativeTypeName("#define SDL_MAX_LOG_MESSAGE 4096")]
-        public const int SDL_MAX_LOG_MESSAGE = 4096;
     }
 }
