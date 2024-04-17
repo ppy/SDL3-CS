@@ -48,13 +48,13 @@ jobs:
         run: dotnet build SDL3-CS.Android.slnf -c Release
 
       - name: Pack
-        run: dotnet pack SDL3-CS.Android/SDL3-CS.Android.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD)
+        run: dotnet pack SDL3-CS.Android\SDL3-CS.Android.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD)
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: SDL3-CS.Android
-          path: SDL3-CS.Android/bin/Release/ppy.*.nupkg
+          path: SDL3-CS.Android\bin\Release\ppy.*.nupkg
 
       - name: Publish tagged release to nuget.org
-        run: dotnet nuget push SDL3-CS.Android/bin/Release/ppy.*.nupkg -s https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}
+        run: dotnet nuget push SDL3-CS.Android\bin\Release\ppy.*.nupkg -s https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}
