@@ -11,7 +11,7 @@ namespace SDL3.SourceGeneration
         None,
 
         /// <summary>
-        /// Change <c>const char*</c> function parameters to <c>SDLUtf8String</c>.
+        /// Change <c>const char*</c> function parameters to <see cref="Helper.Utf8StringStructName"/>.
         /// </summary>
         ChangeParamsToUtf8String = 1 << 0,
 
