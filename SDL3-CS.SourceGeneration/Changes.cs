@@ -11,9 +11,9 @@ namespace SDL3.SourceGeneration
         None,
 
         /// <summary>
-        /// Change <c>const char*</c> function parameters to <c>ReadOnlySpan&lt;byte&gt;</c>.
+        /// Change <c>const char*</c> function parameters to <see cref="Helper.Utf8StringStructName"/>.
         /// </summary>
-        ChangeParamsToReadOnlySpan = 1 << 0,
+        ChangeParamsToUtf8String = 1 << 0,
 
         /// <summary>
         /// Change <c>char *</c> or <c>const char *</c> return type to <see cref="string"/>.

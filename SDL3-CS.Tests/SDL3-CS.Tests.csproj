@@ -7,7 +7,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0"/>
+    <PackageReference Include="NUnit" Version="3.13.3"/>
+    <PackageReference Include="NUnit3TestAdapter" Version="4.4.2"/>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SDL3-CS\SDL3-CS.csproj"/>
