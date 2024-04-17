@@ -59,9 +59,6 @@ namespace SDL
         public static extern SDL_TouchDeviceType SDL_GetTouchDeviceType(SDL_TouchID touchID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetNumTouchFingers(SDL_TouchID touchID);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Finger* SDL_GetTouchFinger(SDL_TouchID touchID, int index);
+        public static extern SDL_Finger** SDL_GetTouchFingers(SDL_TouchID touchID, int* count);
     }
 }
