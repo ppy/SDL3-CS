@@ -48,5 +48,7 @@ namespace SDL
 
             return new Utf8String(raw);
         }
+
+        internal ref readonly byte GetPinnableReference() => ref Raw.GetPinnableReference();
     }
 }
