@@ -19,6 +19,7 @@ namespace SDL3.Tests
         [TestCase(null, -1)]
         [TestCase("", 1)]
         [TestCase("\0", 1)]
+        [TestCase("test", 5)]
         [TestCase("test\0", 5)]
         [TestCase("test\0test", 10)]
         [TestCase("test\0test\0", 10)]
