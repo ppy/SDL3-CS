@@ -14,6 +14,7 @@ namespace SDL3.Tests
         {
             checkNull(null);
             checkNull(default);
+            checkNull(new Utf8String()); // don't do this in actual code
         }
 
         [TestCase(null, -1)]
