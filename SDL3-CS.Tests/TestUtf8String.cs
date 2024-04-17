@@ -10,7 +10,7 @@ namespace SDL3.Tests
     public class TestUtf8String
     {
         [Test]
-        public void TestNullImplicitConversion()
+        public void TestNoImplicitConversion()
         {
             checkNull(null);
             checkNull(default);
