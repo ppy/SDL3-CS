@@ -3,10 +3,9 @@
 
 using System.Diagnostics;
 using System.Text;
-using SDL;
 using static SDL.SDL3;
 
-namespace SDL3.Tests
+namespace SDL.Tests
 {
     public static class Program
     {

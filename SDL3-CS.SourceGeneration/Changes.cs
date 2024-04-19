@@ -3,7 +3,7 @@
 
 using System;
 
-namespace SDL3.SourceGeneration
+namespace SDL.SourceGeneration
 {
     [Flags]
     public enum Changes

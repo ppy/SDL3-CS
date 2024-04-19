@@ -3,10 +3,9 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using SDL;
 using static SDL.SDL3;
 
-namespace SDL3.Tests
+namespace SDL.Tests
 {
     public sealed unsafe class MyWindow : IDisposable
     {

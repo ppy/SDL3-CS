@@ -3,7 +3,7 @@
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SDL3.SourceGeneration
+namespace SDL.SourceGeneration
 {
     public record GeneratedMethod
     {
