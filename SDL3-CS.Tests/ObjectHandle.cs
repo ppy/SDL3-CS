@@ -5,7 +5,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace SDL3.Tests
+namespace SDL.Tests
 {
     /// <summary>
     /// Wrapper on <see cref="GCHandle" /> that supports the <see cref="IDisposable" /> pattern.
