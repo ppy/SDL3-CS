@@ -10,7 +10,6 @@
     <IsRoslynComponent>true</IsRoslynComponent>
 
     <RootNamespace>SDL3.SourceGeneration</RootNamespace>
-    <PackageId>SDL3.SourceGeneration</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
