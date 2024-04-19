@@ -11,7 +11,8 @@ namespace SDL.Tests
     {
         public static void Main()
         {
-            Console.OutputEncoding = Encoding.UTF8;
+            if (OperatingSystem.IsWindows())
+                Console.OutputEncoding = Encoding.UTF8;
 
             SDL_SetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4, "null byte \0 in string"u8);
             Debug.Assert(SDL_GetHint(SDL_HINT_WINDOWS_CLOSE_ON_ALT_F4) == "null byte ");
