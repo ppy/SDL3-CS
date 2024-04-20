@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SDL3.SourceGeneration
+namespace SDL.SourceGeneration
 {
     public class UnfriendlyMethodFinder : ISyntaxReceiver
     {

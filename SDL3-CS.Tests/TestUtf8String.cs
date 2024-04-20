@@ -2,9 +2,8 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using NUnit.Framework;
-using SDL;
 
-namespace SDL3.Tests
+namespace SDL.Tests
 {
     [TestFixture]
     public class TestUtf8String
