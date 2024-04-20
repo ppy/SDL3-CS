@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS.Android", "SDL3-CS.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS.Tests.Android", "SDL3-CS.Tests.Android\SDL3-CS.Tests.Android.csproj", "{E8469DA5-E437-4287-9E2A-8B8F4DC21C1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS.Tests.iOS", "SDL3-CS.Tests.iOS\SDL3-CS.Tests.iOS.csproj", "{CCDD11EE-D552-4925-8B68-351AC9317589}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS.Tests.Desktop", "SDL3-CS.Tests.Desktop\SDL3-CS.Tests.Desktop.csproj", "{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,14 @@ Global
 		{E8469DA5-E437-4287-9E2A-8B8F4DC21C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8469DA5-E437-4287-9E2A-8B8F4DC21C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8469DA5-E437-4287-9E2A-8B8F4DC21C1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCDD11EE-D552-4925-8B68-351AC9317589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCDD11EE-D552-4925-8B68-351AC9317589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCDD11EE-D552-4925-8B68-351AC9317589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCDD11EE-D552-4925-8B68-351AC9317589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

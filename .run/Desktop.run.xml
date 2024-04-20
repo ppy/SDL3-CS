@@ -1,13 +1,13 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="SDL3-CS.Tests" type="DotNetProject" factoryName=".NET Project">
-    <option name="EXE_PATH" value="$PROJECT_DIR$/SDL3-CS.Tests/bin/Debug/net8.0/SDL3-CS.Tests" />
+  <configuration default="false" name="Desktop" type="DotNetProject" factoryName=".NET Project">
+    <option name="EXE_PATH" value="$PROJECT_DIR$/SDL3-CS.Tests.Desktop/bin/Debug/net8.0/SDL3-CS.Tests.Desktop" />
     <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SDL3-CS.Tests/bin/Debug/net8.0" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SDL3-CS.Tests.Desktop/bin/Debug/net8.0" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
     <option name="RUNTIME_ARGUMENTS" value="" />
-    <option name="PROJECT_PATH" value="$PROJECT_DIR$/SDL3-CS.Tests/SDL3-CS.Tests.csproj" />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/SDL3-CS.Tests.Desktop/SDL3-CS.Tests.Desktop.csproj" />
     <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
     <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
     <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
