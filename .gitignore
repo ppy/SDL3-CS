@@ -323,6 +323,7 @@ fabric.properties
 **/.idea/**/dynamic.xml
 **/.idea/**/uiDesigner.xml
 **/.idea/**/dbnavigator.xml
+**/.idea/**/deploymentTargetDropDown.xml
 
 # Rider
 # Rider auto-generates .iml files, and contentModel.xml
