@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0-ios</TargetFramework>
-    <RootNamespace>SDL3.Tests.iOS</RootNamespace>
+    <RootNamespace>SDL.Tests.iOS</RootNamespace>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
