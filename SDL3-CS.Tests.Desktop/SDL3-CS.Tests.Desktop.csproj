@@ -12,7 +12,7 @@
     <ProjectReference Include="..\SDL3-CS.Tests\SDL3-CS.Tests.csproj"/>
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(RuntimeIdentifier)' == '' ">
+  <PropertyGroup>
     <SDLArch>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</SDLArch>
 
     <!-- If RID is specified -->
