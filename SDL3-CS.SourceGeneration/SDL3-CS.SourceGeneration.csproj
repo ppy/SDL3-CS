@@ -9,8 +9,7 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsRoslynComponent>true</IsRoslynComponent>
 
-    <RootNamespace>SDL3.SourceGeneration</RootNamespace>
-    <PackageId>SDL3.SourceGeneration</PackageId>
+    <RootNamespace>SDL.SourceGeneration</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
