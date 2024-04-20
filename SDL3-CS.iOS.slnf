@@ -4,9 +4,8 @@
     "projects": [
       "SDL3-CS\\SDL3-CS.csproj",
       "SDL3-CS.SourceGeneration\\SDL3-CS.SourceGeneration.csproj",
-      "SDL3-CS.Android\\SDL3-CS.Android.csproj",
       "SDL3-CS.Tests\\SDL3-CS.Tests.csproj",
-      "SDL3-CS.Tests.Android\\SDL3-CS.Tests.Android.csproj"
+      "SDL3-CS.Tests.iOS\\SDL3-CS.Tests.iOS.csproj"
     ]
   }
 }
