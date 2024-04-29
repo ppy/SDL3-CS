@@ -44,13 +44,13 @@ namespace SDL
     public static partial class SDL3
     {
         [Macro]
-        public static int SDL_WINDOWPOS_UNDEFINED_DISPLAY(int X) => (int)(SDL_WINDOWPOS_UNDEFINED_MASK | (X));
+        public static int SDL_WINDOWPOS_UNDEFINED_DISPLAY(SDL_DisplayID X) => (int)(SDL_WINDOWPOS_UNDEFINED_MASK | (uint)X);
 
         [Macro]
         public static bool SDL_WINDOWPOS_ISUNDEFINED(int X) => (((X) & 0xFFFF0000) == SDL_WINDOWPOS_UNDEFINED_MASK);
 
         [Macro]
-        public static int SDL_WINDOWPOS_CENTERED_DISPLAY(int X) => (int)(SDL_WINDOWPOS_CENTERED_MASK | (X));
+        public static int SDL_WINDOWPOS_CENTERED_DISPLAY(SDL_DisplayID X) => (int)(SDL_WINDOWPOS_CENTERED_MASK | (uint)X);
 
         [Macro]
         public static bool SDL_WINDOWPOS_ISCENTERED(int X) => (((X) & 0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK);
