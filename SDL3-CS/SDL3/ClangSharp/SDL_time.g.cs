@@ -23,7 +23,6 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -65,6 +64,9 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_GetDateTimeLocalePreferences(SDL_DateFormat* dateFormat, SDL_TimeFormat* timeFormat);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetCurrentTime(SDL_Time* ticks);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -87,11 +89,5 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetDayOfWeek(int year, int month, int day);
-
-        [NativeTypeName("#define SDL_PROP_GLOBAL_SYSTEM_DATE_FORMAT_NUMBER \"SDL.time.date_format\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_SYSTEM_DATE_FORMAT_NUMBER => "SDL.time.date_format"u8;
-
-        [NativeTypeName("#define SDL_PROP_GLOBAL_SYSTEM_TIME_FORMAT_NUMBER \"SDL.time.time_format\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_SYSTEM_TIME_FORMAT_NUMBER => "SDL.time.time_format"u8;
     }
 }

@@ -27,16 +27,6 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public enum SDL_BlendMode
-    {
-        SDL_BLENDMODE_NONE = 0x00000000,
-        SDL_BLENDMODE_BLEND = 0x00000001,
-        SDL_BLENDMODE_ADD = 0x00000002,
-        SDL_BLENDMODE_MOD = 0x00000004,
-        SDL_BLENDMODE_MUL = 0x00000008,
-        SDL_BLENDMODE_INVALID = 0x7FFFFFFF,
-    }
-
     public enum SDL_BlendOperation
     {
         SDL_BLENDOPERATION_ADD = 0x1,
@@ -64,5 +54,23 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_BlendMode SDL_ComposeCustomBlendMode(SDL_BlendFactor srcColorFactor, SDL_BlendFactor dstColorFactor, SDL_BlendOperation colorOperation, SDL_BlendFactor srcAlphaFactor, SDL_BlendFactor dstAlphaFactor, SDL_BlendOperation alphaOperation);
+
+        [NativeTypeName("#define SDL_BLENDMODE_NONE 0x00000000u")]
+        public const uint SDL_BLENDMODE_NONE = 0x00000000U;
+
+        [NativeTypeName("#define SDL_BLENDMODE_BLEND 0x00000001u")]
+        public const uint SDL_BLENDMODE_BLEND = 0x00000001U;
+
+        [NativeTypeName("#define SDL_BLENDMODE_ADD 0x00000002u")]
+        public const uint SDL_BLENDMODE_ADD = 0x00000002U;
+
+        [NativeTypeName("#define SDL_BLENDMODE_MOD 0x00000004u")]
+        public const uint SDL_BLENDMODE_MOD = 0x00000004U;
+
+        [NativeTypeName("#define SDL_BLENDMODE_MUL 0x00000008u")]
+        public const uint SDL_BLENDMODE_MUL = 0x00000008U;
+
+        [NativeTypeName("#define SDL_BLENDMODE_INVALID 0x7FFFFFFFu")]
+        public const uint SDL_BLENDMODE_INVALID = 0x7FFFFFFFU;
     }
 }

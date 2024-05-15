@@ -27,29 +27,19 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public enum SDL_errorcode
-    {
-        SDL_ENOMEM,
-        SDL_EFREAD,
-        SDL_EFWRITE,
-        SDL_EFSEEK,
-        SDL_UNSUPPORTED,
-        SDL_LASTERROR,
-    }
-
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetError([NativeTypeName("const char *")] byte* fmt, __arglist);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_OutOfMemory();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetError", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetError();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_ClearError();
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_Error(SDL_errorcode code);
+        public static extern int SDL_ClearError();
     }
 }

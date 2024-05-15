@@ -1,9 +1,0 @@
-# Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
-# See the LICENCE file in the repository root for full licence text.
-
---with-attribute
-SDL_Keymod=Flags
-
-# Remap the C `SDL_KeyCode` enum to the `SDL_Keycode` typedef
---remap
-SDL_KeyCode=SDL_Keycode

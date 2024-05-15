@@ -14,7 +14,7 @@ namespace SDL
 
     [Flags]
     [Typedef]
-    public enum SDL_WindowFlags : uint
+    public enum SDL_WindowFlags : UInt64
     {
         SDL_WINDOW_FULLSCREEN = SDL3.SDL_WINDOW_FULLSCREEN,
         SDL_WINDOW_OPENGL = SDL3.SDL_WINDOW_OPENGL,

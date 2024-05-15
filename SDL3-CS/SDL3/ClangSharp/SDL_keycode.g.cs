@@ -23,285 +23,796 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
 using static SDL.SDL_Scancode;
 
 namespace SDL
 {
-    public enum SDL_Keycode
-    {
-        SDLK_UNKNOWN = 0,
-        SDLK_RETURN = '\r',
-        SDLK_ESCAPE = '',
-        SDLK_BACKSPACE = '',
-        SDLK_TAB = '\t',
-        SDLK_SPACE = ' ',
-        SDLK_EXCLAIM = '!',
-        SDLK_QUOTEDBL = '"',
-        SDLK_HASH = '#',
-        SDLK_PERCENT = '%',
-        SDLK_DOLLAR = '$',
-        SDLK_AMPERSAND = '&',
-        SDLK_QUOTE = '\'',
-        SDLK_LEFTPAREN = '(',
-        SDLK_RIGHTPAREN = ')',
-        SDLK_ASTERISK = '*',
-        SDLK_PLUS = '+',
-        SDLK_COMMA = ',',
-        SDLK_MINUS = '-',
-        SDLK_PERIOD = '.',
-        SDLK_SLASH = '/',
-        SDLK_0 = '0',
-        SDLK_1 = '1',
-        SDLK_2 = '2',
-        SDLK_3 = '3',
-        SDLK_4 = '4',
-        SDLK_5 = '5',
-        SDLK_6 = '6',
-        SDLK_7 = '7',
-        SDLK_8 = '8',
-        SDLK_9 = '9',
-        SDLK_COLON = ':',
-        SDLK_SEMICOLON = ';',
-        SDLK_LESS = '<',
-        SDLK_EQUALS = '=',
-        SDLK_GREATER = '>',
-        SDLK_QUESTION = '?',
-        SDLK_AT = '@',
-        SDLK_LEFTBRACKET = '[',
-        SDLK_BACKSLASH = '\\',
-        SDLK_RIGHTBRACKET = ']',
-        SDLK_CARET = '^',
-        SDLK_UNDERSCORE = '_',
-        SDLK_BACKQUOTE = '`',
-        SDLK_a = 'a',
-        SDLK_b = 'b',
-        SDLK_c = 'c',
-        SDLK_d = 'd',
-        SDLK_e = 'e',
-        SDLK_f = 'f',
-        SDLK_g = 'g',
-        SDLK_h = 'h',
-        SDLK_i = 'i',
-        SDLK_j = 'j',
-        SDLK_k = 'k',
-        SDLK_l = 'l',
-        SDLK_m = 'm',
-        SDLK_n = 'n',
-        SDLK_o = 'o',
-        SDLK_p = 'p',
-        SDLK_q = 'q',
-        SDLK_r = 'r',
-        SDLK_s = 's',
-        SDLK_t = 't',
-        SDLK_u = 'u',
-        SDLK_v = 'v',
-        SDLK_w = 'w',
-        SDLK_x = 'x',
-        SDLK_y = 'y',
-        SDLK_z = 'z',
-        SDLK_CAPSLOCK = (SDL_SCANCODE_CAPSLOCK | (1 << 30)),
-        SDLK_F1 = (SDL_SCANCODE_F1 | (1 << 30)),
-        SDLK_F2 = (SDL_SCANCODE_F2 | (1 << 30)),
-        SDLK_F3 = (SDL_SCANCODE_F3 | (1 << 30)),
-        SDLK_F4 = (SDL_SCANCODE_F4 | (1 << 30)),
-        SDLK_F5 = (SDL_SCANCODE_F5 | (1 << 30)),
-        SDLK_F6 = (SDL_SCANCODE_F6 | (1 << 30)),
-        SDLK_F7 = (SDL_SCANCODE_F7 | (1 << 30)),
-        SDLK_F8 = (SDL_SCANCODE_F8 | (1 << 30)),
-        SDLK_F9 = (SDL_SCANCODE_F9 | (1 << 30)),
-        SDLK_F10 = (SDL_SCANCODE_F10 | (1 << 30)),
-        SDLK_F11 = (SDL_SCANCODE_F11 | (1 << 30)),
-        SDLK_F12 = (SDL_SCANCODE_F12 | (1 << 30)),
-        SDLK_PRINTSCREEN = (SDL_SCANCODE_PRINTSCREEN | (1 << 30)),
-        SDLK_SCROLLLOCK = (SDL_SCANCODE_SCROLLLOCK | (1 << 30)),
-        SDLK_PAUSE = (SDL_SCANCODE_PAUSE | (1 << 30)),
-        SDLK_INSERT = (SDL_SCANCODE_INSERT | (1 << 30)),
-        SDLK_HOME = (SDL_SCANCODE_HOME | (1 << 30)),
-        SDLK_PAGEUP = (SDL_SCANCODE_PAGEUP | (1 << 30)),
-        SDLK_DELETE = '',
-        SDLK_END = (SDL_SCANCODE_END | (1 << 30)),
-        SDLK_PAGEDOWN = (SDL_SCANCODE_PAGEDOWN | (1 << 30)),
-        SDLK_RIGHT = (SDL_SCANCODE_RIGHT | (1 << 30)),
-        SDLK_LEFT = (SDL_SCANCODE_LEFT | (1 << 30)),
-        SDLK_DOWN = (SDL_SCANCODE_DOWN | (1 << 30)),
-        SDLK_UP = (SDL_SCANCODE_UP | (1 << 30)),
-        SDLK_NUMLOCKCLEAR = (SDL_SCANCODE_NUMLOCKCLEAR | (1 << 30)),
-        SDLK_KP_DIVIDE = (SDL_SCANCODE_KP_DIVIDE | (1 << 30)),
-        SDLK_KP_MULTIPLY = (SDL_SCANCODE_KP_MULTIPLY | (1 << 30)),
-        SDLK_KP_MINUS = (SDL_SCANCODE_KP_MINUS | (1 << 30)),
-        SDLK_KP_PLUS = (SDL_SCANCODE_KP_PLUS | (1 << 30)),
-        SDLK_KP_ENTER = (SDL_SCANCODE_KP_ENTER | (1 << 30)),
-        SDLK_KP_1 = (SDL_SCANCODE_KP_1 | (1 << 30)),
-        SDLK_KP_2 = (SDL_SCANCODE_KP_2 | (1 << 30)),
-        SDLK_KP_3 = (SDL_SCANCODE_KP_3 | (1 << 30)),
-        SDLK_KP_4 = (SDL_SCANCODE_KP_4 | (1 << 30)),
-        SDLK_KP_5 = (SDL_SCANCODE_KP_5 | (1 << 30)),
-        SDLK_KP_6 = (SDL_SCANCODE_KP_6 | (1 << 30)),
-        SDLK_KP_7 = (SDL_SCANCODE_KP_7 | (1 << 30)),
-        SDLK_KP_8 = (SDL_SCANCODE_KP_8 | (1 << 30)),
-        SDLK_KP_9 = (SDL_SCANCODE_KP_9 | (1 << 30)),
-        SDLK_KP_0 = (SDL_SCANCODE_KP_0 | (1 << 30)),
-        SDLK_KP_PERIOD = (SDL_SCANCODE_KP_PERIOD | (1 << 30)),
-        SDLK_APPLICATION = (SDL_SCANCODE_APPLICATION | (1 << 30)),
-        SDLK_POWER = (SDL_SCANCODE_POWER | (1 << 30)),
-        SDLK_KP_EQUALS = (SDL_SCANCODE_KP_EQUALS | (1 << 30)),
-        SDLK_F13 = (SDL_SCANCODE_F13 | (1 << 30)),
-        SDLK_F14 = (SDL_SCANCODE_F14 | (1 << 30)),
-        SDLK_F15 = (SDL_SCANCODE_F15 | (1 << 30)),
-        SDLK_F16 = (SDL_SCANCODE_F16 | (1 << 30)),
-        SDLK_F17 = (SDL_SCANCODE_F17 | (1 << 30)),
-        SDLK_F18 = (SDL_SCANCODE_F18 | (1 << 30)),
-        SDLK_F19 = (SDL_SCANCODE_F19 | (1 << 30)),
-        SDLK_F20 = (SDL_SCANCODE_F20 | (1 << 30)),
-        SDLK_F21 = (SDL_SCANCODE_F21 | (1 << 30)),
-        SDLK_F22 = (SDL_SCANCODE_F22 | (1 << 30)),
-        SDLK_F23 = (SDL_SCANCODE_F23 | (1 << 30)),
-        SDLK_F24 = (SDL_SCANCODE_F24 | (1 << 30)),
-        SDLK_EXECUTE = (SDL_SCANCODE_EXECUTE | (1 << 30)),
-        SDLK_HELP = (SDL_SCANCODE_HELP | (1 << 30)),
-        SDLK_MENU = (SDL_SCANCODE_MENU | (1 << 30)),
-        SDLK_SELECT = (SDL_SCANCODE_SELECT | (1 << 30)),
-        SDLK_STOP = (SDL_SCANCODE_STOP | (1 << 30)),
-        SDLK_AGAIN = (SDL_SCANCODE_AGAIN | (1 << 30)),
-        SDLK_UNDO = (SDL_SCANCODE_UNDO | (1 << 30)),
-        SDLK_CUT = (SDL_SCANCODE_CUT | (1 << 30)),
-        SDLK_COPY = (SDL_SCANCODE_COPY | (1 << 30)),
-        SDLK_PASTE = (SDL_SCANCODE_PASTE | (1 << 30)),
-        SDLK_FIND = (SDL_SCANCODE_FIND | (1 << 30)),
-        SDLK_MUTE = (SDL_SCANCODE_MUTE | (1 << 30)),
-        SDLK_VOLUMEUP = (SDL_SCANCODE_VOLUMEUP | (1 << 30)),
-        SDLK_VOLUMEDOWN = (SDL_SCANCODE_VOLUMEDOWN | (1 << 30)),
-        SDLK_KP_COMMA = (SDL_SCANCODE_KP_COMMA | (1 << 30)),
-        SDLK_KP_EQUALSAS400 = (SDL_SCANCODE_KP_EQUALSAS400 | (1 << 30)),
-        SDLK_ALTERASE = (SDL_SCANCODE_ALTERASE | (1 << 30)),
-        SDLK_SYSREQ = (SDL_SCANCODE_SYSREQ | (1 << 30)),
-        SDLK_CANCEL = (SDL_SCANCODE_CANCEL | (1 << 30)),
-        SDLK_CLEAR = (SDL_SCANCODE_CLEAR | (1 << 30)),
-        SDLK_PRIOR = (SDL_SCANCODE_PRIOR | (1 << 30)),
-        SDLK_RETURN2 = (SDL_SCANCODE_RETURN2 | (1 << 30)),
-        SDLK_SEPARATOR = (SDL_SCANCODE_SEPARATOR | (1 << 30)),
-        SDLK_OUT = (SDL_SCANCODE_OUT | (1 << 30)),
-        SDLK_OPER = (SDL_SCANCODE_OPER | (1 << 30)),
-        SDLK_CLEARAGAIN = (SDL_SCANCODE_CLEARAGAIN | (1 << 30)),
-        SDLK_CRSEL = (SDL_SCANCODE_CRSEL | (1 << 30)),
-        SDLK_EXSEL = (SDL_SCANCODE_EXSEL | (1 << 30)),
-        SDLK_KP_00 = (SDL_SCANCODE_KP_00 | (1 << 30)),
-        SDLK_KP_000 = (SDL_SCANCODE_KP_000 | (1 << 30)),
-        SDLK_THOUSANDSSEPARATOR = (SDL_SCANCODE_THOUSANDSSEPARATOR | (1 << 30)),
-        SDLK_DECIMALSEPARATOR = (SDL_SCANCODE_DECIMALSEPARATOR | (1 << 30)),
-        SDLK_CURRENCYUNIT = (SDL_SCANCODE_CURRENCYUNIT | (1 << 30)),
-        SDLK_CURRENCYSUBUNIT = (SDL_SCANCODE_CURRENCYSUBUNIT | (1 << 30)),
-        SDLK_KP_LEFTPAREN = (SDL_SCANCODE_KP_LEFTPAREN | (1 << 30)),
-        SDLK_KP_RIGHTPAREN = (SDL_SCANCODE_KP_RIGHTPAREN | (1 << 30)),
-        SDLK_KP_LEFTBRACE = (SDL_SCANCODE_KP_LEFTBRACE | (1 << 30)),
-        SDLK_KP_RIGHTBRACE = (SDL_SCANCODE_KP_RIGHTBRACE | (1 << 30)),
-        SDLK_KP_TAB = (SDL_SCANCODE_KP_TAB | (1 << 30)),
-        SDLK_KP_BACKSPACE = (SDL_SCANCODE_KP_BACKSPACE | (1 << 30)),
-        SDLK_KP_A = (SDL_SCANCODE_KP_A | (1 << 30)),
-        SDLK_KP_B = (SDL_SCANCODE_KP_B | (1 << 30)),
-        SDLK_KP_C = (SDL_SCANCODE_KP_C | (1 << 30)),
-        SDLK_KP_D = (SDL_SCANCODE_KP_D | (1 << 30)),
-        SDLK_KP_E = (SDL_SCANCODE_KP_E | (1 << 30)),
-        SDLK_KP_F = (SDL_SCANCODE_KP_F | (1 << 30)),
-        SDLK_KP_XOR = (SDL_SCANCODE_KP_XOR | (1 << 30)),
-        SDLK_KP_POWER = (SDL_SCANCODE_KP_POWER | (1 << 30)),
-        SDLK_KP_PERCENT = (SDL_SCANCODE_KP_PERCENT | (1 << 30)),
-        SDLK_KP_LESS = (SDL_SCANCODE_KP_LESS | (1 << 30)),
-        SDLK_KP_GREATER = (SDL_SCANCODE_KP_GREATER | (1 << 30)),
-        SDLK_KP_AMPERSAND = (SDL_SCANCODE_KP_AMPERSAND | (1 << 30)),
-        SDLK_KP_DBLAMPERSAND = (SDL_SCANCODE_KP_DBLAMPERSAND | (1 << 30)),
-        SDLK_KP_VERTICALBAR = (SDL_SCANCODE_KP_VERTICALBAR | (1 << 30)),
-        SDLK_KP_DBLVERTICALBAR = (SDL_SCANCODE_KP_DBLVERTICALBAR | (1 << 30)),
-        SDLK_KP_COLON = (SDL_SCANCODE_KP_COLON | (1 << 30)),
-        SDLK_KP_HASH = (SDL_SCANCODE_KP_HASH | (1 << 30)),
-        SDLK_KP_SPACE = (SDL_SCANCODE_KP_SPACE | (1 << 30)),
-        SDLK_KP_AT = (SDL_SCANCODE_KP_AT | (1 << 30)),
-        SDLK_KP_EXCLAM = (SDL_SCANCODE_KP_EXCLAM | (1 << 30)),
-        SDLK_KP_MEMSTORE = (SDL_SCANCODE_KP_MEMSTORE | (1 << 30)),
-        SDLK_KP_MEMRECALL = (SDL_SCANCODE_KP_MEMRECALL | (1 << 30)),
-        SDLK_KP_MEMCLEAR = (SDL_SCANCODE_KP_MEMCLEAR | (1 << 30)),
-        SDLK_KP_MEMADD = (SDL_SCANCODE_KP_MEMADD | (1 << 30)),
-        SDLK_KP_MEMSUBTRACT = (SDL_SCANCODE_KP_MEMSUBTRACT | (1 << 30)),
-        SDLK_KP_MEMMULTIPLY = (SDL_SCANCODE_KP_MEMMULTIPLY | (1 << 30)),
-        SDLK_KP_MEMDIVIDE = (SDL_SCANCODE_KP_MEMDIVIDE | (1 << 30)),
-        SDLK_KP_PLUSMINUS = (SDL_SCANCODE_KP_PLUSMINUS | (1 << 30)),
-        SDLK_KP_CLEAR = (SDL_SCANCODE_KP_CLEAR | (1 << 30)),
-        SDLK_KP_CLEARENTRY = (SDL_SCANCODE_KP_CLEARENTRY | (1 << 30)),
-        SDLK_KP_BINARY = (SDL_SCANCODE_KP_BINARY | (1 << 30)),
-        SDLK_KP_OCTAL = (SDL_SCANCODE_KP_OCTAL | (1 << 30)),
-        SDLK_KP_DECIMAL = (SDL_SCANCODE_KP_DECIMAL | (1 << 30)),
-        SDLK_KP_HEXADECIMAL = (SDL_SCANCODE_KP_HEXADECIMAL | (1 << 30)),
-        SDLK_LCTRL = (SDL_SCANCODE_LCTRL | (1 << 30)),
-        SDLK_LSHIFT = (SDL_SCANCODE_LSHIFT | (1 << 30)),
-        SDLK_LALT = (SDL_SCANCODE_LALT | (1 << 30)),
-        SDLK_LGUI = (SDL_SCANCODE_LGUI | (1 << 30)),
-        SDLK_RCTRL = (SDL_SCANCODE_RCTRL | (1 << 30)),
-        SDLK_RSHIFT = (SDL_SCANCODE_RSHIFT | (1 << 30)),
-        SDLK_RALT = (SDL_SCANCODE_RALT | (1 << 30)),
-        SDLK_RGUI = (SDL_SCANCODE_RGUI | (1 << 30)),
-        SDLK_MODE = (SDL_SCANCODE_MODE | (1 << 30)),
-        SDLK_AUDIONEXT = (SDL_SCANCODE_AUDIONEXT | (1 << 30)),
-        SDLK_AUDIOPREV = (SDL_SCANCODE_AUDIOPREV | (1 << 30)),
-        SDLK_AUDIOSTOP = (SDL_SCANCODE_AUDIOSTOP | (1 << 30)),
-        SDLK_AUDIOPLAY = (SDL_SCANCODE_AUDIOPLAY | (1 << 30)),
-        SDLK_AUDIOMUTE = (SDL_SCANCODE_AUDIOMUTE | (1 << 30)),
-        SDLK_MEDIASELECT = (SDL_SCANCODE_MEDIASELECT | (1 << 30)),
-        SDLK_WWW = (SDL_SCANCODE_WWW | (1 << 30)),
-        SDLK_MAIL = (SDL_SCANCODE_MAIL | (1 << 30)),
-        SDLK_CALCULATOR = (SDL_SCANCODE_CALCULATOR | (1 << 30)),
-        SDLK_COMPUTER = (SDL_SCANCODE_COMPUTER | (1 << 30)),
-        SDLK_AC_SEARCH = (SDL_SCANCODE_AC_SEARCH | (1 << 30)),
-        SDLK_AC_HOME = (SDL_SCANCODE_AC_HOME | (1 << 30)),
-        SDLK_AC_BACK = (SDL_SCANCODE_AC_BACK | (1 << 30)),
-        SDLK_AC_FORWARD = (SDL_SCANCODE_AC_FORWARD | (1 << 30)),
-        SDLK_AC_STOP = (SDL_SCANCODE_AC_STOP | (1 << 30)),
-        SDLK_AC_REFRESH = (SDL_SCANCODE_AC_REFRESH | (1 << 30)),
-        SDLK_AC_BOOKMARKS = (SDL_SCANCODE_AC_BOOKMARKS | (1 << 30)),
-        SDLK_BRIGHTNESSDOWN = (SDL_SCANCODE_BRIGHTNESSDOWN | (1 << 30)),
-        SDLK_BRIGHTNESSUP = (SDL_SCANCODE_BRIGHTNESSUP | (1 << 30)),
-        SDLK_DISPLAYSWITCH = (SDL_SCANCODE_DISPLAYSWITCH | (1 << 30)),
-        SDLK_KBDILLUMTOGGLE = (SDL_SCANCODE_KBDILLUMTOGGLE | (1 << 30)),
-        SDLK_KBDILLUMDOWN = (SDL_SCANCODE_KBDILLUMDOWN | (1 << 30)),
-        SDLK_KBDILLUMUP = (SDL_SCANCODE_KBDILLUMUP | (1 << 30)),
-        SDLK_EJECT = (SDL_SCANCODE_EJECT | (1 << 30)),
-        SDLK_SLEEP = (SDL_SCANCODE_SLEEP | (1 << 30)),
-        SDLK_APP1 = (SDL_SCANCODE_APP1 | (1 << 30)),
-        SDLK_APP2 = (SDL_SCANCODE_APP2 | (1 << 30)),
-        SDLK_AUDIOREWIND = (SDL_SCANCODE_AUDIOREWIND | (1 << 30)),
-        SDLK_AUDIOFASTFORWARD = (SDL_SCANCODE_AUDIOFASTFORWARD | (1 << 30)),
-        SDLK_SOFTLEFT = (SDL_SCANCODE_SOFTLEFT | (1 << 30)),
-        SDLK_SOFTRIGHT = (SDL_SCANCODE_SOFTRIGHT | (1 << 30)),
-        SDLK_CALL = (SDL_SCANCODE_CALL | (1 << 30)),
-        SDLK_ENDCALL = (SDL_SCANCODE_ENDCALL | (1 << 30)),
-    }
-
-    [Flags]
-    public enum SDL_Keymod
-    {
-        SDL_KMOD_NONE = 0x0000,
-        SDL_KMOD_LSHIFT = 0x0001,
-        SDL_KMOD_RSHIFT = 0x0002,
-        SDL_KMOD_LCTRL = 0x0040,
-        SDL_KMOD_RCTRL = 0x0080,
-        SDL_KMOD_LALT = 0x0100,
-        SDL_KMOD_RALT = 0x0200,
-        SDL_KMOD_LGUI = 0x0400,
-        SDL_KMOD_RGUI = 0x0800,
-        SDL_KMOD_NUM = 0x1000,
-        SDL_KMOD_CAPS = 0x2000,
-        SDL_KMOD_MODE = 0x4000,
-        SDL_KMOD_SCROLL = 0x8000,
-        SDL_KMOD_CTRL = SDL_KMOD_LCTRL | SDL_KMOD_RCTRL,
-        SDL_KMOD_SHIFT = SDL_KMOD_LSHIFT | SDL_KMOD_RSHIFT,
-        SDL_KMOD_ALT = SDL_KMOD_LALT | SDL_KMOD_RALT,
-        SDL_KMOD_GUI = SDL_KMOD_LGUI | SDL_KMOD_RGUI,
-        SDL_KMOD_RESERVED = SDL_KMOD_SCROLL,
-    }
-
     public static partial class SDL3
     {
-        [NativeTypeName("#define SDLK_SCANCODE_MASK (1<<30)")]
-        public const int SDLK_SCANCODE_MASK = (1 << 30);
+        [NativeTypeName("#define SDLK_SCANCODE_MASK (1u<<30)")]
+        public const uint SDLK_SCANCODE_MASK = (1U << 30);
+
+        [NativeTypeName("#define SDLK_UNKNOWN 0")]
+        public const int SDLK_UNKNOWN = 0;
+
+        [NativeTypeName("#define SDLK_RETURN '\r'")]
+        public const byte SDLK_RETURN = (byte)('\r');
+
+        [NativeTypeName("#define SDLK_ESCAPE '\\x1B'")]
+        public const byte SDLK_ESCAPE = (byte)('');
+
+        [NativeTypeName("#define SDLK_BACKSPACE '\\b'")]
+        public const byte SDLK_BACKSPACE = (byte)('');
+
+        [NativeTypeName("#define SDLK_TAB '\t'")]
+        public const byte SDLK_TAB = (byte)('\t');
+
+        [NativeTypeName("#define SDLK_SPACE ' '")]
+        public const byte SDLK_SPACE = (byte)(' ');
+
+        [NativeTypeName("#define SDLK_EXCLAIM '!'")]
+        public const byte SDLK_EXCLAIM = (byte)('!');
+
+        [NativeTypeName("#define SDLK_DBLAPOSTROPHE '\"'")]
+        public const byte SDLK_DBLAPOSTROPHE = (byte)('"');
+
+        [NativeTypeName("#define SDLK_HASH '#'")]
+        public const byte SDLK_HASH = (byte)('#');
+
+        [NativeTypeName("#define SDLK_PERCENT '%'")]
+        public const byte SDLK_PERCENT = (byte)('%');
+
+        [NativeTypeName("#define SDLK_DOLLAR '$'")]
+        public const byte SDLK_DOLLAR = (byte)('$');
+
+        [NativeTypeName("#define SDLK_AMPERSAND '&'")]
+        public const byte SDLK_AMPERSAND = (byte)('&');
+
+        [NativeTypeName("#define SDLK_APOSTROPHE '\\''")]
+        public const byte SDLK_APOSTROPHE = (byte)('\'');
+
+        [NativeTypeName("#define SDLK_LEFTPAREN '('")]
+        public const byte SDLK_LEFTPAREN = (byte)('(');
+
+        [NativeTypeName("#define SDLK_RIGHTPAREN ')'")]
+        public const byte SDLK_RIGHTPAREN = (byte)(')');
+
+        [NativeTypeName("#define SDLK_ASTERISK '*'")]
+        public const byte SDLK_ASTERISK = (byte)('*');
+
+        [NativeTypeName("#define SDLK_PLUS '+'")]
+        public const byte SDLK_PLUS = (byte)('+');
+
+        [NativeTypeName("#define SDLK_COMMA ','")]
+        public const byte SDLK_COMMA = (byte)(',');
+
+        [NativeTypeName("#define SDLK_MINUS '-'")]
+        public const byte SDLK_MINUS = (byte)('-');
+
+        [NativeTypeName("#define SDLK_PERIOD '.'")]
+        public const byte SDLK_PERIOD = (byte)('.');
+
+        [NativeTypeName("#define SDLK_SLASH '/'")]
+        public const byte SDLK_SLASH = (byte)('/');
+
+        [NativeTypeName("#define SDLK_0 '0'")]
+        public const byte SDLK_0 = (byte)('0');
+
+        [NativeTypeName("#define SDLK_1 '1'")]
+        public const byte SDLK_1 = (byte)('1');
+
+        [NativeTypeName("#define SDLK_2 '2'")]
+        public const byte SDLK_2 = (byte)('2');
+
+        [NativeTypeName("#define SDLK_3 '3'")]
+        public const byte SDLK_3 = (byte)('3');
+
+        [NativeTypeName("#define SDLK_4 '4'")]
+        public const byte SDLK_4 = (byte)('4');
+
+        [NativeTypeName("#define SDLK_5 '5'")]
+        public const byte SDLK_5 = (byte)('5');
+
+        [NativeTypeName("#define SDLK_6 '6'")]
+        public const byte SDLK_6 = (byte)('6');
+
+        [NativeTypeName("#define SDLK_7 '7'")]
+        public const byte SDLK_7 = (byte)('7');
+
+        [NativeTypeName("#define SDLK_8 '8'")]
+        public const byte SDLK_8 = (byte)('8');
+
+        [NativeTypeName("#define SDLK_9 '9'")]
+        public const byte SDLK_9 = (byte)('9');
+
+        [NativeTypeName("#define SDLK_COLON ':'")]
+        public const byte SDLK_COLON = (byte)(':');
+
+        [NativeTypeName("#define SDLK_SEMICOLON ';'")]
+        public const byte SDLK_SEMICOLON = (byte)(';');
+
+        [NativeTypeName("#define SDLK_LESS '<'")]
+        public const byte SDLK_LESS = (byte)('<');
+
+        [NativeTypeName("#define SDLK_EQUALS '='")]
+        public const byte SDLK_EQUALS = (byte)('=');
+
+        [NativeTypeName("#define SDLK_GREATER '>'")]
+        public const byte SDLK_GREATER = (byte)('>');
+
+        [NativeTypeName("#define SDLK_QUESTION '?'")]
+        public const byte SDLK_QUESTION = (byte)('?');
+
+        [NativeTypeName("#define SDLK_AT '@'")]
+        public const byte SDLK_AT = (byte)('@');
+
+        [NativeTypeName("#define SDLK_LEFTBRACKET '['")]
+        public const byte SDLK_LEFTBRACKET = (byte)('[');
+
+        [NativeTypeName("#define SDLK_BACKSLASH '\\'")]
+        public const byte SDLK_BACKSLASH = (byte)('\\');
+
+        [NativeTypeName("#define SDLK_RIGHTBRACKET ']'")]
+        public const byte SDLK_RIGHTBRACKET = (byte)(']');
+
+        [NativeTypeName("#define SDLK_CARET '^'")]
+        public const byte SDLK_CARET = (byte)('^');
+
+        [NativeTypeName("#define SDLK_UNDERSCORE '_'")]
+        public const byte SDLK_UNDERSCORE = (byte)('_');
+
+        [NativeTypeName("#define SDLK_GRAVE '`'")]
+        public const byte SDLK_GRAVE = (byte)('`');
+
+        [NativeTypeName("#define SDLK_a 'a'")]
+        public const byte SDLK_a = (byte)('a');
+
+        [NativeTypeName("#define SDLK_b 'b'")]
+        public const byte SDLK_b = (byte)('b');
+
+        [NativeTypeName("#define SDLK_c 'c'")]
+        public const byte SDLK_c = (byte)('c');
+
+        [NativeTypeName("#define SDLK_d 'd'")]
+        public const byte SDLK_d = (byte)('d');
+
+        [NativeTypeName("#define SDLK_e 'e'")]
+        public const byte SDLK_e = (byte)('e');
+
+        [NativeTypeName("#define SDLK_f 'f'")]
+        public const byte SDLK_f = (byte)('f');
+
+        [NativeTypeName("#define SDLK_g 'g'")]
+        public const byte SDLK_g = (byte)('g');
+
+        [NativeTypeName("#define SDLK_h 'h'")]
+        public const byte SDLK_h = (byte)('h');
+
+        [NativeTypeName("#define SDLK_i 'i'")]
+        public const byte SDLK_i = (byte)('i');
+
+        [NativeTypeName("#define SDLK_j 'j'")]
+        public const byte SDLK_j = (byte)('j');
+
+        [NativeTypeName("#define SDLK_k 'k'")]
+        public const byte SDLK_k = (byte)('k');
+
+        [NativeTypeName("#define SDLK_l 'l'")]
+        public const byte SDLK_l = (byte)('l');
+
+        [NativeTypeName("#define SDLK_m 'm'")]
+        public const byte SDLK_m = (byte)('m');
+
+        [NativeTypeName("#define SDLK_n 'n'")]
+        public const byte SDLK_n = (byte)('n');
+
+        [NativeTypeName("#define SDLK_o 'o'")]
+        public const byte SDLK_o = (byte)('o');
+
+        [NativeTypeName("#define SDLK_p 'p'")]
+        public const byte SDLK_p = (byte)('p');
+
+        [NativeTypeName("#define SDLK_q 'q'")]
+        public const byte SDLK_q = (byte)('q');
+
+        [NativeTypeName("#define SDLK_r 'r'")]
+        public const byte SDLK_r = (byte)('r');
+
+        [NativeTypeName("#define SDLK_s 's'")]
+        public const byte SDLK_s = (byte)('s');
+
+        [NativeTypeName("#define SDLK_t 't'")]
+        public const byte SDLK_t = (byte)('t');
+
+        [NativeTypeName("#define SDLK_u 'u'")]
+        public const byte SDLK_u = (byte)('u');
+
+        [NativeTypeName("#define SDLK_v 'v'")]
+        public const byte SDLK_v = (byte)('v');
+
+        [NativeTypeName("#define SDLK_w 'w'")]
+        public const byte SDLK_w = (byte)('w');
+
+        [NativeTypeName("#define SDLK_x 'x'")]
+        public const byte SDLK_x = (byte)('x');
+
+        [NativeTypeName("#define SDLK_y 'y'")]
+        public const byte SDLK_y = (byte)('y');
+
+        [NativeTypeName("#define SDLK_z 'z'")]
+        public const byte SDLK_z = (byte)('z');
+
+        [NativeTypeName("#define SDLK_CAPSLOCK SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CAPSLOCK)")]
+        public const uint SDLK_CAPSLOCK = ((uint)(SDL_SCANCODE_CAPSLOCK) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F1 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F1)")]
+        public const uint SDLK_F1 = ((uint)(SDL_SCANCODE_F1) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F2 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F2)")]
+        public const uint SDLK_F2 = ((uint)(SDL_SCANCODE_F2) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F3 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F3)")]
+        public const uint SDLK_F3 = ((uint)(SDL_SCANCODE_F3) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F4 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F4)")]
+        public const uint SDLK_F4 = ((uint)(SDL_SCANCODE_F4) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F5 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F5)")]
+        public const uint SDLK_F5 = ((uint)(SDL_SCANCODE_F5) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F6 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F6)")]
+        public const uint SDLK_F6 = ((uint)(SDL_SCANCODE_F6) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F7 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F7)")]
+        public const uint SDLK_F7 = ((uint)(SDL_SCANCODE_F7) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F8 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F8)")]
+        public const uint SDLK_F8 = ((uint)(SDL_SCANCODE_F8) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F9 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F9)")]
+        public const uint SDLK_F9 = ((uint)(SDL_SCANCODE_F9) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F10 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F10)")]
+        public const uint SDLK_F10 = ((uint)(SDL_SCANCODE_F10) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F11 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F11)")]
+        public const uint SDLK_F11 = ((uint)(SDL_SCANCODE_F11) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F12 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F12)")]
+        public const uint SDLK_F12 = ((uint)(SDL_SCANCODE_F12) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_PRINTSCREEN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_PRINTSCREEN)")]
+        public const uint SDLK_PRINTSCREEN = ((uint)(SDL_SCANCODE_PRINTSCREEN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_SCROLLLOCK SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SCROLLLOCK)")]
+        public const uint SDLK_SCROLLLOCK = ((uint)(SDL_SCANCODE_SCROLLLOCK) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_PAUSE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_PAUSE)")]
+        public const uint SDLK_PAUSE = ((uint)(SDL_SCANCODE_PAUSE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_INSERT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_INSERT)")]
+        public const uint SDLK_INSERT = ((uint)(SDL_SCANCODE_INSERT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_HOME SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_HOME)")]
+        public const uint SDLK_HOME = ((uint)(SDL_SCANCODE_HOME) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_PAGEUP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_PAGEUP)")]
+        public const uint SDLK_PAGEUP = ((uint)(SDL_SCANCODE_PAGEUP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_DELETE '\\x7F'")]
+        public const byte SDLK_DELETE = (byte)('');
+
+        [NativeTypeName("#define SDLK_END SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_END)")]
+        public const uint SDLK_END = ((uint)(SDL_SCANCODE_END) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_PAGEDOWN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_PAGEDOWN)")]
+        public const uint SDLK_PAGEDOWN = ((uint)(SDL_SCANCODE_PAGEDOWN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_RIGHT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_RIGHT)")]
+        public const uint SDLK_RIGHT = ((uint)(SDL_SCANCODE_RIGHT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_LEFT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_LEFT)")]
+        public const uint SDLK_LEFT = ((uint)(SDL_SCANCODE_LEFT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_DOWN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_DOWN)")]
+        public const uint SDLK_DOWN = ((uint)(SDL_SCANCODE_DOWN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_UP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_UP)")]
+        public const uint SDLK_UP = ((uint)(SDL_SCANCODE_UP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_NUMLOCKCLEAR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_NUMLOCKCLEAR)")]
+        public const uint SDLK_NUMLOCKCLEAR = ((uint)(SDL_SCANCODE_NUMLOCKCLEAR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_DIVIDE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_DIVIDE)")]
+        public const uint SDLK_KP_DIVIDE = ((uint)(SDL_SCANCODE_KP_DIVIDE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MULTIPLY SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MULTIPLY)")]
+        public const uint SDLK_KP_MULTIPLY = ((uint)(SDL_SCANCODE_KP_MULTIPLY) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MINUS SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MINUS)")]
+        public const uint SDLK_KP_MINUS = ((uint)(SDL_SCANCODE_KP_MINUS) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_PLUS SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_PLUS)")]
+        public const uint SDLK_KP_PLUS = ((uint)(SDL_SCANCODE_KP_PLUS) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_ENTER SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_ENTER)")]
+        public const uint SDLK_KP_ENTER = ((uint)(SDL_SCANCODE_KP_ENTER) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_1 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_1)")]
+        public const uint SDLK_KP_1 = ((uint)(SDL_SCANCODE_KP_1) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_2 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_2)")]
+        public const uint SDLK_KP_2 = ((uint)(SDL_SCANCODE_KP_2) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_3 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_3)")]
+        public const uint SDLK_KP_3 = ((uint)(SDL_SCANCODE_KP_3) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_4 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_4)")]
+        public const uint SDLK_KP_4 = ((uint)(SDL_SCANCODE_KP_4) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_5 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_5)")]
+        public const uint SDLK_KP_5 = ((uint)(SDL_SCANCODE_KP_5) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_6 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_6)")]
+        public const uint SDLK_KP_6 = ((uint)(SDL_SCANCODE_KP_6) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_7 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_7)")]
+        public const uint SDLK_KP_7 = ((uint)(SDL_SCANCODE_KP_7) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_8 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_8)")]
+        public const uint SDLK_KP_8 = ((uint)(SDL_SCANCODE_KP_8) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_9 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_9)")]
+        public const uint SDLK_KP_9 = ((uint)(SDL_SCANCODE_KP_9) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_0 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_0)")]
+        public const uint SDLK_KP_0 = ((uint)(SDL_SCANCODE_KP_0) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_PERIOD SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_PERIOD)")]
+        public const uint SDLK_KP_PERIOD = ((uint)(SDL_SCANCODE_KP_PERIOD) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_APPLICATION SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_APPLICATION)")]
+        public const uint SDLK_APPLICATION = ((uint)(SDL_SCANCODE_APPLICATION) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_POWER SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_POWER)")]
+        public const uint SDLK_POWER = ((uint)(SDL_SCANCODE_POWER) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_EQUALS SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_EQUALS)")]
+        public const uint SDLK_KP_EQUALS = ((uint)(SDL_SCANCODE_KP_EQUALS) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F13 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F13)")]
+        public const uint SDLK_F13 = ((uint)(SDL_SCANCODE_F13) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F14 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F14)")]
+        public const uint SDLK_F14 = ((uint)(SDL_SCANCODE_F14) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F15 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F15)")]
+        public const uint SDLK_F15 = ((uint)(SDL_SCANCODE_F15) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F16 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F16)")]
+        public const uint SDLK_F16 = ((uint)(SDL_SCANCODE_F16) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F17 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F17)")]
+        public const uint SDLK_F17 = ((uint)(SDL_SCANCODE_F17) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F18 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F18)")]
+        public const uint SDLK_F18 = ((uint)(SDL_SCANCODE_F18) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F19 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F19)")]
+        public const uint SDLK_F19 = ((uint)(SDL_SCANCODE_F19) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F20 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F20)")]
+        public const uint SDLK_F20 = ((uint)(SDL_SCANCODE_F20) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F21 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F21)")]
+        public const uint SDLK_F21 = ((uint)(SDL_SCANCODE_F21) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F22 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F22)")]
+        public const uint SDLK_F22 = ((uint)(SDL_SCANCODE_F22) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F23 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F23)")]
+        public const uint SDLK_F23 = ((uint)(SDL_SCANCODE_F23) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_F24 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_F24)")]
+        public const uint SDLK_F24 = ((uint)(SDL_SCANCODE_F24) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_EXECUTE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_EXECUTE)")]
+        public const uint SDLK_EXECUTE = ((uint)(SDL_SCANCODE_EXECUTE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_HELP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_HELP)")]
+        public const uint SDLK_HELP = ((uint)(SDL_SCANCODE_HELP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_MENU SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_MENU)")]
+        public const uint SDLK_MENU = ((uint)(SDL_SCANCODE_MENU) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_SELECT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SELECT)")]
+        public const uint SDLK_SELECT = ((uint)(SDL_SCANCODE_SELECT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_STOP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_STOP)")]
+        public const uint SDLK_STOP = ((uint)(SDL_SCANCODE_STOP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AGAIN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AGAIN)")]
+        public const uint SDLK_AGAIN = ((uint)(SDL_SCANCODE_AGAIN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_UNDO SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_UNDO)")]
+        public const uint SDLK_UNDO = ((uint)(SDL_SCANCODE_UNDO) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CUT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CUT)")]
+        public const uint SDLK_CUT = ((uint)(SDL_SCANCODE_CUT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_COPY SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_COPY)")]
+        public const uint SDLK_COPY = ((uint)(SDL_SCANCODE_COPY) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_PASTE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_PASTE)")]
+        public const uint SDLK_PASTE = ((uint)(SDL_SCANCODE_PASTE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_FIND SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_FIND)")]
+        public const uint SDLK_FIND = ((uint)(SDL_SCANCODE_FIND) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_MUTE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_MUTE)")]
+        public const uint SDLK_MUTE = ((uint)(SDL_SCANCODE_MUTE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_VOLUMEUP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_VOLUMEUP)")]
+        public const uint SDLK_VOLUMEUP = ((uint)(SDL_SCANCODE_VOLUMEUP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_VOLUMEDOWN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_VOLUMEDOWN)")]
+        public const uint SDLK_VOLUMEDOWN = ((uint)(SDL_SCANCODE_VOLUMEDOWN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_COMMA SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_COMMA)")]
+        public const uint SDLK_KP_COMMA = ((uint)(SDL_SCANCODE_KP_COMMA) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_EQUALSAS400 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_EQUALSAS400)")]
+        public const uint SDLK_KP_EQUALSAS400 = ((uint)(SDL_SCANCODE_KP_EQUALSAS400) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_ALTERASE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_ALTERASE)")]
+        public const uint SDLK_ALTERASE = ((uint)(SDL_SCANCODE_ALTERASE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_SYSREQ SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SYSREQ)")]
+        public const uint SDLK_SYSREQ = ((uint)(SDL_SCANCODE_SYSREQ) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CANCEL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CANCEL)")]
+        public const uint SDLK_CANCEL = ((uint)(SDL_SCANCODE_CANCEL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CLEAR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CLEAR)")]
+        public const uint SDLK_CLEAR = ((uint)(SDL_SCANCODE_CLEAR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_PRIOR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_PRIOR)")]
+        public const uint SDLK_PRIOR = ((uint)(SDL_SCANCODE_PRIOR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_RETURN2 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_RETURN2)")]
+        public const uint SDLK_RETURN2 = ((uint)(SDL_SCANCODE_RETURN2) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_SEPARATOR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SEPARATOR)")]
+        public const uint SDLK_SEPARATOR = ((uint)(SDL_SCANCODE_SEPARATOR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_OUT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_OUT)")]
+        public const uint SDLK_OUT = ((uint)(SDL_SCANCODE_OUT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_OPER SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_OPER)")]
+        public const uint SDLK_OPER = ((uint)(SDL_SCANCODE_OPER) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CLEARAGAIN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CLEARAGAIN)")]
+        public const uint SDLK_CLEARAGAIN = ((uint)(SDL_SCANCODE_CLEARAGAIN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CRSEL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CRSEL)")]
+        public const uint SDLK_CRSEL = ((uint)(SDL_SCANCODE_CRSEL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_EXSEL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_EXSEL)")]
+        public const uint SDLK_EXSEL = ((uint)(SDL_SCANCODE_EXSEL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_00 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_00)")]
+        public const uint SDLK_KP_00 = ((uint)(SDL_SCANCODE_KP_00) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_000 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_000)")]
+        public const uint SDLK_KP_000 = ((uint)(SDL_SCANCODE_KP_000) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_THOUSANDSSEPARATOR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_THOUSANDSSEPARATOR)")]
+        public const uint SDLK_THOUSANDSSEPARATOR = ((uint)(SDL_SCANCODE_THOUSANDSSEPARATOR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_DECIMALSEPARATOR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_DECIMALSEPARATOR)")]
+        public const uint SDLK_DECIMALSEPARATOR = ((uint)(SDL_SCANCODE_DECIMALSEPARATOR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CURRENCYUNIT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CURRENCYUNIT)")]
+        public const uint SDLK_CURRENCYUNIT = ((uint)(SDL_SCANCODE_CURRENCYUNIT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CURRENCYSUBUNIT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CURRENCYSUBUNIT)")]
+        public const uint SDLK_CURRENCYSUBUNIT = ((uint)(SDL_SCANCODE_CURRENCYSUBUNIT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_LEFTPAREN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_LEFTPAREN)")]
+        public const uint SDLK_KP_LEFTPAREN = ((uint)(SDL_SCANCODE_KP_LEFTPAREN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_RIGHTPAREN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_RIGHTPAREN)")]
+        public const uint SDLK_KP_RIGHTPAREN = ((uint)(SDL_SCANCODE_KP_RIGHTPAREN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_LEFTBRACE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_LEFTBRACE)")]
+        public const uint SDLK_KP_LEFTBRACE = ((uint)(SDL_SCANCODE_KP_LEFTBRACE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_RIGHTBRACE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_RIGHTBRACE)")]
+        public const uint SDLK_KP_RIGHTBRACE = ((uint)(SDL_SCANCODE_KP_RIGHTBRACE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_TAB SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_TAB)")]
+        public const uint SDLK_KP_TAB = ((uint)(SDL_SCANCODE_KP_TAB) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_BACKSPACE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_BACKSPACE)")]
+        public const uint SDLK_KP_BACKSPACE = ((uint)(SDL_SCANCODE_KP_BACKSPACE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_A SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_A)")]
+        public const uint SDLK_KP_A = ((uint)(SDL_SCANCODE_KP_A) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_B SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_B)")]
+        public const uint SDLK_KP_B = ((uint)(SDL_SCANCODE_KP_B) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_C SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_C)")]
+        public const uint SDLK_KP_C = ((uint)(SDL_SCANCODE_KP_C) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_D SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_D)")]
+        public const uint SDLK_KP_D = ((uint)(SDL_SCANCODE_KP_D) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_E SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_E)")]
+        public const uint SDLK_KP_E = ((uint)(SDL_SCANCODE_KP_E) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_F SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_F)")]
+        public const uint SDLK_KP_F = ((uint)(SDL_SCANCODE_KP_F) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_XOR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_XOR)")]
+        public const uint SDLK_KP_XOR = ((uint)(SDL_SCANCODE_KP_XOR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_POWER SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_POWER)")]
+        public const uint SDLK_KP_POWER = ((uint)(SDL_SCANCODE_KP_POWER) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_PERCENT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_PERCENT)")]
+        public const uint SDLK_KP_PERCENT = ((uint)(SDL_SCANCODE_KP_PERCENT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_LESS SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_LESS)")]
+        public const uint SDLK_KP_LESS = ((uint)(SDL_SCANCODE_KP_LESS) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_GREATER SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_GREATER)")]
+        public const uint SDLK_KP_GREATER = ((uint)(SDL_SCANCODE_KP_GREATER) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_AMPERSAND SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_AMPERSAND)")]
+        public const uint SDLK_KP_AMPERSAND = ((uint)(SDL_SCANCODE_KP_AMPERSAND) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_DBLAMPERSAND SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_DBLAMPERSAND)")]
+        public const uint SDLK_KP_DBLAMPERSAND = ((uint)(SDL_SCANCODE_KP_DBLAMPERSAND) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_VERTICALBAR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_VERTICALBAR)")]
+        public const uint SDLK_KP_VERTICALBAR = ((uint)(SDL_SCANCODE_KP_VERTICALBAR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_DBLVERTICALBAR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_DBLVERTICALBAR)")]
+        public const uint SDLK_KP_DBLVERTICALBAR = ((uint)(SDL_SCANCODE_KP_DBLVERTICALBAR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_COLON SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_COLON)")]
+        public const uint SDLK_KP_COLON = ((uint)(SDL_SCANCODE_KP_COLON) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_HASH SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_HASH)")]
+        public const uint SDLK_KP_HASH = ((uint)(SDL_SCANCODE_KP_HASH) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_SPACE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_SPACE)")]
+        public const uint SDLK_KP_SPACE = ((uint)(SDL_SCANCODE_KP_SPACE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_AT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_AT)")]
+        public const uint SDLK_KP_AT = ((uint)(SDL_SCANCODE_KP_AT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_EXCLAM SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_EXCLAM)")]
+        public const uint SDLK_KP_EXCLAM = ((uint)(SDL_SCANCODE_KP_EXCLAM) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MEMSTORE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MEMSTORE)")]
+        public const uint SDLK_KP_MEMSTORE = ((uint)(SDL_SCANCODE_KP_MEMSTORE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MEMRECALL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MEMRECALL)")]
+        public const uint SDLK_KP_MEMRECALL = ((uint)(SDL_SCANCODE_KP_MEMRECALL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MEMCLEAR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MEMCLEAR)")]
+        public const uint SDLK_KP_MEMCLEAR = ((uint)(SDL_SCANCODE_KP_MEMCLEAR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MEMADD SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MEMADD)")]
+        public const uint SDLK_KP_MEMADD = ((uint)(SDL_SCANCODE_KP_MEMADD) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MEMSUBTRACT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MEMSUBTRACT)")]
+        public const uint SDLK_KP_MEMSUBTRACT = ((uint)(SDL_SCANCODE_KP_MEMSUBTRACT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MEMMULTIPLY SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MEMMULTIPLY)")]
+        public const uint SDLK_KP_MEMMULTIPLY = ((uint)(SDL_SCANCODE_KP_MEMMULTIPLY) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_MEMDIVIDE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MEMDIVIDE)")]
+        public const uint SDLK_KP_MEMDIVIDE = ((uint)(SDL_SCANCODE_KP_MEMDIVIDE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_PLUSMINUS SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_PLUSMINUS)")]
+        public const uint SDLK_KP_PLUSMINUS = ((uint)(SDL_SCANCODE_KP_PLUSMINUS) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_CLEAR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_CLEAR)")]
+        public const uint SDLK_KP_CLEAR = ((uint)(SDL_SCANCODE_KP_CLEAR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_CLEARENTRY SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_CLEARENTRY)")]
+        public const uint SDLK_KP_CLEARENTRY = ((uint)(SDL_SCANCODE_KP_CLEARENTRY) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_BINARY SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_BINARY)")]
+        public const uint SDLK_KP_BINARY = ((uint)(SDL_SCANCODE_KP_BINARY) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_OCTAL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_OCTAL)")]
+        public const uint SDLK_KP_OCTAL = ((uint)(SDL_SCANCODE_KP_OCTAL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_DECIMAL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_DECIMAL)")]
+        public const uint SDLK_KP_DECIMAL = ((uint)(SDL_SCANCODE_KP_DECIMAL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KP_HEXADECIMAL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_HEXADECIMAL)")]
+        public const uint SDLK_KP_HEXADECIMAL = ((uint)(SDL_SCANCODE_KP_HEXADECIMAL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_LCTRL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_LCTRL)")]
+        public const uint SDLK_LCTRL = ((uint)(SDL_SCANCODE_LCTRL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_LSHIFT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_LSHIFT)")]
+        public const uint SDLK_LSHIFT = ((uint)(SDL_SCANCODE_LSHIFT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_LALT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_LALT)")]
+        public const uint SDLK_LALT = ((uint)(SDL_SCANCODE_LALT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_LGUI SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_LGUI)")]
+        public const uint SDLK_LGUI = ((uint)(SDL_SCANCODE_LGUI) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_RCTRL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_RCTRL)")]
+        public const uint SDLK_RCTRL = ((uint)(SDL_SCANCODE_RCTRL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_RSHIFT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_RSHIFT)")]
+        public const uint SDLK_RSHIFT = ((uint)(SDL_SCANCODE_RSHIFT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_RALT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_RALT)")]
+        public const uint SDLK_RALT = ((uint)(SDL_SCANCODE_RALT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_RGUI SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_RGUI)")]
+        public const uint SDLK_RGUI = ((uint)(SDL_SCANCODE_RGUI) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_MODE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_MODE)")]
+        public const uint SDLK_MODE = ((uint)(SDL_SCANCODE_MODE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AUDIONEXT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIONEXT)")]
+        public const uint SDLK_AUDIONEXT = ((uint)(SDL_SCANCODE_AUDIONEXT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AUDIOPREV SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOPREV)")]
+        public const uint SDLK_AUDIOPREV = ((uint)(SDL_SCANCODE_AUDIOPREV) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AUDIOSTOP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOSTOP)")]
+        public const uint SDLK_AUDIOSTOP = ((uint)(SDL_SCANCODE_AUDIOSTOP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AUDIOPLAY SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOPLAY)")]
+        public const uint SDLK_AUDIOPLAY = ((uint)(SDL_SCANCODE_AUDIOPLAY) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AUDIOMUTE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOMUTE)")]
+        public const uint SDLK_AUDIOMUTE = ((uint)(SDL_SCANCODE_AUDIOMUTE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_MEDIASELECT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_MEDIASELECT)")]
+        public const uint SDLK_MEDIASELECT = ((uint)(SDL_SCANCODE_MEDIASELECT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_WWW SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_WWW)")]
+        public const uint SDLK_WWW = ((uint)(SDL_SCANCODE_WWW) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_MAIL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_MAIL)")]
+        public const uint SDLK_MAIL = ((uint)(SDL_SCANCODE_MAIL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CALCULATOR SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CALCULATOR)")]
+        public const uint SDLK_CALCULATOR = ((uint)(SDL_SCANCODE_CALCULATOR) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_COMPUTER SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_COMPUTER)")]
+        public const uint SDLK_COMPUTER = ((uint)(SDL_SCANCODE_COMPUTER) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AC_SEARCH SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AC_SEARCH)")]
+        public const uint SDLK_AC_SEARCH = ((uint)(SDL_SCANCODE_AC_SEARCH) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AC_HOME SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AC_HOME)")]
+        public const uint SDLK_AC_HOME = ((uint)(SDL_SCANCODE_AC_HOME) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AC_BACK SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AC_BACK)")]
+        public const uint SDLK_AC_BACK = ((uint)(SDL_SCANCODE_AC_BACK) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AC_FORWARD SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AC_FORWARD)")]
+        public const uint SDLK_AC_FORWARD = ((uint)(SDL_SCANCODE_AC_FORWARD) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AC_STOP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AC_STOP)")]
+        public const uint SDLK_AC_STOP = ((uint)(SDL_SCANCODE_AC_STOP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AC_REFRESH SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AC_REFRESH)")]
+        public const uint SDLK_AC_REFRESH = ((uint)(SDL_SCANCODE_AC_REFRESH) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AC_BOOKMARKS SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AC_BOOKMARKS)")]
+        public const uint SDLK_AC_BOOKMARKS = ((uint)(SDL_SCANCODE_AC_BOOKMARKS) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_BRIGHTNESSDOWN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_BRIGHTNESSDOWN)")]
+        public const uint SDLK_BRIGHTNESSDOWN = ((uint)(SDL_SCANCODE_BRIGHTNESSDOWN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_BRIGHTNESSUP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_BRIGHTNESSUP)")]
+        public const uint SDLK_BRIGHTNESSUP = ((uint)(SDL_SCANCODE_BRIGHTNESSUP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_DISPLAYSWITCH SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_DISPLAYSWITCH)")]
+        public const uint SDLK_DISPLAYSWITCH = ((uint)(SDL_SCANCODE_DISPLAYSWITCH) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KBDILLUMTOGGLE SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KBDILLUMTOGGLE)")]
+        public const uint SDLK_KBDILLUMTOGGLE = ((uint)(SDL_SCANCODE_KBDILLUMTOGGLE) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KBDILLUMDOWN SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KBDILLUMDOWN)")]
+        public const uint SDLK_KBDILLUMDOWN = ((uint)(SDL_SCANCODE_KBDILLUMDOWN) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_KBDILLUMUP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KBDILLUMUP)")]
+        public const uint SDLK_KBDILLUMUP = ((uint)(SDL_SCANCODE_KBDILLUMUP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_EJECT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_EJECT)")]
+        public const uint SDLK_EJECT = ((uint)(SDL_SCANCODE_EJECT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_SLEEP SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SLEEP)")]
+        public const uint SDLK_SLEEP = ((uint)(SDL_SCANCODE_SLEEP) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_APP1 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_APP1)")]
+        public const uint SDLK_APP1 = ((uint)(SDL_SCANCODE_APP1) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_APP2 SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_APP2)")]
+        public const uint SDLK_APP2 = ((uint)(SDL_SCANCODE_APP2) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AUDIOREWIND SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOREWIND)")]
+        public const uint SDLK_AUDIOREWIND = ((uint)(SDL_SCANCODE_AUDIOREWIND) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_AUDIOFASTFORWARD SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_AUDIOFASTFORWARD)")]
+        public const uint SDLK_AUDIOFASTFORWARD = ((uint)(SDL_SCANCODE_AUDIOFASTFORWARD) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_SOFTLEFT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SOFTLEFT)")]
+        public const uint SDLK_SOFTLEFT = ((uint)(SDL_SCANCODE_SOFTLEFT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_SOFTRIGHT SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_SOFTRIGHT)")]
+        public const uint SDLK_SOFTRIGHT = ((uint)(SDL_SCANCODE_SOFTRIGHT) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_CALL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_CALL)")]
+        public const uint SDLK_CALL = ((uint)(SDL_SCANCODE_CALL) | (1U << 30));
+
+        [NativeTypeName("#define SDLK_ENDCALL SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_ENDCALL)")]
+        public const uint SDLK_ENDCALL = ((uint)(SDL_SCANCODE_ENDCALL) | (1U << 30));
+
+        [NativeTypeName("#define SDL_KMOD_NONE 0x0000u")]
+        public const uint SDL_KMOD_NONE = 0x0000U;
+
+        [NativeTypeName("#define SDL_KMOD_LSHIFT 0x0001u")]
+        public const uint SDL_KMOD_LSHIFT = 0x0001U;
+
+        [NativeTypeName("#define SDL_KMOD_RSHIFT 0x0002u")]
+        public const uint SDL_KMOD_RSHIFT = 0x0002U;
+
+        [NativeTypeName("#define SDL_KMOD_LCTRL 0x0040u")]
+        public const uint SDL_KMOD_LCTRL = 0x0040U;
+
+        [NativeTypeName("#define SDL_KMOD_RCTRL 0x0080u")]
+        public const uint SDL_KMOD_RCTRL = 0x0080U;
+
+        [NativeTypeName("#define SDL_KMOD_LALT 0x0100u")]
+        public const uint SDL_KMOD_LALT = 0x0100U;
+
+        [NativeTypeName("#define SDL_KMOD_RALT 0x0200u")]
+        public const uint SDL_KMOD_RALT = 0x0200U;
+
+        [NativeTypeName("#define SDL_KMOD_LGUI 0x0400u")]
+        public const uint SDL_KMOD_LGUI = 0x0400U;
+
+        [NativeTypeName("#define SDL_KMOD_RGUI 0x0800u")]
+        public const uint SDL_KMOD_RGUI = 0x0800U;
+
+        [NativeTypeName("#define SDL_KMOD_NUM 0x1000u")]
+        public const uint SDL_KMOD_NUM = 0x1000U;
+
+        [NativeTypeName("#define SDL_KMOD_CAPS 0x2000u")]
+        public const uint SDL_KMOD_CAPS = 0x2000U;
+
+        [NativeTypeName("#define SDL_KMOD_MODE 0x4000u")]
+        public const uint SDL_KMOD_MODE = 0x4000U;
+
+        [NativeTypeName("#define SDL_KMOD_SCROLL 0x8000u")]
+        public const uint SDL_KMOD_SCROLL = 0x8000U;
+
+        [NativeTypeName("#define SDL_KMOD_CTRL (SDL_KMOD_LCTRL | SDL_KMOD_RCTRL)")]
+        public const uint SDL_KMOD_CTRL = (0x0040U | 0x0080U);
+
+        [NativeTypeName("#define SDL_KMOD_SHIFT (SDL_KMOD_LSHIFT | SDL_KMOD_RSHIFT)")]
+        public const uint SDL_KMOD_SHIFT = (0x0001U | 0x0002U);
+
+        [NativeTypeName("#define SDL_KMOD_ALT (SDL_KMOD_LALT | SDL_KMOD_RALT)")]
+        public const uint SDL_KMOD_ALT = (0x0100U | 0x0200U);
+
+        [NativeTypeName("#define SDL_KMOD_GUI (SDL_KMOD_LGUI | SDL_KMOD_RGUI)")]
+        public const uint SDL_KMOD_GUI = (0x0400U | 0x0800U);
     }
 }

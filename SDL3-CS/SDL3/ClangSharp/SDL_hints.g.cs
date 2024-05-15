@@ -95,6 +95,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_AUDIO_DEVICE_APP_NAME \"SDL_AUDIO_DEVICE_APP_NAME\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DEVICE_APP_NAME => "SDL_AUDIO_DEVICE_APP_NAME"u8;
 
+        [NativeTypeName("#define SDL_HINT_AUDIO_DEVICE_APP_ICON_NAME \"SDL_AUDIO_DEVICE_APP_ICON_NAME\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DEVICE_APP_ICON_NAME => "SDL_AUDIO_DEVICE_APP_ICON_NAME"u8;
+
         [NativeTypeName("#define SDL_HINT_AUDIO_DEVICE_SAMPLE_FRAMES \"SDL_AUDIO_DEVICE_SAMPLE_FRAMES\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DEVICE_SAMPLE_FRAMES => "SDL_AUDIO_DEVICE_SAMPLE_FRAMES"u8;
 
@@ -434,8 +437,8 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_OPENGL_ES_DRIVER \"SDL_OPENGL_ES_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENGL_ES_DRIVER => "SDL_OPENGL_ES_DRIVER"u8;
 
-        [NativeTypeName("#define SDL_HINT_ORIENTATIONS \"SDL_IOS_ORIENTATIONS\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_ORIENTATIONS => "SDL_IOS_ORIENTATIONS"u8;
+        [NativeTypeName("#define SDL_HINT_ORIENTATIONS \"SDL_ORIENTATIONS\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_ORIENTATIONS => "SDL_ORIENTATIONS"u8;
 
         [NativeTypeName("#define SDL_HINT_PEN_DELAY_MOUSE_BUTTON \"SDL_PEN_DELAY_MOUSE_BUTTON\"")]
         public static ReadOnlySpan<byte> SDL_HINT_PEN_DELAY_MOUSE_BUTTON => "SDL_PEN_DELAY_MOUSE_BUTTON"u8;
@@ -469,9 +472,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_RENDER_METAL_PREFER_LOW_POWER_DEVICE \"SDL_RENDER_METAL_PREFER_LOW_POWER_DEVICE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_RENDER_METAL_PREFER_LOW_POWER_DEVICE => "SDL_RENDER_METAL_PREFER_LOW_POWER_DEVICE"u8;
-
-        [NativeTypeName("#define SDL_HINT_RENDER_PS2_DYNAMIC_VSYNC \"SDL_RENDER_PS2_DYNAMIC_VSYNC\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_RENDER_PS2_DYNAMIC_VSYNC => "SDL_RENDER_PS2_DYNAMIC_VSYNC"u8;
 
         [NativeTypeName("#define SDL_HINT_RENDER_VSYNC \"SDL_RENDER_VSYNC\"")]
         public static ReadOnlySpan<byte> SDL_HINT_RENDER_VSYNC => "SDL_RENDER_VSYNC"u8;
@@ -527,8 +527,8 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_VIDEO_DRIVER \"SDL_VIDEO_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_DRIVER => "SDL_VIDEO_DRIVER"u8;
 
-        [NativeTypeName("#define SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK \"SDL_VIDEO_EGL_GETDISPLAY_FALLBACK\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK => "SDL_VIDEO_EGL_GETDISPLAY_FALLBACK"u8;
+        [NativeTypeName("#define SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK \"SDL_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK => "SDL_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK"u8;
 
         [NativeTypeName("#define SDL_HINT_VIDEO_FORCE_EGL \"SDL_VIDEO_FORCE_EGL\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_FORCE_EGL => "SDL_VIDEO_FORCE_EGL"u8;

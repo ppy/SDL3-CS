@@ -19,7 +19,7 @@ namespace SDL
     }
 
     [Flags]
-    public enum SDLButtonMask
+    public enum SDLButtonMask : uint
     {
         SDL_BUTTON_LMASK = SDL3.SDL_BUTTON_LMASK,
         SDL_BUTTON_MMASK = SDL3.SDL_BUTTON_MMASK,

@@ -1,22 +1,26 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+using System;
+
 namespace SDL
 {
-    public partial struct SDL_MessageBoxButtonData
+    [Flags]
+    [Typedef]
+    public enum SDL_MessageBoxFlags : UInt32
     {
-        public SDL_MessageBoxButtonFlags Flags => (SDL_MessageBoxButtonFlags)flags;
+        SDL_MESSAGEBOX_ERROR = SDL3.SDL_MESSAGEBOX_ERROR,
+        SDL_MESSAGEBOX_WARNING = SDL3.SDL_MESSAGEBOX_WARNING,
+        SDL_MESSAGEBOX_INFORMATION = SDL3.SDL_MESSAGEBOX_INFORMATION,
+        SDL_MESSAGEBOX_BUTTONS_LEFT_TO_RIGHT = SDL3.SDL_MESSAGEBOX_BUTTONS_LEFT_TO_RIGHT,
+        SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT = SDL3.SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT,
     }
 
-    public partial struct SDL_MessageBoxData
+    [Flags]
+    [Typedef]
+    public enum SDL_MessageBoxButtonFlags : UInt32
     {
-        public SDL_MessageBoxFlags Flags => (SDL_MessageBoxFlags)flags;
-    }
-
-    public static partial class SDL3
-    {
-        // public static int SDL_ShowSimpleMessageBox([NativeTypeName("Uint32")] uint flags, [NativeTypeName("const char *")] byte* title, [NativeTypeName("const char *")] byte* message, SDL_Window* window);
-        public static unsafe int SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, Utf8String title, Utf8String message, SDL_Window* window)
-            => SDL_ShowSimpleMessageBox((uint)flags, title, message, window);
+        SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT = SDL3.SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT,
+        SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT = SDL3.SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT,
     }
 }

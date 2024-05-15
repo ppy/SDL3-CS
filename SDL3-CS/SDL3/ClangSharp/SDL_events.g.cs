@@ -1012,7 +1012,7 @@ namespace SDL
         }
     }
 
-    public enum SDL_eventaction
+    public enum SDL_EventAction
     {
         SDL_ADDEVENT,
         SDL_PEEKEVENT,
@@ -1025,7 +1025,7 @@ namespace SDL
         public static extern void SDL_PumpEvents();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_eventaction action, [NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
+        public static extern int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_EventAction action, [NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_HasEvent([NativeTypeName("Uint32")] uint type);
@@ -1085,11 +1085,5 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PRESSED 1")]
         public const int SDL_PRESSED = 1;
-
-        [NativeTypeName("#define SDL_TEXTEDITINGEVENT_TEXT_SIZE 64")]
-        public const int SDL_TEXTEDITINGEVENT_TEXT_SIZE = 64;
-
-        [NativeTypeName("#define SDL_DROPEVENT_DATA_SIZE 64")]
-        public const int SDL_DROPEVENT_DATA_SIZE = 64;
     }
 }

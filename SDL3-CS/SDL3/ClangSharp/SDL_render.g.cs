@@ -24,39 +24,19 @@
 */
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    [Flags]
-    public enum SDL_RendererFlags
-    {
-        SDL_RENDERER_PRESENTVSYNC = 0x00000004,
-    }
-
     public unsafe partial struct SDL_RendererInfo
     {
         [NativeTypeName("const char *")]
         public byte* name;
 
-        [NativeTypeName("Uint32")]
-        public uint flags;
-
         public int num_texture_formats;
 
-        [NativeTypeName("SDL_PixelFormatEnum[16]")]
-        public _texture_formats_e__FixedBuffer texture_formats;
-
-        public int max_texture_width;
-
-        public int max_texture_height;
-
-        [InlineArray(16)]
-        public partial struct _texture_formats_e__FixedBuffer
-        {
-            public SDL_PixelFormatEnum e0;
-        }
+        [NativeTypeName("const SDL_PixelFormatEnum *")]
+        public SDL_PixelFormatEnum* texture_formats;
     }
 
     public partial struct SDL_Vertex
@@ -102,10 +82,10 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetRenderDriver(int index);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_CreateWindowAndRenderer(int width, int height, SDL_WindowFlags window_flags, SDL_Window** window, SDL_Renderer** renderer);
+        public static extern int SDL_CreateWindowAndRenderer([NativeTypeName("const char *")] byte* title, int width, int height, SDL_WindowFlags window_flags, SDL_Window** window, SDL_Renderer** renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, [NativeTypeName("const char *")] byte* name, [NativeTypeName("Uint32")] uint flags);
+        public static extern SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Renderer* SDL_CreateRendererWithProperties(SDL_PropertiesID props);
@@ -361,8 +341,8 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER \"output_colorspace\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER => "output_colorspace"u8;
 
-        [NativeTypeName("#define SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_BOOLEAN \"present_vsync\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_BOOLEAN => "present_vsync"u8;
+        [NativeTypeName("#define SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER \"present_vsync\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER => "present_vsync"u8;
 
         [NativeTypeName("#define SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER \"vulkan.instance\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER => "vulkan.instance"u8;
@@ -391,6 +371,12 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_RENDERER_SURFACE_POINTER \"SDL.renderer.surface\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_SURFACE_POINTER => "SDL.renderer.surface"u8;
 
+        [NativeTypeName("#define SDL_PROP_RENDERER_VSYNC_NUMBER \"SDL.renderer.vsync\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_VSYNC_NUMBER => "SDL.renderer.vsync"u8;
+
+        [NativeTypeName("#define SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER \"SDL.renderer.max_texture_size\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER => "SDL.renderer.max_texture_size"u8;
+
         [NativeTypeName("#define SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER \"SDL.renderer.output_colorspace\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER => "SDL.renderer.output_colorspace"u8;
 
@@ -409,8 +395,14 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_RENDERER_D3D11_DEVICE_POINTER \"SDL.renderer.d3d11.device\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_D3D11_DEVICE_POINTER => "SDL.renderer.d3d11.device"u8;
 
+        [NativeTypeName("#define SDL_PROP_RENDERER_D3D11_SWAPCHAIN_POINTER \"SDL.renderer.d3d11.swap_chain\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_D3D11_SWAPCHAIN_POINTER => "SDL.renderer.d3d11.swap_chain"u8;
+
         [NativeTypeName("#define SDL_PROP_RENDERER_D3D12_DEVICE_POINTER \"SDL.renderer.d3d12.device\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_D3D12_DEVICE_POINTER => "SDL.renderer.d3d12.device"u8;
+
+        [NativeTypeName("#define SDL_PROP_RENDERER_D3D12_SWAPCHAIN_POINTER \"SDL.renderer.d3d12.swap_chain\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_D3D12_SWAPCHAIN_POINTER => "SDL.renderer.d3d12.swap_chain"u8;
 
         [NativeTypeName("#define SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER \"SDL.renderer.d3d12.command_queue\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER => "SDL.renderer.d3d12.command_queue"u8;

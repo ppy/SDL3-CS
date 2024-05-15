@@ -33,11 +33,10 @@ namespace SDL
 
         public SDL_Keycode sym;
 
-        [NativeTypeName("Uint16")]
-        public ushort mod;
+        public SDL_Keymod mod;
 
-        [NativeTypeName("Uint32")]
-        public uint unused;
+        [NativeTypeName("Uint16")]
+        public ushort unused;
     }
 
     public static unsafe partial class SDL3

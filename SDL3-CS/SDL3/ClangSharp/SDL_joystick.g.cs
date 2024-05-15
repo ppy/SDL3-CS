@@ -24,6 +24,7 @@
 */
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -54,19 +55,35 @@ namespace SDL
         SDL_JOYSTICK_CONNECTION_WIRELESS,
     }
 
+    public partial struct SDL_VirtualJoystickTouchpadDesc
+    {
+        [NativeTypeName("Uint16")]
+        public ushort nfingers;
+
+        [NativeTypeName("Uint16[3]")]
+        public _padding_e__FixedBuffer padding;
+
+        [InlineArray(3)]
+        public partial struct _padding_e__FixedBuffer
+        {
+            public ushort e0;
+        }
+    }
+
+    public partial struct SDL_VirtualJoystickSensorDesc
+    {
+        public SDL_SensorType type;
+
+        public float rate;
+    }
+
     public unsafe partial struct SDL_VirtualJoystickDesc
     {
         [NativeTypeName("Uint16")]
         public ushort type;
 
         [NativeTypeName("Uint16")]
-        public ushort naxes;
-
-        [NativeTypeName("Uint16")]
-        public ushort nbuttons;
-
-        [NativeTypeName("Uint16")]
-        public ushort nhats;
+        public ushort padding;
 
         [NativeTypeName("Uint16")]
         public ushort vendor_id;
@@ -75,7 +92,25 @@ namespace SDL
         public ushort product_id;
 
         [NativeTypeName("Uint16")]
-        public ushort padding;
+        public ushort naxes;
+
+        [NativeTypeName("Uint16")]
+        public ushort nbuttons;
+
+        [NativeTypeName("Uint16")]
+        public ushort nballs;
+
+        [NativeTypeName("Uint16")]
+        public ushort nhats;
+
+        [NativeTypeName("Uint16")]
+        public ushort ntouchpads;
+
+        [NativeTypeName("Uint16")]
+        public ushort nsensors;
+
+        [NativeTypeName("Uint16[2]")]
+        public _padding2_e__FixedBuffer padding2;
 
         [NativeTypeName("Uint32")]
         public uint button_mask;
@@ -85,6 +120,12 @@ namespace SDL
 
         [NativeTypeName("const char *")]
         public byte* name;
+
+        [NativeTypeName("const SDL_VirtualJoystickTouchpadDesc *")]
+        public SDL_VirtualJoystickTouchpadDesc* touchpads;
+
+        [NativeTypeName("const SDL_VirtualJoystickSensorDesc *")]
+        public SDL_VirtualJoystickSensorDesc* sensors;
 
         [NativeTypeName("void*")]
         public IntPtr userdata;
@@ -106,6 +147,15 @@ namespace SDL
 
         [NativeTypeName("int (*)(void *, const void *, int)")]
         public delegate* unmanaged[Cdecl]<IntPtr, IntPtr, int, int> SendEffect;
+
+        [NativeTypeName("int (*)(void *, SDL_bool)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, SDL_bool, int> SetSensorsEnabled;
+
+        [InlineArray(2)]
+        public partial struct _padding2_e__FixedBuffer
+        {
+            public ushort e0;
+        }
     }
 
     public static unsafe partial class SDL3
@@ -162,10 +212,7 @@ namespace SDL
         public static extern SDL_Joystick* SDL_GetJoystickFromPlayerIndex(int player_index);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_JoystickID SDL_AttachVirtualJoystick(SDL_JoystickType type, int naxes, int nbuttons, int nhats);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_JoystickID SDL_AttachVirtualJoystickEx([NativeTypeName("const SDL_VirtualJoystickDesc *")] SDL_VirtualJoystickDesc* desc);
+        public static extern SDL_JoystickID SDL_AttachVirtualJoystick([NativeTypeName("const SDL_VirtualJoystickDesc *")] SDL_VirtualJoystickDesc* desc);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_DetachVirtualJoystick(SDL_JoystickID instance_id);
@@ -177,10 +224,19 @@ namespace SDL
         public static extern int SDL_SetJoystickVirtualAxis(SDL_Joystick* joystick, int axis, [NativeTypeName("Sint16")] short value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_SetJoystickVirtualBall(SDL_Joystick* joystick, int ball, [NativeTypeName("Sint16")] short xrel, [NativeTypeName("Sint16")] short yrel);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetJoystickVirtualButton(SDL_Joystick* joystick, int button, [NativeTypeName("Uint8")] byte value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetJoystickVirtualHat(SDL_Joystick* joystick, int hat, [NativeTypeName("Uint8")] byte value);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_SetJoystickVirtualTouchpad(SDL_Joystick* joystick, int touchpad, int finger, [NativeTypeName("Uint8")] byte state, float x, float y, float pressure);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_SendJoystickVirtualSensorData(SDL_Joystick* joystick, SDL_SensorType type, [NativeTypeName("Uint64")] ulong sensor_timestamp, [NativeTypeName("const float *")] float* data, int num_values);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID SDL_GetJoystickProperties(SDL_Joystick* joystick);
@@ -326,31 +382,31 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN \"SDL.joystick.cap.trigger_rumble\"")]
         public static ReadOnlySpan<byte> SDL_PROP_JOYSTICK_CAP_TRIGGER_RUMBLE_BOOLEAN => "SDL.joystick.cap.trigger_rumble"u8;
 
-        [NativeTypeName("#define SDL_HAT_CENTERED 0x00")]
-        public const int SDL_HAT_CENTERED = 0x00;
+        [NativeTypeName("#define SDL_HAT_CENTERED 0x00u")]
+        public const uint SDL_HAT_CENTERED = 0x00U;
 
-        [NativeTypeName("#define SDL_HAT_UP 0x01")]
-        public const int SDL_HAT_UP = 0x01;
+        [NativeTypeName("#define SDL_HAT_UP 0x01u")]
+        public const uint SDL_HAT_UP = 0x01U;
 
-        [NativeTypeName("#define SDL_HAT_RIGHT 0x02")]
-        public const int SDL_HAT_RIGHT = 0x02;
+        [NativeTypeName("#define SDL_HAT_RIGHT 0x02u")]
+        public const uint SDL_HAT_RIGHT = 0x02U;
 
-        [NativeTypeName("#define SDL_HAT_DOWN 0x04")]
-        public const int SDL_HAT_DOWN = 0x04;
+        [NativeTypeName("#define SDL_HAT_DOWN 0x04u")]
+        public const uint SDL_HAT_DOWN = 0x04U;
 
-        [NativeTypeName("#define SDL_HAT_LEFT 0x08")]
-        public const int SDL_HAT_LEFT = 0x08;
+        [NativeTypeName("#define SDL_HAT_LEFT 0x08u")]
+        public const uint SDL_HAT_LEFT = 0x08U;
 
         [NativeTypeName("#define SDL_HAT_RIGHTUP (SDL_HAT_RIGHT|SDL_HAT_UP)")]
-        public const int SDL_HAT_RIGHTUP = (0x02 | 0x01);
+        public const uint SDL_HAT_RIGHTUP = (0x02U | 0x01U);
 
         [NativeTypeName("#define SDL_HAT_RIGHTDOWN (SDL_HAT_RIGHT|SDL_HAT_DOWN)")]
-        public const int SDL_HAT_RIGHTDOWN = (0x02 | 0x04);
+        public const uint SDL_HAT_RIGHTDOWN = (0x02U | 0x04U);
 
         [NativeTypeName("#define SDL_HAT_LEFTUP (SDL_HAT_LEFT|SDL_HAT_UP)")]
-        public const int SDL_HAT_LEFTUP = (0x08 | 0x01);
+        public const uint SDL_HAT_LEFTUP = (0x08U | 0x01U);
 
         [NativeTypeName("#define SDL_HAT_LEFTDOWN (SDL_HAT_LEFT|SDL_HAT_DOWN)")]
-        public const int SDL_HAT_LEFTDOWN = (0x08 | 0x04);
+        public const uint SDL_HAT_LEFTDOWN = (0x08U | 0x04U);
     }
 }

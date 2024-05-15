@@ -23,41 +23,52 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    [Flags]
-    public enum SDL_InitFlags
-    {
-        SDL_INIT_TIMER = 0x00000001,
-        SDL_INIT_AUDIO = 0x00000010,
-        SDL_INIT_VIDEO = 0x00000020,
-        SDL_INIT_JOYSTICK = 0x00000200,
-        SDL_INIT_HAPTIC = 0x00001000,
-        SDL_INIT_GAMEPAD = 0x00002000,
-        SDL_INIT_EVENTS = 0x00004000,
-        SDL_INIT_SENSOR = 0x00008000,
-        SDL_INIT_CAMERA = 0x00010000,
-    }
-
     public static partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_Init([NativeTypeName("Uint32")] uint flags);
+        public static extern int SDL_Init(SDL_InitFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_InitSubSystem([NativeTypeName("Uint32")] uint flags);
+        public static extern int SDL_InitSubSystem(SDL_InitFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_QuitSubSystem([NativeTypeName("Uint32")] uint flags);
+        public static extern void SDL_QuitSubSystem(SDL_InitFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_WasInit([NativeTypeName("Uint32")] uint flags);
+        public static extern SDL_InitFlags SDL_WasInit(SDL_InitFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Quit();
+
+        [NativeTypeName("#define SDL_INIT_TIMER 0x00000001u")]
+        public const uint SDL_INIT_TIMER = 0x00000001U;
+
+        [NativeTypeName("#define SDL_INIT_AUDIO 0x00000010u")]
+        public const uint SDL_INIT_AUDIO = 0x00000010U;
+
+        [NativeTypeName("#define SDL_INIT_VIDEO 0x00000020u")]
+        public const uint SDL_INIT_VIDEO = 0x00000020U;
+
+        [NativeTypeName("#define SDL_INIT_JOYSTICK 0x00000200u")]
+        public const uint SDL_INIT_JOYSTICK = 0x00000200U;
+
+        [NativeTypeName("#define SDL_INIT_HAPTIC 0x00001000u")]
+        public const uint SDL_INIT_HAPTIC = 0x00001000U;
+
+        [NativeTypeName("#define SDL_INIT_GAMEPAD 0x00002000u")]
+        public const uint SDL_INIT_GAMEPAD = 0x00002000U;
+
+        [NativeTypeName("#define SDL_INIT_EVENTS 0x00004000u")]
+        public const uint SDL_INIT_EVENTS = 0x00004000U;
+
+        [NativeTypeName("#define SDL_INIT_SENSOR 0x00008000u")]
+        public const uint SDL_INIT_SENSOR = 0x00008000U;
+
+        [NativeTypeName("#define SDL_INIT_CAMERA 0x00010000u")]
+        public const uint SDL_INIT_CAMERA = 0x00010000U;
     }
 }

@@ -117,12 +117,12 @@ namespace SDL
     {
         public SDL_GamepadBindingType input_type;
 
-        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L196_C5")]
+        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L229_C5")]
         public _input_e__Union input;
 
         public SDL_GamepadBindingType output_type;
 
-        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L216_C5")]
+        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L249_C5")]
         public _output_e__Union output;
 
         [StructLayout(LayoutKind.Explicit)]
@@ -132,11 +132,11 @@ namespace SDL
             public int button;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L200_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L233_C9")]
             public _axis_e__Struct axis;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L207_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L240_C9")]
             public _hat_e__Struct hat;
 
             public partial struct _axis_e__Struct
@@ -163,7 +163,7 @@ namespace SDL
             public SDL_GamepadButton button;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L220_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L253_C9")]
             public _axis_e__Struct axis;
 
             public partial struct _axis_e__Struct

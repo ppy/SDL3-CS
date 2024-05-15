@@ -12,14 +12,14 @@ namespace SDL
     [Typedef]
     public enum SDL_AudioFormat : UInt16
     {
-        SDL_AUDIO_U8 = SDL3.SDL_AUDIO_U8,
-        SDL_AUDIO_S8 = SDL3.SDL_AUDIO_S8,
-        SDL_AUDIO_S16LE = SDL3.SDL_AUDIO_S16LE,
-        SDL_AUDIO_S16BE = SDL3.SDL_AUDIO_S16BE,
-        SDL_AUDIO_S32LE = SDL3.SDL_AUDIO_S32LE,
-        SDL_AUDIO_S32BE = SDL3.SDL_AUDIO_S32BE,
-        SDL_AUDIO_F32LE = SDL3.SDL_AUDIO_F32LE,
-        SDL_AUDIO_F32BE = SDL3.SDL_AUDIO_F32BE,
+        SDL_AUDIO_U8 = (UInt16)SDL3.SDL_AUDIO_U8,
+        SDL_AUDIO_S8 = (UInt16)SDL3.SDL_AUDIO_S8,
+        SDL_AUDIO_S16LE = (UInt16)SDL3.SDL_AUDIO_S16LE,
+        SDL_AUDIO_S16BE = (UInt16)SDL3.SDL_AUDIO_S16BE,
+        SDL_AUDIO_S32LE = (UInt16)SDL3.SDL_AUDIO_S32LE,
+        SDL_AUDIO_S32BE = (UInt16)SDL3.SDL_AUDIO_S32BE,
+        SDL_AUDIO_F32LE = (UInt16)SDL3.SDL_AUDIO_F32LE,
+        SDL_AUDIO_F32BE = (UInt16)SDL3.SDL_AUDIO_F32BE,
     }
 
     public static partial class SDL3
@@ -34,7 +34,7 @@ namespace SDL
         public static readonly SDL_AudioFormat SDL_AUDIO_F32 = BitConverter.IsLittleEndian ? SDL_AudioFormat.SDL_AUDIO_F32LE : SDL_AudioFormat.SDL_AUDIO_F32BE;
 
         [Macro]
-        public static int SDL_AUDIO_BITSIZE(SDL_AudioFormat x) => (UInt16)x & SDL_AUDIO_MASK_BITSIZE;
+        public static int SDL_AUDIO_BITSIZE(SDL_AudioFormat x) => (int)((UInt16)x & SDL_AUDIO_MASK_BITSIZE);
 
         [Macro]
         public static int SDL_AUDIO_BYTESIZE(SDL_AudioFormat x) => SDL_AUDIO_BITSIZE(x) / 8;
