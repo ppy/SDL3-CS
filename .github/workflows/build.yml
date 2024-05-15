@@ -91,52 +91,55 @@ jobs:
 
       - name: Build
         if: ${{ !contains(matrix.platform.container, 'arm') }}
+        shell: bash
         run: |
-          # Setup Linux dependencies
-          if [[ ${{ matrix.platform.target_apt_arch }} == :i386 ]]; then
-            sudo dpkg --add-architecture i386
+          if [[ ${{ runner.os }} == 'Linux' ]]; then
+            # Setup Linux dependencies
+            if [[ ${{ matrix.platform.target_apt_arch }} == :i386 ]]; then
+              sudo dpkg --add-architecture i386
+            fi
+
+            sudo apt-get update -y -qq
+
+            if [[ ${{ matrix.platform.target_apt_arch }} == :i386 ]]; then
+              # Workaround GitHub's ubuntu-20.04 image issue <https://github.com/actions/virtual-environments/issues/4589>
+              sudo apt-get install -y --allow-downgrades libpcre2-8-0=10.34-7
+            fi
+
+            sudo apt-get install -y \
+              gcc-multilib \
+              g++-multilib \
+              cmake \
+              ninja-build \
+              wayland-scanner++ \
+              wayland-protocols \
+              pkg-config${{ matrix.platform.target_apt_arch }} \
+              libasound2-dev${{ matrix.platform.target_apt_arch }} \
+              libdbus-1-dev${{ matrix.platform.target_apt_arch }} \
+              libegl1-mesa-dev${{ matrix.platform.target_apt_arch }} \
+              libgl1-mesa-dev${{ matrix.platform.target_apt_arch }} \
+              libgles2-mesa-dev${{ matrix.platform.target_apt_arch }} \
+              libglu1-mesa-dev${{ matrix.platform.target_apt_arch }} \
+              libibus-1.0-dev${{ matrix.platform.target_apt_arch }} \
+              libpulse-dev${{ matrix.platform.target_apt_arch }} \
+              libsndio-dev${{ matrix.platform.target_apt_arch }} \
+              libudev-dev${{ matrix.platform.target_apt_arch }} \
+              libwayland-dev${{ matrix.platform.target_apt_arch }} \
+              libx11-dev${{ matrix.platform.target_apt_arch }} \
+              libxcursor-dev${{ matrix.platform.target_apt_arch }} \
+              libxext-dev${{ matrix.platform.target_apt_arch }} \
+              libxi-dev${{ matrix.platform.target_apt_arch }} \
+              libxinerama-dev${{ matrix.platform.target_apt_arch }} \
+              libxkbcommon-dev${{ matrix.platform.target_apt_arch }} \
+              libxrandr-dev${{ matrix.platform.target_apt_arch }} \
+              libxss-dev${{ matrix.platform.target_apt_arch }} \
+              libxt-dev${{ matrix.platform.target_apt_arch }} \
+              libxv-dev${{ matrix.platform.target_apt_arch }} \
+              libxxf86vm-dev${{ matrix.platform.target_apt_arch }} \
+              libdrm-dev${{ matrix.platform.target_apt_arch }} \
+              libgbm-dev${{ matrix.platform.target_apt_arch }} \
+              libpulse-dev${{ matrix.platform.target_apt_arch }}
           fi
-
-          sudo apt-get update -y -qq
-
-          if [[ ${{ matrix.platform.target_apt_arch }} == :i386 ]]; then
-            # Workaround GitHub's ubuntu-20.04 image issue <https://github.com/actions/virtual-environments/issues/4589>
-            sudo apt-get install -y --allow-downgrades libpcre2-8-0=10.34-7
-          fi
-
-          sudo apt-get install -y \
-            gcc-multilib \
-            g++-multilib \
-            cmake \
-            ninja-build \
-            wayland-scanner++ \
-            wayland-protocols \
-            pkg-config${{ matrix.platform.target_apt_arch }} \
-            libasound2-dev${{ matrix.platform.target_apt_arch }} \
-            libdbus-1-dev${{ matrix.platform.target_apt_arch }} \
-            libegl1-mesa-dev${{ matrix.platform.target_apt_arch }} \
-            libgl1-mesa-dev${{ matrix.platform.target_apt_arch }} \
-            libgles2-mesa-dev${{ matrix.platform.target_apt_arch }} \
-            libglu1-mesa-dev${{ matrix.platform.target_apt_arch }} \
-            libibus-1.0-dev${{ matrix.platform.target_apt_arch }} \
-            libpulse-dev${{ matrix.platform.target_apt_arch }} \
-            libsndio-dev${{ matrix.platform.target_apt_arch }} \
-            libudev-dev${{ matrix.platform.target_apt_arch }} \
-            libwayland-dev${{ matrix.platform.target_apt_arch }} \
-            libx11-dev${{ matrix.platform.target_apt_arch }} \
-            libxcursor-dev${{ matrix.platform.target_apt_arch }} \
-            libxext-dev${{ matrix.platform.target_apt_arch }} \
-            libxi-dev${{ matrix.platform.target_apt_arch }} \
-            libxinerama-dev${{ matrix.platform.target_apt_arch }} \
-            libxkbcommon-dev${{ matrix.platform.target_apt_arch }} \
-            libxrandr-dev${{ matrix.platform.target_apt_arch }} \
-            libxss-dev${{ matrix.platform.target_apt_arch }} \
-            libxt-dev${{ matrix.platform.target_apt_arch }} \
-            libxv-dev${{ matrix.platform.target_apt_arch }} \
-            libxxf86vm-dev${{ matrix.platform.target_apt_arch }} \
-            libdrm-dev${{ matrix.platform.target_apt_arch }} \
-            libgbm-dev${{ matrix.platform.target_apt_arch }} \
-            libpulse-dev${{ matrix.platform.target_apt_arch }}
           
           # Configure CMake
           ${{ matrix.platform.cmake_configure_env }} cmake -B build ${{ matrix.platform.flags }} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
