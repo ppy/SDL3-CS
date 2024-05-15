@@ -90,7 +90,7 @@ namespace SDL.Tests
         public void Create()
         {
             sdlWindowHandle = SDL_CreateWindow("hello"u8, 800, 600, SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY);
-            renderer = SDL_CreateRenderer(sdlWindowHandle, null, SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
+            renderer = SDL_CreateRenderer(sdlWindowHandle, (Utf8String)null);
         }
 
         private void handleEvent(SDL_Event e)
@@ -155,7 +155,7 @@ namespace SDL.Tests
                             break;
 
                         case SDL_Keycode.SDLK_m:
-                            SDL_Keymod mod = e.key.keysym.Mod;
+                            SDL_Keymod mod = e.key.keysym.mod;
                             Console.WriteLine(mod);
                             break;
                     }
@@ -195,7 +195,7 @@ namespace SDL.Tests
 
             do
             {
-                eventsRead = SDL_PeepEvents(events, SDL_eventaction.SDL_GETEVENT, SDL_EventType.SDL_EVENT_FIRST, SDL_EventType.SDL_EVENT_LAST);
+                eventsRead = SDL_PeepEvents(events, SDL_EventAction.SDL_GETEVENT, SDL_EventType.SDL_EVENT_FIRST, SDL_EventType.SDL_EVENT_LAST);
                 for (int i = 0; i < eventsRead; i++)
                     handleEvent(events[i]);
             } while (eventsRead == events_per_peep);
