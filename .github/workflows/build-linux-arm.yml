@@ -39,12 +39,6 @@ jobs:
           image: ${{ matrix.platform.container }}
           options: -v ${{ github.workspace }}:/workspace
           run: |
-            cd /workspace
-            echo "Hello World!"
-            uname -a
-            
-            ls .
-
             apt update -y -qq
             apt install -y \
               gcc \
@@ -80,6 +74,7 @@ jobs:
               libgbm-dev \
               libpulse-dev
 
+            cd /workspace
             cmake -B build -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
             cmake --build build/ --config Release
             cmake --install build/ --prefix install_output --config Release
