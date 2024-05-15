@@ -15,18 +15,84 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - { name: win-x64,   os: windows-latest, flags: -A x64                                                                            }
-          - { name: win-x86,   os: windows-latest, flags: -A Win32                                                                          }
-          - { name: win-arm64, os: windows-latest, flags: -A ARM64                                                                          }
-          - { name: linux-x64, os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":amd64"                                               }
-          - { name: linux-x86, os: ubuntu-20.04,   flags: -GNinja, cmake_configure_env: CFLAGS=-m32 CXXFLAGS=-m32, target_apt_arch: ":i386" }
-          - { name: osx-x64,   os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET="10.14"          }
+          - { name: win-x64,     os: windows-latest, flags: -A x64                                                                            }
+          - { name: win-x86,     os: windows-latest, flags: -A Win32                                                                          }
+          - { name: win-arm64,   os: windows-latest, flags: -A ARM64                                                                          }
+          - { name: linux-x64,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":amd64"                                               }
+          - { name: linux-x86,   os: ubuntu-20.04,   flags: -GNinja, cmake_configure_env: CFLAGS=-m32 CXXFLAGS=-m32, target_apt_arch: ":i386" }
+          - { name: linux-arm64, os: ubuntu-20.04,   container: arm64v8/ubuntu }
+          - { name: linux-arm,   os: ubuntu-20.04,   container: arm32v7/ubuntu }
+          - { name: osx-x64,     os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET="10.14"          }
           # NOTE: macOS 11.0 is the first released supported by Apple Silicon.
-          - { name: osx-arm64, os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET="11.0"            }
+          - { name: osx-arm64,   os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET="11.0"            }
     steps:
-      - name: Setup Linux dependencies
-        if: runner.os == 'Linux'
+      - uses: actions/checkout@v4
+        with:
+          repository: 'libsdl-org/SDL'
+          ref: 'main'
+
+      - uses: actions/checkout@v4
+        with:
+          path: 'SDL3-CS'
+
+      - name: Set up QEMU
+        if: contains(matrix.platform.container, 'arm')
+        uses: docker/setup-qemu-action@v3
+
+      - name: Build (Linux ARM)
+        if: contains(matrix.platform.container, 'arm')
+        uses: addnab/docker-run-action@v3
+        with:
+          image: ${{ matrix.platform.container }}
+          options: -v ${{ github.workspace }}:/workspace
+          run: |
+            apt update -y -qq
+            apt install -y \
+              gcc \
+              g++ \
+              cmake \
+              ninja-build \
+              wayland-scanner++ \
+              wayland-protocols \
+              pkg-config \
+              libasound2-dev \
+              libdbus-1-dev \
+              libegl1-mesa-dev \
+              libgl1-mesa-dev \
+              libgles2-mesa-dev \
+              libglu1-mesa-dev \
+              libibus-1.0-dev \
+              libpulse-dev \
+              libsndio-dev \
+              libudev-dev \
+              libwayland-dev \
+              libx11-dev \
+              libxcursor-dev \
+              libxext-dev \
+              libxi-dev \
+              libxinerama-dev \
+              libxkbcommon-dev \
+              libxrandr-dev \
+              libxss-dev \
+              libxt-dev \
+              libxv-dev \
+              libxxf86vm-dev \
+              libdrm-dev \
+              libgbm-dev \
+              libpulse-dev
+
+            cd /workspace
+            cmake -B build -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
+            cmake --build build/ --config Release
+            cmake --install build/ --prefix install_output --config Release
+            
+            mkdir -p SDL3-CS/native/${{ matrix.platform.name }}
+            cp install_output/lib/libSDL3.so SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.so
+
+      - name: Build
+        if: runner.os == 'Linux' && !contains(matrix.platform.container, 'arm')
         run: |
+          # Setup Linux dependencies
           if [[ ${{ matrix.platform.target_apt_arch }} == :i386 ]]; then
             sudo dpkg --add-architecture i386
           fi
@@ -71,49 +137,37 @@ jobs:
             libdrm-dev${{ matrix.platform.target_apt_arch }} \
             libgbm-dev${{ matrix.platform.target_apt_arch }} \
             libpulse-dev${{ matrix.platform.target_apt_arch }}
+          
+          # Configure CMake
+          ${{ matrix.platform.cmake_configure_env }} cmake -B build ${{ matrix.platform.flags }} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
+          
+          # Build
+          cmake --build build/ --config Release
 
-      - uses: actions/checkout@v4
-        with:
-          repository: 'libsdl-org/SDL'
-          ref: 'main'
+          if [[ ${{ runner.os }} == 'Windows' ]]; then
+            # Install (Windows)
+            cmake --install build/ --prefix install_output --config Release
 
-      - uses: actions/checkout@v4
-        with:
-          path: 'SDL3-CS'
+            # Prepare release directory (Windows)
+            mkdir -Force SDL3-CS/native/${{ matrix.platform.name }}
+          else
+            # Install
+            sudo cmake --install build/ --prefix install_output --config Release
 
-      - name: Configure CMake
-        run:  ${{ matrix.platform.cmake_configure_env }} cmake -B build ${{ matrix.platform.flags }} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
+            # Prepare release directory
+            mkdir -p SDL3-CS/native/${{ matrix.platform.name }}
+          fi
 
-      - name: Build
-        run: cmake --build build/ --config Release
-
-      - name: Install (Windows)
-        run: cmake --install build/ --prefix install_output --config Release
-        if: runner.os == 'Windows'
-
-      - name: Install
-        run: sudo cmake --install build/ --prefix install_output --config Release
-        if: runner.os != 'Windows'
-
-      - name: Prepare release directory (Windows)
-        run: mkdir -Force SDL3-CS/native/${{ matrix.platform.name }}
-        if: runner.os == 'Windows'
-
-      - name: Prepare release directory
-        run: mkdir -p SDL3-CS/native/${{ matrix.platform.name }}
-        if: runner.os != 'Windows'
-
-      - name: Prepare release (Windows)
-        run: cp install_output/bin/SDL3.dll SDL3-CS/native/${{ matrix.platform.name }}/SDL3.dll
-        if: runner.os == 'Windows'
-
-      - name: Prepare release (Linux)
-        run: cp install_output/lib/libSDL3.so SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.so
-        if: runner.os == 'Linux'
-
-      - name: Prepare release (macOS)
-        run: cp install_output/lib/libSDL3.dylib SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.dylib
-        if: runner.os == 'macOS'
+          if [[ ${{ runner.os }} == 'Windows' ]]; then
+            # Prepare release (Windows)
+            cp install_output/bin/SDL3.dll SDL3-CS/native/${{ matrix.platform.name }}/SDL3.dll
+          elif [[ ${{ runner.os }} == 'Linux' ]]; then
+            # Prepare release (Linux)
+            cp install_output/lib/libSDL3.so SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.so
+          elif [[ ${{ runner.os }} == 'macOS' ]]; then
+            # Prepare release (macOS)
+            cp install_output/lib/libSDL3.dylib SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.dylib
+          fi
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
