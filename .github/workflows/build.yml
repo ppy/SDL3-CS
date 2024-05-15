@@ -90,7 +90,7 @@ jobs:
             cp install_output/lib/libSDL3.so SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.so
 
       - name: Build
-        if: runner.os == 'Linux' && !contains(matrix.platform.container, 'arm')
+        if: !contains(matrix.platform.container, 'arm')
         run: |
           # Setup Linux dependencies
           if [[ ${{ matrix.platform.target_apt_arch }} == :i386 ]]; then
