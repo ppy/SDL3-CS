@@ -1,7 +1,12 @@
 name: cross compile linux
 
 on:
-  push:
+  workflow_dispatch:
+    inputs: {}
+#  schedule:
+#    - cron: '0 0 * * *'
+env:
+  BUILD_TYPE: Release
 
 jobs:
   build:
@@ -10,7 +15,6 @@ jobs:
       fail-fast: false
       matrix:
           platform:
-          - { name: linux-x64,   container: amd64/ubuntu   }
           - { name: linux-arm64, container: arm64v8/ubuntu }
           - { name: linux-arm,   container: arm32v7/ubuntu }
     steps:
