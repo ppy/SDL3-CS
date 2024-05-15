@@ -15,16 +15,16 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - { name: win-x64,     os: windows-latest, flags: -A x64                                                                            }
-          - { name: win-x86,     os: windows-latest, flags: -A Win32                                                                          }
-          - { name: win-arm64,   os: windows-latest, flags: -A ARM64                                                                          }
-          - { name: linux-x64,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":amd64"                                               }
-          - { name: linux-x86,   os: ubuntu-20.04,   flags: -GNinja, cmake_configure_env: CFLAGS=-m32 CXXFLAGS=-m32, target_apt_arch: ":i386" }
+          - { name: win-x64,     os: windows-latest, flags: -A x64 }
+          - { name: win-x86,     os: windows-latest, flags: -A Win32 }
+          - { name: win-arm64,   os: windows-latest, flags: -A ARM64 }
+          - { name: linux-x64,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":amd64"}
+          - { name: linux-x86,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":i386" }
           - { name: linux-arm64, os: ubuntu-20.04,   container: arm64v8/ubuntu }
           - { name: linux-arm,   os: ubuntu-20.04,   container: arm32v7/ubuntu }
-          - { name: osx-x64,     os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET="10.14"          }
+          - { name: osx-x64,     os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET="10.14" }
           # NOTE: macOS 11.0 is the first released supported by Apple Silicon.
-          - { name: osx-arm64,   os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET="11.0"            }
+          - { name: osx-arm64,   os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET="11.0" }
     steps:
       - uses: actions/checkout@v4
         with:
@@ -44,7 +44,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ${{ matrix.platform.container }}
-          options: -v ${{ github.workspace }}:/workspace
+          options: -v ${{ github.workspace }}:/workspace -e NAME=${{ matrix.platform.name }} -e BUILD_TYPE=${{ env.BUILD_TYPE }}
           run: |
             apt update -y -qq
             apt install -y \
@@ -86,22 +86,28 @@ jobs:
             cmake --build build/ --config Release
             cmake --install build/ --prefix install_output --config Release
             
-            mkdir -p SDL3-CS/native/${{ matrix.platform.name }}
-            cp install_output/lib/libSDL3.so SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.so
+            mkdir -p SDL3-CS/native/$NAME
+            cp install_output/lib/libSDL3.so SDL3-CS/native/$NAME/libSDL3.so
 
       - name: Build
         if: ${{ !contains(matrix.platform.container, 'arm') }}
         shell: bash
+        env:
+          NAME: ${{ matrix.platform.name }}
+          TARGET_APT_ARCH: ${{ matrix.platform.target_apt_arch }}
+          RUNNER_OS: ${{ runner.os }}
+          FLAGS: ${{ matrix.platform.flags }}
+
         run: |
-          if [[ ${{ runner.os }} == 'Linux' ]]; then
+          if [[ $RUNNER_OS == 'Linux' ]]; then
             # Setup Linux dependencies
-            if [[ ${{ matrix.platform.target_apt_arch }} == :i386 ]]; then
+            if [[ $TARGET_APT_ARCH == :i386 ]]; then
               sudo dpkg --add-architecture i386
             fi
 
             sudo apt-get update -y -qq
 
-            if [[ ${{ matrix.platform.target_apt_arch }} == :i386 ]]; then
+            if [[ $TARGET_APT_ARCH == :i386 ]]; then
               # Workaround GitHub's ubuntu-20.04 image issue <https://github.com/actions/virtual-environments/issues/4589>
               sudo apt-get install -y --allow-downgrades libpcre2-8-0=10.34-7
             fi
@@ -113,63 +119,59 @@ jobs:
               ninja-build \
               wayland-scanner++ \
               wayland-protocols \
-              pkg-config${{ matrix.platform.target_apt_arch }} \
-              libasound2-dev${{ matrix.platform.target_apt_arch }} \
-              libdbus-1-dev${{ matrix.platform.target_apt_arch }} \
-              libegl1-mesa-dev${{ matrix.platform.target_apt_arch }} \
-              libgl1-mesa-dev${{ matrix.platform.target_apt_arch }} \
-              libgles2-mesa-dev${{ matrix.platform.target_apt_arch }} \
-              libglu1-mesa-dev${{ matrix.platform.target_apt_arch }} \
-              libibus-1.0-dev${{ matrix.platform.target_apt_arch }} \
-              libpulse-dev${{ matrix.platform.target_apt_arch }} \
-              libsndio-dev${{ matrix.platform.target_apt_arch }} \
-              libudev-dev${{ matrix.platform.target_apt_arch }} \
-              libwayland-dev${{ matrix.platform.target_apt_arch }} \
-              libx11-dev${{ matrix.platform.target_apt_arch }} \
-              libxcursor-dev${{ matrix.platform.target_apt_arch }} \
-              libxext-dev${{ matrix.platform.target_apt_arch }} \
-              libxi-dev${{ matrix.platform.target_apt_arch }} \
-              libxinerama-dev${{ matrix.platform.target_apt_arch }} \
-              libxkbcommon-dev${{ matrix.platform.target_apt_arch }} \
-              libxrandr-dev${{ matrix.platform.target_apt_arch }} \
-              libxss-dev${{ matrix.platform.target_apt_arch }} \
-              libxt-dev${{ matrix.platform.target_apt_arch }} \
-              libxv-dev${{ matrix.platform.target_apt_arch }} \
-              libxxf86vm-dev${{ matrix.platform.target_apt_arch }} \
-              libdrm-dev${{ matrix.platform.target_apt_arch }} \
-              libgbm-dev${{ matrix.platform.target_apt_arch }} \
-              libpulse-dev${{ matrix.platform.target_apt_arch }}
+              pkg-config$TARGET_APT_ARCH \
+              libasound2-dev$TARGET_APT_ARCH \
+              libdbus-1-dev$TARGET_APT_ARCH \
+              libegl1-mesa-dev$TARGET_APT_ARCH \
+              libgl1-mesa-dev$TARGET_APT_ARCH \
+              libgles2-mesa-dev$TARGET_APT_ARCH \
+              libglu1-mesa-dev$TARGET_APT_ARCH \
+              libibus-1.0-dev$TARGET_APT_ARCH \
+              libpulse-dev$TARGET_APT_ARCH \
+              libsndio-dev$TARGET_APT_ARCH \
+              libudev-dev$TARGET_APT_ARCH \
+              libwayland-dev$TARGET_APT_ARCH \
+              libx11-dev$TARGET_APT_ARCH \
+              libxcursor-dev$TARGET_APT_ARCH \
+              libxext-dev$TARGET_APT_ARCH \
+              libxi-dev$TARGET_APT_ARCH \
+              libxinerama-dev$TARGET_APT_ARCH \
+              libxkbcommon-dev$TARGET_APT_ARCH \
+              libxrandr-dev$TARGET_APT_ARCH \
+              libxss-dev$TARGET_APT_ARCH \
+              libxt-dev$TARGET_APT_ARCH \
+              libxv-dev$TARGET_APT_ARCH \
+              libxxf86vm-dev$TARGET_APT_ARCH \
+              libdrm-dev$TARGET_APT_ARCH \
+              libgbm-dev$TARGET_APT_ARCH \
+              libpulse-dev$TARGET_APT_ARCH
           fi
           
           # Configure CMake
-          ${{ matrix.platform.cmake_configure_env }} cmake -B build ${{ matrix.platform.flags }} -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
+          cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
           
           # Build
           cmake --build build/ --config Release
 
-          if [[ ${{ runner.os }} == 'Windows' ]]; then
+          if [[ $RUNNER_OS == 'Windows' ]]; then
             # Install (Windows)
             cmake --install build/ --prefix install_output --config Release
-
-            # Prepare release directory (Windows)
-            mkdir -Force SDL3-CS/native/${{ matrix.platform.name }}
           else
             # Install
             sudo cmake --install build/ --prefix install_output --config Release
-
-            # Prepare release directory
-            mkdir -p SDL3-CS/native/${{ matrix.platform.name }}
           fi
 
-          if [[ ${{ runner.os }} == 'Windows' ]]; then
+          mkdir -p SDL3-CS/native/$NAME
+
+          if [[ $RUNNER_OS == 'Windows' ]]; then
             # Prepare release (Windows)
-            cp install_output/bin/SDL3.dll SDL3-CS/native/${{ matrix.platform.name }}/SDL3.dll
-          elif [[ ${{ runner.os }} == 'Linux' ]]; then
+            cp install_output/bin/SDL3.dll SDL3-CS/native/$NAME/SDL3.dll
+          elif [[ $RUNNER_OS == 'Linux' ]]; then
             # Prepare release (Linux)
-            cp install_output/lib/libSDL3.so SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.so
-          elif [[ ${{ runner.os }} == 'macOS' ]]; then
+            cp install_output/lib/libSDL3.so SDL3-CS/native/$NAME/libSDL3.so
+          elif [[ $RUNNER_OS == 'macOS' ]]; then
             # Prepare release (macOS)
-            cp install_output/lib/libSDL3.dylib SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.dylib
+            cp install_output/lib/libSDL3.dylib SDL3-CS/native/$NAME/libSDL3.dylib
           fi
 
       - name: Create pull request
