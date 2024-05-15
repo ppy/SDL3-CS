@@ -6,10 +6,11 @@ namespace SDL
     public static partial class SDL3
     {
         [Macro]
-        public static int SDL_OutOfMemory() => SDL_Error(SDL_errorcode.SDL_ENOMEM);
-
-        [Macro]
-        public static int SDL_Unsupported() => SDL_Error(SDL_errorcode.SDL_UNSUPPORTED);
+        public static unsafe int SDL_Unsupported()
+        {
+            fixed (byte* fmt = "That operation is not supported"u8)
+                return SDL_SetError(fmt, __arglist());
+        }
 
         [Macro]
         public static unsafe int SDL_InvalidParamError([NativeTypeName("const char *")] byte* param)

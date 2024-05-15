@@ -23,17 +23,17 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System.Runtime.InteropServices;
-
 namespace SDL
 {
-    public static unsafe partial class SDL3
+    public static partial class SDL3
     {
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetVersion();
+        [NativeTypeName("#define SDL_MAJOR_VERSION 3")]
+        public const int SDL_MAJOR_VERSION = 3;
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetRevision", ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Unsafe_SDL_GetRevision();
+        [NativeTypeName("#define SDL_MINOR_VERSION 1")]
+        public const int SDL_MINOR_VERSION = 1;
+
+        [NativeTypeName("#define SDL_MICRO_VERSION 2")]
+        public const int SDL_MICRO_VERSION = 2;
     }
 }

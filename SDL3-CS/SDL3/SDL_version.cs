@@ -6,17 +6,22 @@ namespace SDL
     public static partial class SDL3
     {
         [Macro]
-        public static void SDL_VERSION(ref SDL_Version version)
-        {
-            version.major = SDL_MAJOR_VERSION;
-            version.minor = SDL_MINOR_VERSION;
-            version.patch = SDL_PATCHLEVEL;
-        }
+        public static int SDL_VERSIONNUM(int major, int minor, int patch) =>
+            ((major) * 1000000 + (minor) * 1000 + (patch));
 
         [Macro]
-        public static int SDL_VERSIONNUM(int X, int Y, int Z) => ((X) << 24 | (Y) << 8 | (Z) << 0);
+        public static int SDL_VERSIONNUM_MAJOR(int version) => ((version) / 1000000);
 
         [Macro]
-        public static bool SDL_VERSION_ATLEAST(int X, int Y, int Z) => SDL_COMPILEDVERSION >= SDL_VERSIONNUM(X, Y, Z);
+        public static int SDL_VERSIONNUM_MINOR(int version) => (((version) / 1000) % 1000);
+
+        [Macro]
+        public static int SDL_VERSIONNUM_MICRO(int version) => ((version) % 1000);
+
+        [Constant]
+        public static readonly int SDL_VERSION = SDL_VERSIONNUM(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_MICRO_VERSION);
+
+        [Macro]
+        public static bool SDL_VERSION_ATLEAST(int X, int Y, int Z) => SDL_VERSION >= SDL_VERSIONNUM(X, Y, Z);
     }
 }

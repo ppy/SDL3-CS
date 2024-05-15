@@ -583,23 +583,23 @@ namespace SDL
         [NativeTypeName("#define SDL_MIN_UINT32 ((Uint32)0x00000000)")]
         public const uint SDL_MIN_UINT32 = ((uint)(0x00000000));
 
-        [NativeTypeName("#define SDL_MAX_SINT64 ((Sint64)0x7FFFFFFFFFFFFFFFll)")]
-        public const long SDL_MAX_SINT64 = ((long)(0x7FFFFFFFFFFFFFFFL));
+        [NativeTypeName("#define SDL_MAX_SINT64 SDL_SINT64_C(0x7FFFFFFFFFFFFFFF)")]
+        public const long SDL_MAX_SINT64 = (0x7FFFFFFFFFFFFFFFL);
 
-        [NativeTypeName("#define SDL_MIN_SINT64 ((Sint64)(~0x7FFFFFFFFFFFFFFFll))")]
-        public const long SDL_MIN_SINT64 = ((long)(~0x7FFFFFFFFFFFFFFFL));
+        [NativeTypeName("#define SDL_MIN_SINT64 ~SDL_SINT64_C(0x7FFFFFFFFFFFFFFF)")]
+        public const long SDL_MIN_SINT64 = ~(0x7FFFFFFFFFFFFFFFL);
 
-        [NativeTypeName("#define SDL_MAX_UINT64 ((Uint64)0xFFFFFFFFFFFFFFFFull)")]
-        public const ulong SDL_MAX_UINT64 = ((ulong)(0xFFFFFFFFFFFFFFFFUL));
+        [NativeTypeName("#define SDL_MAX_UINT64 SDL_UINT64_C(0xFFFFFFFFFFFFFFFF)")]
+        public const ulong SDL_MAX_UINT64 = (0xFFFFFFFFFFFFFFFFUL);
 
-        [NativeTypeName("#define SDL_MIN_UINT64 ((Uint64)(0x0000000000000000ull))")]
-        public const ulong SDL_MIN_UINT64 = ((ulong)(0x0000000000000000UL));
+        [NativeTypeName("#define SDL_MIN_UINT64 SDL_UINT64_C(0x0000000000000000)")]
+        public const ulong SDL_MIN_UINT64 = (0x0000000000000000UL);
 
         [NativeTypeName("#define SDL_MAX_TIME SDL_MAX_SINT64")]
-        public const long SDL_MAX_TIME = ((long)(0x7FFFFFFFFFFFFFFFL));
+        public const long SDL_MAX_TIME = (0x7FFFFFFFFFFFFFFFL);
 
         [NativeTypeName("#define SDL_MIN_TIME SDL_MIN_SINT64")]
-        public const long SDL_MIN_TIME = ((long)(~0x7FFFFFFFFFFFFFFFL));
+        public const long SDL_MIN_TIME = ~(0x7FFFFFFFFFFFFFFFL);
 
         [NativeTypeName("#define SDL_FLT_EPSILON 1.1920928955078125e-07F")]
         public const float SDL_FLT_EPSILON = 1.1920928955078125e-07F;

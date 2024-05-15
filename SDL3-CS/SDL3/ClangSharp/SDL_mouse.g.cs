@@ -150,18 +150,18 @@ namespace SDL
         public const int SDL_BUTTON_X2 = 5;
 
         [NativeTypeName("#define SDL_BUTTON_LMASK SDL_BUTTON(SDL_BUTTON_LEFT)")]
-        public const int SDL_BUTTON_LMASK = (1 << ((1) - 1));
+        public const uint SDL_BUTTON_LMASK = (1U << ((1) - 1));
 
         [NativeTypeName("#define SDL_BUTTON_MMASK SDL_BUTTON(SDL_BUTTON_MIDDLE)")]
-        public const int SDL_BUTTON_MMASK = (1 << ((2) - 1));
+        public const uint SDL_BUTTON_MMASK = (1U << ((2) - 1));
 
         [NativeTypeName("#define SDL_BUTTON_RMASK SDL_BUTTON(SDL_BUTTON_RIGHT)")]
-        public const int SDL_BUTTON_RMASK = (1 << ((3) - 1));
+        public const uint SDL_BUTTON_RMASK = (1U << ((3) - 1));
 
         [NativeTypeName("#define SDL_BUTTON_X1MASK SDL_BUTTON(SDL_BUTTON_X1)")]
-        public const int SDL_BUTTON_X1MASK = (1 << ((4) - 1));
+        public const uint SDL_BUTTON_X1MASK = (1U << ((4) - 1));
 
         [NativeTypeName("#define SDL_BUTTON_X2MASK SDL_BUTTON(SDL_BUTTON_X2)")]
-        public const int SDL_BUTTON_X2MASK = (1 << ((5) - 1));
+        public const uint SDL_BUTTON_X2MASK = (1U << ((5) - 1));
     }
 }

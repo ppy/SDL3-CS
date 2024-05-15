@@ -427,8 +427,8 @@ namespace SDL
         [NativeTypeName("#define SDL_HAPTIC_SINE (1u<<1)")]
         public const uint SDL_HAPTIC_SINE = (1U << 1);
 
-        [NativeTypeName("#define SDL_HAPTIC_SQUARE (1<<2)")]
-        public const int SDL_HAPTIC_SQUARE = (1 << 2);
+        [NativeTypeName("#define SDL_HAPTIC_SQUARE (1u<<2)")]
+        public const uint SDL_HAPTIC_SQUARE = (1U << 2);
 
         [NativeTypeName("#define SDL_HAPTIC_TRIANGLE (1u<<3)")]
         public const uint SDL_HAPTIC_TRIANGLE = (1U << 3);

@@ -23,33 +23,14 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    [Flags]
-    public enum SDL_MessageBoxFlags
-    {
-        SDL_MESSAGEBOX_ERROR = 0x00000010,
-        SDL_MESSAGEBOX_WARNING = 0x00000020,
-        SDL_MESSAGEBOX_INFORMATION = 0x00000040,
-        SDL_MESSAGEBOX_BUTTONS_LEFT_TO_RIGHT = 0x00000080,
-        SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT = 0x00000100,
-    }
-
-    [Flags]
-    public enum SDL_MessageBoxButtonFlags
-    {
-        SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT = 0x00000001,
-        SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT = 0x00000002,
-    }
-
     public unsafe partial struct SDL_MessageBoxButtonData
     {
-        [NativeTypeName("Uint32")]
-        public uint flags;
+        public SDL_MessageBoxButtonFlags flags;
 
         public int buttonID;
 
@@ -93,8 +74,7 @@ namespace SDL
 
     public unsafe partial struct SDL_MessageBoxData
     {
-        [NativeTypeName("Uint32")]
-        public uint flags;
+        public SDL_MessageBoxFlags flags;
 
         public SDL_Window* window;
 
@@ -119,6 +99,27 @@ namespace SDL
         public static extern int SDL_ShowMessageBox([NativeTypeName("const SDL_MessageBoxData *")] SDL_MessageBoxData* messageboxdata, int* buttonid);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ShowSimpleMessageBox([NativeTypeName("Uint32")] uint flags, [NativeTypeName("const char *")] byte* title, [NativeTypeName("const char *")] byte* message, SDL_Window* window);
+        public static extern int SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, [NativeTypeName("const char *")] byte* title, [NativeTypeName("const char *")] byte* message, SDL_Window* window);
+
+        [NativeTypeName("#define SDL_MESSAGEBOX_ERROR 0x00000010u")]
+        public const uint SDL_MESSAGEBOX_ERROR = 0x00000010U;
+
+        [NativeTypeName("#define SDL_MESSAGEBOX_WARNING 0x00000020u")]
+        public const uint SDL_MESSAGEBOX_WARNING = 0x00000020U;
+
+        [NativeTypeName("#define SDL_MESSAGEBOX_INFORMATION 0x00000040u")]
+        public const uint SDL_MESSAGEBOX_INFORMATION = 0x00000040U;
+
+        [NativeTypeName("#define SDL_MESSAGEBOX_BUTTONS_LEFT_TO_RIGHT 0x00000080u")]
+        public const uint SDL_MESSAGEBOX_BUTTONS_LEFT_TO_RIGHT = 0x00000080U;
+
+        [NativeTypeName("#define SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT 0x00000100u")]
+        public const uint SDL_MESSAGEBOX_BUTTONS_RIGHT_TO_LEFT = 0x00000100U;
+
+        [NativeTypeName("#define SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT 0x00000001u")]
+        public const uint SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT = 0x00000001U;
+
+        [NativeTypeName("#define SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT 0x00000002u")]
+        public const uint SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT = 0x00000002U;
     }
 }
