@@ -4,17 +4,25 @@ on:
   push:
 
 jobs:
-  buildx:
+  build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        container: ["amd64/ubuntu", "arm64v8/ubuntu", "arm32v7/ubuntu"]
+          platform:
+          - { name: linux-x64,   container: amd64/ubuntu   }
+          - { name: linux-arm64, container: arm64v8/ubuntu }
+          - { name: linux-arm,   container: arm32v7/ubuntu }
     steps:
       -
         uses: actions/checkout@v4
         with:
           repository: 'libsdl-org/SDL'
           ref: 'main'
+      -
+        uses: actions/checkout@v4
+        with:
+          path: 'SDL3-CS'
       -
         # Add support for more platforms with QEMU (optional)
         # https://github.com/docker/setup-qemu-action
@@ -24,12 +32,14 @@ jobs:
         name: Run build process with Docker
         uses: addnab/docker-run-action@v3
         with:
-          image: ${{ matrix.container }}
+          image: ${{ matrix.platform.container }}
           options: -v ${{ github.workspace }}:/workspace
           run: |
+            cd /workspace
             echo "Hello World!"
             uname -a
-            ls /workspace
+            
+            ls .
 
             apt update -y -qq
             apt install -y \
@@ -65,3 +75,22 @@ jobs:
               libdrm-dev \
               libgbm-dev \
               libpulse-dev
+
+            cmake -B build -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
+            cmake --build build/ --config Release
+            cmake --install build/ --prefix install_output --config Release
+            
+            mkdir -p SDL3-CS/native/${{ matrix.platform.name }}
+            cp install_output/lib/libSDL3.so SDL3-CS/native/${{ matrix.platform.name }}/libSDL3.so
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: Update ${{ matrix.platform.name }} SDL binaries
+          title: Update ${{ matrix.platform.name }} SDL binaries
+          body: This PR has been auto-generated to update the ${{ matrix.platform.name }} SDL binaries.
+          branch: update-${{ matrix.platform.name }}-binaries
+          path: 'SDL3-CS'
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+            
