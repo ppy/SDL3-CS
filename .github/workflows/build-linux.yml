@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        container: ["amd64/ubuntu", "arm64v8/ubuntu", "i386/ubuntu", "arm32v7/ubuntu"]
+        container: ["amd64/ubuntu", "arm64v8/ubuntu", "arm32v7/ubuntu"]
     steps:
       -
         uses: actions/checkout@v4
@@ -33,8 +33,8 @@ jobs:
 
             apt update -y -qq
             apt install -y \
-              gcc-multilib \
-              g++-multilib \
+              gcc \
+              g++ \
               cmake \
               ninja-build \
               wayland-scanner++ \
