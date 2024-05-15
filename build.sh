@@ -64,13 +64,6 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
         libpulse-dev$TARGET_APT_ARCH
 fi
 
-# Configure CMake
-if [[ $NAME == 'linux-x86' ]]; then
-    FLAGS="$FLAGS -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32"
-elif [[ $NAME == 'linux-x64' ]]; then
-    FLAGS="$FLAGS -DCMAKE_C_FLAGS=-m64 -DCMAKE_CXX_FLAGS=-m64"
-fi
-
 cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
 
 # Build
