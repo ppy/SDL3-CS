@@ -69,13 +69,8 @@ cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEF
 # Build
 cmake --build build/ --config Release
 
-if [[ $RUNNER_OS == 'Windows' ]]; then
-    # Install (Windows)
-    cmake --install build/ --prefix install_output --config Release
-else
-    # Install
-    $SUDO cmake --install build/ --prefix install_output --config Release
-fi
+# Install
+$SUDO cmake --install build/ --prefix install_output --config Release
 
 mkdir -p SDL3-CS/native/$NAME
 
