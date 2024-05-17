@@ -66,12 +66,12 @@ jobs:
         run: ./SDL3-CS/build.sh
       
       - name: Get Actions user id
-        if: ${{ runner.os }} == 'Linux'
+        if: runner.os == 'Linux'
         id: get_uid
         run: echo "uid=$(id -u $USER)" >> $GITHUB_OUTPUT
 
       - name: Correct Ownership in GITHUB_WORKSPACE directory
-        if: ${{ runner.os }} == 'Linux'
+        if: runner.os == 'Linux'
         uses: peter-murray/reset-workspace-ownership-action@v1
         with:
           user_id: ${{ steps.get_uid.outputs.uid }}
