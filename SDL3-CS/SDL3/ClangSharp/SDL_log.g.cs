@@ -66,16 +66,16 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogSetAllPriority(SDL_LogPriority priority);
+        public static extern void SDL_SetLogPriorities(SDL_LogPriority priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogSetPriority(int category, SDL_LogPriority priority);
+        public static extern void SDL_SetLogPriority(int category, SDL_LogPriority priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_LogPriority SDL_LogGetPriority(int category);
+        public static extern SDL_LogPriority SDL_GetLogPriority(int category);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_LogResetPriorities();
+        public static extern void SDL_ResetLogPriorities();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Log([NativeTypeName("const char *")] byte* fmt, __arglist);

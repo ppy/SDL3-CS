@@ -35,5 +35,14 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetRevision", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetRevision();
+
+        [NativeTypeName("#define SDL_MAJOR_VERSION 3")]
+        public const int SDL_MAJOR_VERSION = 3;
+
+        [NativeTypeName("#define SDL_MINOR_VERSION 1")]
+        public const int SDL_MINOR_VERSION = 1;
+
+        [NativeTypeName("#define SDL_MICRO_VERSION 2")]
+        public const int SDL_MICRO_VERSION = 2;
     }
 }

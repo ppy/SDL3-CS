@@ -5,7 +5,7 @@ namespace SDL
 {
     public static partial class SDL3
     {
-        public static void SDL_LogSetPriority(SDL_LogCategory category, SDL_LogPriority priority) => SDL_LogSetPriority((int)category, priority);
-        public static SDL_LogPriority SDL_LogGetPriority(SDL_LogCategory category) => SDL_LogGetPriority((int)category);
+        public static void SDL_SetLogPriority(SDL_LogCategory category, SDL_LogPriority priority) => SDL_SetLogPriority((int)category, priority);
+        public static SDL_LogPriority SDL_GetLogPriority(SDL_LogCategory category) => SDL_GetLogPriority((int)category);
     }
 }

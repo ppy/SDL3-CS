@@ -48,8 +48,7 @@ namespace SDL
 
     public unsafe partial struct SDL_Surface
     {
-        [NativeTypeName("Uint32")]
-        public uint flags;
+        public SDL_SurfaceFlags flags;
 
         public SDL_PixelFormat* format;
 
@@ -205,23 +204,20 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_ReadSurfacePixel(SDL_Surface* surface, int x, int y, [NativeTypeName("Uint8 *")] byte* r, [NativeTypeName("Uint8 *")] byte* g, [NativeTypeName("Uint8 *")] byte* b, [NativeTypeName("Uint8 *")] byte* a);
 
-        [NativeTypeName("#define SDL_SWSURFACE 0")]
-        public const int SDL_SWSURFACE = 0;
+        [NativeTypeName("#define SDL_PREALLOC 0x00000001u")]
+        public const uint SDL_PREALLOC = 0x00000001U;
 
-        [NativeTypeName("#define SDL_PREALLOC 0x00000001")]
-        public const int SDL_PREALLOC = 0x00000001;
+        [NativeTypeName("#define SDL_RLEACCEL 0x00000002u")]
+        public const uint SDL_RLEACCEL = 0x00000002U;
 
-        [NativeTypeName("#define SDL_RLEACCEL 0x00000002")]
-        public const int SDL_RLEACCEL = 0x00000002;
+        [NativeTypeName("#define SDL_DONTFREE 0x00000004u")]
+        public const uint SDL_DONTFREE = 0x00000004U;
 
-        [NativeTypeName("#define SDL_DONTFREE 0x00000004")]
-        public const int SDL_DONTFREE = 0x00000004;
+        [NativeTypeName("#define SDL_SIMD_ALIGNED 0x00000008u")]
+        public const uint SDL_SIMD_ALIGNED = 0x00000008U;
 
-        [NativeTypeName("#define SDL_SIMD_ALIGNED 0x00000008")]
-        public const int SDL_SIMD_ALIGNED = 0x00000008;
-
-        [NativeTypeName("#define SDL_SURFACE_USES_PROPERTIES 0x00000010")]
-        public const int SDL_SURFACE_USES_PROPERTIES = 0x00000010;
+        [NativeTypeName("#define SDL_SURFACE_USES_PROPERTIES 0x00000010u")]
+        public const uint SDL_SURFACE_USES_PROPERTIES = 0x00000010U;
 
         [NativeTypeName("#define SDL_PROP_SURFACE_COLORSPACE_NUMBER \"SDL.surface.colorspace\"")]
         public static ReadOnlySpan<byte> SDL_PROP_SURFACE_COLORSPACE_NUMBER => "SDL.surface.colorspace"u8;

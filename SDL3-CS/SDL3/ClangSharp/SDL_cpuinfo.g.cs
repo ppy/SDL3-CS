@@ -82,7 +82,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
-        public static extern nuint SDL_SIMDGetAlignment();
+        public static extern nuint SDL_GetSIMDAlignment();
 
         [NativeTypeName("#define SDL_CACHELINE_SIZE 128")]
         public const int SDL_CACHELINE_SIZE = 128;
