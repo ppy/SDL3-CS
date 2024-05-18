@@ -57,6 +57,14 @@
       <PackagePath>runtimes/linux-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-arm64\libSDL3.so">
+      <PackagePath>runtimes/linux-arm64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-arm\libSDL3.so">
+      <PackagePath>runtimes/linux-arm/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)..\native\ios\**\*">
       <PackagePath>runtimes/ios/native</PackagePath>
       <Pack>true</Pack>
