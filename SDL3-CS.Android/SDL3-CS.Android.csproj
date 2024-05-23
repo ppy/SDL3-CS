@@ -22,11 +22,4 @@
   <ItemGroup>
     <EmbeddedJar Include="Jars\SDL3AndroidBridge.jar" />
   </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedNativeLibrary Include="..\native\android\armeabi-v7a\libSDL3.so" />
-    <EmbeddedNativeLibrary Include="..\native\android\arm64-v8a\libSDL3.so" />
-    <EmbeddedNativeLibrary Include="..\native\android\x86\libSDL3.so" />
-    <EmbeddedNativeLibrary Include="..\native\android\x86_64\libSDL3.so" />
-  </ItemGroup>
 </Project>

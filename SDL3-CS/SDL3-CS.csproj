@@ -69,6 +69,22 @@
       <PackagePath>runtimes/ios/native</PackagePath>
       <Pack>true</Pack>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\armeabi-v7a\libSDL3.so">
+      <PackagePath>runtimes/android-arm/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\arm64-v8a\libSDL3.so">
+      <PackagePath>runtimes/android-arm64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\x86_64\libSDL3.so">
+      <PackagePath>runtimes/android-x64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\x86\libSDL3.so">
+      <PackagePath>runtimes/android-x86/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
   </ItemGroup>
 
 </Project>
