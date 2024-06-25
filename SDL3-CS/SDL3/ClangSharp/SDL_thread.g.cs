@@ -25,7 +25,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 
 namespace SDL
 {
@@ -44,12 +43,10 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [UnsupportedOSPlatform("windows")]
-        public static extern SDL_Thread* SDL_CreateThread([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<IntPtr, int> fn, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr data);
+        public static extern SDL_Thread* SDL_CreateThreadRuntime([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<IntPtr, int> fn, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr data, [NativeTypeName("SDL_FunctionPointer")] IntPtr pfnBeginThread, [NativeTypeName("SDL_FunctionPointer")] IntPtr pfnEndThread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [UnsupportedOSPlatform("windows")]
-        public static extern SDL_Thread* SDL_CreateThreadWithStackSize([NativeTypeName("SDL_ThreadFunction")] delegate* unmanaged[Cdecl]<IntPtr, int> fn, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const size_t")] nuint stacksize, [NativeTypeName("void*")] IntPtr data);
+        public static extern SDL_Thread* SDL_CreateThreadWithPropertiesRuntime(SDL_PropertiesID props, [NativeTypeName("SDL_FunctionPointer")] IntPtr pfnBeginThread, [NativeTypeName("SDL_FunctionPointer")] IntPtr pfnEndThread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetThreadName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -78,9 +75,27 @@ namespace SDL
         public static extern IntPtr SDL_GetTLS(SDL_TLSID id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetTLS(SDL_TLSID id, [NativeTypeName("const void *")] IntPtr value, [NativeTypeName("void (*)(void *)")] delegate* unmanaged[Cdecl]<IntPtr, void> destructor);
+        public static extern int SDL_SetTLS(SDL_TLSID id, [NativeTypeName("const void *")] IntPtr value, [NativeTypeName("SDL_TLSDestructorCallback")] delegate* unmanaged[Cdecl]<IntPtr, void> destructor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CleanupTLS();
+
+        [NativeTypeName("#define SDL_BeginThreadFunction NULL")]
+        public const int SDL_BeginThreadFunction = 0;
+
+        [NativeTypeName("#define SDL_EndThreadFunction NULL")]
+        public const int SDL_EndThreadFunction = 0;
+
+        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER \"entry_function\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER => "entry_function"u8;
+
+        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_NAME_STRING \"name\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_NAME_STRING => "name"u8;
+
+        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_USERDATA_POINTER \"userdata\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_USERDATA_POINTER => "userdata"u8;
+
+        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER \"stacksize\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER => "stacksize"u8;
     }
 }

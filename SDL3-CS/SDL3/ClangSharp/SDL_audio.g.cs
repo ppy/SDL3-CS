@@ -55,13 +55,13 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetCurrentAudioDriver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_AudioDeviceID* SDL_GetAudioOutputDevices(int* count);
+        public static extern SDL_AudioDeviceID* SDL_GetAudioPlaybackDevices(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_AudioDeviceID* SDL_GetAudioCaptureDevices(int* count);
+        public static extern SDL_AudioDeviceID* SDL_GetAudioRecordingDevices(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetAudioDeviceName", ExactSpelling = true)]
-        [return: NativeTypeName("char *")]
+        [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetAudioDeviceName(SDL_AudioDeviceID devid);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -132,6 +132,12 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_ClearAudioStream(SDL_AudioStream* stream);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_PauseAudioStreamDevice(SDL_AudioStream* stream);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_ResumeAudioStreamDevice(SDL_AudioStream* stream);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_LockAudioStream(SDL_AudioStream* stream);
@@ -205,10 +211,10 @@ namespace SDL
         [NativeTypeName("#define SDL_AUDIO_MASK_SIGNED (1u<<15)")]
         public const uint SDL_AUDIO_MASK_SIGNED = (1U << 15);
 
-        [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_OUTPUT ((SDL_AudioDeviceID) 0xFFFFFFFF)")]
-        public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_OUTPUT = ((SDL_AudioDeviceID)(0xFFFFFFFF));
+        [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK ((SDL_AudioDeviceID) 0xFFFFFFFF)")]
+        public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK = ((SDL_AudioDeviceID)(0xFFFFFFFF));
 
-        [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_CAPTURE ((SDL_AudioDeviceID) 0xFFFFFFFE)")]
-        public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_CAPTURE = ((SDL_AudioDeviceID)(0xFFFFFFFE));
+        [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_RECORDING ((SDL_AudioDeviceID) 0xFFFFFFFE)")]
+        public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_RECORDING = ((SDL_AudioDeviceID)(0xFFFFFFFE));
     }
 }

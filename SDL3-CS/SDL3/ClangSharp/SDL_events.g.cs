@@ -46,9 +46,8 @@ namespace SDL
         SDL_EVENT_DISPLAY_REMOVED,
         SDL_EVENT_DISPLAY_MOVED,
         SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED,
-        SDL_EVENT_DISPLAY_HDR_STATE_CHANGED,
         SDL_EVENT_DISPLAY_FIRST = SDL_EVENT_DISPLAY_ORIENTATION,
-        SDL_EVENT_DISPLAY_LAST = SDL_EVENT_DISPLAY_HDR_STATE_CHANGED,
+        SDL_EVENT_DISPLAY_LAST = SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED,
         SDL_EVENT_WINDOW_SHOWN = 0x202,
         SDL_EVENT_WINDOW_HIDDEN,
         SDL_EVENT_WINDOW_EXPOSED,
@@ -74,6 +73,7 @@ namespace SDL
         SDL_EVENT_WINDOW_DESTROYED,
         SDL_EVENT_WINDOW_PEN_ENTER,
         SDL_EVENT_WINDOW_PEN_LEAVE,
+        SDL_EVENT_WINDOW_HDR_STATE_CHANGED,
         SDL_EVENT_WINDOW_FIRST = SDL_EVENT_WINDOW_SHOWN,
         SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_PEN_LEAVE,
         SDL_EVENT_KEY_DOWN = 0x300,
@@ -214,19 +214,20 @@ namespace SDL
 
         public SDL_KeyboardID which;
 
+        public SDL_Scancode scancode;
+
+        public SDL_Keycode key;
+
+        public SDL_Keymod mod;
+
+        [NativeTypeName("Uint16")]
+        public ushort raw;
+
         [NativeTypeName("Uint8")]
         public byte state;
 
         [NativeTypeName("Uint8")]
         public byte repeat;
-
-        [NativeTypeName("Uint8")]
-        public byte padding2;
-
-        [NativeTypeName("Uint8")]
-        public byte padding3;
-
-        public SDL_Keysym keysym;
     }
 
     public unsafe partial struct SDL_TextEditingEvent
@@ -241,7 +242,7 @@ namespace SDL
 
         public SDL_WindowID windowID;
 
-        [NativeTypeName("char *")]
+        [NativeTypeName("const char *")]
         public byte* text;
 
         [NativeTypeName("Sint32")]
@@ -263,7 +264,7 @@ namespace SDL
 
         public SDL_WindowID windowID;
 
-        [NativeTypeName("char *")]
+        [NativeTypeName("const char *")]
         public byte* text;
     }
 
@@ -294,7 +295,7 @@ namespace SDL
 
         public SDL_MouseID which;
 
-        [NativeTypeName("Uint32")]
+        [NativeTypeName("SDL_MouseButtonFlags")]
         public uint state;
 
         public float x;
@@ -639,7 +640,7 @@ namespace SDL
         public SDL_AudioDeviceID which;
 
         [NativeTypeName("Uint8")]
-        public byte iscapture;
+        public byte recording;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -818,10 +819,10 @@ namespace SDL
 
         public float y;
 
-        [NativeTypeName("char *")]
+        [NativeTypeName("const char *")]
         public byte* source;
 
-        [NativeTypeName("char *")]
+        [NativeTypeName("const char *")]
         public byte* data;
     }
 
