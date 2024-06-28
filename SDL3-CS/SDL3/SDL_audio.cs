@@ -61,18 +61,18 @@ namespace SDL
         public static int SDL_AUDIO_FRAMESIZE(SDL_AudioSpec x) => SDL_AUDIO_BYTESIZE((x).format) * (x).channels;
 
         [MustDisposeResource]
-        public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioOutputDevices()
+        public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioPlaybackDevices()
         {
             int count;
-            var array = SDL_GetAudioOutputDevices(&count);
+            var array = SDL_GetAudioPlaybackDevices(&count);
             return SDLArray.Create(array, count);
         }
 
         [MustDisposeResource]
-        public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioCaptureDevices()
+        public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioRecordingDevices()
         {
             int count;
-            var array = SDL_GetAudioCaptureDevices(&count);
+            var array = SDL_GetAudioRecordingDevices(&count);
             return SDLArray.Create(array, count);
         }
     }
