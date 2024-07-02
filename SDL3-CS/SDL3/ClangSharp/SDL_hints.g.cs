@@ -197,11 +197,8 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_HIDAPI_IGNORE_DEVICES \"SDL_HIDAPI_IGNORE_DEVICES\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_IGNORE_DEVICES => "SDL_HIDAPI_IGNORE_DEVICES"u8;
 
-        [NativeTypeName("#define SDL_HINT_IME_INTERNAL_EDITING \"SDL_IME_INTERNAL_EDITING\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_IME_INTERNAL_EDITING => "SDL_IME_INTERNAL_EDITING"u8;
-
-        [NativeTypeName("#define SDL_HINT_IME_SHOW_UI \"SDL_IME_SHOW_UI\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_IME_SHOW_UI => "SDL_IME_SHOW_UI"u8;
+        [NativeTypeName("#define SDL_HINT_IME_IMPLEMENTED_UI \"SDL_IME_IMPLEMENTED_UI\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_IME_IMPLEMENTED_UI => "SDL_IME_IMPLEMENTED_UI"u8;
 
         [NativeTypeName("#define SDL_HINT_IOS_HIDE_HOME_INDICATOR \"SDL_IOS_HIDE_HOME_INDICATOR\"")]
         public static ReadOnlySpan<byte> SDL_HINT_IOS_HIDE_HOME_INDICATOR => "SDL_IOS_HIDE_HOME_INDICATOR"u8;

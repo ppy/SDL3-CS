@@ -83,6 +83,7 @@ namespace SDL
         SDL_EVENT_KEYMAP_CHANGED,
         SDL_EVENT_KEYBOARD_ADDED,
         SDL_EVENT_KEYBOARD_REMOVED,
+        SDL_EVENT_TEXT_EDITING_CANDIDATES,
         SDL_EVENT_MOUSE_MOTION = 0x400,
         SDL_EVENT_MOUSE_BUTTON_DOWN,
         SDL_EVENT_MOUSE_BUTTON_UP,
@@ -250,6 +251,30 @@ namespace SDL
 
         [NativeTypeName("Sint32")]
         public int length;
+    }
+
+    public unsafe partial struct SDL_TextEditingCandidatesEvent
+    {
+        public SDL_EventType type;
+
+        [NativeTypeName("Uint32")]
+        public uint reserved;
+
+        [NativeTypeName("Uint64")]
+        public ulong timestamp;
+
+        public SDL_WindowID windowID;
+
+        [NativeTypeName("const char *const *")]
+        public byte** candidates;
+
+        [NativeTypeName("Sint32")]
+        public int num_candidates;
+
+        [NativeTypeName("Sint32")]
+        public int selected_candidate;
+
+        public SDL_bool horizontal;
     }
 
     public unsafe partial struct SDL_TextInputEvent
@@ -919,6 +944,9 @@ namespace SDL
 
         [FieldOffset(0)]
         public SDL_TextEditingEvent edit;
+
+        [FieldOffset(0)]
+        public SDL_TextEditingCandidatesEvent edit_candidates;
 
         [FieldOffset(0)]
         public SDL_TextInputEvent text;

@@ -344,6 +344,10 @@ namespace SDL
         public static extern int SDL_strncasecmp([NativeTypeName("const char *")] byte* str1, [NativeTypeName("const char *")] byte* str2, [NativeTypeName("size_t")] nuint maxlen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_StepUTF8([NativeTypeName("const char **")] byte** pstr, [NativeTypeName("size_t *")] nuint* pslen);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_sscanf([NativeTypeName("const char *")] byte* text, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -664,6 +668,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PRIX32 \"X\"")]
         public static ReadOnlySpan<byte> SDL_PRIX32 => "X"u8;
+
+        [NativeTypeName("#define SDL_INVALID_UNICODE_CODEPOINT 0xFFFD")]
+        public const int SDL_INVALID_UNICODE_CODEPOINT = 0xFFFD;
 
         [NativeTypeName("#define SDL_PI_D 3.141592653589793238462643383279502884")]
         public const double SDL_PI_D = 3.141592653589793238462643383279502884;

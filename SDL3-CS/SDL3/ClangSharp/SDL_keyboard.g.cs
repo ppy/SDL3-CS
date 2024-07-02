@@ -97,7 +97,10 @@ namespace SDL
         public static extern int SDL_ClearComposition(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetTextInputRect(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect);
+        public static extern int SDL_SetTextInputArea(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect, int cursor);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_GetTextInputArea(SDL_Window* window, SDL_Rect* rect, int* cursor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_HasScreenKeyboardSupport();
