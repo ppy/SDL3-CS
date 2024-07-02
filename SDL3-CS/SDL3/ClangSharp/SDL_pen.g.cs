@@ -85,8 +85,7 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetPenName(SDL_PenID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_PenCapabilityFlags")]
-        public static extern uint SDL_GetPenCapabilities(SDL_PenID instance_id, SDL_PenCapabilityInfo* capabilities);
+        public static extern SDL_PenCapabilityFlags SDL_GetPenCapabilities(SDL_PenID instance_id, SDL_PenCapabilityInfo* capabilities);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PenSubtype SDL_GetPenType(SDL_PenID instance_id);

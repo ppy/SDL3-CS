@@ -70,5 +70,13 @@ namespace SDL
             var array = SDL_GetFullscreenDisplayModes(displayID, &count);
             return SDLArray.Create(array, count);
         }
+
+        [MustDisposeResource]
+        public static unsafe SDLPointerArray<SDL_Window>? SDL_GetWindows()
+        {
+            int count;
+            var array = SDL_GetWindows(&count);
+            return SDLArray.Create(array, count);
+        }
     }
 }

@@ -295,8 +295,7 @@ namespace SDL
 
         public SDL_MouseID which;
 
-        [NativeTypeName("SDL_MouseButtonFlags")]
-        public uint state;
+        public SDL_MouseButtonFlags state;
 
         public float x;
 

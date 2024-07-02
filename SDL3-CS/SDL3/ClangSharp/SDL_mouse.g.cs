@@ -78,16 +78,13 @@ namespace SDL
         public static extern SDL_Window* SDL_GetMouseFocus();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_MouseButtonFlags")]
-        public static extern uint SDL_GetMouseState(float* x, float* y);
+        public static extern SDL_MouseButtonFlags SDL_GetMouseState(float* x, float* y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_MouseButtonFlags")]
-        public static extern uint SDL_GetGlobalMouseState(float* x, float* y);
+        public static extern SDL_MouseButtonFlags SDL_GetGlobalMouseState(float* x, float* y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("SDL_MouseButtonFlags")]
-        public static extern uint SDL_GetRelativeMouseState(float* x, float* y);
+        public static extern SDL_MouseButtonFlags SDL_GetRelativeMouseState(float* x, float* y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_WarpMouseInWindow(SDL_Window* window, float x, float y);
