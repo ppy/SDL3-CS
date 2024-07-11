@@ -102,7 +102,7 @@ namespace SDL
         public static extern int SDL_GetCurrentRenderOutputSize(SDL_Renderer* renderer, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Texture* SDL_CreateTexture(SDL_Renderer* renderer, SDL_PixelFormatEnum format, int access, int w, int h);
+        public static extern SDL_Texture* SDL_CreateTexture(SDL_Renderer* renderer, SDL_PixelFormat format, int access, int w, int h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Texture* SDL_CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface);

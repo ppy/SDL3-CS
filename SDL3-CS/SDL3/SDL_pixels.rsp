@@ -4,4 +4,4 @@
 # Fix errors with uint -> int conversion
 --with-type
 SDL_Colorspace=uint
-SDL_PixelFormatEnum=uint
+SDL_PixelFormat=uint

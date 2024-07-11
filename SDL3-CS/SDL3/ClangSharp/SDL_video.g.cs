@@ -39,7 +39,7 @@ namespace SDL
     {
         public SDL_DisplayID displayID;
 
-        public SDL_PixelFormatEnum format;
+        public SDL_PixelFormat format;
 
         public int w;
 
@@ -399,9 +399,6 @@ namespace SDL
         public static extern int SDL_SetWindowModalFor(SDL_Window* modal_window, SDL_Window* parent_window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowInputFocus(SDL_Window* window);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetWindowFocusable(SDL_Window* window, SDL_bool focusable);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -493,7 +490,7 @@ namespace SDL
         public static extern int SDL_GL_SwapWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_DeleteContext([NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
+        public static extern int SDL_GL_DestroyContext([NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
 
         [NativeTypeName("#define SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER \"SDL.video.wayland.wl_display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER => "SDL.video.wayland.wl_display"u8;

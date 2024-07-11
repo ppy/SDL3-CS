@@ -336,11 +336,62 @@ namespace SDL
         [NativeTypeName("#define SDLK_NUMLOCKCLEAR 0x40000053u")]
         public const uint SDLK_NUMLOCKCLEAR = 0x40000053U;
 
+        [NativeTypeName("#define SDLK_KP_DIVIDE 0x40000054u")]
+        public const uint SDLK_KP_DIVIDE = 0x40000054U;
+
+        [NativeTypeName("#define SDLK_KP_MULTIPLY 0x40000055u")]
+        public const uint SDLK_KP_MULTIPLY = 0x40000055U;
+
+        [NativeTypeName("#define SDLK_KP_MINUS 0x40000056u")]
+        public const uint SDLK_KP_MINUS = 0x40000056U;
+
+        [NativeTypeName("#define SDLK_KP_PLUS 0x40000057u")]
+        public const uint SDLK_KP_PLUS = 0x40000057U;
+
+        [NativeTypeName("#define SDLK_KP_ENTER 0x40000058u")]
+        public const uint SDLK_KP_ENTER = 0x40000058U;
+
+        [NativeTypeName("#define SDLK_KP_1 0x40000059u")]
+        public const uint SDLK_KP_1 = 0x40000059U;
+
+        [NativeTypeName("#define SDLK_KP_2 0x4000005au")]
+        public const uint SDLK_KP_2 = 0x4000005aU;
+
+        [NativeTypeName("#define SDLK_KP_3 0x4000005bu")]
+        public const uint SDLK_KP_3 = 0x4000005bU;
+
+        [NativeTypeName("#define SDLK_KP_4 0x4000005cu")]
+        public const uint SDLK_KP_4 = 0x4000005cU;
+
+        [NativeTypeName("#define SDLK_KP_5 0x4000005du")]
+        public const uint SDLK_KP_5 = 0x4000005dU;
+
+        [NativeTypeName("#define SDLK_KP_6 0x4000005eu")]
+        public const uint SDLK_KP_6 = 0x4000005eU;
+
+        [NativeTypeName("#define SDLK_KP_7 0x4000005fu")]
+        public const uint SDLK_KP_7 = 0x4000005fU;
+
+        [NativeTypeName("#define SDLK_KP_8 0x40000060u")]
+        public const uint SDLK_KP_8 = 0x40000060U;
+
+        [NativeTypeName("#define SDLK_KP_9 0x40000061u")]
+        public const uint SDLK_KP_9 = 0x40000061U;
+
+        [NativeTypeName("#define SDLK_KP_0 0x40000062u")]
+        public const uint SDLK_KP_0 = 0x40000062U;
+
+        [NativeTypeName("#define SDLK_KP_PERIOD 0x40000063u")]
+        public const uint SDLK_KP_PERIOD = 0x40000063U;
+
         [NativeTypeName("#define SDLK_APPLICATION 0x40000065u")]
         public const uint SDLK_APPLICATION = 0x40000065U;
 
         [NativeTypeName("#define SDLK_POWER 0x40000066u")]
         public const uint SDLK_POWER = 0x40000066U;
+
+        [NativeTypeName("#define SDLK_KP_EQUALS 0x40000067u")]
+        public const uint SDLK_KP_EQUALS = 0x40000067U;
 
         [NativeTypeName("#define SDLK_F13 0x40000068u")]
         public const uint SDLK_F13 = 0x40000068U;
@@ -420,6 +471,12 @@ namespace SDL
         [NativeTypeName("#define SDLK_VOLUMEDOWN 0x40000081u")]
         public const uint SDLK_VOLUMEDOWN = 0x40000081U;
 
+        [NativeTypeName("#define SDLK_KP_COMMA 0x40000085u")]
+        public const uint SDLK_KP_COMMA = 0x40000085U;
+
+        [NativeTypeName("#define SDLK_KP_EQUALSAS400 0x40000086u")]
+        public const uint SDLK_KP_EQUALSAS400 = 0x40000086U;
+
         [NativeTypeName("#define SDLK_ALTERASE 0x40000099u")]
         public const uint SDLK_ALTERASE = 0x40000099U;
 
@@ -474,11 +531,59 @@ namespace SDL
         [NativeTypeName("#define SDLK_CURRENCYSUBUNIT 0x400000b5u")]
         public const uint SDLK_CURRENCYSUBUNIT = 0x400000b5U;
 
+        [NativeTypeName("#define SDLK_KP_LEFTPAREN 0x400000b6u")]
+        public const uint SDLK_KP_LEFTPAREN = 0x400000b6U;
+
+        [NativeTypeName("#define SDLK_KP_RIGHTPAREN 0x400000b7u")]
+        public const uint SDLK_KP_RIGHTPAREN = 0x400000b7U;
+
+        [NativeTypeName("#define SDLK_KP_LEFTBRACE 0x400000b8u")]
+        public const uint SDLK_KP_LEFTBRACE = 0x400000b8U;
+
+        [NativeTypeName("#define SDLK_KP_RIGHTBRACE 0x400000b9u")]
+        public const uint SDLK_KP_RIGHTBRACE = 0x400000b9U;
+
+        [NativeTypeName("#define SDLK_KP_TAB 0x400000bau")]
+        public const uint SDLK_KP_TAB = 0x400000baU;
+
+        [NativeTypeName("#define SDLK_KP_BACKSPACE 0x400000bbu")]
+        public const uint SDLK_KP_BACKSPACE = 0x400000bbU;
+
+        [NativeTypeName("#define SDLK_KP_A 0x400000bcu")]
+        public const uint SDLK_KP_A = 0x400000bcU;
+
+        [NativeTypeName("#define SDLK_KP_B 0x400000bdu")]
+        public const uint SDLK_KP_B = 0x400000bdU;
+
+        [NativeTypeName("#define SDLK_KP_C 0x400000beu")]
+        public const uint SDLK_KP_C = 0x400000beU;
+
+        [NativeTypeName("#define SDLK_KP_D 0x400000bfu")]
+        public const uint SDLK_KP_D = 0x400000bfU;
+
+        [NativeTypeName("#define SDLK_KP_E 0x400000c0u")]
+        public const uint SDLK_KP_E = 0x400000c0U;
+
+        [NativeTypeName("#define SDLK_KP_F 0x400000c1u")]
+        public const uint SDLK_KP_F = 0x400000c1U;
+
         [NativeTypeName("#define SDLK_KP_XOR 0x400000c2u")]
         public const uint SDLK_KP_XOR = 0x400000c2U;
 
         [NativeTypeName("#define SDLK_KP_POWER 0x400000c3u")]
         public const uint SDLK_KP_POWER = 0x400000c3U;
+
+        [NativeTypeName("#define SDLK_KP_PERCENT 0x400000c4u")]
+        public const uint SDLK_KP_PERCENT = 0x400000c4U;
+
+        [NativeTypeName("#define SDLK_KP_LESS 0x400000c5u")]
+        public const uint SDLK_KP_LESS = 0x400000c5U;
+
+        [NativeTypeName("#define SDLK_KP_GREATER 0x400000c6u")]
+        public const uint SDLK_KP_GREATER = 0x400000c6U;
+
+        [NativeTypeName("#define SDLK_KP_AMPERSAND 0x400000c7u")]
+        public const uint SDLK_KP_AMPERSAND = 0x400000c7U;
 
         [NativeTypeName("#define SDLK_KP_DBLAMPERSAND 0x400000c8u")]
         public const uint SDLK_KP_DBLAMPERSAND = 0x400000c8U;
@@ -488,6 +593,21 @@ namespace SDL
 
         [NativeTypeName("#define SDLK_KP_DBLVERTICALBAR 0x400000cau")]
         public const uint SDLK_KP_DBLVERTICALBAR = 0x400000caU;
+
+        [NativeTypeName("#define SDLK_KP_COLON 0x400000cbu")]
+        public const uint SDLK_KP_COLON = 0x400000cbU;
+
+        [NativeTypeName("#define SDLK_KP_HASH 0x400000ccu")]
+        public const uint SDLK_KP_HASH = 0x400000ccU;
+
+        [NativeTypeName("#define SDLK_KP_SPACE 0x400000cdu")]
+        public const uint SDLK_KP_SPACE = 0x400000cdU;
+
+        [NativeTypeName("#define SDLK_KP_AT 0x400000ceu")]
+        public const uint SDLK_KP_AT = 0x400000ceU;
+
+        [NativeTypeName("#define SDLK_KP_EXCLAM 0x400000cfu")]
+        public const uint SDLK_KP_EXCLAM = 0x400000cfU;
 
         [NativeTypeName("#define SDLK_KP_MEMSTORE 0x400000d0u")]
         public const uint SDLK_KP_MEMSTORE = 0x400000d0U;
@@ -509,6 +629,9 @@ namespace SDL
 
         [NativeTypeName("#define SDLK_KP_MEMDIVIDE 0x400000d6u")]
         public const uint SDLK_KP_MEMDIVIDE = 0x400000d6U;
+
+        [NativeTypeName("#define SDLK_KP_PLUSMINUS 0x400000d7u")]
+        public const uint SDLK_KP_PLUSMINUS = 0x400000d7U;
 
         [NativeTypeName("#define SDLK_KP_CLEAR 0x400000d8u")]
         public const uint SDLK_KP_CLEAR = 0x400000d8U;

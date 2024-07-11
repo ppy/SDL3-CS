@@ -33,7 +33,7 @@ namespace SDL
 
     public partial struct SDL_CameraSpec
     {
-        public SDL_PixelFormatEnum format;
+        public SDL_PixelFormat format;
 
         public SDL_Colorspace colorspace;
 

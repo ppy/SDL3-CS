@@ -9,16 +9,15 @@ namespace SDL
     [Typedef]
     public enum SDL_SurfaceFlags : UInt32
     {
-        SDL_PREALLOC = SDL3.SDL_PREALLOC,
-        SDL_RLEACCEL = SDL3.SDL_RLEACCEL,
-        SDL_DONTFREE = SDL3.SDL_DONTFREE,
-        SDL_SIMD_ALIGNED = SDL3.SDL_SIMD_ALIGNED,
-        SDL_SURFACE_USES_PROPERTIES = SDL3.SDL_SURFACE_USES_PROPERTIES,
+        SDL_SURFACE_PREALLOCATED = SDL3.SDL_SURFACE_PREALLOCATED,
+        SDL_SURFACE_LOCK_NEEDED = SDL3.SDL_SURFACE_LOCK_NEEDED,
+        SDL_SURFACE_LOCKED = SDL3.SDL_SURFACE_LOCKED,
+        SDL_SURFACE_SIMD_ALIGNED = SDL3.SDL_SURFACE_SIMD_ALIGNED
     }
 
     public static partial class SDL3
     {
         [Macro]
-        public static unsafe bool SDL_MUSTLOCK(SDL_Surface* S) => (((S)->flags & SDL_SurfaceFlags.SDL_RLEACCEL) != 0);
+        public static unsafe bool SDL_MUSTLOCK(SDL_Surface* S) => ((uint)S->flags & (SDL_SURFACE_LOCK_NEEDED | SDL_SURFACE_LOCKED)) == SDL_SURFACE_LOCK_NEEDED;
     }
 }

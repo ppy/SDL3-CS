@@ -347,6 +347,10 @@ namespace SDL
         [return: NativeTypeName("Uint32")]
         public static extern uint SDL_StepUTF8([NativeTypeName("const char **")] byte** pstr, [NativeTypeName("size_t *")] nuint* pslen);
 
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_UCS4ToUTF8", ExactSpelling = true)]
+        [return: NativeTypeName("char *")]
+        public static extern byte* Unsafe_SDL_UCS4ToUTF8([NativeTypeName("Uint32")] uint codepoint, [NativeTypeName("char *")] byte* dst);
+
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_sscanf([NativeTypeName("const char *")] byte* text, [NativeTypeName("const char *")] byte* fmt, __arglist);
 

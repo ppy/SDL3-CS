@@ -28,10 +28,6 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public partial struct SDL_BlitMap
-    {
-    }
-
     public enum SDL_ScaleMode
     {
         SDL_SCALEMODE_NEAREST,
@@ -46,11 +42,15 @@ namespace SDL
         SDL_FLIP_VERTICAL,
     }
 
+    public partial struct SDL_SurfaceData
+    {
+    }
+
     public unsafe partial struct SDL_Surface
     {
         public SDL_SurfaceFlags flags;
 
-        public SDL_PixelFormat* format;
+        public SDL_PixelFormat format;
 
         public int w;
 
@@ -61,28 +61,18 @@ namespace SDL
         [NativeTypeName("void*")]
         public IntPtr pixels;
 
-        [NativeTypeName("void*")]
-        public IntPtr reserved;
-
-        public int locked;
-
-        [NativeTypeName("void*")]
-        public IntPtr list_blitmap;
-
-        public SDL_Rect clip_rect;
-
-        public SDL_BlitMap* map;
-
         public int refcount;
+
+        public SDL_SurfaceData* @internal;
     }
 
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* SDL_CreateSurface(int width, int height, SDL_PixelFormatEnum format);
+        public static extern SDL_Surface* SDL_CreateSurface(int width, int height, SDL_PixelFormat format);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* SDL_CreateSurfaceFrom([NativeTypeName("void*")] IntPtr pixels, int width, int height, int pitch, SDL_PixelFormatEnum format);
+        public static extern SDL_Surface* SDL_CreateSurfaceFrom(int width, int height, SDL_PixelFormat format, [NativeTypeName("void*")] IntPtr pixels, int pitch);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroySurface(SDL_Surface* surface);
@@ -94,10 +84,13 @@ namespace SDL
         public static extern int SDL_SetSurfaceColorspace(SDL_Surface* surface, SDL_Colorspace colorspace);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetSurfaceColorspace(SDL_Surface* surface, SDL_Colorspace* colorspace);
+        public static extern SDL_Colorspace SDL_GetSurfaceColorspace(SDL_Surface* surface);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetSurfacePalette(SDL_Surface* surface, SDL_Palette* palette);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Palette* SDL_GetSurfacePalette(SDL_Surface* surface);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_LockSurface(SDL_Surface* surface);
@@ -118,13 +111,13 @@ namespace SDL
         public static extern int SDL_SaveBMP(SDL_Surface* surface, [NativeTypeName("const char *")] byte* file);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetSurfaceRLE(SDL_Surface* surface, int flag);
+        public static extern int SDL_SetSurfaceRLE(SDL_Surface* surface, SDL_bool enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_SurfaceHasRLE(SDL_Surface* surface);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetSurfaceColorKey(SDL_Surface* surface, int flag, [NativeTypeName("Uint32")] uint key);
+        public static extern int SDL_SetSurfaceColorKey(SDL_Surface* surface, SDL_bool enabled, [NativeTypeName("Uint32")] uint key);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_SurfaceHasColorKey(SDL_Surface* surface);
@@ -163,22 +156,19 @@ namespace SDL
         public static extern SDL_Surface* SDL_DuplicateSurface(SDL_Surface* surface);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* SDL_ConvertSurface(SDL_Surface* surface, [NativeTypeName("const SDL_PixelFormat *")] SDL_PixelFormat* format);
+        public static extern SDL_Surface* SDL_ConvertSurface(SDL_Surface* surface, SDL_PixelFormat format);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* SDL_ConvertSurfaceFormat(SDL_Surface* surface, SDL_PixelFormatEnum pixel_format);
+        public static extern SDL_Surface* SDL_ConvertSurfaceAndColorspace(SDL_Surface* surface, SDL_PixelFormat format, [NativeTypeName("const SDL_Palette *")] SDL_Palette* palette, SDL_Colorspace colorspace, SDL_PropertiesID props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* SDL_ConvertSurfaceFormatAndColorspace(SDL_Surface* surface, SDL_PixelFormatEnum pixel_format, SDL_Colorspace colorspace, SDL_PropertiesID props);
+        public static extern int SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormat dst_format, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ConvertPixels(int width, int height, SDL_PixelFormatEnum src_format, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormatEnum dst_format, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
+        public static extern int SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormatEnum src_format, SDL_Colorspace src_colorspace, SDL_PropertiesID src_properties, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormatEnum dst_format, SDL_Colorspace dst_colorspace, SDL_PropertiesID dst_properties, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormatEnum src_format, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormatEnum dst_format, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
+        public static extern int SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, [NativeTypeName("const void *")] IntPtr src, int src_pitch, SDL_PixelFormat dst_format, [NativeTypeName("void*")] IntPtr dst, int dst_pitch);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_FillSurfaceRect(SDL_Surface* dst, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect, [NativeTypeName("Uint32")] uint color);
@@ -202,22 +192,27 @@ namespace SDL
         public static extern int SDL_BlitSurfaceUncheckedScaled(SDL_Surface* src, [NativeTypeName("const SDL_Rect *")] SDL_Rect* srcrect, SDL_Surface* dst, [NativeTypeName("const SDL_Rect *")] SDL_Rect* dstrect, SDL_ScaleMode scaleMode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_MapSurfaceRGB(SDL_Surface* surface, [NativeTypeName("Uint8")] byte r, [NativeTypeName("Uint8")] byte g, [NativeTypeName("Uint8")] byte b);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_MapSurfaceRGBA(SDL_Surface* surface, [NativeTypeName("Uint8")] byte r, [NativeTypeName("Uint8")] byte g, [NativeTypeName("Uint8")] byte b, [NativeTypeName("Uint8")] byte a);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_ReadSurfacePixel(SDL_Surface* surface, int x, int y, [NativeTypeName("Uint8 *")] byte* r, [NativeTypeName("Uint8 *")] byte* g, [NativeTypeName("Uint8 *")] byte* b, [NativeTypeName("Uint8 *")] byte* a);
 
-        [NativeTypeName("#define SDL_PREALLOC 0x00000001u")]
-        public const uint SDL_PREALLOC = 0x00000001U;
+        [NativeTypeName("#define SDL_SURFACE_PREALLOCATED 0x00000001u")]
+        public const uint SDL_SURFACE_PREALLOCATED = 0x00000001U;
 
-        [NativeTypeName("#define SDL_RLEACCEL 0x00000002u")]
-        public const uint SDL_RLEACCEL = 0x00000002U;
+        [NativeTypeName("#define SDL_SURFACE_LOCK_NEEDED 0x00000002u")]
+        public const uint SDL_SURFACE_LOCK_NEEDED = 0x00000002U;
 
-        [NativeTypeName("#define SDL_DONTFREE 0x00000004u")]
-        public const uint SDL_DONTFREE = 0x00000004U;
+        [NativeTypeName("#define SDL_SURFACE_LOCKED 0x00000004u")]
+        public const uint SDL_SURFACE_LOCKED = 0x00000004U;
 
-        [NativeTypeName("#define SDL_SIMD_ALIGNED 0x00000008u")]
-        public const uint SDL_SIMD_ALIGNED = 0x00000008U;
-
-        [NativeTypeName("#define SDL_SURFACE_USES_PROPERTIES 0x00000010u")]
-        public const uint SDL_SURFACE_USES_PROPERTIES = 0x00000010U;
+        [NativeTypeName("#define SDL_SURFACE_SIMD_ALIGNED 0x00000008u")]
+        public const uint SDL_SURFACE_SIMD_ALIGNED = 0x00000008U;
 
         [NativeTypeName("#define SDL_PROP_SURFACE_COLORSPACE_NUMBER \"SDL.surface.colorspace\"")]
         public static ReadOnlySpan<byte> SDL_PROP_SURFACE_COLORSPACE_NUMBER => "SDL.surface.colorspace"u8;
