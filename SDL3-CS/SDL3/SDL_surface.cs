@@ -18,6 +18,6 @@ namespace SDL
     public static partial class SDL3
     {
         [Macro]
-        public static unsafe bool SDL_MUSTLOCK(SDL_Surface* S) => ((uint)S->flags & (SDL_SURFACE_LOCK_NEEDED | SDL_SURFACE_LOCKED)) == SDL_SURFACE_LOCK_NEEDED;
+        public static unsafe bool SDL_MUSTLOCK(SDL_Surface* S) => (S->flags & (SDL_SurfaceFlags.SDL_SURFACE_LOCK_NEEDED | SDL_SurfaceFlags.SDL_SURFACE_LOCKED)) == SDL_SurfaceFlags.SDL_SURFACE_LOCK_NEEDED;
     }
 }
