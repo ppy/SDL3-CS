@@ -19,7 +19,8 @@ namespace SDL
     }
 
     [Flags]
-    public enum SDLButtonMask : uint
+    [Typedef]
+    public enum SDL_MouseButtonFlags : uint
     {
         SDL_BUTTON_LMASK = SDL3.SDL_BUTTON_LMASK,
         SDL_BUTTON_MMASK = SDL3.SDL_BUTTON_MMASK,
@@ -31,7 +32,7 @@ namespace SDL
     public static partial class SDL3
     {
         [Macro]
-        public static SDLButtonMask SDL_BUTTON(SDLButton button) => (SDLButtonMask)(1 << ((int)button - 1));
+        public static SDL_MouseButtonFlags SDL_BUTTON(SDLButton button) => (SDL_MouseButtonFlags)(1 << ((int)button - 1));
 
         [MustDisposeResource]
         public static unsafe SDLArray<SDL_MouseID>? SDL_GetMice()

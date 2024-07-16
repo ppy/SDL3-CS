@@ -5,7 +5,7 @@ using System;
 
 namespace SDL
 {
-    using static SDL_PixelFormatEnum;
+    using static SDL_PixelFormat;
     using static SDL_PixelType;
     using static SDL_PackedOrder;
     using static SDL_PackedLayout;
@@ -15,30 +15,30 @@ namespace SDL
     public static partial class SDL3
     {
         [Macro]
-        public static SDL_PixelFormatEnum SDL_DEFINE_PIXELFOURCC(byte A, byte B, byte C, byte D) => (SDL_PixelFormatEnum)SDL_FOURCC(A, B, C, D);
+        public static SDL_PixelFormat SDL_DEFINE_PIXELFOURCC(byte A, byte B, byte C, byte D) => (SDL_PixelFormat)SDL_FOURCC(A, B, C, D);
 
         [Macro]
-        public static SDL_PixelFormatEnum SDL_DEFINE_PIXELFORMAT(int type, int order, int layout, int bits, int bytes)
-            => (SDL_PixelFormatEnum)((1 << 28) | ((type) << 24) | ((order) << 20) | ((layout) << 16) |
-                                     ((bits) << 8) | ((bytes) << 0));
+        public static SDL_PixelFormat SDL_DEFINE_PIXELFORMAT(int type, int order, int layout, int bits, int bytes)
+            => (SDL_PixelFormat)((1 << 28) | ((type) << 24) | ((order) << 20) | ((layout) << 16) |
+                                 ((bits) << 8) | ((bytes) << 0));
 
         [Macro]
-        public static int SDL_PIXELFLAG(SDL_PixelFormatEnum X) => ((int)X >> 28) & 0x0F;
+        public static int SDL_PIXELFLAG(SDL_PixelFormat X) => ((int)X >> 28) & 0x0F;
 
         [Macro]
-        public static SDL_PixelType SDL_PIXELTYPE(SDL_PixelFormatEnum X) => (SDL_PixelType)(((int)X >> 24) & 0x0F);
+        public static SDL_PixelType SDL_PIXELTYPE(SDL_PixelFormat X) => (SDL_PixelType)(((int)X >> 24) & 0x0F);
 
         [Macro]
-        public static SDL_PackedOrder SDL_PIXELORDER(SDL_PixelFormatEnum X) => (SDL_PackedOrder)(((int)X >> 20) & 0x0F);
+        public static SDL_PackedOrder SDL_PIXELORDER(SDL_PixelFormat X) => (SDL_PackedOrder)(((int)X >> 20) & 0x0F);
 
         [Macro]
-        public static SDL_PackedLayout SDL_PIXELLAYOUT(SDL_PixelFormatEnum X) => (SDL_PackedLayout)(((int)X >> 16) & 0x0F);
+        public static SDL_PackedLayout SDL_PIXELLAYOUT(SDL_PixelFormat X) => (SDL_PackedLayout)(((int)X >> 16) & 0x0F);
 
         [Macro]
-        public static int SDL_BITSPERPIXEL(SDL_PixelFormatEnum X) => ((int)X >> 8) & 0xFF;
+        public static int SDL_BITSPERPIXEL(SDL_PixelFormat X) => ((int)X >> 8) & 0xFF;
 
         [Macro]
-        public static int SDL_BYTESPERPIXEL(SDL_PixelFormatEnum X) =>
+        public static int SDL_BYTESPERPIXEL(SDL_PixelFormat X) =>
             (SDL_ISPIXELFORMAT_FOURCC(X)
                 ? ((((X) == SDL_PIXELFORMAT_YUY2) ||
                     ((X) == SDL_PIXELFORMAT_UYVY) ||
@@ -49,7 +49,7 @@ namespace SDL
                 : ((((int)X) >> 0) & 0xFF));
 
         [Macro]
-        public static bool SDL_ISPIXELFORMAT_INDEXED(SDL_PixelFormatEnum format) =>
+        public static bool SDL_ISPIXELFORMAT_INDEXED(SDL_PixelFormat format) =>
             (!SDL_ISPIXELFORMAT_FOURCC(format) &&
              ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX1) ||
               (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX2) ||
@@ -57,14 +57,14 @@ namespace SDL
               (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX8)));
 
         [Macro]
-        public static bool SDL_ISPIXELFORMAT_PACKED(SDL_PixelFormatEnum format) =>
+        public static bool SDL_ISPIXELFORMAT_PACKED(SDL_PixelFormat format) =>
             (!SDL_ISPIXELFORMAT_FOURCC(format) &&
              ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED8) ||
               (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED16) ||
               (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED32)));
 
         [Macro]
-        public static bool SDL_ISPIXELFORMAT_ARRAY(SDL_PixelFormatEnum format) =>
+        public static bool SDL_ISPIXELFORMAT_ARRAY(SDL_PixelFormat format) =>
             (!SDL_ISPIXELFORMAT_FOURCC(format) &&
              ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYU8) ||
               (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYU16) ||
@@ -73,7 +73,7 @@ namespace SDL
               (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYF32)));
 
         [Macro]
-        public static bool SDL_ISPIXELFORMAT_ALPHA(SDL_PixelFormatEnum format) =>
+        public static bool SDL_ISPIXELFORMAT_ALPHA(SDL_PixelFormat format) =>
             ((SDL_ISPIXELFORMAT_PACKED(format) &&
               ((SDL_PIXELORDER(format) == SDL_PACKEDORDER_ARGB) ||
                (SDL_PIXELORDER(format) == SDL_PACKEDORDER_RGBA) ||
@@ -81,19 +81,19 @@ namespace SDL
                (SDL_PIXELORDER(format) == SDL_PACKEDORDER_BGRA))));
 
         [Macro]
-        public static bool SDL_ISPIXELFORMAT_10BIT(SDL_PixelFormatEnum format) =>
+        public static bool SDL_ISPIXELFORMAT_10BIT(SDL_PixelFormat format) =>
             (!SDL_ISPIXELFORMAT_FOURCC(format) &&
              ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED32) &&
               (SDL_PIXELLAYOUT(format) == SDL_PACKEDLAYOUT_2101010)));
 
         [Macro]
-        public static bool SDL_ISPIXELFORMAT_FLOAT(SDL_PixelFormatEnum format) =>
+        public static bool SDL_ISPIXELFORMAT_FLOAT(SDL_PixelFormat format) =>
             (!SDL_ISPIXELFORMAT_FOURCC(format) &&
              ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYF16) ||
               (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYF32)));
 
         [Macro]
-        public static bool SDL_ISPIXELFORMAT_FOURCC(SDL_PixelFormatEnum format) =>
+        public static bool SDL_ISPIXELFORMAT_FOURCC(SDL_PixelFormat format) =>
             ((format != 0) && (SDL_PIXELFLAG(format) != 1));
 
         [Macro]

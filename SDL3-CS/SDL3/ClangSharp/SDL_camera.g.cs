@@ -33,15 +33,17 @@ namespace SDL
 
     public partial struct SDL_CameraSpec
     {
-        public SDL_PixelFormatEnum format;
+        public SDL_PixelFormat format;
+
+        public SDL_Colorspace colorspace;
 
         public int width;
 
         public int height;
 
-        public int interval_numerator;
+        public int framerate_numerator;
 
-        public int interval_denominator;
+        public int framerate_denominator;
     }
 
     public enum SDL_CameraPosition
@@ -71,7 +73,7 @@ namespace SDL
         public static extern SDL_CameraSpec* SDL_GetCameraDeviceSupportedFormats(SDL_CameraDeviceID devid, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetCameraDeviceName", ExactSpelling = true)]
-        [return: NativeTypeName("char *")]
+        [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetCameraDeviceName(SDL_CameraDeviceID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

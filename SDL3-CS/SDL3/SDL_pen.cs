@@ -10,7 +10,8 @@ namespace SDL
     public enum SDL_PenID : UInt32;
 
     [Flags]
-    public enum SDL_PEN_CAPABILITIES : uint
+    [Typedef]
+    public enum SDL_PenCapabilityFlags : uint
     {
         SDL_PEN_DOWN_MASK = SDL3.SDL_PEN_DOWN_MASK,
         SDL_PEN_INK_MASK = SDL3.SDL_PEN_INK_MASK,
@@ -30,10 +31,10 @@ namespace SDL
         public const SDL_MouseID SDL_PEN_MOUSEID = unchecked((SDL_MouseID)(-2));
 
         [Macro]
-        public static SDL_PEN_CAPABILITIES SDL_PEN_CAPABILITY(int capbit) => (SDL_PEN_CAPABILITIES)(1ul << (capbit));
+        public static SDL_PenCapabilityFlags SDL_PEN_CAPABILITY(int capbit) => (SDL_PenCapabilityFlags)(1ul << (capbit));
 
         [Macro]
-        public static SDL_PEN_CAPABILITIES SDL_PEN_AXIS_CAPABILITY(SDL_PenAxis axis) => SDL_PEN_CAPABILITY((int)axis + SDL_PEN_FLAG_AXIS_BIT_OFFSET);
+        public static SDL_PenCapabilityFlags SDL_PEN_AXIS_CAPABILITY(SDL_PenAxis axis) => SDL_PEN_CAPABILITY((int)axis + SDL_PEN_FLAG_AXIS_BIT_OFFSET);
 
         [MustDisposeResource]
         public static unsafe SDLArray<SDL_PenID>? SDL_GetPens()

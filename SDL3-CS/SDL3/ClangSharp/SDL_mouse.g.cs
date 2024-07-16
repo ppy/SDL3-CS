@@ -33,26 +33,26 @@ namespace SDL
 
     public enum SDL_SystemCursor
     {
-        SDL_SYSTEM_CURSOR_ARROW,
-        SDL_SYSTEM_CURSOR_IBEAM,
+        SDL_SYSTEM_CURSOR_DEFAULT,
+        SDL_SYSTEM_CURSOR_TEXT,
         SDL_SYSTEM_CURSOR_WAIT,
         SDL_SYSTEM_CURSOR_CROSSHAIR,
-        SDL_SYSTEM_CURSOR_WAITARROW,
-        SDL_SYSTEM_CURSOR_SIZENWSE,
-        SDL_SYSTEM_CURSOR_SIZENESW,
-        SDL_SYSTEM_CURSOR_SIZEWE,
-        SDL_SYSTEM_CURSOR_SIZENS,
-        SDL_SYSTEM_CURSOR_SIZEALL,
-        SDL_SYSTEM_CURSOR_NO,
-        SDL_SYSTEM_CURSOR_HAND,
-        SDL_SYSTEM_CURSOR_WINDOW_TOPLEFT,
-        SDL_SYSTEM_CURSOR_WINDOW_TOP,
-        SDL_SYSTEM_CURSOR_WINDOW_TOPRIGHT,
-        SDL_SYSTEM_CURSOR_WINDOW_RIGHT,
-        SDL_SYSTEM_CURSOR_WINDOW_BOTTOMRIGHT,
-        SDL_SYSTEM_CURSOR_WINDOW_BOTTOM,
-        SDL_SYSTEM_CURSOR_WINDOW_BOTTOMLEFT,
-        SDL_SYSTEM_CURSOR_WINDOW_LEFT,
+        SDL_SYSTEM_CURSOR_PROGRESS,
+        SDL_SYSTEM_CURSOR_NWSE_RESIZE,
+        SDL_SYSTEM_CURSOR_NESW_RESIZE,
+        SDL_SYSTEM_CURSOR_EW_RESIZE,
+        SDL_SYSTEM_CURSOR_NS_RESIZE,
+        SDL_SYSTEM_CURSOR_MOVE,
+        SDL_SYSTEM_CURSOR_NOT_ALLOWED,
+        SDL_SYSTEM_CURSOR_POINTER,
+        SDL_SYSTEM_CURSOR_NW_RESIZE,
+        SDL_SYSTEM_CURSOR_N_RESIZE,
+        SDL_SYSTEM_CURSOR_NE_RESIZE,
+        SDL_SYSTEM_CURSOR_E_RESIZE,
+        SDL_SYSTEM_CURSOR_SE_RESIZE,
+        SDL_SYSTEM_CURSOR_S_RESIZE,
+        SDL_SYSTEM_CURSOR_SW_RESIZE,
+        SDL_SYSTEM_CURSOR_W_RESIZE,
         SDL_NUM_SYSTEM_CURSORS,
     }
 
@@ -78,16 +78,13 @@ namespace SDL
         public static extern SDL_Window* SDL_GetMouseFocus();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_GetMouseState(float* x, float* y);
+        public static extern SDL_MouseButtonFlags SDL_GetMouseState(float* x, float* y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_GetGlobalMouseState(float* x, float* y);
+        public static extern SDL_MouseButtonFlags SDL_GetGlobalMouseState(float* x, float* y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_GetRelativeMouseState(float* x, float* y);
+        public static extern SDL_MouseButtonFlags SDL_GetRelativeMouseState(float* x, float* y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_WarpMouseInWindow(SDL_Window* window, float x, float y);

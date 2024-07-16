@@ -57,7 +57,7 @@ namespace SDL
         public static extern byte** SDL_Vulkan_GetInstanceExtensions([NativeTypeName("Uint32 *")] uint* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_Vulkan_CreateSurface(SDL_Window* window, [NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("const struct VkAllocationCallbacks *")] VkAllocationCallbacks* allocator, [NativeTypeName("VkSurfaceKHR *")] VkSurfaceKHR_T** surface);
+        public static extern int SDL_Vulkan_CreateSurface(SDL_Window* window, [NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("const struct VkAllocationCallbacks *")] VkAllocationCallbacks* allocator, [NativeTypeName("VkSurfaceKHR *")] VkSurfaceKHR_T** surface);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Vulkan_DestroySurface([NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("VkSurfaceKHR")] VkSurfaceKHR_T* surface, [NativeTypeName("const struct VkAllocationCallbacks *")] VkAllocationCallbacks* allocator);

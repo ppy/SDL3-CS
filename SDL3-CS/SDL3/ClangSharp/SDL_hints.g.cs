@@ -197,11 +197,8 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_HIDAPI_IGNORE_DEVICES \"SDL_HIDAPI_IGNORE_DEVICES\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_IGNORE_DEVICES => "SDL_HIDAPI_IGNORE_DEVICES"u8;
 
-        [NativeTypeName("#define SDL_HINT_IME_INTERNAL_EDITING \"SDL_IME_INTERNAL_EDITING\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_IME_INTERNAL_EDITING => "SDL_IME_INTERNAL_EDITING"u8;
-
-        [NativeTypeName("#define SDL_HINT_IME_SHOW_UI \"SDL_IME_SHOW_UI\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_IME_SHOW_UI => "SDL_IME_SHOW_UI"u8;
+        [NativeTypeName("#define SDL_HINT_IME_IMPLEMENTED_UI \"SDL_IME_IMPLEMENTED_UI\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_IME_IMPLEMENTED_UI => "SDL_IME_IMPLEMENTED_UI"u8;
 
         [NativeTypeName("#define SDL_HINT_IOS_HIDE_HOME_INDICATOR \"SDL_IOS_HIDE_HOME_INDICATOR\"")]
         public static ReadOnlySpan<byte> SDL_HINT_IOS_HIDE_HOME_INDICATOR => "SDL_IOS_HIDE_HOME_INDICATOR"u8;
@@ -380,6 +377,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_JOYSTICK_ZERO_CENTERED_DEVICES \"SDL_JOYSTICK_ZERO_CENTERED_DEVICES\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_ZERO_CENTERED_DEVICES => "SDL_JOYSTICK_ZERO_CENTERED_DEVICES"u8;
 
+        [NativeTypeName("#define SDL_HINT_KEYCODE_OPTIONS \"SDL_KEYCODE_OPTIONS\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_KEYCODE_OPTIONS => "SDL_KEYCODE_OPTIONS"u8;
+
         [NativeTypeName("#define SDL_HINT_KMSDRM_DEVICE_INDEX \"SDL_KMSDRM_DEVICE_INDEX\"")]
         public static ReadOnlySpan<byte> SDL_HINT_KMSDRM_DEVICE_INDEX => "SDL_KMSDRM_DEVICE_INDEX"u8;
 
@@ -430,6 +430,12 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_MOUSE_RELATIVE_WARP_MOTION \"SDL_MOUSE_RELATIVE_WARP_MOTION\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MOUSE_RELATIVE_WARP_MOTION => "SDL_MOUSE_RELATIVE_WARP_MOTION"u8;
+
+        [NativeTypeName("#define SDL_HINT_MOUSE_RELATIVE_CURSOR_VISIBLE \"SDL_MOUSE_RELATIVE_CURSOR_VISIBLE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_MOUSE_RELATIVE_CURSOR_VISIBLE => "SDL_MOUSE_RELATIVE_CURSOR_VISIBLE"u8;
+
+        [NativeTypeName("#define SDL_HINT_MOUSE_RELATIVE_CLIP_INTERVAL \"SDL_MOUSE_RELATIVE_CLIP_INTERVAL\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_MOUSE_RELATIVE_CLIP_INTERVAL => "SDL_MOUSE_RELATIVE_CLIP_INTERVAL"u8;
 
         [NativeTypeName("#define SDL_HINT_MOUSE_TOUCH_EVENTS \"SDL_MOUSE_TOUCH_EVENTS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MOUSE_TOUCH_EVENTS => "SDL_MOUSE_TOUCH_EVENTS"u8;
@@ -631,6 +637,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_WINDOWS_USE_D3D9EX \"SDL_WINDOWS_USE_D3D9EX\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_USE_D3D9EX => "SDL_WINDOWS_USE_D3D9EX"u8;
+
+        [NativeTypeName("#define SDL_HINT_WINDOWS_ERASE_BACKGROUND_MODE \"SDL_WINDOWS_ERASE_BACKGROUND_MODE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_ERASE_BACKGROUND_MODE => "SDL_WINDOWS_ERASE_BACKGROUND_MODE"u8;
 
         [NativeTypeName("#define SDL_HINT_WINRT_HANDLE_BACK_BUTTON \"SDL_WINRT_HANDLE_BACK_BUTTON\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WINRT_HANDLE_BACK_BUTTON => "SDL_WINRT_HANDLE_BACK_BUTTON"u8;

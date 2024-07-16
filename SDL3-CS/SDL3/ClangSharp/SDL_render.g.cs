@@ -28,17 +28,6 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public unsafe partial struct SDL_RendererInfo
-    {
-        [NativeTypeName("const char *")]
-        public byte* name;
-
-        public int num_texture_formats;
-
-        [NativeTypeName("const SDL_PixelFormatEnum *")]
-        public SDL_PixelFormatEnum* texture_formats;
-    }
-
     public partial struct SDL_Vertex
     {
         public SDL_FPoint position;
@@ -99,8 +88,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GetRenderWindow(SDL_Renderer* renderer);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetRendererInfo(SDL_Renderer* renderer, SDL_RendererInfo* info);
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetRendererName", ExactSpelling = true)]
+        [return: NativeTypeName("const char *")]
+        public static extern byte* Unsafe_SDL_GetRendererName(SDL_Renderer* renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID SDL_GetRendererProperties(SDL_Renderer* renderer);
@@ -112,7 +102,7 @@ namespace SDL
         public static extern int SDL_GetCurrentRenderOutputSize(SDL_Renderer* renderer, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Texture* SDL_CreateTexture(SDL_Renderer* renderer, SDL_PixelFormatEnum format, int access, int w, int h);
+        public static extern SDL_Texture* SDL_CreateTexture(SDL_Renderer* renderer, SDL_PixelFormat format, int access, int w, int h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Texture* SDL_CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface);
@@ -127,7 +117,7 @@ namespace SDL
         public static extern SDL_Renderer* SDL_GetRendererFromTexture(SDL_Texture* texture);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_QueryTexture(SDL_Texture* texture, SDL_PixelFormatEnum* format, int* access, int* w, int* h);
+        public static extern int SDL_GetTextureSize(SDL_Texture* texture, float* w, float* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetTextureColorMod(SDL_Texture* texture, [NativeTypeName("Uint8")] byte r, [NativeTypeName("Uint8")] byte g, [NativeTypeName("Uint8")] byte b);
@@ -194,6 +184,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetRenderLogicalPresentation(SDL_Renderer* renderer, int* w, int* h, SDL_RendererLogicalPresentation* mode, SDL_ScaleMode* scale_mode);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_GetRenderLogicalPresentationRect(SDL_Renderer* renderer, SDL_FRect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_RenderCoordinatesFromWindow(SDL_Renderer* renderer, float window_x, float window_y, float* x, float* y);
@@ -289,10 +282,7 @@ namespace SDL
         public static extern int SDL_RenderGeometry(SDL_Renderer* renderer, SDL_Texture* texture, [NativeTypeName("const SDL_Vertex *")] SDL_Vertex* vertices, int num_vertices, [NativeTypeName("const int *")] int* indices, int num_indices);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_RenderGeometryRaw(SDL_Renderer* renderer, SDL_Texture* texture, [NativeTypeName("const float *")] float* xy, int xy_stride, [NativeTypeName("const SDL_Color *")] SDL_Color* color, int color_stride, [NativeTypeName("const float *")] float* uv, int uv_stride, int num_vertices, [NativeTypeName("const void *")] IntPtr indices, int num_indices, int size_indices);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_RenderGeometryRawFloat(SDL_Renderer* renderer, SDL_Texture* texture, [NativeTypeName("const float *")] float* xy, int xy_stride, [NativeTypeName("const SDL_FColor *")] SDL_FColor* color, int color_stride, [NativeTypeName("const float *")] float* uv, int uv_stride, int num_vertices, [NativeTypeName("const void *")] IntPtr indices, int num_indices, int size_indices);
+        public static extern int SDL_RenderGeometryRaw(SDL_Renderer* renderer, SDL_Texture* texture, [NativeTypeName("const float *")] float* xy, int xy_stride, [NativeTypeName("const SDL_FColor *")] SDL_FColor* color, int color_stride, [NativeTypeName("const float *")] float* uv, int uv_stride, int num_vertices, [NativeTypeName("const void *")] IntPtr indices, int num_indices, int size_indices);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Surface* SDL_RenderReadPixels(SDL_Renderer* renderer, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect);
@@ -376,6 +366,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER \"SDL.renderer.max_texture_size\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_MAX_TEXTURE_SIZE_NUMBER => "SDL.renderer.max_texture_size"u8;
+
+        [NativeTypeName("#define SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER \"SDL.renderer.texture_formats\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_TEXTURE_FORMATS_POINTER => "SDL.renderer.texture_formats"u8;
 
         [NativeTypeName("#define SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER \"SDL.renderer.output_colorspace\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_OUTPUT_COLORSPACE_NUMBER => "SDL.renderer.output_colorspace"u8;
@@ -499,6 +492,18 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_TEXTURE_COLORSPACE_NUMBER \"SDL.texture.colorspace\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_COLORSPACE_NUMBER => "SDL.texture.colorspace"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_FORMAT_NUMBER \"SDL.texture.format\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_FORMAT_NUMBER => "SDL.texture.format"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_ACCESS_NUMBER \"SDL.texture.access\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_ACCESS_NUMBER => "SDL.texture.access"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_WIDTH_NUMBER \"SDL.texture.width\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_WIDTH_NUMBER => "SDL.texture.width"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_HEIGHT_NUMBER \"SDL.texture.height\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_HEIGHT_NUMBER => "SDL.texture.height"u8;
 
         [NativeTypeName("#define SDL_PROP_TEXTURE_SDR_WHITE_POINT_FLOAT \"SDL.texture.SDR_white_point\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_SDR_WHITE_POINT_FLOAT => "SDL.texture.SDR_white_point"u8;

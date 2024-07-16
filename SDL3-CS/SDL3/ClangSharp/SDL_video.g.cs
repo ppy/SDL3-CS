@@ -39,7 +39,7 @@ namespace SDL
     {
         public SDL_DisplayID displayID;
 
-        public SDL_PixelFormatEnum format;
+        public SDL_PixelFormat format;
 
         public int w;
 
@@ -71,6 +71,10 @@ namespace SDL
         SDL_FLASH_CANCEL,
         SDL_FLASH_BRIEFLY,
         SDL_FLASH_UNTIL_FOCUSED,
+    }
+
+    public partial struct SDL_GLContextState
+    {
     }
 
     public enum SDL_GLattr
@@ -237,6 +241,9 @@ namespace SDL
         public static extern uint SDL_GetWindowPixelFormat(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Window** SDL_GetWindows(int* count);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_CreateWindow([NativeTypeName("const char *")] byte* title, int w, int h, SDL_WindowFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -281,6 +288,12 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetWindowSize(SDL_Window* window, int* w, int* h);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_SetWindowAspectRatio(SDL_Window* window, float min_aspect, float max_aspect);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_GetWindowAspectRatio(SDL_Window* window, float* min_aspect, float* max_aspect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetWindowBordersSize(SDL_Window* window, int* top, int* left, int* bottom, int* right);
@@ -340,6 +353,12 @@ namespace SDL
         public static extern SDL_Surface* SDL_GetWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_SetWindowSurfaceVSync(SDL_Window* window, int vsync);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_GetWindowSurfaceVSync(SDL_Window* window, int* vsync);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_UpdateWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -378,9 +397,6 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetWindowModalFor(SDL_Window* modal_window, SDL_Window* parent_window);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowInputFocus(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetWindowFocusable(SDL_Window* window, SDL_bool focusable);
@@ -437,17 +453,17 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_GLContext")]
-        public static extern IntPtr SDL_GL_CreateContext(SDL_Window* window);
+        public static extern SDL_GLContextState* SDL_GL_CreateContext(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_MakeCurrent(SDL_Window* window, [NativeTypeName("SDL_GLContext")] IntPtr context);
+        public static extern int SDL_GL_MakeCurrent(SDL_Window* window, [NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GL_GetCurrentWindow();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_GLContext")]
-        public static extern IntPtr SDL_GL_GetCurrentContext();
+        public static extern SDL_GLContextState* SDL_GL_GetCurrentContext();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_EGLDisplay")]
@@ -474,7 +490,7 @@ namespace SDL
         public static extern int SDL_GL_SwapWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_DeleteContext([NativeTypeName("SDL_GLContext")] IntPtr context);
+        public static extern int SDL_GL_DestroyContext([NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
 
         [NativeTypeName("#define SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER \"SDL.video.wayland.wl_display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER => "SDL.video.wayland.wl_display"u8;
@@ -565,12 +581,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN \"SDL.display.HDR_enabled\"")]
         public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN => "SDL.display.HDR_enabled"u8;
-
-        [NativeTypeName("#define SDL_PROP_DISPLAY_SDR_WHITE_POINT_FLOAT \"SDL.display.SDR_white_point\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_SDR_WHITE_POINT_FLOAT => "SDL.display.SDR_white_point"u8;
-
-        [NativeTypeName("#define SDL_PROP_DISPLAY_HDR_HEADROOM_FLOAT \"SDL.display.HDR_headroom\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_HDR_HEADROOM_FLOAT => "SDL.display.HDR_headroom"u8;
 
         [NativeTypeName("#define SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER \"SDL.display.KMSDRM.panel_orientation\"")]
         public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER => "SDL.display.KMSDRM.panel_orientation"u8;
@@ -677,6 +687,15 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_WINDOW_SHAPE_POINTER \"SDL.window.shape\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_SHAPE_POINTER => "SDL.window.shape"u8;
 
+        [NativeTypeName("#define SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN \"SDL.window.HDR_enabled\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_HDR_ENABLED_BOOLEAN => "SDL.window.HDR_enabled"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT \"SDL.window.SDR_white_level\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_SDR_WHITE_LEVEL_FLOAT => "SDL.window.SDR_white_level"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_HDR_HEADROOM_FLOAT \"SDL.window.HDR_headroom\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_HDR_HEADROOM_FLOAT => "SDL.window.HDR_headroom"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_ANDROID_WINDOW_POINTER \"SDL.window.android.window\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_ANDROID_WINDOW_POINTER => "SDL.window.android.window"u8;
 
@@ -688,6 +707,15 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_UIKIT_METAL_VIEW_TAG_NUMBER \"SDL.window.uikit.metal_view_tag\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_UIKIT_METAL_VIEW_TAG_NUMBER => "SDL.window.uikit.metal_view_tag"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_UIKIT_OPENGL_FRAMEBUFFER_NUMBER \"SDL.window.uikit.opengl.framebuffer\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_UIKIT_OPENGL_FRAMEBUFFER_NUMBER => "SDL.window.uikit.opengl.framebuffer"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_UIKIT_OPENGL_RENDERBUFFER_NUMBER \"SDL.window.uikit.opengl.renderbuffer\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_UIKIT_OPENGL_RENDERBUFFER_NUMBER => "SDL.window.uikit.opengl.renderbuffer"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_UIKIT_OPENGL_RESOLVE_FRAMEBUFFER_NUMBER \"SDL.window.uikit.opengl.resolve_framebuffer\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_UIKIT_OPENGL_RESOLVE_FRAMEBUFFER_NUMBER => "SDL.window.uikit.opengl.resolve_framebuffer"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_KMSDRM_DEVICE_INDEX_NUMBER \"SDL.window.kmsdrm.dev_index\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_KMSDRM_DEVICE_INDEX_NUMBER => "SDL.window.kmsdrm.dev_index"u8;
@@ -757,5 +785,11 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_X11_WINDOW_NUMBER \"SDL.window.x11.window\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_X11_WINDOW_NUMBER => "SDL.window.x11.window"u8;
+
+        [NativeTypeName("#define SDL_WINDOW_SURFACE_VSYNC_DISABLED 0")]
+        public const int SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0;
+
+        [NativeTypeName("#define SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE (-1)")]
+        public const int SDL_WINDOW_SURFACE_VSYNC_ADAPTIVE = (-1);
     }
 }

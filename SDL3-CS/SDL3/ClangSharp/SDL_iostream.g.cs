@@ -38,13 +38,20 @@ namespace SDL
         SDL_IO_STATUS_WRITEONLY,
     }
 
+    public enum SDL_IOWhence
+    {
+        SDL_IO_SEEK_SET,
+        SDL_IO_SEEK_CUR,
+        SDL_IO_SEEK_END,
+    }
+
     public unsafe partial struct SDL_IOStreamInterface
     {
         [NativeTypeName("Sint64 (*)(void *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, long> size;
 
-        [NativeTypeName("Sint64 (*)(void *, Sint64, int)")]
-        public delegate* unmanaged[Cdecl]<IntPtr, long, int, long> seek;
+        [NativeTypeName("Sint64 (*)(void *, Sint64, SDL_IOWhence)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, long, SDL_IOWhence, long> seek;
 
         [NativeTypeName("size_t (*)(void *, void *, size_t, SDL_IOStatus *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, IntPtr, nuint, SDL_IOStatus*, nuint> read;
@@ -92,7 +99,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Sint64")]
-        public static extern long SDL_SeekIO(SDL_IOStream* context, [NativeTypeName("Sint64")] long offset, int whence);
+        public static extern long SDL_SeekIO(SDL_IOStream* context, [NativeTypeName("Sint64")] long offset, SDL_IOWhence whence);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Sint64")]
@@ -124,6 +131,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_ReadU8(SDL_IOStream* src, [NativeTypeName("Uint8 *")] byte* value);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_ReadS8(SDL_IOStream* src, [NativeTypeName("Sint8 *")] sbyte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_ReadU16LE(SDL_IOStream* src, [NativeTypeName("Uint16 *")] ushort* value);
@@ -163,6 +173,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_WriteU8(SDL_IOStream* dst, [NativeTypeName("Uint8")] byte value);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_WriteS8(SDL_IOStream* dst, [NativeTypeName("Sint8")] sbyte value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_WriteU16LE(SDL_IOStream* dst, [NativeTypeName("Uint16")] ushort value);
@@ -214,14 +227,5 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER \"SDL.iostream.dynamic.chunksize\"")]
         public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_DYNAMIC_CHUNKSIZE_NUMBER => "SDL.iostream.dynamic.chunksize"u8;
-
-        [NativeTypeName("#define SDL_IO_SEEK_SET 0")]
-        public const int SDL_IO_SEEK_SET = 0;
-
-        [NativeTypeName("#define SDL_IO_SEEK_CUR 1")]
-        public const int SDL_IO_SEEK_CUR = 1;
-
-        [NativeTypeName("#define SDL_IO_SEEK_END 2")]
-        public const int SDL_IO_SEEK_END = 2;
     }
 }
