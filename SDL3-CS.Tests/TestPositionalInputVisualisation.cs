@@ -114,17 +114,17 @@ namespace SDL.Tests
                     break;
 
                 case SDL_EventType.SDL_EVENT_KEY_DOWN:
-                    switch (e.key.keysym.sym)
+                    switch (e.key.key)
                     {
-                        case SDL_Keycode.SDLK_r:
+                        case SDL_Keycode.SDLK_R:
                             SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() == SDL_bool.SDL_TRUE ? SDL_bool.SDL_FALSE : SDL_bool.SDL_TRUE);
                             break;
 
-                        case SDL_Keycode.SDLK_f:
+                        case SDL_Keycode.SDLK_F:
                             SDL_SetWindowFullscreen(window, SDL_bool.SDL_TRUE);
                             break;
 
-                        case SDL_Keycode.SDLK_w:
+                        case SDL_Keycode.SDLK_W:
                             SDL_SetWindowFullscreen(window, SDL_bool.SDL_FALSE);
                             break;
                     }

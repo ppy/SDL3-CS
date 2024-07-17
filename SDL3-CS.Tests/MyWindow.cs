@@ -81,7 +81,7 @@ namespace SDL.Tests
 
         private void handleKeyFromFilter(SDL_KeyboardEvent e)
         {
-            if (e.keysym.sym == SDL_Keycode.SDLK_f)
+            if (e.key == SDL_Keycode.SDLK_F)
             {
                 flash = true;
             }
@@ -102,14 +102,14 @@ namespace SDL.Tests
                     break;
 
                 case SDL_EventType.SDL_EVENT_KEY_DOWN:
-                    switch (e.key.keysym.sym)
+                    switch (e.key.key)
                     {
-                        case SDL_Keycode.SDLK_r:
+                        case SDL_Keycode.SDLK_R:
                             bool old = SDL_GetRelativeMouseMode() == SDL_bool.SDL_TRUE;
                             SDL_SetRelativeMouseMode(old ? SDL_bool.SDL_FALSE : SDL_bool.SDL_TRUE);
                             break;
 
-                        case SDL_Keycode.SDLK_v:
+                        case SDL_Keycode.SDLK_V:
                             string? text = SDL_GetClipboardText();
                             Console.WriteLine($"clipboard: {text}");
                             break;
@@ -122,7 +122,7 @@ namespace SDL.Tests
                             SDL_SetWindowFullscreen(sdlWindowHandle, SDL_bool.SDL_TRUE);
                             break;
 
-                        case SDL_Keycode.SDLK_j:
+                        case SDL_Keycode.SDLK_J:
                         {
                             using var gamepads = SDL_GetGamepads();
 
@@ -147,15 +147,15 @@ namespace SDL.Tests
                         }
 
                         case SDL_Keycode.SDLK_F1:
-                            SDL_StartTextInput();
+                            SDL_StartTextInput(sdlWindowHandle);
                             break;
 
                         case SDL_Keycode.SDLK_F2:
-                            SDL_StopTextInput();
+                            SDL_StopTextInput(sdlWindowHandle);
                             break;
 
-                        case SDL_Keycode.SDLK_m:
-                            SDL_Keymod mod = e.key.keysym.mod;
+                        case SDL_Keycode.SDLK_M:
+                            SDL_Keymod mod = e.key.mod;
                             Console.WriteLine(mod);
                             break;
                     }
@@ -172,9 +172,9 @@ namespace SDL.Tests
 
                 case SDL_EventType.SDL_EVENT_WINDOW_PEN_ENTER:
                     SDL_PenCapabilityInfo info;
-                    var cap = (SDL_PEN_CAPABILITIES)SDL_GetPenCapabilities((SDL_PenID)e.window.data1, &info);
+                    var cap = SDL_GetPenCapabilities((SDL_PenID)e.window.data1, &info);
 
-                    if (cap.HasFlag(SDL_PEN_CAPABILITIES.SDL_PEN_AXIS_XTILT_MASK))
+                    if (cap.HasFlag(SDL_PenCapabilityFlags.SDL_PEN_AXIS_XTILT_MASK))
                         Console.WriteLine("has pen xtilt axis");
 
                     Console.WriteLine(info.max_tilt);

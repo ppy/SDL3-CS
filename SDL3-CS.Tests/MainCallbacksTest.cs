@@ -46,7 +46,7 @@ namespace SDL.Tests
                 case SDL_EventType.SDL_EVENT_QUIT:
                 case SDL_EventType.SDL_EVENT_WINDOW_CLOSE_REQUESTED:
                 case SDL_EventType.SDL_EVENT_TERMINATING:
-                case SDL_EventType.SDL_EVENT_KEY_DOWN when e.key.keysym.sym == SDL_Keycode.SDLK_ESCAPE:
+                case SDL_EventType.SDL_EVENT_KEY_DOWN when e.key.key == SDL_Keycode.SDLK_ESCAPE:
                     return TERMINATE_SUCCESS;
             }
 
