@@ -9,19 +9,6 @@ namespace SDL
     [Typedef]
     public enum SDL_AudioDeviceID : UInt32;
 
-    [Typedef]
-    public enum SDL_AudioFormat : UInt16
-    {
-        SDL_AUDIO_U8 = (UInt16)SDL3.SDL_AUDIO_U8,
-        SDL_AUDIO_S8 = (UInt16)SDL3.SDL_AUDIO_S8,
-        SDL_AUDIO_S16LE = (UInt16)SDL3.SDL_AUDIO_S16LE,
-        SDL_AUDIO_S16BE = (UInt16)SDL3.SDL_AUDIO_S16BE,
-        SDL_AUDIO_S32LE = (UInt16)SDL3.SDL_AUDIO_S32LE,
-        SDL_AUDIO_S32BE = (UInt16)SDL3.SDL_AUDIO_S32BE,
-        SDL_AUDIO_F32LE = (UInt16)SDL3.SDL_AUDIO_F32LE,
-        SDL_AUDIO_F32BE = (UInt16)SDL3.SDL_AUDIO_F32BE,
-    }
-
     public static partial class SDL3
     {
         [Constant]
@@ -60,20 +47,18 @@ namespace SDL
         [Macro]
         public static int SDL_AUDIO_FRAMESIZE(SDL_AudioSpec x) => SDL_AUDIO_BYTESIZE((x).format) * (x).channels;
 
-        [MustDisposeResource]
         public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioPlaybackDevices()
         {
             int count;
             var array = SDL_GetAudioPlaybackDevices(&count);
-            return SDLArray.Create(array, count);
+            return SDLArray.CreatePooled(array, count);
         }
 
-        [MustDisposeResource]
         public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioRecordingDevices()
         {
             int count;
             var array = SDL_GetAudioRecordingDevices(&count);
-            return SDLArray.Create(array, count);
+            return SDLArray.CreatePooled(array, count);
         }
     }
 }

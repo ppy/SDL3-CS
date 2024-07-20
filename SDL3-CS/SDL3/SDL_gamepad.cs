@@ -12,28 +12,25 @@ namespace SDL
         /// <returns>
         /// An array of <see cref="nint"/> that can be passed to <see cref="Marshal.PtrToStringUTF8(System.IntPtr)"/>.
         /// </returns>
-        [MustDisposeResource]
         public static unsafe SDLArray<IntPtr>? SDL_GetGamepadMappings()
         {
             int count;
             IntPtr* array = (IntPtr*)SDL_GetGamepadMappings(&count);
-            return SDLArray.Create(array, count);
+            return SDLArray.CreatePooled(array, count);
         }
 
-        [MustDisposeResource]
         public static unsafe SDLArray<SDL_JoystickID>? SDL_GetGamepads()
         {
             int count;
             var array = SDL_GetGamepads(&count);
-            return SDLArray.Create(array, count);
+            return SDLArray.CreatePooled(array, count);
         }
 
-        [MustDisposeResource]
         public static unsafe SDLPointerArray<SDL_GamepadBinding>? SDL_GetGamepadBindings(SDL_Gamepad* gamepad)
         {
             int count;
             var array = SDL_GetGamepadBindings(gamepad, &count);
-            return SDLArray.Create(array, count);
+            return SDLArray.CreatePooled(array, count);
         }
     }
 }

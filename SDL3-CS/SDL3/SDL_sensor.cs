@@ -11,12 +11,11 @@ namespace SDL
 
     public static partial class SDL3
     {
-        [MustDisposeResource]
         public static unsafe SDLArray<SDL_SensorID>? SDL_GetSensors()
         {
             int count;
             var array = SDL_GetSensors(&count);
-            return SDLArray.Create(array, count);
+            return SDLArray.CreatePooled(array, count);
         }
     }
 }

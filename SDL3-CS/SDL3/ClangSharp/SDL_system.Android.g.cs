@@ -34,12 +34,12 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
         [SupportedOSPlatform("Android")]
-        public static extern IntPtr SDL_AndroidGetJNIEnv();
+        public static extern IntPtr SDL_GetAndroidJNIEnv();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
         [SupportedOSPlatform("Android")]
-        public static extern IntPtr SDL_AndroidGetActivity();
+        public static extern IntPtr SDL_GetAndroidActivity();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
@@ -59,33 +59,39 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern void SDL_AndroidBackButton();
+        public static extern void SDL_SendAndroidBackButton();
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_AndroidGetInternalStoragePath", ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetAndroidInternalStoragePath", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Android")]
-        public static extern byte* Unsafe_SDL_AndroidGetInternalStoragePath();
+        public static extern byte* Unsafe_SDL_GetAndroidInternalStoragePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_AndroidGetExternalStorageState([NativeTypeName("Uint32 *")] uint* state);
+        public static extern uint SDL_GetAndroidExternalStorageState();
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_AndroidGetExternalStoragePath", ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetAndroidExternalStoragePath", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Android")]
-        public static extern byte* Unsafe_SDL_AndroidGetExternalStoragePath();
+        public static extern byte* Unsafe_SDL_GetAndroidExternalStoragePath();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetAndroidCachePath", ExactSpelling = true)]
+        [return: NativeTypeName("const char *")]
+        [SupportedOSPlatform("Android")]
+        public static extern byte* Unsafe_SDL_GetAndroidCachePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_AndroidRequestPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_AndroidRequestPermissionCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, SDL_bool, void> cb, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern int SDL_RequestAndroidPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_RequestAndroidPermissionCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, SDL_bool, void> cb, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_AndroidShowToast([NativeTypeName("const char *")] byte* message, int duration, int gravity, int xoffset, int yoffset);
+        public static extern int SDL_ShowAndroidToast([NativeTypeName("const char *")] byte* message, int duration, int gravity, int xoffset, int yoffset);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_AndroidSendMessage([NativeTypeName("Uint32")] uint command, int param1);
+        public static extern int SDL_SendAndroidMessage([NativeTypeName("Uint32")] uint command, int param1);
 
         [NativeTypeName("#define SDL_ANDROID_EXTERNAL_STORAGE_READ 0x01")]
         public const int SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;

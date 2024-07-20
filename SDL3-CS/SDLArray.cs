@@ -6,17 +6,18 @@ using JetBrains.Annotations;
 
 namespace SDL
 {
-    [MustDisposeResource]
     public sealed unsafe class SDLArray<T> : IDisposable
         where T : unmanaged
     {
         private readonly T* array;
+        private readonly bool isPooled;
         public readonly int Count;
         private bool isDisposed;
 
-        internal SDLArray(T* array, int count)
+        internal SDLArray(T* array, int count, bool isPooled = false)
         {
             this.array = array;
+            this.isPooled = isPooled;
             Count = count;
         }
 
@@ -37,7 +38,9 @@ namespace SDL
                 return;
 
             isDisposed = true;
-            SDL3.SDL_free(array);
+
+            if (!isPooled)
+                SDL3.SDL_free(array);
         }
     }
 
@@ -61,6 +64,24 @@ namespace SDL
                 return null;
 
             return new SDLPointerArray<T>(array, count);
+        }
+
+        internal static SDLArray<T>? CreatePooled<T>(T* array, int count)
+            where T : unmanaged
+        {
+            if (array == null)
+                return null;
+
+            return new SDLArray<T>(array, count, true);
+        }
+
+        internal static SDLPointerArray<T>? CreatePooled<T>(T** array, int count)
+            where T : unmanaged
+        {
+            if (array == null)
+                return null;
+
+            return new SDLPointerArray<T>(array, count, true);
         }
     }
 }

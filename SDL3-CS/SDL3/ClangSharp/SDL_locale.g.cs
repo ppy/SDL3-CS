@@ -39,6 +39,7 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Locale* SDL_GetPreferredLocales();
+        [return: NativeTypeName("const SDL_Locale *const *")]
+        public static extern SDL_Locale** SDL_GetPreferredLocales(int* count);
     }
 }

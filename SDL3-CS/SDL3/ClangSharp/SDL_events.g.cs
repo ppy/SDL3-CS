@@ -45,6 +45,8 @@ namespace SDL
         SDL_EVENT_DISPLAY_ADDED,
         SDL_EVENT_DISPLAY_REMOVED,
         SDL_EVENT_DISPLAY_MOVED,
+        SDL_EVENT_DISPLAY_DESKTOP_MODE_CHANGED,
+        SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED,
         SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED,
         SDL_EVENT_DISPLAY_FIRST = SDL_EVENT_DISPLAY_ORIENTATION,
         SDL_EVENT_DISPLAY_LAST = SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED,
@@ -74,7 +76,7 @@ namespace SDL
         SDL_EVENT_WINDOW_PEN_LEAVE,
         SDL_EVENT_WINDOW_HDR_STATE_CHANGED,
         SDL_EVENT_WINDOW_FIRST = SDL_EVENT_WINDOW_SHOWN,
-        SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_PEN_LEAVE,
+        SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_HDR_STATE_CHANGED,
         SDL_EVENT_KEY_DOWN = 0x300,
         SDL_EVENT_KEY_UP,
         SDL_EVENT_TEXT_EDITING,
@@ -166,6 +168,9 @@ namespace SDL
 
         [NativeTypeName("Sint32")]
         public int data1;
+
+        [NativeTypeName("Sint32")]
+        public int data2;
     }
 
     public partial struct SDL_WindowEvent
@@ -685,7 +690,7 @@ namespace SDL
         [NativeTypeName("Uint64")]
         public ulong timestamp;
 
-        public SDL_CameraDeviceID which;
+        public SDL_CameraID which;
     }
 
     public partial struct SDL_TouchFingerEvent
@@ -1105,7 +1110,14 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_AllocateEventMemory([NativeTypeName("size_t")] nuint size);
+        public static extern IntPtr SDL_AllocateTemporaryMemory([NativeTypeName("size_t")] nuint size);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_ClaimTemporaryMemory([NativeTypeName("const void *")] IntPtr mem);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_FreeTemporaryMemory([NativeTypeName("const void *")] IntPtr mem);
 
         [NativeTypeName("#define SDL_RELEASED 0")]
         public const int SDL_RELEASED = 0;

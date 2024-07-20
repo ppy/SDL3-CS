@@ -11,12 +11,11 @@ namespace SDL
 
     public static partial class SDL3
     {
-        [MustDisposeResource]
         public static unsafe SDLArray<SDL_KeyboardID>? SDL_GetKeyboards()
         {
             int count;
             var array = SDL_GetKeyboards(&count);
-            return SDLArray.Create(array, count);
+            return SDLArray.CreatePooled(array, count);
         }
     }
 }

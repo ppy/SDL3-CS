@@ -45,18 +45,18 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern int SDL_Direct3D9GetAdapterIndex(SDL_DisplayID displayID);
+        public static extern int SDL_GetDirect3D9AdapterIndex(SDL_DisplayID displayID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern SDL_bool SDL_DXGIGetOutputInfo(SDL_DisplayID displayID, int* adapterIndex, int* outputIndex);
+        public static extern int SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int* adapterIndex, int* outputIndex);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern int SDL_GDKGetTaskQueue([NativeTypeName("XTaskQueueHandle *")] XTaskQueueObject** outTaskQueue);
+        public static extern int SDL_GetGDKTaskQueue([NativeTypeName("XTaskQueueHandle *")] XTaskQueueObject** outTaskQueue);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern int SDL_GDKGetDefaultUser([NativeTypeName("XUserHandle *")] XUser** outUserHandle);
+        public static extern int SDL_GetGDKDefaultUser([NativeTypeName("XUserHandle *")] XUser** outUserHandle);
     }
 }

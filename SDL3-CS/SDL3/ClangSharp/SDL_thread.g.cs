@@ -68,14 +68,11 @@ namespace SDL
         public static extern void SDL_DetachThread(SDL_Thread* thread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_TLSID SDL_CreateTLS();
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_GetTLS(SDL_TLSID id);
+        public static extern IntPtr SDL_GetTLS(SDL_TLSID* id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetTLS(SDL_TLSID id, [NativeTypeName("const void *")] IntPtr value, [NativeTypeName("SDL_TLSDestructorCallback")] delegate* unmanaged[Cdecl]<IntPtr, void> destructor);
+        public static extern int SDL_SetTLS(SDL_TLSID* id, [NativeTypeName("const void *")] IntPtr value, [NativeTypeName("SDL_TLSDestructorCallback")] delegate* unmanaged[Cdecl]<IntPtr, void> destructor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CleanupTLS();

@@ -35,7 +35,11 @@ namespace SDL
         SDL_SYSTEM_THEME_DARK,
     }
 
-    public partial struct SDL_DisplayMode
+    public partial struct SDL_DisplayModeData
+    {
+    }
+
+    public unsafe partial struct SDL_DisplayMode
     {
         public SDL_DisplayID displayID;
 
@@ -49,8 +53,11 @@ namespace SDL
 
         public float refresh_rate;
 
-        [NativeTypeName("void*")]
-        public IntPtr driverdata;
+        public int refresh_rate_numerator;
+
+        public int refresh_rate_denominator;
+
+        public SDL_DisplayModeData* @internal;
     }
 
     public enum SDL_DisplayOrientation
@@ -167,6 +174,7 @@ namespace SDL
         public static extern SDL_SystemTheme SDL_GetSystemTheme();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("const SDL_DisplayID *")]
         public static extern SDL_DisplayID* SDL_GetDisplays(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -195,7 +203,7 @@ namespace SDL
         public static extern float SDL_GetDisplayContentScale(SDL_DisplayID displayID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_DisplayMode **")]
+        [return: NativeTypeName("const SDL_DisplayMode *const *")]
         public static extern SDL_DisplayMode** SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -233,14 +241,14 @@ namespace SDL
         public static extern SDL_DisplayMode* SDL_GetWindowFullscreenMode(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("void*")]
+        [return: NativeTypeName("const void *")]
         public static extern IntPtr SDL_GetWindowICCProfile(SDL_Window* window, [NativeTypeName("size_t *")] nuint* size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_GetWindowPixelFormat(SDL_Window* window);
+        public static extern SDL_PixelFormat SDL_GetWindowPixelFormat(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("SDL_Window *const *")]
         public static extern SDL_Window** SDL_GetWindows(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -393,7 +401,7 @@ namespace SDL
         public static extern int SDL_SetWindowOpacity(SDL_Window* window, float opacity);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowOpacity(SDL_Window* window, float* out_opacity);
+        public static extern float SDL_GetWindowOpacity(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetWindowModalFor(SDL_Window* modal_window, SDL_Window* parent_window);

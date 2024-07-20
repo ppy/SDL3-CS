@@ -8,17 +8,18 @@ using JetBrains.Annotations;
 namespace SDL
 {
     // T* can't be used as a type parameter, so this has to be a separate class
-    [MustDisposeResource]
     public sealed unsafe class SDLPointerArray<T> : IDisposable
         where T : unmanaged
     {
         private readonly T** array;
+        private readonly bool isPooled;
         public readonly int Count;
         private bool isDisposed;
 
-        internal SDLPointerArray(T** array, int count)
+        internal SDLPointerArray(T** array, int count, bool isPooled = false)
         {
             this.array = array;
+            this.isPooled = isPooled;
             Count = count;
         }
 
@@ -40,7 +41,9 @@ namespace SDL
                 return;
 
             isDisposed = true;
-            SDL3.SDL_free(array);
+            
+            if (!isPooled)
+                SDL3.SDL_free(array);
         }
     }
 }
