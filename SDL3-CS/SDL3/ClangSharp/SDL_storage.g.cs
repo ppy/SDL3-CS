@@ -57,6 +57,9 @@ namespace SDL
         [NativeTypeName("int (*)(void *, const char *, const char *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, int> rename;
 
+        [NativeTypeName("int (*)(void *, const char *, const char *)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, int> copy;
+
         [NativeTypeName("Uint64 (*)(void *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, ulong> space_remaining;
     }
@@ -105,6 +108,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_RenameStoragePath(SDL_Storage* storage, [NativeTypeName("const char *")] byte* oldpath, [NativeTypeName("const char *")] byte* newpath);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_CopyStorageFile(SDL_Storage* storage, [NativeTypeName("const char *")] byte* oldpath, [NativeTypeName("const char *")] byte* newpath);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetStoragePathInfo(SDL_Storage* storage, [NativeTypeName("const char *")] byte* path, SDL_PathInfo* info);

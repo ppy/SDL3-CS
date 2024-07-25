@@ -43,7 +43,7 @@ namespace SDL
         public static extern void SDL_OnApplicationDidReceiveMemoryWarning();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_OnApplicationWillResignActive();
+        public static extern void SDL_OnApplicationWillEnterBackground();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_OnApplicationDidEnterBackground();
@@ -52,6 +52,6 @@ namespace SDL
         public static extern void SDL_OnApplicationWillEnterForeground();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_OnApplicationDidBecomeActive();
+        public static extern void SDL_OnApplicationDidEnterForeground();
     }
 }

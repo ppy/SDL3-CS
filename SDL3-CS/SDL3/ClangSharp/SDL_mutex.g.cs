@@ -97,7 +97,7 @@ namespace SDL
         public static extern int SDL_WaitSemaphoreTimeout(SDL_Semaphore* sem, [NativeTypeName("Sint32")] int timeoutMS);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_PostSemaphore(SDL_Semaphore* sem);
+        public static extern int SDL_SignalSemaphore(SDL_Semaphore* sem);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]

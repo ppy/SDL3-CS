@@ -97,12 +97,12 @@ namespace SDL
 
         public static SDL_bool SDL_PointInRectFloat([NativeTypeName("const SDL_FPoint *")] SDL_FPoint* p, [NativeTypeName("const SDL_FRect *")] SDL_FRect* r)
         {
-            return ((p) != null && (r) != null && (p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);
+            return ((p) != null && (r) != null && (p->x >= r->x) && (p->x <= (r->x + r->w)) && (p->y >= r->y) && (p->y <= (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectEmptyFloat([NativeTypeName("const SDL_FRect *")] SDL_FRect* r)
         {
-            return ((r == null) || (r->w <= 0.0f) || (r->h <= 0.0f)) ? (SDL_bool)(1) : (SDL_bool)(0);
+            return ((r == null) || (r->w < 0.0f) || (r->h < 0.0f)) ? (SDL_bool)(1) : (SDL_bool)(0);
         }
 
         public static SDL_bool SDL_RectsEqualEpsilon([NativeTypeName("const SDL_FRect *")] SDL_FRect* a, [NativeTypeName("const SDL_FRect *")] SDL_FRect* b, [NativeTypeName("const float")] float epsilon)

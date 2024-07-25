@@ -56,6 +56,7 @@ namespace SDL
         SDL_EVENT_WINDOW_MOVED,
         SDL_EVENT_WINDOW_RESIZED,
         SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED,
+        SDL_EVENT_WINDOW_METAL_VIEW_RESIZED,
         SDL_EVENT_WINDOW_MINIMIZED,
         SDL_EVENT_WINDOW_MAXIMIZED,
         SDL_EVENT_WINDOW_RESTORED,
@@ -68,6 +69,7 @@ namespace SDL
         SDL_EVENT_WINDOW_ICCPROF_CHANGED,
         SDL_EVENT_WINDOW_DISPLAY_CHANGED,
         SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED,
+        SDL_EVENT_WINDOW_SAFE_AREA_CHANGED,
         SDL_EVENT_WINDOW_OCCLUDED,
         SDL_EVENT_WINDOW_ENTER_FULLSCREEN,
         SDL_EVENT_WINDOW_LEAVE_FULLSCREEN,
@@ -1115,9 +1117,6 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
         public static extern IntPtr SDL_ClaimTemporaryMemory([NativeTypeName("const void *")] IntPtr mem);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_FreeTemporaryMemory([NativeTypeName("const void *")] IntPtr mem);
 
         [NativeTypeName("#define SDL_RELEASED 0")]
         public const int SDL_RELEASED = 0;

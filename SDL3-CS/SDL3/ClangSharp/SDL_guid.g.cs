@@ -47,6 +47,6 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GUIDToString(SDL_GUID guid);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GUID SDL_GUIDFromString([NativeTypeName("const char *")] byte* pchGUID);
+        public static extern SDL_GUID SDL_StringToGUID([NativeTypeName("const char *")] byte* pchGUID);
     }
 }

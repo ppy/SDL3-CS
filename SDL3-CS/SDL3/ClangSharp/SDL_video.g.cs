@@ -298,6 +298,9 @@ namespace SDL
         public static extern int SDL_GetWindowSize(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_GetWindowSafeArea(SDL_Window* window, SDL_Rect* rect);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetWindowAspectRatio(SDL_Window* window, float min_aspect, float max_aspect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -475,18 +478,18 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_EGLDisplay")]
-        public static extern IntPtr SDL_EGL_GetCurrentEGLDisplay();
+        public static extern IntPtr SDL_EGL_GetCurrentDisplay();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_EGLConfig")]
-        public static extern IntPtr SDL_EGL_GetCurrentEGLConfig();
+        public static extern IntPtr SDL_EGL_GetCurrentConfig();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_EGLSurface")]
-        public static extern IntPtr SDL_EGL_GetWindowEGLSurface(SDL_Window* window);
+        public static extern IntPtr SDL_EGL_GetWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_EGL_SetEGLAttributeCallbacks([NativeTypeName("SDL_EGLAttribArrayCallback")] delegate* unmanaged[Cdecl]<nint*> platformAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> surfaceAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> contextAttribCallback);
+        public static extern void SDL_EGL_SetAttributeCallbacks([NativeTypeName("SDL_EGLAttribArrayCallback")] delegate* unmanaged[Cdecl]<nint*> platformAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> surfaceAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> contextAttribCallback);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GL_SetSwapInterval(int interval);
