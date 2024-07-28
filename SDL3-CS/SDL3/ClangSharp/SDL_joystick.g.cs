@@ -170,7 +170,6 @@ namespace SDL
         public static extern SDL_bool SDL_HasJoystick();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_JoystickID *")]
         public static extern SDL_JoystickID* SDL_GetJoysticks(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetJoystickNameForID", ExactSpelling = true)]

@@ -67,11 +67,9 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetCurrentCameraDriver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_CameraID *")]
         public static extern SDL_CameraID* SDL_GetCameras(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_CameraSpec *const *")]
         public static extern SDL_CameraSpec** SDL_GetCameraSupportedFormats(SDL_CameraID devid, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetCameraName", ExactSpelling = true)]

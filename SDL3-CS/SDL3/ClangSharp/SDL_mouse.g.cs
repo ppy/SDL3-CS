@@ -68,7 +68,6 @@ namespace SDL
         public static extern SDL_bool SDL_HasMouse();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_MouseID *")]
         public static extern SDL_MouseID* SDL_GetMice(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetMouseNameForID", ExactSpelling = true)]

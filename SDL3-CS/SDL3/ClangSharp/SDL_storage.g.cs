@@ -120,7 +120,7 @@ namespace SDL
         public static extern ulong SDL_GetStorageSpaceRemaining(SDL_Storage* storage);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *const *")]
+        [return: NativeTypeName("char **")]
         public static extern byte** SDL_GlobStorageDirectory(SDL_Storage* storage, [NativeTypeName("const char *")] byte* path, [NativeTypeName("const char *")] byte* pattern, SDL_GlobFlags flags, int* count);
     }
 }

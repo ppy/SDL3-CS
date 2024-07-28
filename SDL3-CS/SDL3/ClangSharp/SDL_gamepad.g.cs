@@ -192,15 +192,15 @@ namespace SDL
         public static extern int SDL_ReloadGamepadMappings();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *const *")]
+        [return: NativeTypeName("char **")]
         public static extern byte** SDL_GetGamepadMappings(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetGamepadMappingForGUID", ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
+        [return: NativeTypeName("char *")]
         public static extern byte* Unsafe_SDL_GetGamepadMappingForGUID(SDL_GUID guid);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetGamepadMapping", ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
+        [return: NativeTypeName("char *")]
         public static extern byte* Unsafe_SDL_GetGamepadMapping(SDL_Gamepad* gamepad);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -210,7 +210,6 @@ namespace SDL
         public static extern SDL_bool SDL_HasGamepad();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_JoystickID *")]
         public static extern SDL_JoystickID* SDL_GetGamepads(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -249,7 +248,7 @@ namespace SDL
         public static extern SDL_GamepadType SDL_GetRealGamepadTypeForID(SDL_JoystickID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetGamepadMappingForID", ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
+        [return: NativeTypeName("char *")]
         public static extern byte* Unsafe_SDL_GetGamepadMappingForID(SDL_JoystickID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -330,7 +329,6 @@ namespace SDL
         public static extern SDL_bool SDL_GamepadEventsEnabled();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_GamepadBinding *const *")]
         public static extern SDL_GamepadBinding** SDL_GetGamepadBindings(SDL_Gamepad* gamepad, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

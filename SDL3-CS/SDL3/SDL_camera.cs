@@ -11,18 +11,20 @@ namespace SDL
 
     public static partial class SDL3
     {
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_CameraID>? SDL_GetCameras()
         {
             int count;
             var array = SDL_GetCameras(&count);
-            return SDLArray.CreatePooled(array, count);
+            return SDLArray.Create(array, count);
         }
 
+        [MustDisposeResource]
         public static unsafe SDLPointerArray<SDL_CameraSpec>? SDL_GetCameraSupportedFormats(SDL_CameraID devid)
         {
             int count;
             var array = SDL_GetCameraSupportedFormats(devid, &count);
-            return SDLArray.CreatePooled(array, count);
+            return SDLArray.Create(array, count);
         }
     }
 }

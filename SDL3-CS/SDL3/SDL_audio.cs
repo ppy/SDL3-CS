@@ -47,18 +47,36 @@ namespace SDL
         [Macro]
         public static int SDL_AUDIO_FRAMESIZE(SDL_AudioSpec x) => SDL_AUDIO_BYTESIZE((x).format) * (x).channels;
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioPlaybackDevices()
         {
             int count;
             var array = SDL_GetAudioPlaybackDevices(&count);
-            return SDLArray.CreatePooled(array, count);
+            return SDLArray.Create(array, count);
         }
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_AudioDeviceID>? SDL_GetAudioRecordingDevices()
         {
             int count;
             var array = SDL_GetAudioRecordingDevices(&count);
-            return SDLArray.CreatePooled(array, count);
+            return SDLArray.Create(array, count);
+        }
+
+        [MustDisposeResource]
+        public static unsafe SDLArray<int>? SDL_GetAudioStreamInputChannelMap(SDL_AudioStream* stream)
+        {
+            int count;
+            int* array = SDL_GetAudioStreamInputChannelMap(stream, &count);
+            return SDLArray.Create(array, count);
+        }
+
+        [MustDisposeResource]
+        public static unsafe SDLArray<int>? SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream* stream)
+        {
+            int count;
+            int* array = SDL_GetAudioStreamOutputChannelMap(stream, &count);
+            return SDLArray.Create(array, count);
         }
     }
 }

@@ -73,7 +73,7 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetBasePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetPrefPath", ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
+        [return: NativeTypeName("char *")]
         public static extern byte* Unsafe_SDL_GetPrefPath([NativeTypeName("const char *")] byte* org, [NativeTypeName("const char *")] byte* app);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetUserFolder", ExactSpelling = true)]
@@ -99,7 +99,7 @@ namespace SDL
         public static extern int SDL_GetPathInfo([NativeTypeName("const char *")] byte* path, SDL_PathInfo* info);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *const *")]
+        [return: NativeTypeName("char **")]
         public static extern byte** SDL_GlobDirectory([NativeTypeName("const char *")] byte* path, [NativeTypeName("const char *")] byte* pattern, SDL_GlobFlags flags, int* count);
 
         [NativeTypeName("#define SDL_GLOB_CASEINSENSITIVE (1u << 0)")]

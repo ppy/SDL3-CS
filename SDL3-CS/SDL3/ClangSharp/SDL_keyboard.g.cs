@@ -33,7 +33,6 @@ namespace SDL
         public static extern SDL_bool SDL_HasKeyboard();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_KeyboardID *")]
         public static extern SDL_KeyboardID* SDL_GetKeyboards(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetKeyboardNameForID", ExactSpelling = true)]

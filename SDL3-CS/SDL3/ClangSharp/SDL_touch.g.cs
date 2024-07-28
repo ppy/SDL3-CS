@@ -49,7 +49,6 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_TouchID *")]
         public static extern SDL_TouchID* SDL_GetTouchDevices(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetTouchDeviceName", ExactSpelling = true)]
@@ -60,7 +59,6 @@ namespace SDL
         public static extern SDL_TouchDeviceType SDL_GetTouchDeviceType(SDL_TouchID touchID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_Finger *const *")]
         public static extern SDL_Finger** SDL_GetTouchFingers(SDL_TouchID touchID, int* count);
     }
 }

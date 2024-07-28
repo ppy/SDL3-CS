@@ -1110,14 +1110,6 @@ namespace SDL
         [return: NativeTypeName("Uint32")]
         public static extern uint SDL_RegisterEvents(int numevents);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_AllocateTemporaryMemory([NativeTypeName("size_t")] nuint size);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_ClaimTemporaryMemory([NativeTypeName("const void *")] IntPtr mem);
-
         [NativeTypeName("#define SDL_RELEASED 0")]
         public const int SDL_RELEASED = 0;
 

@@ -34,11 +34,12 @@ namespace SDL
         [Macro]
         public static SDL_MouseButtonFlags SDL_BUTTON(SDLButton button) => (SDL_MouseButtonFlags)(1 << ((int)button - 1));
 
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_MouseID>? SDL_GetMice()
         {
             int count;
             var array = SDL_GetMice(&count);
-            return SDLArray.CreatePooled(array, count);
+            return SDLArray.Create(array, count);
         }
     }
 }

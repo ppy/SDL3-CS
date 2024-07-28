@@ -11,11 +11,12 @@ namespace SDL
 
     public static partial class SDL3
     {
+        [MustDisposeResource]
         public static unsafe SDLArray<SDL_JoystickID>? SDL_GetJoysticks()
         {
             int count;
             var array = SDL_GetJoysticks(&count);
-            return SDLArray.CreatePooled(array, count);
+            return SDLArray.Create(array, count);
         }
     }
 }
