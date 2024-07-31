@@ -37,6 +37,7 @@ namespace SDL
                 return;
 
             isDisposed = true;
+
             SDL3.SDL_free(array);
         }
     }

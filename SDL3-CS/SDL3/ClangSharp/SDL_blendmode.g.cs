@@ -61,8 +61,14 @@ namespace SDL
         [NativeTypeName("#define SDL_BLENDMODE_BLEND 0x00000001u")]
         public const uint SDL_BLENDMODE_BLEND = 0x00000001U;
 
+        [NativeTypeName("#define SDL_BLENDMODE_BLEND_PREMULTIPLIED 0x00000010u")]
+        public const uint SDL_BLENDMODE_BLEND_PREMULTIPLIED = 0x00000010U;
+
         [NativeTypeName("#define SDL_BLENDMODE_ADD 0x00000002u")]
         public const uint SDL_BLENDMODE_ADD = 0x00000002U;
+
+        [NativeTypeName("#define SDL_BLENDMODE_ADD_PREMULTIPLIED 0x00000020u")]
+        public const uint SDL_BLENDMODE_ADD_PREMULTIPLIED = 0x00000020U;
 
         [NativeTypeName("#define SDL_BLENDMODE_MOD 0x00000004u")]
         public const uint SDL_BLENDMODE_MOD = 0x00000004U;

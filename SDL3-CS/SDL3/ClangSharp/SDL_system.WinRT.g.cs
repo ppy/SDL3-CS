@@ -46,13 +46,13 @@ namespace SDL
 
     public static unsafe partial class SDL3
     {
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_WinRTGetFSPath", ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetWinRTFSPath", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         [SupportedOSPlatform("Windows")]
-        public static extern byte* Unsafe_SDL_WinRTGetFSPath(SDL_WinRT_Path pathType);
+        public static extern byte* Unsafe_SDL_GetWinRTFSPath(SDL_WinRT_Path pathType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern SDL_WinRT_DeviceFamily SDL_WinRTGetDeviceFamily();
+        public static extern SDL_WinRT_DeviceFamily SDL_GetWinRTDeviceFamily();
     }
 }

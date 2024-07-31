@@ -28,6 +28,19 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    [NativeTypeName("int")]
+    public enum SDL_AudioFormat : uint
+    {
+        SDL_AUDIO_U8 = 0x0008U,
+        SDL_AUDIO_S8 = 0x8008U,
+        SDL_AUDIO_S16LE = 0x8010U,
+        SDL_AUDIO_S16BE = 0x9010U,
+        SDL_AUDIO_S32LE = 0x8020U,
+        SDL_AUDIO_S32BE = 0x9020U,
+        SDL_AUDIO_F32LE = 0x8120U,
+        SDL_AUDIO_F32BE = 0x9120U,
+    }
+
     public partial struct SDL_AudioSpec
     {
         public SDL_AudioFormat format;
@@ -68,7 +81,6 @@ namespace SDL
         public static extern int SDL_GetAudioDeviceFormat(SDL_AudioDeviceID devid, SDL_AudioSpec* spec, int* sample_frames);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const int *")]
         public static extern int* SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -132,11 +144,9 @@ namespace SDL
         public static extern int SDL_SetAudioStreamGain(SDL_AudioStream* stream, float gain);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const int *")]
         public static extern int* SDL_GetAudioStreamInputChannelMap(SDL_AudioStream* stream, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const int *")]
         public static extern int* SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream* stream, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -205,30 +215,6 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetSilenceValueForFormat(SDL_AudioFormat format);
 
-        [NativeTypeName("#define SDL_AUDIO_U8 0x0008u")]
-        public const uint SDL_AUDIO_U8 = 0x0008U;
-
-        [NativeTypeName("#define SDL_AUDIO_S8 0x8008u")]
-        public const uint SDL_AUDIO_S8 = 0x8008U;
-
-        [NativeTypeName("#define SDL_AUDIO_S16LE 0x8010u")]
-        public const uint SDL_AUDIO_S16LE = 0x8010U;
-
-        [NativeTypeName("#define SDL_AUDIO_S16BE 0x9010u")]
-        public const uint SDL_AUDIO_S16BE = 0x9010U;
-
-        [NativeTypeName("#define SDL_AUDIO_S32LE 0x8020u")]
-        public const uint SDL_AUDIO_S32LE = 0x8020U;
-
-        [NativeTypeName("#define SDL_AUDIO_S32BE 0x9020u")]
-        public const uint SDL_AUDIO_S32BE = 0x9020U;
-
-        [NativeTypeName("#define SDL_AUDIO_F32LE 0x8120u")]
-        public const uint SDL_AUDIO_F32LE = 0x8120U;
-
-        [NativeTypeName("#define SDL_AUDIO_F32BE 0x9120u")]
-        public const uint SDL_AUDIO_F32BE = 0x9120U;
-
         [NativeTypeName("#define SDL_AUDIO_MASK_BITSIZE (0xFFu)")]
         public const uint SDL_AUDIO_MASK_BITSIZE = (0xFFU);
 
@@ -241,10 +227,10 @@ namespace SDL
         [NativeTypeName("#define SDL_AUDIO_MASK_SIGNED (1u<<15)")]
         public const uint SDL_AUDIO_MASK_SIGNED = (1U << 15);
 
-        [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK ((SDL_AudioDeviceID) 0xFFFFFFFF)")]
-        public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK = ((SDL_AudioDeviceID)(0xFFFFFFFF));
+        [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK ((SDL_AudioDeviceID) 0xFFFFFFFFu)")]
+        public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK = ((SDL_AudioDeviceID)(0xFFFFFFFFU));
 
-        [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_RECORDING ((SDL_AudioDeviceID) 0xFFFFFFFE)")]
-        public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_RECORDING = ((SDL_AudioDeviceID)(0xFFFFFFFE));
+        [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_RECORDING ((SDL_AudioDeviceID) 0xFFFFFFFEu)")]
+        public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_RECORDING = ((SDL_AudioDeviceID)(0xFFFFFFFEU));
     }
 }

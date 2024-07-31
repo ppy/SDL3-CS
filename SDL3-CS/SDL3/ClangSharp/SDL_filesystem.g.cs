@@ -41,6 +41,7 @@ namespace SDL
         SDL_FOLDER_SCREENSHOTS,
         SDL_FOLDER_TEMPLATES,
         SDL_FOLDER_VIDEOS,
+        SDL_FOLDER_TOTAL,
     }
 
     public enum SDL_PathType
@@ -68,7 +69,7 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetBasePath", ExactSpelling = true)]
-        [return: NativeTypeName("char *")]
+        [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetBasePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetPrefPath", ExactSpelling = true)]
@@ -76,7 +77,7 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetPrefPath([NativeTypeName("const char *")] byte* org, [NativeTypeName("const char *")] byte* app);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetUserFolder", ExactSpelling = true)]
-        [return: NativeTypeName("char *")]
+        [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetUserFolder(SDL_Folder folder);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -90,6 +91,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_RenamePath([NativeTypeName("const char *")] byte* oldpath, [NativeTypeName("const char *")] byte* newpath);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_CopyFile([NativeTypeName("const char *")] byte* oldpath, [NativeTypeName("const char *")] byte* newpath);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetPathInfo([NativeTypeName("const char *")] byte* path, SDL_PathInfo* info);

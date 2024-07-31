@@ -56,10 +56,10 @@ namespace SDL
         public static extern void SDL_UnlockProperties(SDL_PropertiesID props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetPropertyWithCleanup(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr value, [NativeTypeName("SDL_CleanupPropertyCallback")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, void> cleanup, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern int SDL_SetPointerPropertyWithCleanup(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr value, [NativeTypeName("SDL_CleanupPropertyCallback")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, void> cleanup, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetProperty(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr value);
+        public static extern int SDL_SetPointerProperty(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_SetStringProperty(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
@@ -81,7 +81,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_GetProperty(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr default_value);
+        public static extern IntPtr SDL_GetPointerProperty(SDL_PropertiesID props, [NativeTypeName("const char *")] byte* name, [NativeTypeName("void*")] IntPtr default_value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetStringProperty", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]

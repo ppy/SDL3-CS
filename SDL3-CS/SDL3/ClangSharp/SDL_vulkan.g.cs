@@ -32,6 +32,10 @@ namespace SDL
     {
     }
 
+    public partial struct VkPhysicalDevice_T
+    {
+    }
+
     public partial struct VkSurfaceKHR_T
     {
     }
@@ -61,5 +65,8 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Vulkan_DestroySurface([NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("VkSurfaceKHR")] VkSurfaceKHR_T* surface, [NativeTypeName("const struct VkAllocationCallbacks *")] VkAllocationCallbacks* allocator);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_Vulkan_GetPresentationSupport([NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("VkPhysicalDevice")] VkPhysicalDevice_T* physicalDevice, [NativeTypeName("Uint32")] uint queueFamilyIndex);
     }
 }

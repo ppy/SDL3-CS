@@ -43,9 +43,9 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GUIDToString(SDL_GUID guid, [NativeTypeName("char *")] byte* pszGUID, int cbGUID);
+        public static extern void SDL_GUIDToString(SDL_GUID guid, [NativeTypeName("char *")] byte* pszGUID, int cbGUID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GUID SDL_GUIDFromString([NativeTypeName("const char *")] byte* pchGUID);
+        public static extern SDL_GUID SDL_StringToGUID([NativeTypeName("const char *")] byte* pchGUID);
     }
 }
