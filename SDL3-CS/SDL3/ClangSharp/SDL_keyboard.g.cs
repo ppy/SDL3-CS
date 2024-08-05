@@ -23,10 +23,32 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    public enum SDL_TextInputType
+    {
+        SDL_TEXTINPUT_TYPE_TEXT,
+        SDL_TEXTINPUT_TYPE_TEXT_NAME,
+        SDL_TEXTINPUT_TYPE_TEXT_EMAIL,
+        SDL_TEXTINPUT_TYPE_TEXT_USERNAME,
+        SDL_TEXTINPUT_TYPE_TEXT_PASSWORD_HIDDEN,
+        SDL_TEXTINPUT_TYPE_TEXT_PASSWORD_VISIBLE,
+        SDL_TEXTINPUT_TYPE_NUMBER,
+        SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_HIDDEN,
+        SDL_TEXTINPUT_TYPE_NUMBER_PASSWORD_VISIBLE,
+    }
+
+    public enum SDL_Capitalization
+    {
+        SDL_CAPITALIZE_NONE,
+        SDL_CAPITALIZE_SENTENCES,
+        SDL_CAPITALIZE_WORDS,
+        SDL_CAPITALIZE_LETTERS,
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -88,6 +110,9 @@ namespace SDL
         public static extern int SDL_StartTextInput(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_StartTextInputWithProperties(SDL_Window* window, SDL_PropertiesID props);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_TextInputActive(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -107,5 +132,20 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_ScreenKeyboardShown(SDL_Window* window);
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_TYPE_NUMBER \"SDL.textinput.type\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_TYPE_NUMBER => "SDL.textinput.type"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER \"SDL.textinput.capitalization\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_CAPITALIZATION_NUMBER => "SDL.textinput.capitalization"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN \"SDL.textinput.autocorrect\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_AUTOCORRECT_BOOLEAN => "SDL.textinput.autocorrect"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN \"SDL.textinput.multiline\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN => "SDL.textinput.multiline"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER \"SDL.textinput.android.inputtype\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER => "SDL.textinput.android.inputtype"u8;
     }
 }

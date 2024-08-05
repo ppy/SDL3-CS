@@ -23,11 +23,12 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public static partial class SDL3
+    public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_Init(SDL_InitFlags flags);
@@ -43,6 +44,16 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Quit();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_SetAppMetadata([NativeTypeName("const char *")] byte* appname, [NativeTypeName("const char *")] byte* appversion, [NativeTypeName("const char *")] byte* appidentifier);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_SetAppMetadataProperty([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetAppMetadataProperty", ExactSpelling = true)]
+        [return: NativeTypeName("const char *")]
+        public static extern byte* Unsafe_SDL_GetAppMetadataProperty([NativeTypeName("const char *")] byte* name);
 
         [NativeTypeName("#define SDL_INIT_TIMER 0x00000001u")]
         public const uint SDL_INIT_TIMER = 0x00000001U;
@@ -70,5 +81,26 @@ namespace SDL
 
         [NativeTypeName("#define SDL_INIT_CAMERA 0x00010000u")]
         public const uint SDL_INIT_CAMERA = 0x00010000U;
+
+        [NativeTypeName("#define SDL_PROP_APP_METADATA_NAME_STRING \"SDL.app.metadata.name\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_APP_METADATA_NAME_STRING => "SDL.app.metadata.name"u8;
+
+        [NativeTypeName("#define SDL_PROP_APP_METADATA_VERSION_STRING \"SDL.app.metadata.version\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_APP_METADATA_VERSION_STRING => "SDL.app.metadata.version"u8;
+
+        [NativeTypeName("#define SDL_PROP_APP_METADATA_IDENTIFIER_STRING \"SDL.app.metadata.identifier\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_APP_METADATA_IDENTIFIER_STRING => "SDL.app.metadata.identifier"u8;
+
+        [NativeTypeName("#define SDL_PROP_APP_METADATA_CREATOR_STRING \"SDL.app.metadata.creator\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_APP_METADATA_CREATOR_STRING => "SDL.app.metadata.creator"u8;
+
+        [NativeTypeName("#define SDL_PROP_APP_METADATA_COPYRIGHT_STRING \"SDL.app.metadata.copyright\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_APP_METADATA_COPYRIGHT_STRING => "SDL.app.metadata.copyright"u8;
+
+        [NativeTypeName("#define SDL_PROP_APP_METADATA_URL_STRING \"SDL.app.metadata.url\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_APP_METADATA_URL_STRING => "SDL.app.metadata.url"u8;
+
+        [NativeTypeName("#define SDL_PROP_APP_METADATA_TYPE_STRING \"SDL.app.metadata.type\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_APP_METADATA_TYPE_STRING => "SDL.app.metadata.type"u8;
     }
 }

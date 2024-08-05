@@ -89,9 +89,6 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_AUDIO_CATEGORY \"SDL_AUDIO_CATEGORY\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_CATEGORY => "SDL_AUDIO_CATEGORY"u8;
 
-        [NativeTypeName("#define SDL_HINT_AUDIO_DEVICE_APP_NAME \"SDL_AUDIO_DEVICE_APP_NAME\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DEVICE_APP_NAME => "SDL_AUDIO_DEVICE_APP_NAME"u8;
-
         [NativeTypeName("#define SDL_HINT_AUDIO_DEVICE_APP_ICON_NAME \"SDL_AUDIO_DEVICE_APP_ICON_NAME\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DEVICE_APP_ICON_NAME => "SDL_AUDIO_DEVICE_APP_ICON_NAME"u8;
 
