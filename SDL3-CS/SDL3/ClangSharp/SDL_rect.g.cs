@@ -65,6 +65,14 @@ namespace SDL
 
     public static unsafe partial class SDL3
     {
+        public static void SDL_RectToFRect([NativeTypeName("const SDL_Rect *")] SDL_Rect* rect, SDL_FRect* frect)
+        {
+            frect->x = (float)(rect->x);
+            frect->y = (float)(rect->y);
+            frect->w = (float)(rect->w);
+            frect->h = (float)(rect->h);
+        }
+
         public static SDL_bool SDL_PointInRect([NativeTypeName("const SDL_Point *")] SDL_Point* p, [NativeTypeName("const SDL_Rect *")] SDL_Rect* r)
         {
             return ((p) != null && (r) != null && (p->x >= r->x) && (p->x < (r->x + r->w)) && (p->y >= r->y) && (p->y < (r->y + r->h))) ? (SDL_bool)(1) : (SDL_bool)(0);

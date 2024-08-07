@@ -1110,6 +1110,9 @@ namespace SDL
         [return: NativeTypeName("Uint32")]
         public static extern uint SDL_RegisterEvents(int numevents);
 
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Window* SDL_GetWindowFromEvent([NativeTypeName("const SDL_Event *")] SDL_Event* @event);
+
         [NativeTypeName("#define SDL_RELEASED 0")]
         public const int SDL_RELEASED = 0;
 

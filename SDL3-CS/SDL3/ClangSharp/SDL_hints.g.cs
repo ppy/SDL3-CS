@@ -38,13 +38,13 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetHintWithPriority([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, SDL_HintPriority priority);
+        public static extern int SDL_SetHintWithPriority([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, SDL_HintPriority priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetHint([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
+        public static extern int SDL_SetHint([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ResetHint([NativeTypeName("const char *")] byte* name);
+        public static extern int SDL_ResetHint([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_ResetHints();
@@ -86,11 +86,14 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_APPLE_TV_REMOTE_ALLOW_ROTATION \"SDL_APPLE_TV_REMOTE_ALLOW_ROTATION\"")]
         public static ReadOnlySpan<byte> SDL_HINT_APPLE_TV_REMOTE_ALLOW_ROTATION => "SDL_APPLE_TV_REMOTE_ALLOW_ROTATION"u8;
 
+        [NativeTypeName("#define SDL_HINT_AUDIO_ALSA_DEFAULT_DEVICE \"SDL_AUDIO_ALSA_DEFAULT_DEVICE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_ALSA_DEFAULT_DEVICE => "SDL_AUDIO_ALSA_DEFAULT_DEVICE"u8;
+
         [NativeTypeName("#define SDL_HINT_AUDIO_CATEGORY \"SDL_AUDIO_CATEGORY\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_CATEGORY => "SDL_AUDIO_CATEGORY"u8;
 
-        [NativeTypeName("#define SDL_HINT_AUDIO_DEVICE_APP_NAME \"SDL_AUDIO_DEVICE_APP_NAME\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DEVICE_APP_NAME => "SDL_AUDIO_DEVICE_APP_NAME"u8;
+        [NativeTypeName("#define SDL_HINT_AUDIO_CHANNELS \"SDL_AUDIO_CHANNELS\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_CHANNELS => "SDL_AUDIO_CHANNELS"u8;
 
         [NativeTypeName("#define SDL_HINT_AUDIO_DEVICE_APP_ICON_NAME \"SDL_AUDIO_DEVICE_APP_ICON_NAME\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DEVICE_APP_ICON_NAME => "SDL_AUDIO_DEVICE_APP_ICON_NAME"u8;
@@ -104,8 +107,26 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_AUDIO_DEVICE_STREAM_ROLE \"SDL_AUDIO_DEVICE_STREAM_ROLE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DEVICE_STREAM_ROLE => "SDL_AUDIO_DEVICE_STREAM_ROLE"u8;
 
+        [NativeTypeName("#define SDL_HINT_AUDIO_DISK_INPUT_FILE \"SDL_AUDIO_DISK_INPUT_FILE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DISK_INPUT_FILE => "SDL_AUDIO_DISK_INPUT_FILE"u8;
+
+        [NativeTypeName("#define SDL_HINT_AUDIO_DISK_OUTPUT_FILE \"SDL_AUDIO_DISK_OUTPUT_FILE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DISK_OUTPUT_FILE => "SDL_AUDIO_DISK_OUTPUT_FILE"u8;
+
+        [NativeTypeName("#define SDL_HINT_AUDIO_DISK_TIMESCALE \"SDL_AUDIO_DISK_TIMESCALE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DISK_TIMESCALE => "SDL_AUDIO_DISK_TIMESCALE"u8;
+
         [NativeTypeName("#define SDL_HINT_AUDIO_DRIVER \"SDL_AUDIO_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DRIVER => "SDL_AUDIO_DRIVER"u8;
+
+        [NativeTypeName("#define SDL_HINT_AUDIO_DUMMY_TIMESCALE \"SDL_AUDIO_DUMMY_TIMESCALE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_DUMMY_TIMESCALE => "SDL_AUDIO_DUMMY_TIMESCALE"u8;
+
+        [NativeTypeName("#define SDL_HINT_AUDIO_FORMAT \"SDL_AUDIO_FORMAT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_FORMAT => "SDL_AUDIO_FORMAT"u8;
+
+        [NativeTypeName("#define SDL_HINT_AUDIO_FREQUENCY \"SDL_AUDIO_FREQUENCY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_AUDIO_FREQUENCY => "SDL_AUDIO_FREQUENCY"u8;
 
         [NativeTypeName("#define SDL_HINT_AUDIO_INCLUDE_MONITORS \"SDL_AUDIO_INCLUDE_MONITORS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_AUDIO_INCLUDE_MONITORS => "SDL_AUDIO_INCLUDE_MONITORS"u8;
@@ -145,6 +166,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_ENABLE_SCREEN_KEYBOARD \"SDL_ENABLE_SCREEN_KEYBOARD\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ENABLE_SCREEN_KEYBOARD => "SDL_ENABLE_SCREEN_KEYBOARD"u8;
+
+        [NativeTypeName("#define SDL_HINT_EVDEV_DEVICES \"SDL_EVDEV_DEVICES\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_EVDEV_DEVICES => "SDL_EVDEV_DEVICES"u8;
 
         [NativeTypeName("#define SDL_HINT_EVENT_LOGGING \"SDL_EVENT_LOGGING\"")]
         public static ReadOnlySpan<byte> SDL_HINT_EVENT_LOGGING => "SDL_EVENT_LOGGING"u8;
@@ -187,6 +211,15 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_GDK_TEXTINPUT_TITLE \"SDL_GDK_TEXTINPUT_TITLE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_GDK_TEXTINPUT_TITLE => "SDL_GDK_TEXTINPUT_TITLE"u8;
+
+        [NativeTypeName("#define SDL_HINT_HIDAPI_LIBUSB \"SDL_HIDAPI_LIBUSB\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_LIBUSB => "SDL_HIDAPI_LIBUSB"u8;
+
+        [NativeTypeName("#define SDL_HINT_HIDAPI_LIBUSB_WHITELIST \"SDL_HIDAPI_LIBUSB_WHITELIST\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_LIBUSB_WHITELIST => "SDL_HIDAPI_LIBUSB_WHITELIST"u8;
+
+        [NativeTypeName("#define SDL_HINT_HIDAPI_UDEV \"SDL_HIDAPI_UDEV\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_UDEV => "SDL_HIDAPI_UDEV"u8;
 
         [NativeTypeName("#define SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS \"SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS => "SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS"u8;
@@ -440,8 +473,14 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_MOUSE_TOUCH_EVENTS \"SDL_MOUSE_TOUCH_EVENTS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MOUSE_TOUCH_EVENTS => "SDL_MOUSE_TOUCH_EVENTS"u8;
 
+        [NativeTypeName("#define SDL_HINT_MUTE_CONSOLE_KEYBOARD \"SDL_MUTE_CONSOLE_KEYBOARD\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_MUTE_CONSOLE_KEYBOARD => "SDL_MUTE_CONSOLE_KEYBOARD"u8;
+
         [NativeTypeName("#define SDL_HINT_NO_SIGNAL_HANDLERS \"SDL_NO_SIGNAL_HANDLERS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_NO_SIGNAL_HANDLERS => "SDL_NO_SIGNAL_HANDLERS"u8;
+
+        [NativeTypeName("#define SDL_HINT_OPENGL_LIBRARY \"SDL_OPENGL_LIBRARY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_OPENGL_LIBRARY => "SDL_OPENGL_LIBRARY"u8;
 
         [NativeTypeName("#define SDL_HINT_OPENGL_ES_DRIVER \"SDL_OPENGL_ES_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENGL_ES_DRIVER => "SDL_OPENGL_ES_DRIVER"u8;
@@ -536,6 +575,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_VIDEO_DRIVER \"SDL_VIDEO_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_DRIVER => "SDL_VIDEO_DRIVER"u8;
 
+        [NativeTypeName("#define SDL_HINT_VIDEO_DUMMY_SAVE_FRAMES \"SDL_VIDEO_DUMMY_SAVE_FRAMES\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VIDEO_DUMMY_SAVE_FRAMES => "SDL_VIDEO_DUMMY_SAVE_FRAMES"u8;
+
         [NativeTypeName("#define SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK \"SDL_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK => "SDL_VIDEO_EGL_ALLOW_GETDISPLAY_FALLBACK"u8;
 
@@ -547,6 +589,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS \"SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS => "SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS"u8;
+
+        [NativeTypeName("#define SDL_HINT_VIDEO_OFFSCREEN_SAVE_FRAMES \"SDL_VIDEO_OFFSCREEN_SAVE_FRAMES\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VIDEO_OFFSCREEN_SAVE_FRAMES => "SDL_VIDEO_OFFSCREEN_SAVE_FRAMES"u8;
 
         [NativeTypeName("#define SDL_HINT_VIDEO_SYNC_WINDOW_OPERATIONS \"SDL_VIDEO_SYNC_WINDOW_OPERATIONS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_SYNC_WINDOW_OPERATIONS => "SDL_VIDEO_SYNC_WINDOW_OPERATIONS"u8;
@@ -575,8 +620,14 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_VIDEO_X11_NET_WM_PING \"SDL_VIDEO_X11_NET_WM_PING\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_X11_NET_WM_PING => "SDL_VIDEO_X11_NET_WM_PING"u8;
 
+        [NativeTypeName("#define SDL_HINT_VIDEO_X11_NODIRECTCOLOR \"SDL_VIDEO_X11_NODIRECTCOLOR\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VIDEO_X11_NODIRECTCOLOR => "SDL_VIDEO_X11_NODIRECTCOLOR"u8;
+
         [NativeTypeName("#define SDL_HINT_VIDEO_X11_SCALING_FACTOR \"SDL_VIDEO_X11_SCALING_FACTOR\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_X11_SCALING_FACTOR => "SDL_VIDEO_X11_SCALING_FACTOR"u8;
+
+        [NativeTypeName("#define SDL_HINT_VIDEO_X11_VISUALID \"SDL_VIDEO_X11_VISUALID\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VIDEO_X11_VISUALID => "SDL_VIDEO_X11_VISUALID"u8;
 
         [NativeTypeName("#define SDL_HINT_VIDEO_X11_WINDOW_VISUALID \"SDL_VIDEO_X11_WINDOW_VISUALID\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_X11_WINDOW_VISUALID => "SDL_VIDEO_X11_WINDOW_VISUALID"u8;
@@ -584,11 +635,38 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_VIDEO_X11_XRANDR \"SDL_VIDEO_X11_XRANDR\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_X11_XRANDR => "SDL_VIDEO_X11_XRANDR"u8;
 
+        [NativeTypeName("#define SDL_HINT_VITA_ENABLE_BACK_TOUCH \"SDL_VITA_ENABLE_BACK_TOUCH\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VITA_ENABLE_BACK_TOUCH => "SDL_VITA_ENABLE_BACK_TOUCH"u8;
+
+        [NativeTypeName("#define SDL_HINT_VITA_ENABLE_FRONT_TOUCH \"SDL_VITA_ENABLE_FRONT_TOUCH\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VITA_ENABLE_FRONT_TOUCH => "SDL_VITA_ENABLE_FRONT_TOUCH"u8;
+
+        [NativeTypeName("#define SDL_HINT_VITA_MODULE_PATH \"SDL_VITA_MODULE_PATH\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VITA_MODULE_PATH => "SDL_VITA_MODULE_PATH"u8;
+
+        [NativeTypeName("#define SDL_HINT_VITA_PVR_INIT \"SDL_VITA_PVR_INIT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VITA_PVR_INIT => "SDL_VITA_PVR_INIT"u8;
+
+        [NativeTypeName("#define SDL_HINT_VITA_RESOLUTION \"SDL_VITA_RESOLUTION\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VITA_RESOLUTION => "SDL_VITA_RESOLUTION"u8;
+
+        [NativeTypeName("#define SDL_HINT_VITA_PVR_OPENGL \"SDL_VITA_PVR_OPENGL\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VITA_PVR_OPENGL => "SDL_VITA_PVR_OPENGL"u8;
+
         [NativeTypeName("#define SDL_HINT_VITA_TOUCH_MOUSE_DEVICE \"SDL_VITA_TOUCH_MOUSE_DEVICE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VITA_TOUCH_MOUSE_DEVICE => "SDL_VITA_TOUCH_MOUSE_DEVICE"u8;
 
+        [NativeTypeName("#define SDL_HINT_VULKAN_DISPLAY \"SDL_VULKAN_DISPLAY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VULKAN_DISPLAY => "SDL_VULKAN_DISPLAY"u8;
+
+        [NativeTypeName("#define SDL_HINT_VULKAN_LIBRARY \"SDL_VULKAN_LIBRARY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VULKAN_LIBRARY => "SDL_VULKAN_LIBRARY"u8;
+
         [NativeTypeName("#define SDL_HINT_WAVE_FACT_CHUNK \"SDL_WAVE_FACT_CHUNK\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WAVE_FACT_CHUNK => "SDL_WAVE_FACT_CHUNK"u8;
+
+        [NativeTypeName("#define SDL_HINT_WAVE_CHUNK_LIMIT \"SDL_WAVE_CHUNK_LIMIT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_WAVE_CHUNK_LIMIT => "SDL_WAVE_CHUNK_LIMIT"u8;
 
         [NativeTypeName("#define SDL_HINT_WAVE_RIFF_CHUNK_SIZE \"SDL_WAVE_RIFF_CHUNK_SIZE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WAVE_RIFF_CHUNK_SIZE => "SDL_WAVE_RIFF_CHUNK_SIZE"u8;
@@ -620,9 +698,6 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_WINDOWS_RAW_KEYBOARD \"SDL_WINDOWS_RAW_KEYBOARD\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_RAW_KEYBOARD => "SDL_WINDOWS_RAW_KEYBOARD"u8;
 
-        [NativeTypeName("#define SDL_HINT_WINDOWS_FORCE_MUTEX_CRITICAL_SECTIONS \"SDL_WINDOWS_FORCE_MUTEX_CRITICAL_SECTIONS\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_FORCE_MUTEX_CRITICAL_SECTIONS => "SDL_WINDOWS_FORCE_MUTEX_CRITICAL_SECTIONS"u8;
-
         [NativeTypeName("#define SDL_HINT_WINDOWS_FORCE_SEMAPHORE_KERNEL \"SDL_WINDOWS_FORCE_SEMAPHORE_KERNEL\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_FORCE_SEMAPHORE_KERNEL => "SDL_WINDOWS_FORCE_SEMAPHORE_KERNEL"u8;
 
@@ -652,6 +727,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_X11_WINDOW_TYPE \"SDL_X11_WINDOW_TYPE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_X11_WINDOW_TYPE => "SDL_X11_WINDOW_TYPE"u8;
+
+        [NativeTypeName("#define SDL_HINT_X11_XCB_LIBRARY \"SDL_X11_XCB_LIBRARY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_X11_XCB_LIBRARY => "SDL_X11_XCB_LIBRARY"u8;
 
         [NativeTypeName("#define SDL_HINT_XINPUT_ENABLED \"SDL_XINPUT_ENABLED\"")]
         public static ReadOnlySpan<byte> SDL_HINT_XINPUT_ENABLED => "SDL_XINPUT_ENABLED"u8;
