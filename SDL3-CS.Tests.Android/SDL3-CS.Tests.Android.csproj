@@ -16,4 +16,19 @@
     <ProjectReference Include="..\SDL3-CS.Android\SDL3-CS.Android.csproj"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)..\native\android\armeabi-v7a\libSDL3.so">
+      <Abi>armeabi-v7a</Abi>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)..\native\android\arm64-v8a\libSDL3.so">
+      <Abi>arm64-v8a</Abi>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)..\native\android\x86\libSDL3.so">
+      <Abi>x86</Abi>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="$(MSBuildThisFileDirectory)..\native\android\x86_64\libSDL3.so">
+      <Abi>x86_64</Abi>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+
 </Project>
