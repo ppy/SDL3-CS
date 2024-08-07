@@ -1,5 +1,4 @@
-﻿using Java.Lang;
-using Org.Libsdl.App;
+﻿using Org.Libsdl.App;
 
 namespace SDL.Tests.Android
 {
@@ -8,6 +7,6 @@ namespace SDL.Tests.Android
     {
         protected override string[] GetLibraries() => ["SDL3"];
 
-        protected override IRunnable CreateSDLMainRunnable() => new Runnable(Program.Main);
+        protected override void Main() => Program.Main();
     }
 }
