@@ -23,125 +23,40 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System.Runtime.InteropServices;
-using static SDL.SDL_PenAxis;
-
 namespace SDL
 {
     public enum SDL_PenAxis
     {
-        SDL_PEN_AXIS_PRESSURE = 0,
+        SDL_PEN_AXIS_PRESSURE,
         SDL_PEN_AXIS_XTILT,
         SDL_PEN_AXIS_YTILT,
         SDL_PEN_AXIS_DISTANCE,
         SDL_PEN_AXIS_ROTATION,
         SDL_PEN_AXIS_SLIDER,
         SDL_PEN_NUM_AXES,
-        SDL_PEN_AXIS_LAST = SDL_PEN_NUM_AXES - 1,
     }
 
-    public enum SDL_PenSubtype
+    public static partial class SDL3
     {
-        SDL_PEN_TYPE_UNKNOWN = 0,
-        SDL_PEN_TYPE_ERASER = 1,
-        SDL_PEN_TYPE_PEN,
-        SDL_PEN_TYPE_PENCIL,
-        SDL_PEN_TYPE_BRUSH,
-        SDL_PEN_TYPE_AIRBRUSH,
-        SDL_PEN_TYPE_LAST = SDL_PEN_TYPE_AIRBRUSH,
-    }
+        [NativeTypeName("#define SDL_PEN_INPUT_DOWN (1u << 0)")]
+        public const uint SDL_PEN_INPUT_DOWN = (1U << 0);
 
-    public partial struct SDL_PenCapabilityInfo
-    {
-        public float max_tilt;
+        [NativeTypeName("#define SDL_PEN_INPUT_BUTTON_1 (1u << 1)")]
+        public const uint SDL_PEN_INPUT_BUTTON_1 = (1U << 1);
 
-        [NativeTypeName("Uint32")]
-        public uint wacom_id;
+        [NativeTypeName("#define SDL_PEN_INPUT_BUTTON_2 (1u << 2)")]
+        public const uint SDL_PEN_INPUT_BUTTON_2 = (1U << 2);
 
-        [NativeTypeName("Sint8")]
-        public sbyte num_buttons;
-    }
+        [NativeTypeName("#define SDL_PEN_INPUT_BUTTON_3 (1u << 3)")]
+        public const uint SDL_PEN_INPUT_BUTTON_3 = (1U << 3);
 
-    public static unsafe partial class SDL3
-    {
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_PenID* SDL_GetPens(int* count);
+        [NativeTypeName("#define SDL_PEN_INPUT_BUTTON_4 (1u << 4)")]
+        public const uint SDL_PEN_INPUT_BUTTON_4 = (1U << 4);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("Uint32")]
-        public static extern uint SDL_GetPenStatus(SDL_PenID instance_id, float* x, float* y, float* axes, [NativeTypeName("size_t")] nuint num_axes);
+        [NativeTypeName("#define SDL_PEN_INPUT_BUTTON_5 (1u << 5)")]
+        public const uint SDL_PEN_INPUT_BUTTON_5 = (1U << 5);
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_PenID SDL_GetPenFromGUID(SDL_GUID guid);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GUID SDL_GetPenGUID(SDL_PenID instance_id);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_PenConnected(SDL_PenID instance_id);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetPenName", ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Unsafe_SDL_GetPenName(SDL_PenID instance_id);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_PenCapabilityFlags SDL_GetPenCapabilities(SDL_PenID instance_id, SDL_PenCapabilityInfo* capabilities);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_PenSubtype SDL_GetPenType(SDL_PenID instance_id);
-
-        [NativeTypeName("#define SDL_PEN_INVALID ((SDL_PenID)0)")]
-        public const SDL_PenID SDL_PEN_INVALID = ((SDL_PenID)(0));
-
-        [NativeTypeName("#define SDL_PEN_INFO_UNKNOWN (-1)")]
-        public const int SDL_PEN_INFO_UNKNOWN = (-1);
-
-        [NativeTypeName("#define SDL_PEN_FLAG_DOWN_BIT_INDEX 13")]
-        public const int SDL_PEN_FLAG_DOWN_BIT_INDEX = 13;
-
-        [NativeTypeName("#define SDL_PEN_FLAG_INK_BIT_INDEX 14")]
-        public const int SDL_PEN_FLAG_INK_BIT_INDEX = 14;
-
-        [NativeTypeName("#define SDL_PEN_FLAG_ERASER_BIT_INDEX 15")]
-        public const int SDL_PEN_FLAG_ERASER_BIT_INDEX = 15;
-
-        [NativeTypeName("#define SDL_PEN_FLAG_AXIS_BIT_OFFSET 16")]
-        public const int SDL_PEN_FLAG_AXIS_BIT_OFFSET = 16;
-
-        [NativeTypeName("#define SDL_PEN_TIP_INK SDL_PEN_FLAG_INK_BIT_INDEX")]
-        public const int SDL_PEN_TIP_INK = 14;
-
-        [NativeTypeName("#define SDL_PEN_TIP_ERASER SDL_PEN_FLAG_ERASER_BIT_INDEX")]
-        public const int SDL_PEN_TIP_ERASER = 15;
-
-        [NativeTypeName("#define SDL_PEN_DOWN_MASK SDL_PEN_CAPABILITY(SDL_PEN_FLAG_DOWN_BIT_INDEX)")]
-        public const uint SDL_PEN_DOWN_MASK = (1U << (13));
-
-        [NativeTypeName("#define SDL_PEN_INK_MASK SDL_PEN_CAPABILITY(SDL_PEN_FLAG_INK_BIT_INDEX)")]
-        public const uint SDL_PEN_INK_MASK = (1U << (14));
-
-        [NativeTypeName("#define SDL_PEN_ERASER_MASK SDL_PEN_CAPABILITY(SDL_PEN_FLAG_ERASER_BIT_INDEX)")]
-        public const uint SDL_PEN_ERASER_MASK = (1U << (15));
-
-        [NativeTypeName("#define SDL_PEN_AXIS_PRESSURE_MASK SDL_PEN_AXIS_CAPABILITY(SDL_PEN_AXIS_PRESSURE)")]
-        public const uint SDL_PEN_AXIS_PRESSURE_MASK = (1U << ((int)(SDL_PEN_AXIS_PRESSURE) + 16));
-
-        [NativeTypeName("#define SDL_PEN_AXIS_XTILT_MASK SDL_PEN_AXIS_CAPABILITY(SDL_PEN_AXIS_XTILT)")]
-        public const uint SDL_PEN_AXIS_XTILT_MASK = (1U << ((int)(SDL_PEN_AXIS_XTILT) + 16));
-
-        [NativeTypeName("#define SDL_PEN_AXIS_YTILT_MASK SDL_PEN_AXIS_CAPABILITY(SDL_PEN_AXIS_YTILT)")]
-        public const uint SDL_PEN_AXIS_YTILT_MASK = (1U << ((int)(SDL_PEN_AXIS_YTILT) + 16));
-
-        [NativeTypeName("#define SDL_PEN_AXIS_DISTANCE_MASK SDL_PEN_AXIS_CAPABILITY(SDL_PEN_AXIS_DISTANCE)")]
-        public const uint SDL_PEN_AXIS_DISTANCE_MASK = (1U << ((int)(SDL_PEN_AXIS_DISTANCE) + 16));
-
-        [NativeTypeName("#define SDL_PEN_AXIS_ROTATION_MASK SDL_PEN_AXIS_CAPABILITY(SDL_PEN_AXIS_ROTATION)")]
-        public const uint SDL_PEN_AXIS_ROTATION_MASK = (1U << ((int)(SDL_PEN_AXIS_ROTATION) + 16));
-
-        [NativeTypeName("#define SDL_PEN_AXIS_SLIDER_MASK SDL_PEN_AXIS_CAPABILITY(SDL_PEN_AXIS_SLIDER)")]
-        public const uint SDL_PEN_AXIS_SLIDER_MASK = (1U << ((int)(SDL_PEN_AXIS_SLIDER) + 16));
-
-        [NativeTypeName("#define SDL_PEN_AXIS_BIDIRECTIONAL_MASKS (SDL_PEN_AXIS_XTILT_MASK | SDL_PEN_AXIS_YTILT_MASK)")]
-        public const uint SDL_PEN_AXIS_BIDIRECTIONAL_MASKS = ((1U << ((int)(SDL_PEN_AXIS_XTILT) + 16)) | (1U << ((int)(SDL_PEN_AXIS_YTILT) + 16)));
+        [NativeTypeName("#define SDL_PEN_INPUT_ERASER_TIP (1u << 30)")]
+        public const uint SDL_PEN_INPUT_ERASER_TIP = (1U << 30);
     }
 }
