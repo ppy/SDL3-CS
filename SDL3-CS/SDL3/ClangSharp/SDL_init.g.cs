@@ -28,6 +28,13 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    public enum SDL_AppResult
+    {
+        SDL_APP_CONTINUE,
+        SDL_APP_SUCCESS,
+        SDL_APP_FAILURE,
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

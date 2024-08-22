@@ -595,104 +595,107 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER \"SDL.display.KMSDRM.panel_orientation\"")]
         public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER => "SDL.display.KMSDRM.panel_orientation"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN \"always_on_top\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN => "always_on_top"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN \"SDL.window.create.always_on_top\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN => "SDL.window.create.always_on_top"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN \"borderless\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN => "borderless"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN \"SDL.window.create.borderless\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN => "SDL.window.create.borderless"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN \"focusable\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN => "focusable"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN \"SDL.window.create.focusable\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN => "SDL.window.create.focusable"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN \"external_graphics_context\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN => "external_graphics_context"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN \"SDL.window.create.external_graphics_context\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN => "SDL.window.create.external_graphics_context"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN \"fullscreen\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN => "fullscreen"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FLAGS_NUMBER \"SDL.window.create.flags\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FLAGS_NUMBER => "SDL.window.create.flags"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER \"height\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER => "height"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN \"SDL.window.create.fullscreen\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN => "SDL.window.create.fullscreen"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN \"hidden\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN => "hidden"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER \"SDL.window.create.height\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER => "SDL.window.create.height"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN \"high_pixel_density\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN => "high_pixel_density"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN \"SDL.window.create.hidden\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN => "SDL.window.create.hidden"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN \"maximized\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN => "maximized"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN \"SDL.window.create.high_pixel_density\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN => "SDL.window.create.high_pixel_density"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN \"menu\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN => "menu"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN \"SDL.window.create.maximized\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN => "SDL.window.create.maximized"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN \"metal\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN => "metal"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN \"SDL.window.create.menu\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN => "SDL.window.create.menu"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN \"minimized\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN => "minimized"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN \"SDL.window.create.metal\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN => "SDL.window.create.metal"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN \"modal\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN => "modal"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN \"SDL.window.create.minimized\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN => "SDL.window.create.minimized"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN \"mouse_grabbed\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN => "mouse_grabbed"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN \"SDL.window.create.modal\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN => "SDL.window.create.modal"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN \"opengl\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN => "opengl"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN \"SDL.window.create.mouse_grabbed\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN => "SDL.window.create.mouse_grabbed"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_PARENT_POINTER \"parent\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_PARENT_POINTER => "parent"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN \"SDL.window.create.opengl\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN => "SDL.window.create.opengl"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN \"resizable\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN => "resizable"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_PARENT_POINTER \"SDL.window.create.parent\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_PARENT_POINTER => "SDL.window.create.parent"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TITLE_STRING \"title\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TITLE_STRING => "title"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN \"SDL.window.create.resizable\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN => "SDL.window.create.resizable"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN \"transparent\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN => "transparent"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TITLE_STRING \"SDL.window.create.title\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TITLE_STRING => "SDL.window.create.title"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN \"tooltip\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN => "tooltip"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN \"SDL.window.create.transparent\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN => "SDL.window.create.transparent"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN \"utility\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN => "utility"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN \"SDL.window.create.tooltip\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN => "SDL.window.create.tooltip"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN \"vulkan\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN => "vulkan"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN \"SDL.window.create.utility\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN => "SDL.window.create.utility"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER \"width\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER => "width"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN \"SDL.window.create.vulkan\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN => "SDL.window.create.vulkan"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X_NUMBER \"x\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X_NUMBER => "x"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER \"SDL.window.create.width\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER => "SDL.window.create.width"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_Y_NUMBER \"y\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_Y_NUMBER => "y"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X_NUMBER \"SDL.window.create.x\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X_NUMBER => "SDL.window.create.x"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER \"cocoa.window\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER => "cocoa.window"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_Y_NUMBER \"SDL.window.create.y\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_Y_NUMBER => "SDL.window.create.y"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER \"cocoa.view\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER => "cocoa.view"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER \"SDL.window.create.cocoa.window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER => "SDL.window.create.cocoa.window"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN \"wayland.surface_role_custom\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN => "wayland.surface_role_custom"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER \"SDL.window.create.cocoa.view\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER => "SDL.window.create.cocoa.view"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN \"wayland.create_egl_window\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN => "wayland.create_egl_window"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN \"SDL.window.create.wayland.surface_role_custom\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN => "SDL.window.create.wayland.surface_role_custom"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER \"wayland.wl_surface\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER => "wayland.wl_surface"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN \"SDL.window.create.wayland.create_egl_window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN => "SDL.window.create.wayland.create_egl_window"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER \"win32.hwnd\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER => "win32.hwnd"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER \"SDL.window.create.wayland.wl_surface\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER => "SDL.window.create.wayland.wl_surface"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER \"win32.pixel_format_hwnd\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER => "win32.pixel_format_hwnd"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER \"SDL.window.create.win32.hwnd\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER => "SDL.window.create.win32.hwnd"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER \"x11.window\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER => "x11.window"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER \"SDL.window.create.win32.pixel_format_hwnd\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER => "SDL.window.create.win32.pixel_format_hwnd"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER \"SDL.window.create.x11.window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER => "SDL.window.create.x11.window"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_SHAPE_POINTER \"SDL.window.shape\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_SHAPE_POINTER => "SDL.window.shape"u8;

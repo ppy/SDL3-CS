@@ -83,16 +83,16 @@ namespace SDL
         [NativeTypeName("#define SDL_EndThreadFunction NULL")]
         public const int SDL_EndThreadFunction = 0;
 
-        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER \"entry_function\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER => "entry_function"u8;
+        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER \"SDL.thread.create.entry_function\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER => "SDL.thread.create.entry_function"u8;
 
-        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_NAME_STRING \"name\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_NAME_STRING => "name"u8;
+        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_NAME_STRING \"SDL.thread.create.name\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_NAME_STRING => "SDL.thread.create.name"u8;
 
-        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_USERDATA_POINTER \"userdata\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_USERDATA_POINTER => "userdata"u8;
+        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_USERDATA_POINTER \"SDL.thread.create.userdata\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_USERDATA_POINTER => "SDL.thread.create.userdata"u8;
 
-        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER \"stacksize\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER => "stacksize"u8;
+        [NativeTypeName("#define SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER \"SDL.thread.create.stacksize\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_STACKSIZE_NUMBER => "SDL.thread.create.stacksize"u8;
     }
 }

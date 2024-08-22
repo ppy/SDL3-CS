@@ -739,5 +739,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_XINPUT_ENABLED \"SDL_XINPUT_ENABLED\"")]
         public static ReadOnlySpan<byte> SDL_HINT_XINPUT_ENABLED => "SDL_XINPUT_ENABLED"u8;
+
+        [NativeTypeName("#define SDL_HINT_ASSERT \"SDL_ASSERT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_ASSERT => "SDL_ASSERT"u8;
     }
 }
