@@ -83,15 +83,15 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_RequestAndroidPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_RequestAndroidPermissionCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, SDL_bool, void> cb, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern SDL_bool SDL_RequestAndroidPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_RequestAndroidPermissionCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, SDL_bool, void> cb, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_ShowAndroidToast([NativeTypeName("const char *")] byte* message, int duration, int gravity, int xoffset, int yoffset);
+        public static extern SDL_bool SDL_ShowAndroidToast([NativeTypeName("const char *")] byte* message, int duration, int gravity, int xoffset, int yoffset);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
-        public static extern int SDL_SendAndroidMessage([NativeTypeName("Uint32")] uint command, int param1);
+        public static extern SDL_bool SDL_SendAndroidMessage([NativeTypeName("Uint32")] uint command, int param1);
 
         [NativeTypeName("#define SDL_ANDROID_EXTERNAL_STORAGE_READ 0x01")]
         public const int SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;

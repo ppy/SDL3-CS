@@ -59,7 +59,7 @@ namespace SDL
         public static extern SDL_TimerID SDL_AddTimerNS([NativeTypeName("Uint64")] ulong interval, [NativeTypeName("SDL_NSTimerCallback")] delegate* unmanaged[Cdecl]<IntPtr, SDL_TimerID, ulong, ulong> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_RemoveTimer(SDL_TimerID id);
+        public static extern SDL_bool SDL_RemoveTimer(SDL_TimerID id);
 
         [NativeTypeName("#define SDL_MS_PER_SECOND 1000")]
         public const int SDL_MS_PER_SECOND = 1000;

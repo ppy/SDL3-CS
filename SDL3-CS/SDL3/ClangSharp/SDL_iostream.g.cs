@@ -59,8 +59,8 @@ namespace SDL
         [NativeTypeName("size_t (*)(void *, const void *, size_t, SDL_IOStatus *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, IntPtr, nuint, SDL_IOStatus*, nuint> write;
 
-        [NativeTypeName("int (*)(void *)")]
-        public delegate* unmanaged[Cdecl]<IntPtr, int> close;
+        [NativeTypeName("SDL_bool (*)(void *)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, SDL_bool> close;
     }
 
     public partial struct SDL_IOStream
@@ -85,7 +85,7 @@ namespace SDL
         public static extern SDL_IOStream* SDL_OpenIO([NativeTypeName("const SDL_IOStreamInterface *")] SDL_IOStreamInterface* iface, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_CloseIO(SDL_IOStream* context);
+        public static extern SDL_bool SDL_CloseIO(SDL_IOStream* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID SDL_GetIOProperties(SDL_IOStream* context);
