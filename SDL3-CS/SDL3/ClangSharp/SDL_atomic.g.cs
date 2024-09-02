@@ -67,10 +67,10 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_AtomicSetPtr([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr v);
+        public static extern IntPtr SDL_AtomicSetPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr v);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_AtomicGetPtr([NativeTypeName("void **")] IntPtr* a);
+        public static extern IntPtr SDL_AtomicGetPointer([NativeTypeName("void **")] IntPtr* a);
     }
 }

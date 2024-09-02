@@ -60,7 +60,7 @@ namespace SDL
         public static extern SDL_bool SDL_AddHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_DelHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_RemoveHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [NativeTypeName("#define SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED \"SDL_ALLOW_ALT_TAB_WHILE_GRABBED\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED => "SDL_ALLOW_ALT_TAB_WHILE_GRABBED"u8;
@@ -220,6 +220,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_HIDAPI_UDEV \"SDL_HIDAPI_UDEV\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_UDEV => "SDL_HIDAPI_UDEV"u8;
+
+        [NativeTypeName("#define SDL_HINT_GPU_DRIVER \"SDL_GPU_DRIVER\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_GPU_DRIVER => "SDL_GPU_DRIVER"u8;
 
         [NativeTypeName("#define SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS \"SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS => "SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS"u8;
@@ -491,12 +494,6 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_ORIENTATIONS \"SDL_ORIENTATIONS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ORIENTATIONS => "SDL_ORIENTATIONS"u8;
 
-        [NativeTypeName("#define SDL_HINT_PEN_DELAY_MOUSE_BUTTON \"SDL_PEN_DELAY_MOUSE_BUTTON\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_PEN_DELAY_MOUSE_BUTTON => "SDL_PEN_DELAY_MOUSE_BUTTON"u8;
-
-        [NativeTypeName("#define SDL_HINT_PEN_NOT_MOUSE \"SDL_PEN_NOT_MOUSE\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_PEN_NOT_MOUSE => "SDL_PEN_NOT_MOUSE"u8;
-
         [NativeTypeName("#define SDL_HINT_POLL_SENTINEL \"SDL_POLL_SENTINEL\"")]
         public static ReadOnlySpan<byte> SDL_HINT_POLL_SENTINEL => "SDL_POLL_SENTINEL"u8;
 
@@ -514,6 +511,12 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_RENDER_VULKAN_DEBUG \"SDL_RENDER_VULKAN_DEBUG\"")]
         public static ReadOnlySpan<byte> SDL_HINT_RENDER_VULKAN_DEBUG => "SDL_RENDER_VULKAN_DEBUG"u8;
+
+        [NativeTypeName("#define SDL_HINT_RENDER_GPU_DEBUG \"SDL_RENDER_GPU_DEBUG\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_RENDER_GPU_DEBUG => "SDL_RENDER_GPU_DEBUG"u8;
+
+        [NativeTypeName("#define SDL_HINT_RENDER_GPU_LOW_POWER \"SDL_RENDER_GPU_LOW_POWER\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_RENDER_GPU_LOW_POWER => "SDL_RENDER_GPU_LOW_POWER"u8;
 
         [NativeTypeName("#define SDL_HINT_RENDER_DRIVER \"SDL_RENDER_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_RENDER_DRIVER => "SDL_RENDER_DRIVER"u8;

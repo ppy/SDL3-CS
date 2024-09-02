@@ -90,6 +90,7 @@ headers = [
     add("SDL3/SDL_events.h"),
     add("SDL3/SDL_filesystem.h"),
     add("SDL3/SDL_gamepad.h"),
+    add("SDL3/SDL_gpu.h"),
     add("SDL3/SDL_guid.h"),
     add("SDL3/SDL_haptic.h"),
     add("SDL3/SDL_hidapi.h"),

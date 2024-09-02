@@ -32,7 +32,6 @@ namespace SDL
     {
         SDL_SCALEMODE_NEAREST,
         SDL_SCALEMODE_LINEAR,
-        SDL_SCALEMODE_BEST,
     }
 
     public enum SDL_FlipMode

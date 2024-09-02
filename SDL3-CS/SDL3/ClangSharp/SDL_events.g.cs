@@ -1106,7 +1106,7 @@ namespace SDL
         public static extern SDL_bool SDL_AddEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_DelEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool> filter, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_RemoveEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_FilterEvents([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool> filter, [NativeTypeName("void*")] IntPtr userdata);
