@@ -564,26 +564,26 @@ namespace SDL
         [return: NativeTypeName("char *")]
         public static extern byte* Unsafe_SDL_iconv_string([NativeTypeName("const char *")] byte* tocode, [NativeTypeName("const char *")] byte* fromcode, [NativeTypeName("const char *")] byte* inbuf, [NativeTypeName("size_t")] nuint inbytesleft);
 
-        public static int SDL_size_mul_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
+        public static SDL_bool SDL_size_mul_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
         {
             if (a != 0 && b > 0xffffffffffffffffUL / a)
             {
-                return -1;
+                return (SDL_bool)(0);
             }
 
             *ret = a * b;
-            return 0;
+            return (SDL_bool)(1);
         }
 
-        public static int SDL_size_add_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
+        public static SDL_bool SDL_size_add_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
         {
             if (b > 0xffffffffffffffffUL - a)
             {
-                return -1;
+                return (SDL_bool)(0);
             }
 
             *ret = a + b;
-            return 0;
+            return (SDL_bool)(1);
         }
 
         [NativeTypeName("#define SDL_SIZE_MAX SIZE_MAX")]

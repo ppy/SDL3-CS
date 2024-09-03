@@ -394,8 +394,14 @@ namespace SDL
         [NativeTypeName("#define SDL_ALPHA_OPAQUE 255")]
         public const int SDL_ALPHA_OPAQUE = 255;
 
+        [NativeTypeName("#define SDL_ALPHA_OPAQUE_FLOAT 1.0f")]
+        public const float SDL_ALPHA_OPAQUE_FLOAT = 1.0f;
+
         [NativeTypeName("#define SDL_ALPHA_TRANSPARENT 0")]
         public const int SDL_ALPHA_TRANSPARENT = 0;
+
+        [NativeTypeName("#define SDL_ALPHA_TRANSPARENT_FLOAT 0.0f")]
+        public const float SDL_ALPHA_TRANSPARENT_FLOAT = 0.0f;
 
         [NativeTypeName("#define SDL_PIXELFORMAT_RGBA32 SDL_PIXELFORMAT_ABGR8888")]
         public const SDL_PixelFormat SDL_PIXELFORMAT_RGBA32 = SDL_PIXELFORMAT_ABGR8888;
