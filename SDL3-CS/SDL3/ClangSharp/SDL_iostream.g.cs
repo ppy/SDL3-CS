@@ -47,6 +47,9 @@ namespace SDL
 
     public unsafe partial struct SDL_IOStreamInterface
     {
+        [NativeTypeName("Uint32")]
+        public uint version;
+
         [NativeTypeName("Sint64 (*)(void *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, long> size;
 

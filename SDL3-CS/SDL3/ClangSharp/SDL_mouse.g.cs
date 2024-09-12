@@ -53,7 +53,7 @@ namespace SDL
         SDL_SYSTEM_CURSOR_S_RESIZE,
         SDL_SYSTEM_CURSOR_SW_RESIZE,
         SDL_SYSTEM_CURSOR_W_RESIZE,
-        SDL_NUM_SYSTEM_CURSORS,
+        SDL_SYSTEM_CURSOR_COUNT,
     }
 
     public enum SDL_MouseWheelDirection

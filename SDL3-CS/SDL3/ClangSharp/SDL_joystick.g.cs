@@ -45,6 +45,7 @@ namespace SDL
         SDL_JOYSTICK_TYPE_DRUM_KIT,
         SDL_JOYSTICK_TYPE_ARCADE_PAD,
         SDL_JOYSTICK_TYPE_THROTTLE,
+        SDL_JOYSTICK_TYPE_COUNT,
     }
 
     public enum SDL_JoystickConnectionState
@@ -79,6 +80,9 @@ namespace SDL
 
     public unsafe partial struct SDL_VirtualJoystickDesc
     {
+        [NativeTypeName("Uint32")]
+        public uint version;
+
         [NativeTypeName("Uint16")]
         public ushort type;
 
@@ -229,13 +233,13 @@ namespace SDL
         public static extern SDL_bool SDL_SetJoystickVirtualBall(SDL_Joystick* joystick, int ball, [NativeTypeName("Sint16")] short xrel, [NativeTypeName("Sint16")] short yrel);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetJoystickVirtualButton(SDL_Joystick* joystick, int button, [NativeTypeName("Uint8")] byte value);
+        public static extern SDL_bool SDL_SetJoystickVirtualButton(SDL_Joystick* joystick, int button, SDL_bool down);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_SetJoystickVirtualHat(SDL_Joystick* joystick, int hat, [NativeTypeName("Uint8")] byte value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetJoystickVirtualTouchpad(SDL_Joystick* joystick, int touchpad, int finger, [NativeTypeName("Uint8")] byte state, float x, float y, float pressure);
+        public static extern SDL_bool SDL_SetJoystickVirtualTouchpad(SDL_Joystick* joystick, int touchpad, int finger, SDL_bool down, float x, float y, float pressure);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_SendJoystickVirtualSensorData(SDL_Joystick* joystick, SDL_SensorType type, [NativeTypeName("Uint64")] ulong sensor_timestamp, [NativeTypeName("const float *")] float* data, int num_values);
@@ -328,8 +332,7 @@ namespace SDL
         public static extern byte SDL_GetJoystickHat(SDL_Joystick* joystick, int hat);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("Uint8")]
-        public static extern byte SDL_GetJoystickButton(SDL_Joystick* joystick, int button);
+        public static extern SDL_bool SDL_GetJoystickButton(SDL_Joystick* joystick, int button);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_RumbleJoystick(SDL_Joystick* joystick, [NativeTypeName("Uint16")] ushort low_frequency_rumble, [NativeTypeName("Uint16")] ushort high_frequency_rumble, [NativeTypeName("Uint32")] uint duration_ms);

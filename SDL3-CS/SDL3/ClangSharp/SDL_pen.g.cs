@@ -34,7 +34,7 @@ namespace SDL
         SDL_PEN_AXIS_ROTATION,
         SDL_PEN_AXIS_SLIDER,
         SDL_PEN_AXIS_TANGENTIAL_PRESSURE,
-        SDL_PEN_NUM_AXES,
+        SDL_PEN_AXIS_COUNT,
     }
 
     public static partial class SDL3

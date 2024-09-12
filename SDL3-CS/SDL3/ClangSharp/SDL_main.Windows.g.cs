@@ -38,9 +38,5 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
         public static extern void SDL_UnregisterApp();
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern void SDL_GDKSuspendComplete();
     }
 }

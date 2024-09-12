@@ -45,7 +45,7 @@ namespace SDL
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_LEFT,
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT,
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR,
-        SDL_GAMEPAD_TYPE_MAX,
+        SDL_GAMEPAD_TYPE_COUNT,
     }
 
     public enum SDL_GamepadButton
@@ -77,7 +77,7 @@ namespace SDL
         SDL_GAMEPAD_BUTTON_MISC4,
         SDL_GAMEPAD_BUTTON_MISC5,
         SDL_GAMEPAD_BUTTON_MISC6,
-        SDL_GAMEPAD_BUTTON_MAX,
+        SDL_GAMEPAD_BUTTON_COUNT,
     }
 
     public enum SDL_GamepadButtonLabel
@@ -102,7 +102,7 @@ namespace SDL
         SDL_GAMEPAD_AXIS_RIGHTY,
         SDL_GAMEPAD_AXIS_LEFT_TRIGGER,
         SDL_GAMEPAD_AXIS_RIGHT_TRIGGER,
-        SDL_GAMEPAD_AXIS_MAX,
+        SDL_GAMEPAD_AXIS_COUNT,
     }
 
     public enum SDL_GamepadBindingType
@@ -117,12 +117,12 @@ namespace SDL
     {
         public SDL_GamepadBindingType input_type;
 
-        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L245_C5")]
+        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L247_C5")]
         public _input_e__Union input;
 
         public SDL_GamepadBindingType output_type;
 
-        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L265_C5")]
+        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L267_C5")]
         public _output_e__Union output;
 
         [StructLayout(LayoutKind.Explicit)]
@@ -132,11 +132,11 @@ namespace SDL
             public int button;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L249_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L251_C9")]
             public _axis_e__Struct axis;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L256_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L258_C9")]
             public _hat_e__Struct hat;
 
             public partial struct _axis_e__Struct
@@ -163,7 +163,7 @@ namespace SDL
             public SDL_GamepadButton button;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L269_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L271_C9")]
             public _axis_e__Struct axis;
 
             public partial struct _axis_e__Struct
@@ -366,8 +366,7 @@ namespace SDL
         public static extern SDL_bool SDL_GamepadHasButton(SDL_Gamepad* gamepad, SDL_GamepadButton button);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("Uint8")]
-        public static extern byte SDL_GetGamepadButton(SDL_Gamepad* gamepad, SDL_GamepadButton button);
+        public static extern SDL_bool SDL_GetGamepadButton(SDL_Gamepad* gamepad, SDL_GamepadButton button);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_GamepadButtonLabel SDL_GetGamepadButtonLabelForType(SDL_GamepadType type, SDL_GamepadButton button);
@@ -382,7 +381,7 @@ namespace SDL
         public static extern int SDL_GetNumGamepadTouchpadFingers(SDL_Gamepad* gamepad, int touchpad);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad* gamepad, int touchpad, int finger, [NativeTypeName("Uint8 *")] byte* state, float* x, float* y, float* pressure);
+        public static extern SDL_bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad* gamepad, int touchpad, int finger, SDL_bool* down, float* x, float* y, float* pressure);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_GamepadHasSensor(SDL_Gamepad* gamepad, SDL_SensorType type);

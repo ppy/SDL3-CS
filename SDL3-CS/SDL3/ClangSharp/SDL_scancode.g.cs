@@ -275,6 +275,6 @@ namespace SDL
         SDL_SCANCODE_CALL = 289,
         SDL_SCANCODE_ENDCALL = 290,
         SDL_SCANCODE_RESERVED = 400,
-        SDL_NUM_SCANCODES = 512,
+        SDL_SCANCODE_COUNT = 512,
     }
 }

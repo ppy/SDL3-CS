@@ -30,6 +30,9 @@ namespace SDL
 {
     public unsafe partial struct SDL_StorageInterface
     {
+        [NativeTypeName("Uint32")]
+        public uint version;
+
         [NativeTypeName("SDL_bool (*)(void *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, SDL_bool> close;
 

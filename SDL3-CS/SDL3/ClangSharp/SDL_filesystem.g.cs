@@ -41,7 +41,7 @@ namespace SDL
         SDL_FOLDER_SCREENSHOTS,
         SDL_FOLDER_TEMPLATES,
         SDL_FOLDER_VIDEOS,
-        SDL_FOLDER_TOTAL,
+        SDL_FOLDER_COUNT,
     }
 
     public enum SDL_PathType

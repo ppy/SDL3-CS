@@ -403,7 +403,10 @@ namespace SDL
         public static extern float SDL_GetWindowOpacity(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowModalFor(SDL_Window* modal_window, SDL_Window* parent_window);
+        public static extern SDL_bool SDL_SetWindowParent(SDL_Window* window, SDL_Window* parent);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_SetWindowModal(SDL_Window* window, SDL_bool modal);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_SetWindowFocusable(SDL_Window* window, SDL_bool focusable);
@@ -753,9 +756,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER \"SDL.window.vivante.surface\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER => "SDL.window.vivante.surface"u8;
-
-        [NativeTypeName("#define SDL_PROP_WINDOW_WINRT_WINDOW_POINTER \"SDL.window.winrt.window\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WINRT_WINDOW_POINTER => "SDL.window.winrt.window"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_WIN32_HWND_POINTER \"SDL.window.win32.hwnd\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WIN32_HWND_POINTER => "SDL.window.win32.hwnd"u8;

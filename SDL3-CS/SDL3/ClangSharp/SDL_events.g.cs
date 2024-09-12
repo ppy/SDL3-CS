@@ -231,11 +231,9 @@ namespace SDL
         [NativeTypeName("Uint16")]
         public ushort raw;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
 
-        [NativeTypeName("Uint8")]
-        public byte repeat;
+        public SDL_bool repeat;
     }
 
     public unsafe partial struct SDL_TextEditingEvent
@@ -282,6 +280,15 @@ namespace SDL
         public int selected_candidate;
 
         public SDL_bool horizontal;
+
+        [NativeTypeName("Uint8")]
+        public byte padding1;
+
+        [NativeTypeName("Uint8")]
+        public byte padding2;
+
+        [NativeTypeName("Uint8")]
+        public byte padding3;
     }
 
     public unsafe partial struct SDL_TextInputEvent
@@ -355,8 +362,7 @@ namespace SDL
         [NativeTypeName("Uint8")]
         public byte button;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
 
         [NativeTypeName("Uint8")]
         public byte clicks;
@@ -496,8 +502,7 @@ namespace SDL
         [NativeTypeName("Uint8")]
         public byte button;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -582,8 +587,7 @@ namespace SDL
         [NativeTypeName("Uint8")]
         public byte button;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -670,8 +674,7 @@ namespace SDL
 
         public SDL_AudioDeviceID which;
 
-        [NativeTypeName("Uint8")]
-        public byte recording;
+        public SDL_bool recording;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -779,11 +782,9 @@ namespace SDL
 
         public float y;
 
-        [NativeTypeName("Uint8")]
-        public byte eraser;
+        public SDL_bool eraser;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
     }
 
     public partial struct SDL_PenButtonEvent
@@ -809,8 +810,7 @@ namespace SDL
         [NativeTypeName("Uint8")]
         public byte button;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
     }
 
     public partial struct SDL_PenAxisEvent
@@ -1123,11 +1123,5 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GetWindowFromEvent([NativeTypeName("const SDL_Event *")] SDL_Event* @event);
-
-        [NativeTypeName("#define SDL_RELEASED 0")]
-        public const int SDL_RELEASED = 0;
-
-        [NativeTypeName("#define SDL_PRESSED 1")]
-        public const int SDL_PRESSED = 1;
     }
 }

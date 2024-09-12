@@ -29,34 +29,10 @@ using System.Runtime.Versioning;
 
 namespace SDL
 {
-    public partial struct XTaskQueueObject
-    {
-    }
-
-    public partial struct XUser
-    {
-    }
-
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
         public static extern void SDL_SetWindowsMessageHook([NativeTypeName("SDL_WindowsMessageHook")] delegate* unmanaged[Cdecl]<IntPtr, MSG*, SDL_bool> callback, [NativeTypeName("void*")] IntPtr userdata);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern int SDL_GetDirect3D9AdapterIndex(SDL_DisplayID displayID);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern SDL_bool SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int* adapterIndex, int* outputIndex);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern SDL_bool SDL_GetGDKTaskQueue([NativeTypeName("XTaskQueueHandle *")] XTaskQueueObject** outTaskQueue);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern SDL_bool SDL_GetGDKDefaultUser([NativeTypeName("XUserHandle *")] XUser** outUserHandle);
     }
 }

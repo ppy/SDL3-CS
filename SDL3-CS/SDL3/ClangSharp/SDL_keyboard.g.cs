@@ -65,8 +65,8 @@ namespace SDL
         public static extern SDL_Window* SDL_GetKeyboardFocus();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const Uint8 *")]
-        public static extern byte* SDL_GetKeyboardState(int* numkeys);
+        [return: NativeTypeName("const SDL_bool *")]
+        public static extern SDL_bool* SDL_GetKeyboardState(int* numkeys);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_ResetKeyboard();
