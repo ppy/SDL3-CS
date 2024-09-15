@@ -62,6 +62,9 @@ namespace SDL
         [NativeTypeName("size_t (*)(void *, const void *, size_t, SDL_IOStatus *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, IntPtr, nuint, SDL_IOStatus*, nuint> write;
 
+        [NativeTypeName("SDL_bool (*)(void *, SDL_IOStatus *)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, SDL_IOStatus*, SDL_bool> flush;
+
         [NativeTypeName("SDL_bool (*)(void *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, SDL_bool> close;
     }
@@ -123,6 +126,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
         public static extern nuint SDL_IOvprintf(SDL_IOStream* context, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* ap);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_FlushIO(SDL_IOStream* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
@@ -221,6 +227,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_IOSTREAM_STDIO_FILE_POINTER \"SDL.iostream.stdio.file\"")]
         public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_STDIO_FILE_POINTER => "SDL.iostream.stdio.file"u8;
+
+        [NativeTypeName("#define SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER \"SDL.iostream.file_descriptor\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER => "SDL.iostream.file_descriptor"u8;
 
         [NativeTypeName("#define SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER \"SDL.iostream.android.aasset\"")]
         public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER => "SDL.iostream.android.aasset"u8;

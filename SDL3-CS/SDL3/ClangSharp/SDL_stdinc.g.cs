@@ -42,6 +42,10 @@ namespace SDL
         DUMMY_ENUM_VALUE,
     }
 
+    public partial struct SDL_Environment
+    {
+    }
+
     public partial struct SDL_iconv_data_t
     {
     }
@@ -82,15 +86,41 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetNumAllocations();
 
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_getenv", ExactSpelling = true)]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Environment* SDL_GetEnvironment();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_CleanupEnvironment();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Environment* SDL_CreateEnvironment(SDL_bool populated);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetEnvironmentVariable", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* Unsafe_SDL_getenv([NativeTypeName("const char *")] byte* name);
+        public static extern byte* Unsafe_SDL_GetEnvironmentVariable(SDL_Environment* env, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_setenv([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, int overwrite);
+        [return: NativeTypeName("char **")]
+        public static extern byte** SDL_GetEnvironmentVariables(SDL_Environment* env);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_unsetenv([NativeTypeName("const char *")] byte* name);
+        public static extern SDL_bool SDL_SetEnvironmentVariable(SDL_Environment* env, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, SDL_bool overwrite);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_UnsetEnvironmentVariable(SDL_Environment* env, [NativeTypeName("const char *")] byte* name);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_DestroyEnvironment(SDL_Environment* env);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_getenv_unsafe", ExactSpelling = true)]
+        [return: NativeTypeName("const char *")]
+        public static extern byte* Unsafe_SDL_getenv_unsafe([NativeTypeName("const char *")] byte* name);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_setenv_unsafe([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, int overwrite);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_unsetenv_unsafe([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_qsort([NativeTypeName("void*")] IntPtr @base, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size, [NativeTypeName("SDL_CompareCallback")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, int> compare);
