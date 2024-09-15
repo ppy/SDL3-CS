@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>SDL</RootNamespace>
+    <TargetFrameworks>net8.0;net8.0-android</TargetFrameworks>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>$(NoWarn);SYSLIB1054;CA1401</NoWarn>
@@ -93,6 +94,7 @@
       <PackagePath>runtimes/android-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
+    <EmbeddedJar Include="Jars\SDL3AndroidBridge.jar" />
   </ItemGroup>
 
 </Project>
