@@ -23,24 +23,15 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 namespace SDL
 {
-    public static unsafe partial class SDL3
+    public static partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern void SDL_SetWindowsMessageHook([NativeTypeName("SDL_WindowsMessageHook")] delegate* unmanaged[Cdecl]<IntPtr, MSG*, SDL_bool> callback, [NativeTypeName("void*")] IntPtr userdata);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern int SDL_GetDirect3D9AdapterIndex(SDL_DisplayID displayID);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern SDL_bool SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int* adapterIndex, int* outputIndex);
+        public static extern void SDL_GDKSuspendComplete();
     }
 }

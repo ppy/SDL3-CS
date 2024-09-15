@@ -314,6 +314,7 @@ def main():
 
     generate_platform_specific_headers(sdl_api, add("SDL3/SDL_main.h"), [
         (["SDL_PLATFORM_WINDOWS"], "Windows", "Windows"),
+        (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
     ])
 
     generate_platform_specific_headers(sdl_api, add("SDL3/SDL_system.h"), [
@@ -321,7 +322,8 @@ def main():
         (["SDL_PLATFORM_ANDROID"], "Android", "Android"),
         (["SDL_PLATFORM_IOS"], "iOS", "iOS"),
         (["SDL_PLATFORM_LINUX"], "Linux", "Linux"),
-        (["SDL_PLATFORM_WINDOWS"], "Windows", "Windows")
+        (["SDL_PLATFORM_WINDOWS", "SDL_PLATFORM_WIN32"], "Windows", "Windows"),
+        (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
     ])
 
 
