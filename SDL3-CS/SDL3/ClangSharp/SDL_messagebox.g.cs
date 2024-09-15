@@ -57,7 +57,7 @@ namespace SDL
         SDL_MESSAGEBOX_COLOR_BUTTON_BORDER,
         SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND,
         SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED,
-        SDL_MESSAGEBOX_COLOR_MAX,
+        SDL_MESSAGEBOX_COLOR_COUNT,
     }
 
     public partial struct SDL_MessageBoxColorScheme
@@ -96,10 +96,10 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ShowMessageBox([NativeTypeName("const SDL_MessageBoxData *")] SDL_MessageBoxData* messageboxdata, int* buttonid);
+        public static extern SDL_bool SDL_ShowMessageBox([NativeTypeName("const SDL_MessageBoxData *")] SDL_MessageBoxData* messageboxdata, int* buttonid);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, [NativeTypeName("const char *")] byte* title, [NativeTypeName("const char *")] byte* message, SDL_Window* window);
+        public static extern SDL_bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, [NativeTypeName("const char *")] byte* title, [NativeTypeName("const char *")] byte* message, SDL_Window* window);
 
         [NativeTypeName("#define SDL_MESSAGEBOX_ERROR 0x00000010u")]
         public const uint SDL_MESSAGEBOX_ERROR = 0x00000010U;

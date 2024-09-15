@@ -33,14 +33,10 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern int SDL_RegisterApp([NativeTypeName("const char *")] byte* name, [NativeTypeName("Uint32")] uint style, [NativeTypeName("void*")] IntPtr hInst);
+        public static extern SDL_bool SDL_RegisterApp([NativeTypeName("const char *")] byte* name, [NativeTypeName("Uint32")] uint style, [NativeTypeName("void*")] IntPtr hInst);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
         public static extern void SDL_UnregisterApp();
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern void SDL_GDKSuspendComplete();
     }
 }

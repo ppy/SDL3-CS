@@ -28,13 +28,20 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    public enum SDL_AppResult
+    {
+        SDL_APP_CONTINUE,
+        SDL_APP_SUCCESS,
+        SDL_APP_FAILURE,
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_Init(SDL_InitFlags flags);
+        public static extern SDL_bool SDL_Init(SDL_InitFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_InitSubSystem(SDL_InitFlags flags);
+        public static extern SDL_bool SDL_InitSubSystem(SDL_InitFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_QuitSubSystem(SDL_InitFlags flags);
@@ -46,10 +53,10 @@ namespace SDL
         public static extern void SDL_Quit();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetAppMetadata([NativeTypeName("const char *")] byte* appname, [NativeTypeName("const char *")] byte* appversion, [NativeTypeName("const char *")] byte* appidentifier);
+        public static extern SDL_bool SDL_SetAppMetadata([NativeTypeName("const char *")] byte* appname, [NativeTypeName("const char *")] byte* appversion, [NativeTypeName("const char *")] byte* appidentifier);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetAppMetadataProperty([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
+        public static extern SDL_bool SDL_SetAppMetadataProperty([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetAppMetadataProperty", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]

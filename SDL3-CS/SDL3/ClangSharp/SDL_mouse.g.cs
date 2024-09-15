@@ -53,7 +53,7 @@ namespace SDL
         SDL_SYSTEM_CURSOR_S_RESIZE,
         SDL_SYSTEM_CURSOR_SW_RESIZE,
         SDL_SYSTEM_CURSOR_W_RESIZE,
-        SDL_NUM_SYSTEM_CURSORS,
+        SDL_SYSTEM_CURSOR_COUNT,
     }
 
     public enum SDL_MouseWheelDirection
@@ -90,16 +90,16 @@ namespace SDL
         public static extern void SDL_WarpMouseInWindow(SDL_Window* window, float x, float y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_WarpMouseGlobal(float x, float y);
+        public static extern SDL_bool SDL_WarpMouseGlobal(float x, float y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetRelativeMouseMode(SDL_bool enabled);
+        public static extern SDL_bool SDL_SetWindowRelativeMouseMode(SDL_Window* window, SDL_bool enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_CaptureMouse(SDL_bool enabled);
+        public static extern SDL_bool SDL_GetWindowRelativeMouseMode(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetRelativeMouseMode();
+        public static extern SDL_bool SDL_CaptureMouse(SDL_bool enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Cursor* SDL_CreateCursor([NativeTypeName("const Uint8 *")] byte* data, [NativeTypeName("const Uint8 *")] byte* mask, int w, int h, int hot_x, int hot_y);
@@ -111,7 +111,7 @@ namespace SDL
         public static extern SDL_Cursor* SDL_CreateSystemCursor(SDL_SystemCursor id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetCursor(SDL_Cursor* cursor);
+        public static extern SDL_bool SDL_SetCursor(SDL_Cursor* cursor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Cursor* SDL_GetCursor();
@@ -123,10 +123,10 @@ namespace SDL
         public static extern void SDL_DestroyCursor(SDL_Cursor* cursor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ShowCursor();
+        public static extern SDL_bool SDL_ShowCursor();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_HideCursor();
+        public static extern SDL_bool SDL_HideCursor();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_CursorVisible();

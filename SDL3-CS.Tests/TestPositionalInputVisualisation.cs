@@ -11,12 +11,11 @@ namespace SDL.Tests
         private SDL_Window* window;
         private SDL_Renderer* renderer;
 
-        protected override int Init()
+        protected override SDL_AppResult Init()
         {
             // decouple pen, mouse and touch events
             SDL_SetHint(SDL_HINT_MOUSE_TOUCH_EVENTS, "0");
             SDL_SetHint(SDL_HINT_TOUCH_MOUSE_EVENTS, "0");
-            SDL_SetHint(SDL_HINT_PEN_NOT_MOUSE, "2");
 
             SDL_Init(SDL_InitFlags.SDL_INIT_VIDEO);
 
@@ -48,7 +47,7 @@ namespace SDL.Tests
             SDL_RenderFillRect(renderer, &r);
         }
 
-        protected override int Iterate()
+        protected override SDL_AppResult Iterate()
         {
             const float gray = 0.1f;
             SDL_SetRenderDrawColorFloat(renderer, gray, gray, gray, 1.0f);
@@ -86,7 +85,7 @@ namespace SDL.Tests
             return base.Iterate();
         }
 
-        protected override int Event(SDL_Event e)
+        protected override SDL_AppResult Event(SDL_Event e)
         {
             SDL_ConvertEventToRenderCoordinates(renderer, &e);
 
@@ -117,7 +116,7 @@ namespace SDL.Tests
                     switch (e.key.key)
                     {
                         case SDL_Keycode.SDLK_R:
-                            SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() == SDL_bool.SDL_TRUE ? SDL_bool.SDL_FALSE : SDL_bool.SDL_TRUE);
+                            SDL_SetWindowRelativeMouseMode(window, SDL_GetWindowRelativeMouseMode(window) == SDL_bool.SDL_TRUE ? SDL_bool.SDL_FALSE : SDL_bool.SDL_TRUE);
                             break;
 
                         case SDL_Keycode.SDLK_F:

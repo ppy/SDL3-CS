@@ -92,13 +92,13 @@ namespace SDL
         public static extern SDL_PropertiesID SDL_GetCameraProperties(SDL_Camera* camera);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetCameraFormat(SDL_Camera* camera, SDL_CameraSpec* spec);
+        public static extern SDL_bool SDL_GetCameraFormat(SDL_Camera* camera, SDL_CameraSpec* spec);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Surface* SDL_AcquireCameraFrame(SDL_Camera* camera, [NativeTypeName("Uint64 *")] ulong* timestampNS);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ReleaseCameraFrame(SDL_Camera* camera, SDL_Surface* frame);
+        public static extern void SDL_ReleaseCameraFrame(SDL_Camera* camera, SDL_Surface* frame);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CloseCamera(SDL_Camera* camera);

@@ -187,10 +187,10 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetDisplayName(SDL_DisplayID displayID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect* rect);
+        public static extern SDL_bool SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect* rect);
+        public static extern SDL_bool SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_DisplayOrientation SDL_GetNaturalDisplayOrientation(SDL_DisplayID displayID);
@@ -205,7 +205,7 @@ namespace SDL
         public static extern SDL_DisplayMode** SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, SDL_bool include_high_density_modes, SDL_DisplayMode* mode);
+        public static extern SDL_bool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, SDL_bool include_high_density_modes, SDL_DisplayMode* mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const SDL_DisplayMode *")]
@@ -231,7 +231,7 @@ namespace SDL
         public static extern float SDL_GetWindowDisplayScale(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowFullscreenMode(SDL_Window* window, [NativeTypeName("const SDL_DisplayMode *")] SDL_DisplayMode* mode);
+        public static extern SDL_bool SDL_SetWindowFullscreenMode(SDL_Window* window, [NativeTypeName("const SDL_DisplayMode *")] SDL_DisplayMode* mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const SDL_DisplayMode *")]
@@ -272,86 +272,86 @@ namespace SDL
         public static extern SDL_WindowFlags SDL_GetWindowFlags(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowTitle(SDL_Window* window, [NativeTypeName("const char *")] byte* title);
+        public static extern SDL_bool SDL_SetWindowTitle(SDL_Window* window, [NativeTypeName("const char *")] byte* title);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetWindowTitle", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetWindowTitle(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowIcon(SDL_Window* window, SDL_Surface* icon);
+        public static extern SDL_bool SDL_SetWindowIcon(SDL_Window* window, SDL_Surface* icon);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowPosition(SDL_Window* window, int x, int y);
+        public static extern SDL_bool SDL_SetWindowPosition(SDL_Window* window, int x, int y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowPosition(SDL_Window* window, int* x, int* y);
+        public static extern SDL_bool SDL_GetWindowPosition(SDL_Window* window, int* x, int* y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowSize(SDL_Window* window, int w, int h);
+        public static extern SDL_bool SDL_SetWindowSize(SDL_Window* window, int w, int h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowSize(SDL_Window* window, int* w, int* h);
+        public static extern SDL_bool SDL_GetWindowSize(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowSafeArea(SDL_Window* window, SDL_Rect* rect);
+        public static extern SDL_bool SDL_GetWindowSafeArea(SDL_Window* window, SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowAspectRatio(SDL_Window* window, float min_aspect, float max_aspect);
+        public static extern SDL_bool SDL_SetWindowAspectRatio(SDL_Window* window, float min_aspect, float max_aspect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowAspectRatio(SDL_Window* window, float* min_aspect, float* max_aspect);
+        public static extern SDL_bool SDL_GetWindowAspectRatio(SDL_Window* window, float* min_aspect, float* max_aspect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowBordersSize(SDL_Window* window, int* top, int* left, int* bottom, int* right);
+        public static extern SDL_bool SDL_GetWindowBordersSize(SDL_Window* window, int* top, int* left, int* bottom, int* right);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowSizeInPixels(SDL_Window* window, int* w, int* h);
+        public static extern SDL_bool SDL_GetWindowSizeInPixels(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowMinimumSize(SDL_Window* window, int min_w, int min_h);
+        public static extern SDL_bool SDL_SetWindowMinimumSize(SDL_Window* window, int min_w, int min_h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowMinimumSize(SDL_Window* window, int* w, int* h);
+        public static extern SDL_bool SDL_GetWindowMinimumSize(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowMaximumSize(SDL_Window* window, int max_w, int max_h);
+        public static extern SDL_bool SDL_SetWindowMaximumSize(SDL_Window* window, int max_w, int max_h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowMaximumSize(SDL_Window* window, int* w, int* h);
+        public static extern SDL_bool SDL_GetWindowMaximumSize(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowBordered(SDL_Window* window, SDL_bool bordered);
+        public static extern SDL_bool SDL_SetWindowBordered(SDL_Window* window, SDL_bool bordered);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowResizable(SDL_Window* window, SDL_bool resizable);
+        public static extern SDL_bool SDL_SetWindowResizable(SDL_Window* window, SDL_bool resizable);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowAlwaysOnTop(SDL_Window* window, SDL_bool on_top);
+        public static extern SDL_bool SDL_SetWindowAlwaysOnTop(SDL_Window* window, SDL_bool on_top);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ShowWindow(SDL_Window* window);
+        public static extern SDL_bool SDL_ShowWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_HideWindow(SDL_Window* window);
+        public static extern SDL_bool SDL_HideWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_RaiseWindow(SDL_Window* window);
+        public static extern SDL_bool SDL_RaiseWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_MaximizeWindow(SDL_Window* window);
+        public static extern SDL_bool SDL_MaximizeWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_MinimizeWindow(SDL_Window* window);
+        public static extern SDL_bool SDL_MinimizeWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_RestoreWindow(SDL_Window* window);
+        public static extern SDL_bool SDL_RestoreWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowFullscreen(SDL_Window* window, SDL_bool fullscreen);
+        public static extern SDL_bool SDL_SetWindowFullscreen(SDL_Window* window, SDL_bool fullscreen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SyncWindow(SDL_Window* window);
+        public static extern SDL_bool SDL_SyncWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_WindowHasSurface(SDL_Window* window);
@@ -360,25 +360,25 @@ namespace SDL
         public static extern SDL_Surface* SDL_GetWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowSurfaceVSync(SDL_Window* window, int vsync);
+        public static extern SDL_bool SDL_SetWindowSurfaceVSync(SDL_Window* window, int vsync);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetWindowSurfaceVSync(SDL_Window* window, int* vsync);
+        public static extern SDL_bool SDL_GetWindowSurfaceVSync(SDL_Window* window, int* vsync);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_UpdateWindowSurface(SDL_Window* window);
+        public static extern SDL_bool SDL_UpdateWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_UpdateWindowSurfaceRects(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rects, int numrects);
+        public static extern SDL_bool SDL_UpdateWindowSurfaceRects(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rects, int numrects);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_DestroyWindowSurface(SDL_Window* window);
+        public static extern SDL_bool SDL_DestroyWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowKeyboardGrab(SDL_Window* window, SDL_bool grabbed);
+        public static extern SDL_bool SDL_SetWindowKeyboardGrab(SDL_Window* window, SDL_bool grabbed);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowMouseGrab(SDL_Window* window, SDL_bool grabbed);
+        public static extern SDL_bool SDL_SetWindowMouseGrab(SDL_Window* window, SDL_bool grabbed);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_bool SDL_GetWindowKeyboardGrab(SDL_Window* window);
@@ -390,35 +390,38 @@ namespace SDL
         public static extern SDL_Window* SDL_GetGrabbedWindow();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowMouseRect(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect);
+        public static extern SDL_bool SDL_SetWindowMouseRect(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const SDL_Rect *")]
         public static extern SDL_Rect* SDL_GetWindowMouseRect(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowOpacity(SDL_Window* window, float opacity);
+        public static extern SDL_bool SDL_SetWindowOpacity(SDL_Window* window, float opacity);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern float SDL_GetWindowOpacity(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowModalFor(SDL_Window* modal_window, SDL_Window* parent_window);
+        public static extern SDL_bool SDL_SetWindowParent(SDL_Window* window, SDL_Window* parent);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowFocusable(SDL_Window* window, SDL_bool focusable);
+        public static extern SDL_bool SDL_SetWindowModal(SDL_Window* window, SDL_bool modal);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ShowWindowSystemMenu(SDL_Window* window, int x, int y);
+        public static extern SDL_bool SDL_SetWindowFocusable(SDL_Window* window, SDL_bool focusable);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowHitTest(SDL_Window* window, [NativeTypeName("SDL_HitTest")] delegate* unmanaged[Cdecl]<SDL_Window*, SDL_Point*, IntPtr, SDL_HitTestResult> callback, [NativeTypeName("void*")] IntPtr callback_data);
+        public static extern SDL_bool SDL_ShowWindowSystemMenu(SDL_Window* window, int x, int y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetWindowShape(SDL_Window* window, SDL_Surface* shape);
+        public static extern SDL_bool SDL_SetWindowHitTest(SDL_Window* window, [NativeTypeName("SDL_HitTest")] delegate* unmanaged[Cdecl]<SDL_Window*, SDL_Point*, IntPtr, SDL_HitTestResult> callback, [NativeTypeName("void*")] IntPtr callback_data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_FlashWindow(SDL_Window* window, SDL_FlashOperation operation);
+        public static extern SDL_bool SDL_SetWindowShape(SDL_Window* window, SDL_Surface* shape);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_FlashWindow(SDL_Window* window, SDL_FlashOperation operation);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroyWindow(SDL_Window* window);
@@ -427,13 +430,13 @@ namespace SDL
         public static extern SDL_bool SDL_ScreenSaverEnabled();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_EnableScreenSaver();
+        public static extern SDL_bool SDL_EnableScreenSaver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_DisableScreenSaver();
+        public static extern SDL_bool SDL_DisableScreenSaver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_LoadLibrary([NativeTypeName("const char *")] byte* path);
+        public static extern SDL_bool SDL_GL_LoadLibrary([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
@@ -453,17 +456,17 @@ namespace SDL
         public static extern void SDL_GL_ResetAttributes();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_SetAttribute(SDL_GLattr attr, int value);
+        public static extern SDL_bool SDL_GL_SetAttribute(SDL_GLattr attr, int value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_GetAttribute(SDL_GLattr attr, int* value);
+        public static extern SDL_bool SDL_GL_GetAttribute(SDL_GLattr attr, int* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_GLContext")]
         public static extern SDL_GLContextState* SDL_GL_CreateContext(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_MakeCurrent(SDL_Window* window, [NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
+        public static extern SDL_bool SDL_GL_MakeCurrent(SDL_Window* window, [NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GL_GetCurrentWindow();
@@ -488,16 +491,16 @@ namespace SDL
         public static extern void SDL_EGL_SetAttributeCallbacks([NativeTypeName("SDL_EGLAttribArrayCallback")] delegate* unmanaged[Cdecl]<nint*> platformAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> surfaceAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> contextAttribCallback);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_SetSwapInterval(int interval);
+        public static extern SDL_bool SDL_GL_SetSwapInterval(int interval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_GetSwapInterval(int* interval);
+        public static extern SDL_bool SDL_GL_GetSwapInterval(int* interval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_SwapWindow(SDL_Window* window);
+        public static extern SDL_bool SDL_GL_SwapWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GL_DestroyContext([NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
+        public static extern SDL_bool SDL_GL_DestroyContext([NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
 
         [NativeTypeName("#define SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER \"SDL.video.wayland.wl_display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER => "SDL.video.wayland.wl_display"u8;
@@ -547,8 +550,11 @@ namespace SDL
         [NativeTypeName("#define SDL_WINDOW_MOUSE_CAPTURE SDL_UINT64_C(0x0000000000004000)")]
         public const ulong SDL_WINDOW_MOUSE_CAPTURE = (0x0000000000004000UL);
 
-        [NativeTypeName("#define SDL_WINDOW_ALWAYS_ON_TOP SDL_UINT64_C(0x0000000000008000)")]
-        public const ulong SDL_WINDOW_ALWAYS_ON_TOP = (0x0000000000008000UL);
+        [NativeTypeName("#define SDL_WINDOW_MOUSE_RELATIVE_MODE SDL_UINT64_C(0x0000000000008000)")]
+        public const ulong SDL_WINDOW_MOUSE_RELATIVE_MODE = (0x0000000000008000UL);
+
+        [NativeTypeName("#define SDL_WINDOW_ALWAYS_ON_TOP SDL_UINT64_C(0x0000000000010000)")]
+        public const ulong SDL_WINDOW_ALWAYS_ON_TOP = (0x0000000000010000UL);
 
         [NativeTypeName("#define SDL_WINDOW_UTILITY SDL_UINT64_C(0x0000000000020000)")]
         public const ulong SDL_WINDOW_UTILITY = (0x0000000000020000UL);
@@ -592,104 +598,107 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER \"SDL.display.KMSDRM.panel_orientation\"")]
         public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER => "SDL.display.KMSDRM.panel_orientation"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN \"always_on_top\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN => "always_on_top"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN \"SDL.window.create.always_on_top\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN => "SDL.window.create.always_on_top"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN \"borderless\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN => "borderless"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN \"SDL.window.create.borderless\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN => "SDL.window.create.borderless"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN \"focusable\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN => "focusable"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN \"SDL.window.create.focusable\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN => "SDL.window.create.focusable"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN \"external_graphics_context\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN => "external_graphics_context"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN \"SDL.window.create.external_graphics_context\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN => "SDL.window.create.external_graphics_context"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN \"fullscreen\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN => "fullscreen"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FLAGS_NUMBER \"SDL.window.create.flags\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FLAGS_NUMBER => "SDL.window.create.flags"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER \"height\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER => "height"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN \"SDL.window.create.fullscreen\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN => "SDL.window.create.fullscreen"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN \"hidden\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN => "hidden"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER \"SDL.window.create.height\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER => "SDL.window.create.height"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN \"high_pixel_density\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN => "high_pixel_density"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN \"SDL.window.create.hidden\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HIDDEN_BOOLEAN => "SDL.window.create.hidden"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN \"maximized\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN => "maximized"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN \"SDL.window.create.high_pixel_density\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN => "SDL.window.create.high_pixel_density"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN \"menu\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN => "menu"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN \"SDL.window.create.maximized\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN => "SDL.window.create.maximized"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN \"metal\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN => "metal"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN \"SDL.window.create.menu\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MENU_BOOLEAN => "SDL.window.create.menu"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN \"minimized\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN => "minimized"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN \"SDL.window.create.metal\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_METAL_BOOLEAN => "SDL.window.create.metal"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN \"modal\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN => "modal"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN \"SDL.window.create.minimized\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MINIMIZED_BOOLEAN => "SDL.window.create.minimized"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN \"mouse_grabbed\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN => "mouse_grabbed"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN \"SDL.window.create.modal\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MODAL_BOOLEAN => "SDL.window.create.modal"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN \"opengl\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN => "opengl"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN \"SDL.window.create.mouse_grabbed\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_MOUSE_GRABBED_BOOLEAN => "SDL.window.create.mouse_grabbed"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_PARENT_POINTER \"parent\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_PARENT_POINTER => "parent"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN \"SDL.window.create.opengl\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN => "SDL.window.create.opengl"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN \"resizable\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN => "resizable"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_PARENT_POINTER \"SDL.window.create.parent\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_PARENT_POINTER => "SDL.window.create.parent"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TITLE_STRING \"title\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TITLE_STRING => "title"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN \"SDL.window.create.resizable\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_RESIZABLE_BOOLEAN => "SDL.window.create.resizable"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN \"transparent\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN => "transparent"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TITLE_STRING \"SDL.window.create.title\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TITLE_STRING => "SDL.window.create.title"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN \"tooltip\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN => "tooltip"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN \"SDL.window.create.transparent\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TRANSPARENT_BOOLEAN => "SDL.window.create.transparent"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN \"utility\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN => "utility"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN \"SDL.window.create.tooltip\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_TOOLTIP_BOOLEAN => "SDL.window.create.tooltip"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN \"vulkan\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN => "vulkan"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN \"SDL.window.create.utility\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_UTILITY_BOOLEAN => "SDL.window.create.utility"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER \"width\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER => "width"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN \"SDL.window.create.vulkan\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_VULKAN_BOOLEAN => "SDL.window.create.vulkan"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X_NUMBER \"x\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X_NUMBER => "x"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER \"SDL.window.create.width\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER => "SDL.window.create.width"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_Y_NUMBER \"y\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_Y_NUMBER => "y"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X_NUMBER \"SDL.window.create.x\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X_NUMBER => "SDL.window.create.x"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER \"cocoa.window\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER => "cocoa.window"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_Y_NUMBER \"SDL.window.create.y\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_Y_NUMBER => "SDL.window.create.y"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER \"cocoa.view\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER => "cocoa.view"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER \"SDL.window.create.cocoa.window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_WINDOW_POINTER => "SDL.window.create.cocoa.window"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN \"wayland.surface_role_custom\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN => "wayland.surface_role_custom"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER \"SDL.window.create.cocoa.view\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER => "SDL.window.create.cocoa.view"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN \"wayland.create_egl_window\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN => "wayland.create_egl_window"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN \"SDL.window.create.wayland.surface_role_custom\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN => "SDL.window.create.wayland.surface_role_custom"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER \"wayland.wl_surface\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER => "wayland.wl_surface"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN \"SDL.window.create.wayland.create_egl_window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_CREATE_EGL_WINDOW_BOOLEAN => "SDL.window.create.wayland.create_egl_window"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER \"win32.hwnd\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER => "win32.hwnd"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER \"SDL.window.create.wayland.wl_surface\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER => "SDL.window.create.wayland.wl_surface"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER \"win32.pixel_format_hwnd\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER => "win32.pixel_format_hwnd"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER \"SDL.window.create.win32.hwnd\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER => "SDL.window.create.win32.hwnd"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER \"x11.window\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER => "x11.window"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER \"SDL.window.create.win32.pixel_format_hwnd\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER => "SDL.window.create.win32.pixel_format_hwnd"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER \"SDL.window.create.x11.window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER => "SDL.window.create.x11.window"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_SHAPE_POINTER \"SDL.window.shape\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_SHAPE_POINTER => "SDL.window.shape"u8;
@@ -747,9 +756,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER \"SDL.window.vivante.surface\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_VIVANTE_SURFACE_POINTER => "SDL.window.vivante.surface"u8;
-
-        [NativeTypeName("#define SDL_PROP_WINDOW_WINRT_WINDOW_POINTER \"SDL.window.winrt.window\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WINRT_WINDOW_POINTER => "SDL.window.winrt.window"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_WIN32_HWND_POINTER \"SDL.window.win32.hwnd\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WIN32_HWND_POINTER => "SDL.window.win32.hwnd"u8;

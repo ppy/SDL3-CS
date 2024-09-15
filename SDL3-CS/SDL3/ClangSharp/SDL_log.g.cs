@@ -39,7 +39,7 @@ namespace SDL
         SDL_LOG_CATEGORY_RENDER,
         SDL_LOG_CATEGORY_INPUT,
         SDL_LOG_CATEGORY_TEST,
-        SDL_LOG_CATEGORY_RESERVED1,
+        SDL_LOG_CATEGORY_GPU,
         SDL_LOG_CATEGORY_RESERVED2,
         SDL_LOG_CATEGORY_RESERVED3,
         SDL_LOG_CATEGORY_RESERVED4,
@@ -60,7 +60,7 @@ namespace SDL
         SDL_LOG_PRIORITY_WARN,
         SDL_LOG_PRIORITY_ERROR,
         SDL_LOG_PRIORITY_CRITICAL,
-        SDL_NUM_LOG_PRIORITIES,
+        SDL_LOG_PRIORITY_COUNT,
     }
 
     public static unsafe partial class SDL3
@@ -78,7 +78,7 @@ namespace SDL
         public static extern void SDL_ResetLogPriorities();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetLogPriorityPrefix(SDL_LogPriority priority, [NativeTypeName("const char *")] byte* prefix);
+        public static extern SDL_bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, [NativeTypeName("const char *")] byte* prefix);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Log([NativeTypeName("const char *")] byte* fmt, __arglist);

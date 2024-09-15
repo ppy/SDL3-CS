@@ -23,24 +23,15 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
-using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 namespace SDL
 {
-    public static unsafe partial class SDL3
+    public static partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("iOS")]
-        public static extern SDL_bool SDL_SetiOSAnimationCallback(SDL_Window* window, int interval, [NativeTypeName("SDL_iOSAnimationCallback")] delegate* unmanaged[Cdecl]<IntPtr, void> callback, [NativeTypeName("void*")] IntPtr callbackParam);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("iOS")]
-        public static extern void SDL_SetiOSEventPump(SDL_bool enabled);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("iOS")]
-        public static extern void SDL_OnApplicationDidChangeStatusBarOrientation();
+        [SupportedOSPlatform("Windows")]
+        public static extern void SDL_GDKSuspendComplete();
     }
 }

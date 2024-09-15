@@ -14,9 +14,9 @@ namespace SDL
     {
         [LibraryImport("SDL3", StringMarshalling = StringMarshalling.Utf8)]
         [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
-        private static unsafe partial int SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, IntPtr userdata, string[] mime_types, UIntPtr num_mime_types);
+        private static unsafe partial SDL_bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, IntPtr userdata, string[] mime_types, UIntPtr num_mime_types);
 
-        public static unsafe int SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, IntPtr userdata, params string[] mime_types)
+        public static unsafe SDL_bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, IntPtr userdata, params string[] mime_types)
             => SDL_SetClipboardData(callback, cleanup, userdata, mime_types, (UIntPtr)mime_types.Length);
     }
 }

@@ -47,6 +47,9 @@ namespace SDL
 
     public unsafe partial struct SDL_IOStreamInterface
     {
+        [NativeTypeName("Uint32")]
+        public uint version;
+
         [NativeTypeName("Sint64 (*)(void *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, long> size;
 
@@ -59,8 +62,11 @@ namespace SDL
         [NativeTypeName("size_t (*)(void *, const void *, size_t, SDL_IOStatus *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, IntPtr, nuint, SDL_IOStatus*, nuint> write;
 
-        [NativeTypeName("int (*)(void *)")]
-        public delegate* unmanaged[Cdecl]<IntPtr, int> close;
+        [NativeTypeName("SDL_bool (*)(void *, SDL_IOStatus *)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, SDL_IOStatus*, SDL_bool> flush;
+
+        [NativeTypeName("SDL_bool (*)(void *)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, SDL_bool> close;
     }
 
     public partial struct SDL_IOStream
@@ -85,7 +91,7 @@ namespace SDL
         public static extern SDL_IOStream* SDL_OpenIO([NativeTypeName("const SDL_IOStreamInterface *")] SDL_IOStreamInterface* iface, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_CloseIO(SDL_IOStream* context);
+        public static extern SDL_bool SDL_CloseIO(SDL_IOStream* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID SDL_GetIOProperties(SDL_IOStream* context);
@@ -120,6 +126,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
         public static extern nuint SDL_IOvprintf(SDL_IOStream* context, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* ap);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_FlushIO(SDL_IOStream* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
@@ -218,6 +227,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_IOSTREAM_STDIO_FILE_POINTER \"SDL.iostream.stdio.file\"")]
         public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_STDIO_FILE_POINTER => "SDL.iostream.stdio.file"u8;
+
+        [NativeTypeName("#define SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER \"SDL.iostream.file_descriptor\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_FILE_DESCRIPTOR_NUMBER => "SDL.iostream.file_descriptor"u8;
 
         [NativeTypeName("#define SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER \"SDL.iostream.android.aasset\"")]
         public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER => "SDL.iostream.android.aasset"u8;

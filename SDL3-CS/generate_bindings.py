@@ -90,6 +90,7 @@ headers = [
     add("SDL3/SDL_events.h"),
     add("SDL3/SDL_filesystem.h"),
     add("SDL3/SDL_gamepad.h"),
+    add("SDL3/SDL_gpu.h"),
     add("SDL3/SDL_guid.h"),
     add("SDL3/SDL_haptic.h"),
     add("SDL3/SDL_hidapi.h"),
@@ -111,6 +112,7 @@ headers = [
     add("SDL3/SDL_pixels.h"),
     add("SDL3/SDL_platform.h"),
     add("SDL3/SDL_power.h"),
+    add("SDL3/SDL_process.h"),
     add("SDL3/SDL_properties.h"),
     add("SDL3/SDL_rect.h"),
     add("SDL3/SDL_render.h"),
@@ -312,7 +314,8 @@ def main():
         check_generated_functions(sdl_api, header, [output_file])
 
     generate_platform_specific_headers(sdl_api, add("SDL3/SDL_main.h"), [
-        (["SDL_PLATFORM_WIN32", "SDL_PLATFORM_WINGDK"], "Windows", "Windows"),
+        (["SDL_PLATFORM_WINDOWS"], "Windows", "Windows"),
+        (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
     ])
 
     generate_platform_specific_headers(sdl_api, add("SDL3/SDL_system.h"), [
@@ -320,8 +323,8 @@ def main():
         (["SDL_PLATFORM_ANDROID"], "Android", "Android"),
         (["SDL_PLATFORM_IOS"], "iOS", "iOS"),
         (["SDL_PLATFORM_LINUX"], "Linux", "Linux"),
-        (["SDL_PLATFORM_WIN32", "SDL_PLATFORM_WINGDK"], "Windows", "Windows"),
-        (["SDL_PLATFORM_WINRT"], "WinRT", "Windows"),
+        (["SDL_PLATFORM_WINDOWS", "SDL_PLATFORM_WIN32"], "Windows", "Windows"),
+        (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
     ])
 
 

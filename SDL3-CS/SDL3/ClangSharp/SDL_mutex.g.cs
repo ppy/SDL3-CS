@@ -52,7 +52,7 @@ namespace SDL
         public static extern void SDL_LockMutex(SDL_Mutex* mutex);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_TryLockMutex(SDL_Mutex* mutex);
+        public static extern SDL_bool SDL_TryLockMutex(SDL_Mutex* mutex);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_UnlockMutex(SDL_Mutex* mutex);
@@ -70,10 +70,10 @@ namespace SDL
         public static extern void SDL_LockRWLockForWriting(SDL_RWLock* rwlock);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_TryLockRWLockForReading(SDL_RWLock* rwlock);
+        public static extern SDL_bool SDL_TryLockRWLockForReading(SDL_RWLock* rwlock);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_TryLockRWLockForWriting(SDL_RWLock* rwlock);
+        public static extern SDL_bool SDL_TryLockRWLockForWriting(SDL_RWLock* rwlock);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_UnlockRWLock(SDL_RWLock* rwlock);
@@ -88,16 +88,16 @@ namespace SDL
         public static extern void SDL_DestroySemaphore(SDL_Semaphore* sem);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_WaitSemaphore(SDL_Semaphore* sem);
+        public static extern void SDL_WaitSemaphore(SDL_Semaphore* sem);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_TryWaitSemaphore(SDL_Semaphore* sem);
+        public static extern SDL_bool SDL_TryWaitSemaphore(SDL_Semaphore* sem);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_WaitSemaphoreTimeout(SDL_Semaphore* sem, [NativeTypeName("Sint32")] int timeoutMS);
+        public static extern SDL_bool SDL_WaitSemaphoreTimeout(SDL_Semaphore* sem, [NativeTypeName("Sint32")] int timeoutMS);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SignalSemaphore(SDL_Semaphore* sem);
+        public static extern void SDL_SignalSemaphore(SDL_Semaphore* sem);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]
@@ -110,21 +110,15 @@ namespace SDL
         public static extern void SDL_DestroyCondition(SDL_Condition* cond);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SignalCondition(SDL_Condition* cond);
+        public static extern void SDL_SignalCondition(SDL_Condition* cond);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_BroadcastCondition(SDL_Condition* cond);
+        public static extern void SDL_BroadcastCondition(SDL_Condition* cond);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_WaitCondition(SDL_Condition* cond, SDL_Mutex* mutex);
+        public static extern void SDL_WaitCondition(SDL_Condition* cond, SDL_Mutex* mutex);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_WaitConditionTimeout(SDL_Condition* cond, SDL_Mutex* mutex, [NativeTypeName("Sint32")] int timeoutMS);
-
-        [NativeTypeName("#define SDL_MUTEX_TIMEDOUT 1")]
-        public const int SDL_MUTEX_TIMEDOUT = 1;
-
-        [NativeTypeName("#define SDL_RWLOCK_TIMEDOUT SDL_MUTEX_TIMEDOUT")]
-        public const int SDL_RWLOCK_TIMEDOUT = 1;
+        public static extern SDL_bool SDL_WaitConditionTimeout(SDL_Condition* cond, SDL_Mutex* mutex, [NativeTypeName("Sint32")] int timeoutMS);
     }
 }

@@ -19,7 +19,7 @@ namespace SDL.Tests
 
         public MyWindow()
         {
-            if (SDL_InitSubSystem(init_flags) < 0)
+            if (SDL_InitSubSystem(init_flags) == SDL_bool.SDL_FALSE)
                 throw new InvalidOperationException($"failed to initialise SDL. Error: {SDL_GetError()}");
 
             initSuccess = true;
@@ -51,18 +51,18 @@ namespace SDL.Tests
 
         // ReSharper disable once UseCollectionExpression
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
-        private static int nativeFilter(IntPtr userdata, SDL_Event* e)
+        private static SDL_bool nativeFilter(IntPtr userdata, SDL_Event* e)
         {
             var handle = new ObjectHandle<MyWindow>(userdata);
             if (handle.GetTarget(out var window))
                 return window.handleEventFromFilter(e);
 
-            return 1;
+            return SDL_bool.SDL_TRUE;
         }
 
         public Action<SDL_Event>? EventFilter;
 
-        private int handleEventFromFilter(SDL_Event* e)
+        private SDL_bool handleEventFromFilter(SDL_Event* e)
         {
             switch (e->Type)
             {
@@ -76,7 +76,7 @@ namespace SDL.Tests
                     break;
             }
 
-            return 1;
+            return SDL_bool.SDL_TRUE;
         }
 
         private void handleKeyFromFilter(SDL_KeyboardEvent e)
@@ -105,8 +105,8 @@ namespace SDL.Tests
                     switch (e.key.key)
                     {
                         case SDL_Keycode.SDLK_R:
-                            bool old = SDL_GetRelativeMouseMode() == SDL_bool.SDL_TRUE;
-                            SDL_SetRelativeMouseMode(old ? SDL_bool.SDL_FALSE : SDL_bool.SDL_TRUE);
+                            bool old = SDL_GetWindowRelativeMouseMode(sdlWindowHandle) == SDL_bool.SDL_TRUE;
+                            SDL_SetWindowRelativeMouseMode(sdlWindowHandle, old ? SDL_bool.SDL_FALSE : SDL_bool.SDL_TRUE);
                             break;
 
                         case SDL_Keycode.SDLK_V:
@@ -170,14 +170,8 @@ namespace SDL.Tests
                     Console.WriteLine($"gamepad added: {e.gdevice.which}");
                     break;
 
-                case SDL_EventType.SDL_EVENT_WINDOW_PEN_ENTER:
-                    SDL_PenCapabilityInfo info;
-                    var cap = SDL_GetPenCapabilities((SDL_PenID)e.window.data1, &info);
-
-                    if (cap.HasFlag(SDL_PenCapabilityFlags.SDL_PEN_AXIS_XTILT_MASK))
-                        Console.WriteLine("has pen xtilt axis");
-
-                    Console.WriteLine(info.max_tilt);
+                case SDL_EventType.SDL_EVENT_PEN_PROXIMITY_IN:
+                    Console.WriteLine($"pen proximity in: {e.pproximity.which}");
                     break;
             }
         }

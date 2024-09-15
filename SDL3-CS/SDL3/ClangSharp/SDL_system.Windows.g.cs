@@ -29,14 +29,6 @@ using System.Runtime.Versioning;
 
 namespace SDL
 {
-    public partial struct XTaskQueueObject
-    {
-    }
-
-    public partial struct XUser
-    {
-    }
-
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -49,14 +41,6 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern int SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int* adapterIndex, int* outputIndex);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern int SDL_GetGDKTaskQueue([NativeTypeName("XTaskQueueHandle *")] XTaskQueueObject** outTaskQueue);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [SupportedOSPlatform("Windows")]
-        public static extern int SDL_GetGDKDefaultUser([NativeTypeName("XUserHandle *")] XUser** outUserHandle);
+        public static extern SDL_bool SDL_GetDXGIOutputInfo(SDL_DisplayID displayID, int* adapterIndex, int* outputIndex);
     }
 }

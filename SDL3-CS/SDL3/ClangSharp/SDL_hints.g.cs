@@ -38,13 +38,13 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetHintWithPriority([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, SDL_HintPriority priority);
+        public static extern SDL_bool SDL_SetHintWithPriority([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, SDL_HintPriority priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_SetHint([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
+        public static extern SDL_bool SDL_SetHint([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_ResetHint([NativeTypeName("const char *")] byte* name);
+        public static extern SDL_bool SDL_ResetHint([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_ResetHints();
@@ -57,10 +57,10 @@ namespace SDL
         public static extern SDL_bool SDL_GetHintBoolean([NativeTypeName("const char *")] byte* name, SDL_bool default_value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_AddHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern SDL_bool SDL_AddHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_DelHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_RemoveHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [NativeTypeName("#define SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED \"SDL_ALLOW_ALT_TAB_WHILE_GRABBED\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED => "SDL_ALLOW_ALT_TAB_WHILE_GRABBED"u8;
@@ -221,6 +221,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_HIDAPI_UDEV \"SDL_HIDAPI_UDEV\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_UDEV => "SDL_HIDAPI_UDEV"u8;
 
+        [NativeTypeName("#define SDL_HINT_GPU_DRIVER \"SDL_GPU_DRIVER\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_GPU_DRIVER => "SDL_GPU_DRIVER"u8;
+
         [NativeTypeName("#define SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS \"SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS => "SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS"u8;
 
@@ -256,6 +259,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES_EXCLUDED \"SDL_JOYSTICK_FLIGHTSTICK_DEVICES_EXCLUDED\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES_EXCLUDED => "SDL_JOYSTICK_FLIGHTSTICK_DEVICES_EXCLUDED"u8;
+
+        [NativeTypeName("#define SDL_HINT_JOYSTICK_GAMEINPUT \"SDL_JOYSTICK_GAMEINPUT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_GAMEINPUT => "SDL_JOYSTICK_GAMEINPUT"u8;
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_GAMECUBE_DEVICES \"SDL_JOYSTICK_GAMECUBE_DEVICES\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_GAMECUBE_DEVICES => "SDL_JOYSTICK_GAMECUBE_DEVICES"u8;
@@ -488,12 +494,6 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_ORIENTATIONS \"SDL_ORIENTATIONS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ORIENTATIONS => "SDL_ORIENTATIONS"u8;
 
-        [NativeTypeName("#define SDL_HINT_PEN_DELAY_MOUSE_BUTTON \"SDL_PEN_DELAY_MOUSE_BUTTON\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_PEN_DELAY_MOUSE_BUTTON => "SDL_PEN_DELAY_MOUSE_BUTTON"u8;
-
-        [NativeTypeName("#define SDL_HINT_PEN_NOT_MOUSE \"SDL_PEN_NOT_MOUSE\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_PEN_NOT_MOUSE => "SDL_PEN_NOT_MOUSE"u8;
-
         [NativeTypeName("#define SDL_HINT_POLL_SENTINEL \"SDL_POLL_SENTINEL\"")]
         public static ReadOnlySpan<byte> SDL_HINT_POLL_SENTINEL => "SDL_POLL_SENTINEL"u8;
 
@@ -511,6 +511,12 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_RENDER_VULKAN_DEBUG \"SDL_RENDER_VULKAN_DEBUG\"")]
         public static ReadOnlySpan<byte> SDL_HINT_RENDER_VULKAN_DEBUG => "SDL_RENDER_VULKAN_DEBUG"u8;
+
+        [NativeTypeName("#define SDL_HINT_RENDER_GPU_DEBUG \"SDL_RENDER_GPU_DEBUG\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_RENDER_GPU_DEBUG => "SDL_RENDER_GPU_DEBUG"u8;
+
+        [NativeTypeName("#define SDL_HINT_RENDER_GPU_LOW_POWER \"SDL_RENDER_GPU_LOW_POWER\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_RENDER_GPU_LOW_POWER => "SDL_RENDER_GPU_LOW_POWER"u8;
 
         [NativeTypeName("#define SDL_HINT_RENDER_DRIVER \"SDL_RENDER_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_RENDER_DRIVER => "SDL_RENDER_DRIVER"u8;
@@ -695,6 +701,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_WINDOWS_ENABLE_MESSAGELOOP \"SDL_WINDOWS_ENABLE_MESSAGELOOP\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_ENABLE_MESSAGELOOP => "SDL_WINDOWS_ENABLE_MESSAGELOOP"u8;
 
+        [NativeTypeName("#define SDL_HINT_WINDOWS_GAMEINPUT \"SDL_WINDOWS_GAMEINPUT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_GAMEINPUT => "SDL_WINDOWS_GAMEINPUT"u8;
+
         [NativeTypeName("#define SDL_HINT_WINDOWS_RAW_KEYBOARD \"SDL_WINDOWS_RAW_KEYBOARD\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_RAW_KEYBOARD => "SDL_WINDOWS_RAW_KEYBOARD"u8;
 
@@ -713,15 +722,6 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_WINDOWS_ERASE_BACKGROUND_MODE \"SDL_WINDOWS_ERASE_BACKGROUND_MODE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_WINDOWS_ERASE_BACKGROUND_MODE => "SDL_WINDOWS_ERASE_BACKGROUND_MODE"u8;
 
-        [NativeTypeName("#define SDL_HINT_WINRT_HANDLE_BACK_BUTTON \"SDL_WINRT_HANDLE_BACK_BUTTON\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_WINRT_HANDLE_BACK_BUTTON => "SDL_WINRT_HANDLE_BACK_BUTTON"u8;
-
-        [NativeTypeName("#define SDL_HINT_WINRT_PRIVACY_POLICY_LABEL \"SDL_WINRT_PRIVACY_POLICY_LABEL\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_WINRT_PRIVACY_POLICY_LABEL => "SDL_WINRT_PRIVACY_POLICY_LABEL"u8;
-
-        [NativeTypeName("#define SDL_HINT_WINRT_PRIVACY_POLICY_URL \"SDL_WINRT_PRIVACY_POLICY_URL\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_WINRT_PRIVACY_POLICY_URL => "SDL_WINRT_PRIVACY_POLICY_URL"u8;
-
         [NativeTypeName("#define SDL_HINT_X11_FORCE_OVERRIDE_REDIRECT \"SDL_X11_FORCE_OVERRIDE_REDIRECT\"")]
         public static ReadOnlySpan<byte> SDL_HINT_X11_FORCE_OVERRIDE_REDIRECT => "SDL_X11_FORCE_OVERRIDE_REDIRECT"u8;
 
@@ -733,5 +733,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_XINPUT_ENABLED \"SDL_XINPUT_ENABLED\"")]
         public static ReadOnlySpan<byte> SDL_HINT_XINPUT_ENABLED => "SDL_XINPUT_ENABLED"u8;
+
+        [NativeTypeName("#define SDL_HINT_ASSERT \"SDL_ASSERT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_ASSERT => "SDL_ASSERT"u8;
     }
 }

@@ -41,7 +41,7 @@ namespace SDL
         SDL_FOLDER_SCREENSHOTS,
         SDL_FOLDER_TEMPLATES,
         SDL_FOLDER_VIDEOS,
-        SDL_FOLDER_TOTAL,
+        SDL_FOLDER_COUNT,
     }
 
     public enum SDL_PathType
@@ -81,22 +81,22 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetUserFolder(SDL_Folder folder);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_CreateDirectory([NativeTypeName("const char *")] byte* path);
+        public static extern SDL_bool SDL_CreateDirectory([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_EnumerateDirectory([NativeTypeName("const char *")] byte* path, [NativeTypeName("SDL_EnumerateDirectoryCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, int> callback, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern SDL_bool SDL_EnumerateDirectory([NativeTypeName("const char *")] byte* path, [NativeTypeName("SDL_EnumerateDirectoryCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, int> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_RemovePath([NativeTypeName("const char *")] byte* path);
+        public static extern SDL_bool SDL_RemovePath([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_RenamePath([NativeTypeName("const char *")] byte* oldpath, [NativeTypeName("const char *")] byte* newpath);
+        public static extern SDL_bool SDL_RenamePath([NativeTypeName("const char *")] byte* oldpath, [NativeTypeName("const char *")] byte* newpath);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_CopyFile([NativeTypeName("const char *")] byte* oldpath, [NativeTypeName("const char *")] byte* newpath);
+        public static extern SDL_bool SDL_CopyFile([NativeTypeName("const char *")] byte* oldpath, [NativeTypeName("const char *")] byte* newpath);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetPathInfo([NativeTypeName("const char *")] byte* path, SDL_PathInfo* info);
+        public static extern SDL_bool SDL_GetPathInfo([NativeTypeName("const char *")] byte* path, SDL_PathInfo* info);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char **")]

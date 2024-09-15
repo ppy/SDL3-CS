@@ -6,7 +6,7 @@ using System;
 namespace SDL
 {
     [Typedef]
-    public enum SDL_bool
+    public enum SDL_bool : byte
     {
         SDL_FALSE = SDL3.SDL_FALSE,
         SDL_TRUE = SDL3.SDL_TRUE

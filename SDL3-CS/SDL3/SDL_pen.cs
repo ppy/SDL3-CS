@@ -2,7 +2,6 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
-using JetBrains.Annotations;
 
 namespace SDL
 {
@@ -11,37 +10,14 @@ namespace SDL
 
     [Flags]
     [Typedef]
-    public enum SDL_PenCapabilityFlags : uint
+    public enum SDL_PenInputFlags : UInt32
     {
-        SDL_PEN_DOWN_MASK = SDL3.SDL_PEN_DOWN_MASK,
-        SDL_PEN_INK_MASK = SDL3.SDL_PEN_INK_MASK,
-        SDL_PEN_ERASER_MASK = SDL3.SDL_PEN_ERASER_MASK,
-        SDL_PEN_AXIS_PRESSURE_MASK = SDL3.SDL_PEN_AXIS_PRESSURE_MASK,
-        SDL_PEN_AXIS_XTILT_MASK = SDL3.SDL_PEN_AXIS_XTILT_MASK,
-        SDL_PEN_AXIS_YTILT_MASK = SDL3.SDL_PEN_AXIS_YTILT_MASK,
-        SDL_PEN_AXIS_DISTANCE_MASK = SDL3.SDL_PEN_AXIS_DISTANCE_MASK,
-        SDL_PEN_AXIS_ROTATION_MASK = SDL3.SDL_PEN_AXIS_ROTATION_MASK,
-        SDL_PEN_AXIS_SLIDER_MASK = SDL3.SDL_PEN_AXIS_SLIDER_MASK,
-        SDL_PEN_AXIS_BIDIRECTIONAL_MASKS = SDL3.SDL_PEN_AXIS_BIDIRECTIONAL_MASKS,
-    }
-
-    public static partial class SDL3
-    {
-        [Constant]
-        public const SDL_MouseID SDL_PEN_MOUSEID = unchecked((SDL_MouseID)(-2));
-
-        [Macro]
-        public static SDL_PenCapabilityFlags SDL_PEN_CAPABILITY(int capbit) => (SDL_PenCapabilityFlags)(1ul << (capbit));
-
-        [Macro]
-        public static SDL_PenCapabilityFlags SDL_PEN_AXIS_CAPABILITY(SDL_PenAxis axis) => SDL_PEN_CAPABILITY((int)axis + SDL_PEN_FLAG_AXIS_BIT_OFFSET);
-
-        [MustDisposeResource]
-        public static unsafe SDLArray<SDL_PenID>? SDL_GetPens()
-        {
-            int count;
-            var array = SDL_GetPens(&count);
-            return SDLArray.Create(array, count);
-        }
+        SDL_PEN_INPUT_DOWN = SDL3.SDL_PEN_INPUT_DOWN,
+        SDL_PEN_INPUT_BUTTON_1 = SDL3.SDL_PEN_INPUT_BUTTON_1,
+        SDL_PEN_INPUT_BUTTON_2 = SDL3.SDL_PEN_INPUT_BUTTON_2,
+        SDL_PEN_INPUT_BUTTON_3 = SDL3.SDL_PEN_INPUT_BUTTON_3,
+        SDL_PEN_INPUT_BUTTON_4 = SDL3.SDL_PEN_INPUT_BUTTON_4,
+        SDL_PEN_INPUT_BUTTON_5 = SDL3.SDL_PEN_INPUT_BUTTON_5,
+        SDL_PEN_INPUT_ERASER_TIP = SDL3.SDL_PEN_INPUT_ERASER_TIP,
     }
 }

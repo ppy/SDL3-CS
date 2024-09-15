@@ -1,5 +1,5 @@
 diff --git a/include/SDL3/SDL.h b/include/SDL3/SDL.h
-index 6cda579f7..bc2952a4e 100644
+index 4e18f6382..d737c7a9a 100644
 --- a/include/SDL3/SDL.h
 +++ b/include/SDL3/SDL.h
 @@ -28,6 +28,8 @@
@@ -12,10 +12,10 @@ index 6cda579f7..bc2952a4e 100644
  #include <SDL3/SDL_assert.h>
  #include <SDL3/SDL_atomic.h>
 diff --git a/include/SDL3/SDL_log.h b/include/SDL3/SDL_log.h
-index 3ded311ff..42760135f 100644
+index 3c0e80f38..44f58add3 100644
 --- a/include/SDL3/SDL_log.h
 +++ b/include/SDL3/SDL_log.h
-@@ -372,7 +372,7 @@ extern DECLSPEC void SDLCALL SDL_LogMessageV(int category,
+@@ -407,7 +407,7 @@ extern SDL_DECLSPEC void SDLCALL SDL_LogMessageV(int category,
   *
   * \since This datatype is available since SDL 3.0.0.
   */
@@ -25,28 +25,24 @@ index 3ded311ff..42760135f 100644
  /**
   * Get the current log output function.
 diff --git a/include/SDL3/SDL_stdinc.h b/include/SDL3/SDL_stdinc.h
-index 00a54a139..847b50ecb 100644
+index 5539f2a81..3155f3f31 100644
 --- a/include/SDL3/SDL_stdinc.h
 +++ b/include/SDL3/SDL_stdinc.h
-@@ -146,7 +146,7 @@ void *alloca(size_t);
+@@ -194,7 +194,7 @@ void *alloca(size_t);
   *
   * \sa SDL_bool
   */
--#define SDL_FALSE 0
+-#define SDL_FALSE false
 +#define SDL_FALSE (SDL_bool)0
  
  /**
   * A boolean true.
-@@ -155,7 +155,7 @@ void *alloca(size_t);
+@@ -203,7 +203,7 @@ void *alloca(size_t);
   *
   * \sa SDL_bool
   */
--#define SDL_TRUE 1
+-#define SDL_TRUE true
 +#define SDL_TRUE (SDL_bool)1
  
  /**
   * A boolean type: true or false.
-
-base-commit: 0429f5d6a36fc35b551bcc2acd4a40c2db6dab82
--- 
-2.40.0.windows.1

@@ -28,31 +28,22 @@ using System.Runtime.Versioning;
 
 namespace SDL
 {
-    public enum SDL_WinRT_Path
+    public partial struct XTaskQueueObject
     {
-        SDL_WINRT_PATH_INSTALLED_LOCATION,
-        SDL_WINRT_PATH_LOCAL_FOLDER,
-        SDL_WINRT_PATH_ROAMING_FOLDER,
-        SDL_WINRT_PATH_TEMP_FOLDER,
     }
 
-    public enum SDL_WinRT_DeviceFamily
+    public partial struct XUser
     {
-        SDL_WINRT_DEVICEFAMILY_UNKNOWN,
-        SDL_WINRT_DEVICEFAMILY_DESKTOP,
-        SDL_WINRT_DEVICEFAMILY_MOBILE,
-        SDL_WINRT_DEVICEFAMILY_XBOX,
     }
 
     public static unsafe partial class SDL3
     {
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetWinRTFSPath", ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern byte* Unsafe_SDL_GetWinRTFSPath(SDL_WinRT_Path pathType);
+        public static extern SDL_bool SDL_GetGDKTaskQueue([NativeTypeName("XTaskQueueHandle *")] XTaskQueueObject** outTaskQueue);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Windows")]
-        public static extern SDL_WinRT_DeviceFamily SDL_GetWinRTDeviceFamily();
+        public static extern SDL_bool SDL_GetGDKDefaultUser([NativeTypeName("XUserHandle *")] XUser** outUserHandle);
     }
 }

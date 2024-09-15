@@ -22,24 +22,20 @@ namespace SDL.Tests
             SDL3.SDL_EnterAppMainCallbacks(0, (byte**)objectHandle.Handle, &AppInit, &AppIterate, &AppEvent, &AppQuit);
         }
 
-        protected virtual int Init()
+        protected virtual SDL_AppResult Init()
         {
             SDL3.SDL_SetLogPriorities(SDL_LogPriority.SDL_LOG_PRIORITY_VERBOSE);
             SDL3.SDL_SetLogOutputFunction(&LogOutput, IntPtr.Zero);
-            return CONTINUE;
+            return SDL_AppResult.SDL_APP_CONTINUE;
         }
 
-        protected const int TERMINATE_ERROR = -1;
-        protected const int CONTINUE = 0;
-        protected const int TERMINATE_SUCCESS = 1;
-
-        protected virtual int Iterate()
+        protected virtual SDL_AppResult Iterate()
         {
             Thread.Sleep(10);
-            return CONTINUE;
+            return SDL_AppResult.SDL_APP_CONTINUE;
         }
 
-        protected virtual int Event(SDL_Event e)
+        protected virtual SDL_AppResult Event(SDL_Event e)
         {
             switch (e.Type)
             {
@@ -47,10 +43,10 @@ namespace SDL.Tests
                 case SDL_EventType.SDL_EVENT_WINDOW_CLOSE_REQUESTED:
                 case SDL_EventType.SDL_EVENT_TERMINATING:
                 case SDL_EventType.SDL_EVENT_KEY_DOWN when e.key.key == SDL_Keycode.SDLK_ESCAPE:
-                    return TERMINATE_SUCCESS;
+                    return SDL_AppResult.SDL_APP_SUCCESS;
             }
 
-            return CONTINUE;
+            return SDL_AppResult.SDL_APP_CONTINUE;
         }
 
         protected virtual void Quit()
@@ -64,7 +60,7 @@ namespace SDL.Tests
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
-        private static int AppInit(IntPtr* appState, int argc, byte** argv)
+        private static SDL_AppResult AppInit(IntPtr* appState, int argc, byte** argv)
         {
             IntPtr handle = (IntPtr)argv;
             *appState = handle;
@@ -73,27 +69,27 @@ namespace SDL.Tests
             if (objectHandle.GetTarget(out var target))
                 return target.Init();
 
-            return TERMINATE_ERROR;
+            return SDL_AppResult.SDL_APP_FAILURE;
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
-        private static int AppIterate(IntPtr appState)
+        private static SDL_AppResult AppIterate(IntPtr appState)
         {
             var objectHandle = new ObjectHandle<MainCallbacksTest>(appState, true);
             if (objectHandle.GetTarget(out var target))
                 return target.Iterate();
 
-            return TERMINATE_ERROR;
+            return SDL_AppResult.SDL_APP_FAILURE;
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
-        private static int AppEvent(IntPtr appState, SDL_Event* e)
+        private static SDL_AppResult AppEvent(IntPtr appState, SDL_Event* e)
         {
             var objectHandle = new ObjectHandle<MainCallbacksTest>(appState, true);
             if (objectHandle.GetTarget(out var target))
                 return target.Event(*e);
 
-            return TERMINATE_ERROR;
+            return SDL_AppResult.SDL_APP_FAILURE;
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]

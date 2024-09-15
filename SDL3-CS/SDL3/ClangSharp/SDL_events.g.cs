@@ -74,8 +74,6 @@ namespace SDL
         SDL_EVENT_WINDOW_ENTER_FULLSCREEN,
         SDL_EVENT_WINDOW_LEAVE_FULLSCREEN,
         SDL_EVENT_WINDOW_DESTROYED,
-        SDL_EVENT_WINDOW_PEN_ENTER,
-        SDL_EVENT_WINDOW_PEN_LEAVE,
         SDL_EVENT_WINDOW_HDR_STATE_CHANGED,
         SDL_EVENT_WINDOW_FIRST = SDL_EVENT_WINDOW_SHOWN,
         SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_HDR_STATE_CHANGED,
@@ -127,11 +125,14 @@ namespace SDL
         SDL_EVENT_AUDIO_DEVICE_REMOVED,
         SDL_EVENT_AUDIO_DEVICE_FORMAT_CHANGED,
         SDL_EVENT_SENSOR_UPDATE = 0x1200,
-        SDL_EVENT_PEN_DOWN = 0x1300,
+        SDL_EVENT_PEN_PROXIMITY_IN = 0x1300,
+        SDL_EVENT_PEN_PROXIMITY_OUT,
+        SDL_EVENT_PEN_DOWN,
         SDL_EVENT_PEN_UP,
-        SDL_EVENT_PEN_MOTION,
         SDL_EVENT_PEN_BUTTON_DOWN,
         SDL_EVENT_PEN_BUTTON_UP,
+        SDL_EVENT_PEN_MOTION,
+        SDL_EVENT_PEN_AXIS,
         SDL_EVENT_CAMERA_DEVICE_ADDED = 0x1400,
         SDL_EVENT_CAMERA_DEVICE_REMOVED,
         SDL_EVENT_CAMERA_DEVICE_APPROVED,
@@ -230,11 +231,9 @@ namespace SDL
         [NativeTypeName("Uint16")]
         public ushort raw;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
 
-        [NativeTypeName("Uint8")]
-        public byte repeat;
+        public SDL_bool repeat;
     }
 
     public unsafe partial struct SDL_TextEditingEvent
@@ -281,6 +280,15 @@ namespace SDL
         public int selected_candidate;
 
         public SDL_bool horizontal;
+
+        [NativeTypeName("Uint8")]
+        public byte padding1;
+
+        [NativeTypeName("Uint8")]
+        public byte padding2;
+
+        [NativeTypeName("Uint8")]
+        public byte padding3;
     }
 
     public unsafe partial struct SDL_TextInputEvent
@@ -354,8 +362,7 @@ namespace SDL
         [NativeTypeName("Uint8")]
         public byte button;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
 
         [NativeTypeName("Uint8")]
         public byte clicks;
@@ -495,8 +502,7 @@ namespace SDL
         [NativeTypeName("Uint8")]
         public byte button;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -581,8 +587,7 @@ namespace SDL
         [NativeTypeName("Uint8")]
         public byte button;
 
-        [NativeTypeName("Uint8")]
-        public byte state;
+        public SDL_bool down;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -669,8 +674,7 @@ namespace SDL
 
         public SDL_AudioDeviceID which;
 
-        [NativeTypeName("Uint8")]
-        public byte recording;
+        public SDL_bool recording;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -722,7 +726,7 @@ namespace SDL
         public SDL_WindowID windowID;
     }
 
-    public partial struct SDL_PenTipEvent
+    public partial struct SDL_PenProximityEvent
     {
         public SDL_EventType type;
 
@@ -735,28 +739,6 @@ namespace SDL
         public SDL_WindowID windowID;
 
         public SDL_PenID which;
-
-        [NativeTypeName("Uint8")]
-        public byte tip;
-
-        [NativeTypeName("Uint8")]
-        public byte state;
-
-        [NativeTypeName("Uint16")]
-        public ushort pen_state;
-
-        public float x;
-
-        public float y;
-
-        [NativeTypeName("float[6]")]
-        public _axes_e__FixedBuffer axes;
-
-        [InlineArray(6)]
-        public partial struct _axes_e__FixedBuffer
-        {
-            public float e0;
-        }
     }
 
     public partial struct SDL_PenMotionEvent
@@ -773,27 +755,36 @@ namespace SDL
 
         public SDL_PenID which;
 
-        [NativeTypeName("Uint8")]
-        public byte padding1;
+        public SDL_PenInputFlags pen_state;
 
-        [NativeTypeName("Uint8")]
-        public byte padding2;
+        public float x;
 
-        [NativeTypeName("Uint16")]
-        public ushort pen_state;
+        public float y;
+    }
+
+    public partial struct SDL_PenTouchEvent
+    {
+        public SDL_EventType type;
+
+        [NativeTypeName("Uint32")]
+        public uint reserved;
+
+        [NativeTypeName("Uint64")]
+        public ulong timestamp;
+
+        public SDL_WindowID windowID;
+
+        public SDL_PenID which;
+
+        public SDL_PenInputFlags pen_state;
 
         public float x;
 
         public float y;
 
-        [NativeTypeName("float[6]")]
-        public _axes_e__FixedBuffer axes;
+        public SDL_bool eraser;
 
-        [InlineArray(6)]
-        public partial struct _axes_e__FixedBuffer
-        {
-            public float e0;
-        }
+        public SDL_bool down;
     }
 
     public partial struct SDL_PenButtonEvent
@@ -810,27 +801,41 @@ namespace SDL
 
         public SDL_PenID which;
 
-        [NativeTypeName("Uint8")]
-        public byte button;
-
-        [NativeTypeName("Uint8")]
-        public byte state;
-
-        [NativeTypeName("Uint16")]
-        public ushort pen_state;
+        public SDL_PenInputFlags pen_state;
 
         public float x;
 
         public float y;
 
-        [NativeTypeName("float[6]")]
-        public _axes_e__FixedBuffer axes;
+        [NativeTypeName("Uint8")]
+        public byte button;
 
-        [InlineArray(6)]
-        public partial struct _axes_e__FixedBuffer
-        {
-            public float e0;
-        }
+        public SDL_bool down;
+    }
+
+    public partial struct SDL_PenAxisEvent
+    {
+        public SDL_EventType type;
+
+        [NativeTypeName("Uint32")]
+        public uint reserved;
+
+        [NativeTypeName("Uint64")]
+        public ulong timestamp;
+
+        public SDL_WindowID windowID;
+
+        public SDL_PenID which;
+
+        public SDL_PenInputFlags pen_state;
+
+        public float x;
+
+        public float y;
+
+        public SDL_PenAxis axis;
+
+        public float value;
     }
 
     public unsafe partial struct SDL_DropEvent
@@ -1021,13 +1026,19 @@ namespace SDL
         public SDL_TouchFingerEvent tfinger;
 
         [FieldOffset(0)]
-        public SDL_PenTipEvent ptip;
+        public SDL_PenProximityEvent pproximity;
+
+        [FieldOffset(0)]
+        public SDL_PenTouchEvent ptouch;
 
         [FieldOffset(0)]
         public SDL_PenMotionEvent pmotion;
 
         [FieldOffset(0)]
         public SDL_PenButtonEvent pbutton;
+
+        [FieldOffset(0)]
+        public SDL_PenAxisEvent paxis;
 
         [FieldOffset(0)]
         public SDL_DropEvent drop;
@@ -1083,22 +1094,22 @@ namespace SDL
         public static extern SDL_bool SDL_WaitEventTimeout(SDL_Event* @event, [NativeTypeName("Sint32")] int timeoutMS);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_PushEvent(SDL_Event* @event);
+        public static extern SDL_bool SDL_PushEvent(SDL_Event* @event);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetEventFilter([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int> filter, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_SetEventFilter([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetEventFilter([NativeTypeName("SDL_EventFilter *")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int>* filter, [NativeTypeName("void **")] IntPtr* userdata);
+        public static extern SDL_bool SDL_GetEventFilter([NativeTypeName("SDL_EventFilter *")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool>* filter, [NativeTypeName("void **")] IntPtr* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_AddEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int> filter, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern SDL_bool SDL_AddEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_DelEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int> filter, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_RemoveEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_FilterEvents([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, int> filter, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_FilterEvents([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_bool> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_SetEventEnabled([NativeTypeName("Uint32")] uint type, SDL_bool enabled);
@@ -1112,11 +1123,5 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GetWindowFromEvent([NativeTypeName("const SDL_Event *")] SDL_Event* @event);
-
-        [NativeTypeName("#define SDL_RELEASED 0")]
-        public const int SDL_RELEASED = 0;
-
-        [NativeTypeName("#define SDL_PRESSED 1")]
-        public const int SDL_PRESSED = 1;
     }
 }
