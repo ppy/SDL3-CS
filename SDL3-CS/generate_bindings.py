@@ -112,6 +112,7 @@ headers = [
     add("SDL3/SDL_pixels.h"),
     add("SDL3/SDL_platform.h"),
     add("SDL3/SDL_power.h"),
+    add("SDL3/SDL_process.h"),
     add("SDL3/SDL_properties.h"),
     add("SDL3/SDL_rect.h"),
     add("SDL3/SDL_render.h"),
