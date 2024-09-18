@@ -87,6 +87,7 @@ fi
 
 # Build SDL
 pushd SDL >/dev/null
+git reset --hard HEAD
 cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release

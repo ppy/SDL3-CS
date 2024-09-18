@@ -130,7 +130,14 @@ headers = [
     add("SDL3/SDL_vulkan.h"),
 ]
 
-def patch_sdl_types():
+def prepare_sdl_source():
+    subprocess.run([
+        "git",
+        "reset",
+        "--hard",
+        "HEAD"
+    ], cwd = SDL_root)
+
     subprocess.run([
         "git",
         "apply",
@@ -298,7 +305,7 @@ def get_string_returning_functions(sdl_api):
 
 
 def main():
-    patch_sdl_types()
+    prepare_sdl_source()
 
     sdl_api = get_sdl_api_dump()
 
