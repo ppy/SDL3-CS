@@ -1,6 +1,6 @@
 # SDL3-CS
 
-SDL-CS is [SDL 3](https://github.com/libsdl-org/SDL) bindings, developed for internal use and available publicly on [NuGet.org](https://www.nuget.org/packages/ppy.SDL3-CS).
+SDL3-CS is [SDL3](https://github.com/libsdl-org/SDL) bindings, developed for internal use and available publicly on [NuGet.org](https://www.nuget.org/packages/ppy.SDL3-CS).
 
 ## About
 
