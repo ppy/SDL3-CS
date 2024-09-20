@@ -6,8 +6,6 @@ Generates C# bindings for SDL3 using ClangSharp.
 
 Prerequisites:
 - run `dotnet tool restore` (to install ClangSharpPInvokeGenerator)
-- https://github.com/libsdl-org/SDL checked out alongside this repository
-- git apply --3way `SDL-use-proper-types.patch` to SDL repo
 
 This script should be run manually.
 """
@@ -21,12 +19,13 @@ import sys
 # Needs to match SDL3.SourceGeneration.Helper.UnsafePrefix
 unsafe_prefix = "Unsafe_"
 
-SDL_root = pathlib.Path("../../SDL")
+repository_root = pathlib.Path(__file__).resolve().parents[1]
+
+SDL_root = repository_root / "External" / "SDL"
 SDL_include_root = SDL_root / "include"
 SDL3_header_base = "SDL3"  # base folder of header files
 
-csproj_root = pathlib.Path(".")
-
+csproj_root = repository_root / "SDL3-CS"
 
 class Header:
     """Represents a SDL header file that is used in ClangSharp generation."""
@@ -131,6 +130,20 @@ headers = [
     add("SDL3/SDL_vulkan.h"),
 ]
 
+def prepare_sdl_source():
+    subprocess.run([
+        "git",
+        "reset",
+        "--hard",
+        "HEAD"
+    ], cwd = SDL_root)
+
+    subprocess.run([
+        "git",
+        "apply",
+        "--3way",
+        repository_root / "External" / "SDL-use-proper-types.patch"
+    ], cwd = SDL_root)
 
 def get_sdl_api_dump():
     subprocess.run([
@@ -292,6 +305,8 @@ def get_string_returning_functions(sdl_api):
 
 
 def main():
+    prepare_sdl_source()
+
     sdl_api = get_sdl_api_dump()
 
     # typedefs are added globally as their types appear outside of the defining header

@@ -1,12 +1,6 @@
 name: Build Native
 on:
   workflow_dispatch:
-    inputs:
-      sdl_ref:
-        description: SDL3 commit/branch/tag to build
-        required: true
-        default: main
-        type: string
 #  schedule:
 #    - cron: '0 0 * * *'
 env:
@@ -23,7 +17,7 @@ jobs:
           - { name: win-x64,     os: windows-latest, flags: -A x64 }
           - { name: win-x86,     os: windows-latest, flags: -A Win32 }
           - { name: win-arm64,   os: windows-latest, flags: -A ARM64 }
-          - { name: linux-x64,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":amd64"}
+          - { name: linux-x64,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":amd64" }
           - { name: linux-x86,   os: ubuntu-20.04,   flags: -GNinja -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32", target_apt_arch: ":i386" }
           - { name: linux-arm64, os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":arm64", container: arm64v8/ubuntu }
           - { name: linux-arm,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":armhf", container: arm32v7/ubuntu }
@@ -33,12 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: 'libsdl-org/SDL'
-          ref: ${{ inputs.sdl_ref }}
-
-      - uses: actions/checkout@v4
-        with:
-          path: 'SDL3-CS'
+          submodules: true
 
       - name: Set up QEMU
         if: contains(matrix.platform.container, 'arm')
@@ -58,7 +47,7 @@ jobs:
             -e BUILD_TYPE=${{ env.BUILD_TYPE }}
           run: |
             cd /workspace
-            ./SDL3-CS/build.sh
+            ./External/build.sh
 
       - name: Build
         if: ${{ !contains(matrix.platform.container, 'arm') }}
@@ -68,7 +57,7 @@ jobs:
           TARGET_APT_ARCH: ${{ matrix.platform.target_apt_arch }}
           RUNNER_OS: ${{ runner.os }}
           FLAGS: ${{ matrix.platform.flags }}
-        run: ./SDL3-CS/build.sh
+        run: ./External/build.sh
 
       - name: Get Actions user id
         if: runner.os == 'Linux'
@@ -88,7 +77,6 @@ jobs:
           title: Update ${{ matrix.platform.name }} SDL binaries
           body: This PR has been auto-generated to update the ${{ matrix.platform.name }} SDL binaries.
           branch: update-${{ matrix.platform.name }}-binaries
-          path: 'SDL3-CS'
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
@@ -98,28 +86,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: 'libsdl-org/SDL'
-          ref: ${{ inputs.sdl_ref }}
-
-      - uses: actions/checkout@v4
-        with:
-          path: 'SDL3-CS'
+          submodules: true
 
       - name: Build (iOS)
-        run: xcodebuild -project Xcode/SDL/SDL.xcodeproj -target SDL3.xcframework -configuration Release
+        run: xcodebuild -project External/SDL/Xcode/SDL/SDL.xcodeproj -target SDL3.xcframework -configuration Release
 
       - name: Prepare release directory (iOS)
-        run: mkdir -p SDL3-CS/native/ios
+        run: mkdir -p native/ios
 
       - name: Prepare release (iOS)
         run: |
-          mkdir -p SDL3-CS/native/ios/SDL3.xcframework/ios-arm64/SDL3.framework;
-          mkdir -p SDL3-CS/native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework;
-          cp Xcode/SDL/build/SDL3.xcframework/Info.plist                                           SDL3-CS/native/ios/SDL3.xcframework/Info.plist;
-          cp Xcode/SDL/build/SDL3.xcframework/ios-arm64/SDL3.framework/SDL3                        SDL3-CS/native/ios/SDL3.xcframework/ios-arm64/SDL3.framework/SDL3;
-          cp Xcode/SDL/build/SDL3.xcframework/ios-arm64/SDL3.framework/Info.plist                  SDL3-CS/native/ios/SDL3.xcframework/ios-arm64/SDL3.framework/Info.plist;
-          cp Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/SDL3       SDL3-CS/native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/SDL3;
-          cp Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist SDL3-CS/native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist;
+          mkdir -p native/ios/SDL3.xcframework/ios-arm64/SDL3.framework;
+          mkdir -p native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework;
+          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/Info.plist                                           native/ios/SDL3.xcframework/Info.plist;
+          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64/SDL3.framework/SDL3                        native/ios/SDL3.xcframework/ios-arm64/SDL3.framework/SDL3;
+          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64/SDL3.framework/Info.plist                  native/ios/SDL3.xcframework/ios-arm64/SDL3.framework/Info.plist;
+          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/SDL3       native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/SDL3;
+          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist;
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
@@ -128,7 +111,6 @@ jobs:
           title: Update iOS SDL binaries
           body: This PR has been auto-generated to update the iOS SDL binaries
           branch: update-ios-binaries
-          path: 'SDL3-CS'
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
@@ -136,17 +118,12 @@ jobs:
     name: android
     runs-on: ubuntu-20.04
     env:
-        NDK_VER: 23.1.7779620
-        PLATFORM_VER: android-34
+      NDK_VER: 23.1.7779620
+      PLATFORM_VER: android-34
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: 'libsdl-org/SDL'
-          ref: ${{ inputs.sdl_ref }}
-
-      - uses: actions/checkout@v4
-        with:
-          path: 'SDL3-CS'
+          submodules: true
 
       - name: Setup JDK
         uses: actions/setup-java@v3
@@ -169,22 +146,22 @@ jobs:
       - name: Build (Android)
         run: |
           export PATH=$ANDROID_HOME/ndk/$NDK_VER:$PATH
-          export OUTPUT=$PWD/SDL3-CS/native/android
+          export OUTPUT=$PWD/native/android
           rm -rf $OUTPUT && mkdir -p $OUTPUT
 
           # Build SDL3
-          sed -i 's/abi=.*/abi="armeabi-v7a arm64-v8a x86 x86_64"/g' ./build-scripts/androidbuildlibs.sh
-          ./build-scripts/androidbuildlibs.sh NDK_LIBS_OUT="$OUTPUT"
+          sed -i 's/abi=.*/abi="armeabi-v7a arm64-v8a x86 x86_64"/g' ./External/SDL/build-scripts/androidbuildlibs.sh
+          ./External/SDL/build-scripts/androidbuildlibs.sh NDK_LIBS_OUT="$OUTPUT"
 
       - name: Build SDL3 Android Java
         run: |
           export JAVA_HOME=$JAVA_HOME_11_X64
           export PATH=$JAVA_HOME_11_X64/bin:$PATH
-          export OUTPUT=$PWD/SDL3-CS/SDL3-CS.Android/Jars/
+          export OUTPUT=$PWD/SDL3-CS.Android/Jars/
           rm -rf $OUTPUT && mkdir -p $OUTPUT
 
           # Build SDL3 Android Java part
-          cd android-project/app/src/main/java
+          cd ./External/SDL/android-project/app/src/main/java
           javac -cp $ANDROID_HOME/platforms/$PLATFORM_VER/android.jar -encoding utf8 org/libsdl/app/*.java
           jar cvf $OUTPUT/SDL3AndroidBridge.jar org/libsdl/app/*.class
 
@@ -195,6 +172,5 @@ jobs:
           title: Update Android SDL binaries
           body: This PR has been auto-generated to update the Android SDL binaries
           branch: update-android-binaries
-          path: 'SDL3-CS'
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
