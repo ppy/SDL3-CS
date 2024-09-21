@@ -90,9 +90,6 @@ namespace SDL
         public static extern SDL_Environment* SDL_GetEnvironment();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_CleanupEnvironment();
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Environment* SDL_CreateEnvironment(SDL_bool populated);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetEnvironmentVariable", ExactSpelling = true)]
@@ -111,6 +108,10 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroyEnvironment(SDL_Environment* env);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_getenv", ExactSpelling = true)]
+        [return: NativeTypeName("const char *")]
+        public static extern byte* Unsafe_SDL_getenv([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_getenv_unsafe", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -609,7 +610,7 @@ namespace SDL
 
         public static SDL_bool SDL_size_mul_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
         {
-            if (a != 0 && b > 0xffffffffffffffffUL / a)
+            if (a != 0 && unchecked(b > 0xffffffffffffffffUL / a))
             {
                 return (SDL_bool)(0);
             }
@@ -620,7 +621,7 @@ namespace SDL
 
         public static SDL_bool SDL_size_add_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
         {
-            if (b > 0xffffffffffffffffUL - a)
+            if (b > unchecked(0xffffffffffffffffUL - a))
             {
                 return (SDL_bool)(0);
             }
@@ -629,14 +630,17 @@ namespace SDL
             return (SDL_bool)(1);
         }
 
+        [NativeTypeName("#define __bool_true_false_are_defined 1")]
+        public const int __bool_true_false_are_defined = 1;
+
+        [NativeTypeName("#define false (SDL_bool)0")]
+        public const SDL_bool @false = (SDL_bool)(0);
+
+        [NativeTypeName("#define true (SDL_bool)1")]
+        public const SDL_bool @true = (SDL_bool)(1);
+
         [NativeTypeName("#define SDL_SIZE_MAX SIZE_MAX")]
         public const ulong SDL_SIZE_MAX = 0xffffffffffffffffUL;
-
-        [NativeTypeName("#define SDL_FALSE (SDL_bool)0")]
-        public const SDL_bool SDL_FALSE = (SDL_bool)(0);
-
-        [NativeTypeName("#define SDL_TRUE (SDL_bool)1")]
-        public const SDL_bool SDL_TRUE = (SDL_bool)(1);
 
         [NativeTypeName("#define SDL_MAX_SINT8 ((Sint8)0x7F)")]
         public const sbyte SDL_MAX_SINT8 = ((sbyte)(0x7F));
@@ -698,25 +702,25 @@ namespace SDL
         [NativeTypeName("#define SDL_PRIs64 \"lld\"")]
         public static ReadOnlySpan<byte> SDL_PRIs64 => "lld"u8;
 
-        [NativeTypeName("#define SDL_PRIu64 \"llu\"")]
+        [NativeTypeName("#define SDL_PRIu64 PRIu64")]
         public static ReadOnlySpan<byte> SDL_PRIu64 => "llu"u8;
 
-        [NativeTypeName("#define SDL_PRIx64 \"llx\"")]
+        [NativeTypeName("#define SDL_PRIx64 PRIx64")]
         public static ReadOnlySpan<byte> SDL_PRIx64 => "llx"u8;
 
-        [NativeTypeName("#define SDL_PRIX64 \"llX\"")]
+        [NativeTypeName("#define SDL_PRIX64 PRIX64")]
         public static ReadOnlySpan<byte> SDL_PRIX64 => "llX"u8;
 
-        [NativeTypeName("#define SDL_PRIs32 \"d\"")]
+        [NativeTypeName("#define SDL_PRIs32 PRId32")]
         public static ReadOnlySpan<byte> SDL_PRIs32 => "d"u8;
 
-        [NativeTypeName("#define SDL_PRIu32 \"u\"")]
+        [NativeTypeName("#define SDL_PRIu32 PRIu32")]
         public static ReadOnlySpan<byte> SDL_PRIu32 => "u"u8;
 
-        [NativeTypeName("#define SDL_PRIx32 \"x\"")]
+        [NativeTypeName("#define SDL_PRIx32 PRIx32")]
         public static ReadOnlySpan<byte> SDL_PRIx32 => "x"u8;
 
-        [NativeTypeName("#define SDL_PRIX32 \"X\"")]
+        [NativeTypeName("#define SDL_PRIX32 PRIX32")]
         public static ReadOnlySpan<byte> SDL_PRIX32 => "X"u8;
 
         [NativeTypeName("#define SDL_INVALID_UNICODE_CODEPOINT 0xFFFD")]

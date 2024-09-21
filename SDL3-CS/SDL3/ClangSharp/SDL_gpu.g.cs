@@ -100,6 +100,8 @@ namespace SDL
     {
         SDL_GPU_STOREOP_STORE,
         SDL_GPU_STOREOP_DONT_CARE,
+        SDL_GPU_STOREOP_RESOLVE,
+        SDL_GPU_STOREOP_RESOLVE_AND_STORE,
     }
 
     public enum SDL_GPUIndexElementSize
@@ -804,7 +806,7 @@ namespace SDL
         public SDL_GPUColorTargetBlendState blend_state;
     }
 
-    public unsafe partial struct SDL_GpuGraphicsPipelineTargetInfo
+    public unsafe partial struct SDL_GPUGraphicsPipelineTargetInfo
     {
         [NativeTypeName("const SDL_GPUColorTargetDescription *")]
         public SDL_GPUColorTargetDescription* color_target_descriptions;
@@ -842,7 +844,7 @@ namespace SDL
 
         public SDL_GPUDepthStencilState depth_stencil_state;
 
-        public SDL_GpuGraphicsPipelineTargetInfo target_info;
+        public SDL_GPUGraphicsPipelineTargetInfo target_info;
 
         public SDL_PropertiesID props;
     }
@@ -906,16 +908,23 @@ namespace SDL
 
         public SDL_GPUStoreOp store_op;
 
+        public SDL_GPUTexture* resolve_texture;
+
+        [NativeTypeName("Uint32")]
+        public uint resolve_mip_level;
+
+        [NativeTypeName("Uint32")]
+        public uint resolve_layer;
+
         public SDL_bool cycle;
+
+        public SDL_bool cycle_resolve_texture;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
 
         [NativeTypeName("Uint8")]
         public byte padding2;
-
-        [NativeTypeName("Uint8")]
-        public byte padding3;
     }
 
     public unsafe partial struct SDL_GPUDepthStencilTargetInfo

@@ -142,7 +142,7 @@ def prepare_sdl_source():
         "git",
         "apply",
         "--3way",
-        repository_root / "External" / "SDL-use-proper-types.patch"
+        repository_root / "External" / "SDL-bindings-fixes.patch"
     ], cwd = SDL_root)
 
 def get_sdl_api_dump():
@@ -229,6 +229,8 @@ base_command = [
     "--methodClassName", "SDL3",
     "--namespace", "SDL",
 
+    "--language", "c",
+
     "--remap",
     "void*=IntPtr",
     "char=byte",
@@ -236,6 +238,8 @@ base_command = [
 
     "--define-macro",
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
+    "SDL_DEFINE_STDBOOL",
+    "NULL=0",
 
     "--additional",
     "--undefine-macro=_WIN32",

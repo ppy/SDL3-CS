@@ -62,9 +62,6 @@ namespace SDL
         [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetAppMetadataProperty([NativeTypeName("const char *")] byte* name);
 
-        [NativeTypeName("#define SDL_INIT_TIMER 0x00000001u")]
-        public const uint SDL_INIT_TIMER = 0x00000001U;
-
         [NativeTypeName("#define SDL_INIT_AUDIO 0x00000010u")]
         public const uint SDL_INIT_AUDIO = 0x00000010U;
 

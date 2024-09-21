@@ -30,7 +30,7 @@ namespace SDL
     public static partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetCPUCount();
+        public static extern int SDL_GetNumLogicalCPUCores();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetCPUCacheLineSize();

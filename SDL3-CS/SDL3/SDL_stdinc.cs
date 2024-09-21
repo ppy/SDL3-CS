@@ -8,8 +8,8 @@ namespace SDL
     [Typedef]
     public enum SDL_bool : byte
     {
-        SDL_FALSE = SDL3.SDL_FALSE,
-        SDL_TRUE = SDL3.SDL_TRUE
+        SDL_FALSE = 0,
+        SDL_TRUE = 1
     }
 
     [Typedef]

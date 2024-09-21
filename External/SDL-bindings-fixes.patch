@@ -1,0 +1,102 @@
+diff --git a/include/SDL3/SDL.h b/include/SDL3/SDL.h
+index 3698f6362..e43840cf1 100644
+--- a/include/SDL3/SDL.h
++++ b/include/SDL3/SDL.h
+@@ -28,6 +28,8 @@
+ #ifndef SDL_h_
+ #define SDL_h_
+ 
++#error Don't build with enum type changes
++
+ #include <SDL3/SDL_stdinc.h>
+ #include <SDL3/SDL_assert.h>
+ #include <SDL3/SDL_atomic.h>
+diff --git a/include/SDL3/SDL_log.h b/include/SDL3/SDL_log.h
+index 8feb9e0af..b66ae0422 100644
+--- a/include/SDL3/SDL_log.h
++++ b/include/SDL3/SDL_log.h
+@@ -471,7 +471,7 @@ extern SDL_DECLSPEC void SDLCALL SDL_LogMessageV(int category,
+  *
+  * \since This datatype is available since SDL 3.0.0.
+  */
+-typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, int category, SDL_LogPriority priority, const char *message);
++typedef void (SDLCALL *SDL_LogOutputFunction)(void *userdata, SDL_LogCategory category, SDL_LogPriority priority, const char *message);
+ 
+ /**
+  * Get the current log output function.
+diff --git a/include/SDL3/SDL_stdinc.h b/include/SDL3/SDL_stdinc.h
+index 8818cda58..63210fe5e 100644
+--- a/include/SDL3/SDL_stdinc.h
++++ b/include/SDL3/SDL_stdinc.h
+@@ -51,9 +51,10 @@
+ #ifdef SDL_DEFINE_STDBOOL
+ #ifndef __bool_true_false_are_defined
+ #define __bool_true_false_are_defined 1
+-#define bool  uint8_t
+-#define false 0
+-#define true  1
++typedef uint8_t SDL_bool;
++#define bool  SDL_bool
++#define false (SDL_bool)0
++#define true  (SDL_bool)1
+ #endif
+ #else
+ #include <stdbool.h>
+diff --git a/include/SDL3/SDL_rect.h b/include/SDL3/SDL_rect.h
+index 8f9eee4df..e6bd7a131 100644
+--- a/include/SDL3/SDL_rect.h
++++ b/include/SDL3/SDL_rect.h
+@@ -154,7 +154,7 @@ SDL_FORCE_INLINE void SDL_RectToFRect(const SDL_Rect *rect, SDL_FRect *frect)
+  */
+ SDL_FORCE_INLINE bool SDL_PointInRect(const SDL_Point *p, const SDL_Rect *r)
+ {
+-    return ( p && r && (p->x >= r->x) && (p->x < (r->x + r->w)) &&
++    return ( p != NULL && r != NULL && (p->x >= r->x) && (p->x < (r->x + r->w)) &&
+              (p->y >= r->y) && (p->y < (r->y + r->h)) ) ? true : false;
+ }
+ 
+@@ -178,7 +178,7 @@ SDL_FORCE_INLINE bool SDL_PointInRect(const SDL_Point *p, const SDL_Rect *r)
+  */
+ SDL_FORCE_INLINE bool SDL_RectEmpty(const SDL_Rect *r)
+ {
+-    return ((!r) || (r->w <= 0) || (r->h <= 0)) ? true : false;
++    return ((r == NULL) || (r->w <= 0) || (r->h <= 0)) ? true : false;
+ }
+ 
+ /**
+@@ -202,7 +202,7 @@ SDL_FORCE_INLINE bool SDL_RectEmpty(const SDL_Rect *r)
+  */
+ SDL_FORCE_INLINE bool SDL_RectsEqual(const SDL_Rect *a, const SDL_Rect *b)
+ {
+-    return (a && b && (a->x == b->x) && (a->y == b->y) &&
++    return (a != NULL && b != NULL && (a->x == b->x) && (a->y == b->y) &&
+             (a->w == b->w) && (a->h == b->h)) ? true : false;
+ }
+ 
+@@ -319,7 +319,7 @@ extern SDL_DECLSPEC bool SDLCALL SDL_GetRectAndLineIntersection(const SDL_Rect *
+  */
+ SDL_FORCE_INLINE bool SDL_PointInRectFloat(const SDL_FPoint *p, const SDL_FRect *r)
+ {
+-    return ( p && r && (p->x >= r->x) && (p->x <= (r->x + r->w)) &&
++    return ( p != NULL && r != NULL && (p->x >= r->x) && (p->x <= (r->x + r->w)) &&
+              (p->y >= r->y) && (p->y <= (r->y + r->h)) ) ? true : false;
+ }
+ 
+@@ -343,7 +343,7 @@ SDL_FORCE_INLINE bool SDL_PointInRectFloat(const SDL_FPoint *p, const SDL_FRect
+  */
+ SDL_FORCE_INLINE bool SDL_RectEmptyFloat(const SDL_FRect *r)
+ {
+-    return ((!r) || (r->w < 0.0f) || (r->h < 0.0f)) ? true : false;
++    return ((r == NULL) || (r->w < 0.0f) || (r->h < 0.0f)) ? true : false;
+ }
+ 
+ /**
+@@ -373,7 +373,7 @@ SDL_FORCE_INLINE bool SDL_RectEmptyFloat(const SDL_FRect *r)
+  */
+ SDL_FORCE_INLINE bool SDL_RectsEqualEpsilon(const SDL_FRect *a, const SDL_FRect *b, const float epsilon)
+ {
+-    return (a && b && ((a == b) ||
++    return (a != NULL && b != NULL && ((a == b) ||
+             ((SDL_fabsf(a->x - b->x) <= epsilon) &&
+             (SDL_fabsf(a->y - b->y) <= epsilon) &&
+             (SDL_fabsf(a->w - b->w) <= epsilon) &&

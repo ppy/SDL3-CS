@@ -133,5 +133,37 @@ namespace SDL
 
         [Macro]
         public static bool SDL_ISCOLORSPACE_FULL_RANGE(SDL_Colorspace X) => (SDL_COLORSPACERANGE(X) == SDL_COLOR_RANGE_FULL);
+
+        [Constant]
+        public static readonly SDL_PixelFormat SDL_PIXELFORMAT_RGBA32 = BitConverter.IsLittleEndian ? SDL_PIXELFORMAT_ABGR8888 : SDL_PIXELFORMAT_RGBA8888;
+
+        [Constant]
+        public static readonly SDL_PixelFormat SDL_PIXELFORMAT_ARGB32 = BitConverter.IsLittleEndian ? SDL_PIXELFORMAT_BGRA8888 : SDL_PIXELFORMAT_ARGB8888;
+
+        [Constant]
+        public static readonly SDL_PixelFormat SDL_PIXELFORMAT_BGRA32 = BitConverter.IsLittleEndian ? SDL_PIXELFORMAT_ARGB8888 : SDL_PIXELFORMAT_BGRA8888;
+
+        [Constant]
+        public static readonly SDL_PixelFormat SDL_PIXELFORMAT_ABGR32 = BitConverter.IsLittleEndian ? SDL_PIXELFORMAT_RGBA8888 : SDL_PIXELFORMAT_ABGR8888;
+
+        [Constant]
+        public static readonly SDL_PixelFormat SDL_PIXELFORMAT_RGBX32 = BitConverter.IsLittleEndian ? SDL_PIXELFORMAT_XBGR8888 : SDL_PIXELFORMAT_RGBX8888;
+
+        [Constant]
+        public static readonly SDL_PixelFormat SDL_PIXELFORMAT_XRGB32 = BitConverter.IsLittleEndian ? SDL_PIXELFORMAT_BGRX8888 : SDL_PIXELFORMAT_XRGB8888;
+
+        [Constant]
+        public static readonly SDL_PixelFormat SDL_PIXELFORMAT_BGRX32 = BitConverter.IsLittleEndian ? SDL_PIXELFORMAT_XRGB8888 : SDL_PIXELFORMAT_BGRX8888;
+
+        [Constant]
+        public static readonly SDL_PixelFormat SDL_PIXELFORMAT_XBGR32 = BitConverter.IsLittleEndian ? SDL_PIXELFORMAT_RGBX8888 : SDL_PIXELFORMAT_XBGR8888;
+
+        // FIXME: --language c doesn't put right types to below constants
+
+        [Constant]
+        public static readonly SDL_Colorspace SDL_COLORSPACE_RGB_DEFAULT = SDL_Colorspace.SDL_COLORSPACE_SRGB;
+
+        [Constant]
+        public static readonly SDL_Colorspace SDL_COLORSPACE_YUV_DEFAULT = SDL_Colorspace.SDL_COLORSPACE_SRGB;
     }
 }

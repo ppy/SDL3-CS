@@ -33,6 +33,12 @@ namespace SDL
         public int value;
     }
 
+    public partial struct SDL_AtomicU32
+    {
+        [NativeTypeName("Uint32")]
+        public uint value;
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -51,26 +57,37 @@ namespace SDL
         public static extern void SDL_MemoryBarrierAcquireFunction();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_AtomicCompareAndSwap(SDL_AtomicInt* a, int oldval, int newval);
+        public static extern SDL_bool SDL_CompareAndSwapAtomicInt(SDL_AtomicInt* a, int oldval, int newval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_AtomicSet(SDL_AtomicInt* a, int v);
+        public static extern int SDL_SetAtomicInt(SDL_AtomicInt* a, int v);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_AtomicGet(SDL_AtomicInt* a);
+        public static extern int SDL_GetAtomicInt(SDL_AtomicInt* a);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_AtomicAdd(SDL_AtomicInt* a, int v);
+        public static extern int SDL_AddAtomicInt(SDL_AtomicInt* a, int v);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_AtomicCompareAndSwapPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr oldval, [NativeTypeName("void*")] IntPtr newval);
+        public static extern SDL_bool SDL_CompareAndSwapAtomicU32(SDL_AtomicU32* a, [NativeTypeName("Uint32")] uint oldval, [NativeTypeName("Uint32")] uint newval);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_SetAtomicU32(SDL_AtomicU32* a, [NativeTypeName("Uint32")] uint v);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_GetAtomicU32(SDL_AtomicU32* a);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_bool SDL_CompareAndSwapAtomicPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr oldval, [NativeTypeName("void*")] IntPtr newval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_AtomicSetPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr v);
+        public static extern IntPtr SDL_SetAtomicPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr v);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_AtomicGetPointer([NativeTypeName("void **")] IntPtr* a);
+        public static extern IntPtr SDL_GetAtomicPointer([NativeTypeName("void **")] IntPtr* a);
     }
 }

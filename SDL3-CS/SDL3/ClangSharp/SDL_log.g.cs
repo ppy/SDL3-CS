@@ -54,7 +54,9 @@ namespace SDL
 
     public enum SDL_LogPriority
     {
-        SDL_LOG_PRIORITY_VERBOSE = 1,
+        SDL_LOG_PRIORITY_INVALID,
+        SDL_LOG_PRIORITY_TRACE,
+        SDL_LOG_PRIORITY_VERBOSE,
         SDL_LOG_PRIORITY_DEBUG,
         SDL_LOG_PRIORITY_INFO,
         SDL_LOG_PRIORITY_WARN,
@@ -82,6 +84,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Log([NativeTypeName("const char *")] byte* fmt, __arglist);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_LogTrace(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_LogVerbose(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
