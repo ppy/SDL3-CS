@@ -25,7 +25,7 @@ namespace SDL.Tests
         public unsafe void TestClipboardData()
         {
             var ret = SDL3.SDL_SetClipboardData(&dataCallback, &cleanupCallback, IntPtr.Zero, "test/one", "test/two");
-            Assert.That(ret, Is.EqualTo(0), SDL3.SDL_GetError);
+            Assert.That(ret, Is.EqualTo(SDL_bool.SDL_TRUE), SDL3.SDL_GetError);
 
             Assert.That(SDL3.SDL_HasClipboardData("test/one"), Is.EqualTo(SDL_bool.SDL_TRUE));
             Assert.That(SDL3.SDL_HasClipboardData("test/two"), Is.EqualTo(SDL_bool.SDL_TRUE));

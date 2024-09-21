@@ -46,7 +46,7 @@ namespace SDL.Tests
                 Console.WriteLine($"from {window}, message: {message->message}");
             }
 
-            return SDL_TRUE; // sample use of definition from SDL3 class, not SDL_bool enum
+            return SDL_bool.SDL_TRUE; // sample use of definition from SDL3 class, not SDL_bool enum
         }
 
         // ReSharper disable once UseCollectionExpression
