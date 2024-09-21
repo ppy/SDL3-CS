@@ -140,13 +140,6 @@ def prepare_sdl_source():
         "HEAD"
     ], cwd=SDL_root)
 
-    subprocess.run([
-        "git",
-        "apply",
-        "--3way",
-        repository_root / "External" / "SDL-use-proper-types.patch"
-    ], cwd=SDL_root)
-
 
 def get_sdl_api_dump():
     subprocess.run([

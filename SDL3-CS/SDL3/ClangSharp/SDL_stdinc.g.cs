@@ -611,32 +611,32 @@ namespace SDL
         {
             if (a != 0 && b > 0xffffffffffffffffUL / a)
             {
-                return (SDL_bool)(0);
+                return false;
             }
 
             *ret = a * b;
-            return (SDL_bool)(1);
+            return true;
         }
 
         public static SDL_bool SDL_size_add_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
         {
             if (b > 0xffffffffffffffffUL - a)
             {
-                return (SDL_bool)(0);
+                return false;
             }
 
             *ret = a + b;
-            return (SDL_bool)(1);
+            return true;
         }
 
         [NativeTypeName("#define SDL_SIZE_MAX SIZE_MAX")]
         public const ulong SDL_SIZE_MAX = 0xffffffffffffffffUL;
 
-        [NativeTypeName("#define SDL_FALSE (SDL_bool)0")]
-        public const SDL_bool SDL_FALSE = (SDL_bool)(0);
+        [NativeTypeName("#define SDL_FALSE false")]
+        public const bool SDL_FALSE = false;
 
-        [NativeTypeName("#define SDL_TRUE (SDL_bool)1")]
-        public const SDL_bool SDL_TRUE = (SDL_bool)(1);
+        [NativeTypeName("#define SDL_TRUE true")]
+        public const bool SDL_TRUE = true;
 
         [NativeTypeName("#define SDL_MAX_SINT8 ((Sint8)0x7F)")]
         public const sbyte SDL_MAX_SINT8 = ((sbyte)(0x7F));
