@@ -74,7 +74,8 @@ namespace SDL
         public static extern void SDL_GetMemoryFunctions([NativeTypeName("SDL_malloc_func *")] delegate* unmanaged[Cdecl]<nuint, IntPtr>* malloc_func, [NativeTypeName("SDL_calloc_func *")] delegate* unmanaged[Cdecl]<nuint, nuint, IntPtr>* calloc_func, [NativeTypeName("SDL_realloc_func *")] delegate* unmanaged[Cdecl]<IntPtr, nuint, IntPtr>* realloc_func, [NativeTypeName("SDL_free_func *")] delegate* unmanaged[Cdecl]<IntPtr, void>* free_func);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetMemoryFunctions([NativeTypeName("SDL_malloc_func")] delegate* unmanaged[Cdecl]<nuint, IntPtr> malloc_func, [NativeTypeName("SDL_calloc_func")] delegate* unmanaged[Cdecl]<nuint, nuint, IntPtr> calloc_func, [NativeTypeName("SDL_realloc_func")] delegate* unmanaged[Cdecl]<IntPtr, nuint, IntPtr> realloc_func, [NativeTypeName("SDL_free_func")] delegate* unmanaged[Cdecl]<IntPtr, void> free_func);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetMemoryFunctions([NativeTypeName("SDL_malloc_func")] delegate* unmanaged[Cdecl]<nuint, IntPtr> malloc_func, [NativeTypeName("SDL_calloc_func")] delegate* unmanaged[Cdecl]<nuint, nuint, IntPtr> calloc_func, [NativeTypeName("SDL_realloc_func")] delegate* unmanaged[Cdecl]<IntPtr, nuint, IntPtr> realloc_func, [NativeTypeName("SDL_free_func")] delegate* unmanaged[Cdecl]<IntPtr, void> free_func);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
@@ -90,10 +91,7 @@ namespace SDL
         public static extern SDL_Environment* SDL_GetEnvironment();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_CleanupEnvironment();
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Environment* SDL_CreateEnvironment(SDL_bool populated);
+        public static extern SDL_Environment* SDL_CreateEnvironment([NativeTypeName("bool")] byte populated);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetEnvironmentVariable", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -104,13 +102,19 @@ namespace SDL
         public static extern byte** SDL_GetEnvironmentVariables(SDL_Environment* env);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetEnvironmentVariable(SDL_Environment* env, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, SDL_bool overwrite);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetEnvironmentVariable(SDL_Environment* env, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, [NativeTypeName("bool")] byte overwrite);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_UnsetEnvironmentVariable(SDL_Environment* env, [NativeTypeName("const char *")] byte* name);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_UnsetEnvironmentVariable(SDL_Environment* env, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroyEnvironment(SDL_Environment* env);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_getenv", ExactSpelling = true)]
+        [return: NativeTypeName("const char *")]
+        public static extern byte* Unsafe_SDL_getenv([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_getenv_unsafe", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -607,7 +611,7 @@ namespace SDL
         [return: NativeTypeName("char *")]
         public static extern byte* Unsafe_SDL_iconv_string([NativeTypeName("const char *")] byte* tocode, [NativeTypeName("const char *")] byte* fromcode, [NativeTypeName("const char *")] byte* inbuf, [NativeTypeName("size_t")] nuint inbytesleft);
 
-        public static SDL_bool SDL_size_mul_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
+        public static bool SDL_size_mul_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
         {
             if (a != 0 && b > 0xffffffffffffffffUL / a)
             {
@@ -618,7 +622,7 @@ namespace SDL
             return true;
         }
 
-        public static SDL_bool SDL_size_add_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
+        public static bool SDL_size_add_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
         {
             if (b > 0xffffffffffffffffUL - a)
             {
@@ -631,12 +635,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_SIZE_MAX SIZE_MAX")]
         public const ulong SDL_SIZE_MAX = 0xffffffffffffffffUL;
-
-        [NativeTypeName("#define SDL_FALSE false")]
-        public const bool SDL_FALSE = false;
-
-        [NativeTypeName("#define SDL_TRUE true")]
-        public const bool SDL_TRUE = true;
 
         [NativeTypeName("#define SDL_MAX_SINT8 ((Sint8)0x7F)")]
         public const sbyte SDL_MAX_SINT8 = ((sbyte)(0x7F));
@@ -718,6 +716,21 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PRIX32 \"X\"")]
         public static ReadOnlySpan<byte> SDL_PRIX32 => "X"u8;
+
+        [NativeTypeName("#define SDL_PRILL_PREFIX \"ll\"")]
+        public static ReadOnlySpan<byte> SDL_PRILL_PREFIX => "ll"u8;
+
+        [NativeTypeName("#define SDL_PRILLd SDL_PRILL_PREFIX \"d\"")]
+        public static ReadOnlySpan<byte> SDL_PRILLd => "lld"u8;
+
+        [NativeTypeName("#define SDL_PRILLu SDL_PRILL_PREFIX \"u\"")]
+        public static ReadOnlySpan<byte> SDL_PRILLu => "llu"u8;
+
+        [NativeTypeName("#define SDL_PRILLx SDL_PRILL_PREFIX \"x\"")]
+        public static ReadOnlySpan<byte> SDL_PRILLx => "llx"u8;
+
+        [NativeTypeName("#define SDL_PRILLX SDL_PRILL_PREFIX \"X\"")]
+        public static ReadOnlySpan<byte> SDL_PRILLX => "llX"u8;
 
         [NativeTypeName("#define SDL_INVALID_UNICODE_CODEPOINT 0xFFFD")]
         public const int SDL_INVALID_UNICODE_CODEPOINT = 0xFFFD;

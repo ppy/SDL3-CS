@@ -31,10 +31,11 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetX11EventHook([NativeTypeName("SDL_X11EventHook")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, SDL_bool> callback, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_SetX11EventHook([NativeTypeName("SDL_X11EventHook")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, byte> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_IsTablet();
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_IsTablet();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_OnApplicationWillTerminate();

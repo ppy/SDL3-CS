@@ -65,7 +65,8 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasMouse();
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_HasMouse();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_MouseID* SDL_GetMice(int* count);
@@ -90,16 +91,20 @@ namespace SDL
         public static extern void SDL_WarpMouseInWindow(SDL_Window* window, float x, float y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WarpMouseGlobal(float x, float y);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WarpMouseGlobal(float x, float y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowRelativeMouseMode(SDL_Window* window, SDL_bool enabled);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetWindowRelativeMouseMode(SDL_Window* window, [NativeTypeName("bool")] byte enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowRelativeMouseMode(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GetWindowRelativeMouseMode(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_CaptureMouse(SDL_bool enabled);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_CaptureMouse([NativeTypeName("bool")] byte enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Cursor* SDL_CreateCursor([NativeTypeName("const Uint8 *")] byte* data, [NativeTypeName("const Uint8 *")] byte* mask, int w, int h, int hot_x, int hot_y);
@@ -111,7 +116,8 @@ namespace SDL
         public static extern SDL_Cursor* SDL_CreateSystemCursor(SDL_SystemCursor id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetCursor(SDL_Cursor* cursor);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetCursor(SDL_Cursor* cursor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Cursor* SDL_GetCursor();
@@ -123,13 +129,16 @@ namespace SDL
         public static extern void SDL_DestroyCursor(SDL_Cursor* cursor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ShowCursor();
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ShowCursor();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HideCursor();
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_HideCursor();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_CursorVisible();
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_CursorVisible();
 
         [NativeTypeName("#define SDL_BUTTON_LEFT 1")]
         public const int SDL_BUTTON_LEFT = 1;

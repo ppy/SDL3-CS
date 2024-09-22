@@ -62,11 +62,11 @@ namespace SDL
         [NativeTypeName("size_t (*)(void *, const void *, size_t, SDL_IOStatus *)")]
         public delegate* unmanaged[Cdecl]<IntPtr, IntPtr, nuint, SDL_IOStatus*, nuint> write;
 
-        [NativeTypeName("SDL_bool (*)(void *, SDL_IOStatus *)")]
-        public delegate* unmanaged[Cdecl]<IntPtr, SDL_IOStatus*, SDL_bool> flush;
+        [NativeTypeName("bool (*)(void *, SDL_IOStatus *)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, SDL_IOStatus*, byte> flush;
 
-        [NativeTypeName("SDL_bool (*)(void *)")]
-        public delegate* unmanaged[Cdecl]<IntPtr, SDL_bool> close;
+        [NativeTypeName("bool (*)(void *)")]
+        public delegate* unmanaged[Cdecl]<IntPtr, byte> close;
     }
 
     public partial struct SDL_IOStream
@@ -91,7 +91,8 @@ namespace SDL
         public static extern SDL_IOStream* SDL_OpenIO([NativeTypeName("const SDL_IOStreamInterface *")] SDL_IOStreamInterface* iface, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_CloseIO(SDL_IOStream* context);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_CloseIO(SDL_IOStream* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID SDL_GetIOProperties(SDL_IOStream* context);
@@ -128,99 +129,128 @@ namespace SDL
         public static extern nuint SDL_IOvprintf(SDL_IOStream* context, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* ap);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_FlushIO(SDL_IOStream* context);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_FlushIO(SDL_IOStream* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_LoadFile_IO(SDL_IOStream* src, [NativeTypeName("size_t *")] nuint* datasize, SDL_bool closeio);
+        public static extern IntPtr SDL_LoadFile_IO(SDL_IOStream* src, [NativeTypeName("size_t *")] nuint* datasize, [NativeTypeName("bool")] byte closeio);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
         public static extern IntPtr SDL_LoadFile([NativeTypeName("const char *")] byte* file, [NativeTypeName("size_t *")] nuint* datasize);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadU8(SDL_IOStream* src, [NativeTypeName("Uint8 *")] byte* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadU8(SDL_IOStream* src, [NativeTypeName("Uint8 *")] byte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadS8(SDL_IOStream* src, [NativeTypeName("Sint8 *")] sbyte* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadS8(SDL_IOStream* src, [NativeTypeName("Sint8 *")] sbyte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadU16LE(SDL_IOStream* src, [NativeTypeName("Uint16 *")] ushort* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadU16LE(SDL_IOStream* src, [NativeTypeName("Uint16 *")] ushort* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadS16LE(SDL_IOStream* src, [NativeTypeName("Sint16 *")] short* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadS16LE(SDL_IOStream* src, [NativeTypeName("Sint16 *")] short* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadU16BE(SDL_IOStream* src, [NativeTypeName("Uint16 *")] ushort* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadU16BE(SDL_IOStream* src, [NativeTypeName("Uint16 *")] ushort* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadS16BE(SDL_IOStream* src, [NativeTypeName("Sint16 *")] short* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadS16BE(SDL_IOStream* src, [NativeTypeName("Sint16 *")] short* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadU32LE(SDL_IOStream* src, [NativeTypeName("Uint32 *")] uint* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadU32LE(SDL_IOStream* src, [NativeTypeName("Uint32 *")] uint* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadS32LE(SDL_IOStream* src, [NativeTypeName("Sint32 *")] int* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadS32LE(SDL_IOStream* src, [NativeTypeName("Sint32 *")] int* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadU32BE(SDL_IOStream* src, [NativeTypeName("Uint32 *")] uint* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadU32BE(SDL_IOStream* src, [NativeTypeName("Uint32 *")] uint* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadS32BE(SDL_IOStream* src, [NativeTypeName("Sint32 *")] int* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadS32BE(SDL_IOStream* src, [NativeTypeName("Sint32 *")] int* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadU64LE(SDL_IOStream* src, [NativeTypeName("Uint64 *")] ulong* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadU64LE(SDL_IOStream* src, [NativeTypeName("Uint64 *")] ulong* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadS64LE(SDL_IOStream* src, [NativeTypeName("Sint64 *")] long* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadS64LE(SDL_IOStream* src, [NativeTypeName("Sint64 *")] long* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadU64BE(SDL_IOStream* src, [NativeTypeName("Uint64 *")] ulong* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadU64BE(SDL_IOStream* src, [NativeTypeName("Uint64 *")] ulong* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReadS64BE(SDL_IOStream* src, [NativeTypeName("Sint64 *")] long* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReadS64BE(SDL_IOStream* src, [NativeTypeName("Sint64 *")] long* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteU8(SDL_IOStream* dst, [NativeTypeName("Uint8")] byte value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteU8(SDL_IOStream* dst, [NativeTypeName("Uint8")] byte value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteS8(SDL_IOStream* dst, [NativeTypeName("Sint8")] sbyte value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteS8(SDL_IOStream* dst, [NativeTypeName("Sint8")] sbyte value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteU16LE(SDL_IOStream* dst, [NativeTypeName("Uint16")] ushort value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteU16LE(SDL_IOStream* dst, [NativeTypeName("Uint16")] ushort value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteS16LE(SDL_IOStream* dst, [NativeTypeName("Sint16")] short value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteS16LE(SDL_IOStream* dst, [NativeTypeName("Sint16")] short value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteU16BE(SDL_IOStream* dst, [NativeTypeName("Uint16")] ushort value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteU16BE(SDL_IOStream* dst, [NativeTypeName("Uint16")] ushort value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteS16BE(SDL_IOStream* dst, [NativeTypeName("Sint16")] short value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteS16BE(SDL_IOStream* dst, [NativeTypeName("Sint16")] short value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteU32LE(SDL_IOStream* dst, [NativeTypeName("Uint32")] uint value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteU32LE(SDL_IOStream* dst, [NativeTypeName("Uint32")] uint value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteS32LE(SDL_IOStream* dst, [NativeTypeName("Sint32")] int value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteS32LE(SDL_IOStream* dst, [NativeTypeName("Sint32")] int value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteU32BE(SDL_IOStream* dst, [NativeTypeName("Uint32")] uint value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteU32BE(SDL_IOStream* dst, [NativeTypeName("Uint32")] uint value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteS32BE(SDL_IOStream* dst, [NativeTypeName("Sint32")] int value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteS32BE(SDL_IOStream* dst, [NativeTypeName("Sint32")] int value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteU64LE(SDL_IOStream* dst, [NativeTypeName("Uint64")] ulong value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteU64LE(SDL_IOStream* dst, [NativeTypeName("Uint64")] ulong value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteS64LE(SDL_IOStream* dst, [NativeTypeName("Sint64")] long value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteS64LE(SDL_IOStream* dst, [NativeTypeName("Sint64")] long value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteU64BE(SDL_IOStream* dst, [NativeTypeName("Uint64")] ulong value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteU64BE(SDL_IOStream* dst, [NativeTypeName("Uint64")] ulong value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WriteS64BE(SDL_IOStream* dst, [NativeTypeName("Sint64")] long value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_WriteS64BE(SDL_IOStream* dst, [NativeTypeName("Sint64")] long value);
 
         [NativeTypeName("#define SDL_PROP_IOSTREAM_WINDOWS_HANDLE_POINTER \"SDL.iostream.windows.handle\"")]
         public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_WINDOWS_HANDLE_POINTER => "SDL.iostream.windows.handle"u8;

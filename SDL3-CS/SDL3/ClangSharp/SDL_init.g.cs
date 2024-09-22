@@ -38,10 +38,12 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_Init(SDL_InitFlags flags);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_Init(SDL_InitFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_InitSubSystem(SDL_InitFlags flags);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_InitSubSystem(SDL_InitFlags flags);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_QuitSubSystem(SDL_InitFlags flags);
@@ -53,17 +55,16 @@ namespace SDL
         public static extern void SDL_Quit();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetAppMetadata([NativeTypeName("const char *")] byte* appname, [NativeTypeName("const char *")] byte* appversion, [NativeTypeName("const char *")] byte* appidentifier);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetAppMetadata([NativeTypeName("const char *")] byte* appname, [NativeTypeName("const char *")] byte* appversion, [NativeTypeName("const char *")] byte* appidentifier);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetAppMetadataProperty([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetAppMetadataProperty([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetAppMetadataProperty", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetAppMetadataProperty([NativeTypeName("const char *")] byte* name);
-
-        [NativeTypeName("#define SDL_INIT_TIMER 0x00000001u")]
-        public const uint SDL_INIT_TIMER = 0x00000001U;
 
         [NativeTypeName("#define SDL_INIT_AUDIO 0x00000010u")]
         public const uint SDL_INIT_AUDIO = 0x00000010U;

@@ -46,16 +46,19 @@ namespace SDL
         public static extern int SDL_GetAndroidSDKVersion();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Android")]
-        public static extern SDL_bool SDL_IsAndroidTV();
+        public static extern byte SDL_IsAndroidTV();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Android")]
-        public static extern SDL_bool SDL_IsChromebook();
+        public static extern byte SDL_IsChromebook();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Android")]
-        public static extern SDL_bool SDL_IsDeXMode();
+        public static extern byte SDL_IsDeXMode();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [SupportedOSPlatform("Android")]
@@ -82,16 +85,19 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetAndroidCachePath();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Android")]
-        public static extern SDL_bool SDL_RequestAndroidPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_RequestAndroidPermissionCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, SDL_bool, void> cb, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern byte SDL_RequestAndroidPermission([NativeTypeName("const char *")] byte* permission, [NativeTypeName("SDL_RequestAndroidPermissionCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte, void> cb, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Android")]
-        public static extern SDL_bool SDL_ShowAndroidToast([NativeTypeName("const char *")] byte* message, int duration, int gravity, int xoffset, int yoffset);
+        public static extern byte SDL_ShowAndroidToast([NativeTypeName("const char *")] byte* message, int duration, int gravity, int xoffset, int yoffset);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Android")]
-        public static extern SDL_bool SDL_SendAndroidMessage([NativeTypeName("Uint32")] uint command, int param1);
+        public static extern byte SDL_SendAndroidMessage([NativeTypeName("Uint32")] uint command, int param1);
 
         [NativeTypeName("#define SDL_ANDROID_EXTERNAL_STORAGE_READ 0x01")]
         public const int SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;

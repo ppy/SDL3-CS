@@ -81,7 +81,8 @@ namespace SDL
         public static extern SDL_SensorID SDL_GetSensorID(SDL_Sensor* sensor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetSensorData(SDL_Sensor* sensor, float* data, int num_values);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GetSensorData(SDL_Sensor* sensor, float* data, int num_values);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CloseSensor(SDL_Sensor* sensor);

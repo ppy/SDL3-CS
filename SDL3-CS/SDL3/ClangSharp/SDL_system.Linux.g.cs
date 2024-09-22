@@ -31,11 +31,13 @@ namespace SDL
     public static partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Linux")]
-        public static extern SDL_bool SDL_SetLinuxThreadPriority([NativeTypeName("Sint64")] long threadID, int priority);
+        public static extern byte SDL_SetLinuxThreadPriority([NativeTypeName("Sint64")] long threadID, int priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Linux")]
-        public static extern SDL_bool SDL_SetLinuxThreadPriorityAndPolicy([NativeTypeName("Sint64")] long threadID, int sdlPriority, int schedPolicy);
+        public static extern byte SDL_SetLinuxThreadPriorityAndPolicy([NativeTypeName("Sint64")] long threadID, int sdlPriority, int schedPolicy);
     }
 }

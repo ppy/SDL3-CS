@@ -38,13 +38,16 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetHintWithPriority([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, SDL_HintPriority priority);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetHintWithPriority([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value, SDL_HintPriority priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetHint([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetHint([NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ResetHint([NativeTypeName("const char *")] byte* name);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ResetHint([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_ResetHints();
@@ -54,10 +57,12 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetHint([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetHintBoolean([NativeTypeName("const char *")] byte* name, SDL_bool default_value);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GetHintBoolean([NativeTypeName("const char *")] byte* name, [NativeTypeName("bool")] byte default_value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_AddHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_AddHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_RemoveHintCallback([NativeTypeName("const char *")] byte* name, [NativeTypeName("SDL_HintCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, byte*, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
@@ -328,6 +333,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_STEAMDECK \"SDL_JOYSTICK_HIDAPI_STEAMDECK\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_STEAMDECK => "SDL_JOYSTICK_HIDAPI_STEAMDECK"u8;
+
+        [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_STEAM_HORI \"SDL_JOYSTICK_HIDAPI_STEAM_HORI\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_STEAM_HORI => "SDL_JOYSTICK_HIDAPI_STEAM_HORI"u8;
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_SWITCH \"SDL_JOYSTICK_HIDAPI_SWITCH\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_SWITCH => "SDL_JOYSTICK_HIDAPI_SWITCH"u8;

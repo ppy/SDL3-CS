@@ -183,13 +183,14 @@ namespace SDL
         public static extern int SDL_AddGamepadMapping([NativeTypeName("const char *")] byte* mapping);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_AddGamepadMappingsFromIO(SDL_IOStream* src, SDL_bool closeio);
+        public static extern int SDL_AddGamepadMappingsFromIO(SDL_IOStream* src, [NativeTypeName("bool")] byte closeio);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_AddGamepadMappingsFromFile([NativeTypeName("const char *")] byte* file);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ReloadGamepadMappings();
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_ReloadGamepadMappings();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char **")]
@@ -204,16 +205,19 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetGamepadMapping(SDL_Gamepad* gamepad);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetGamepadMapping(SDL_JoystickID instance_id, [NativeTypeName("const char *")] byte* mapping);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetGamepadMapping(SDL_JoystickID instance_id, [NativeTypeName("const char *")] byte* mapping);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasGamepad();
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_HasGamepad();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_JoystickID* SDL_GetGamepads(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_IsGamepad(SDL_JoystickID instance_id);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_IsGamepad(SDL_JoystickID instance_id);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetGamepadNameForID", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -284,7 +288,8 @@ namespace SDL
         public static extern int SDL_GetGamepadPlayerIndex(SDL_Gamepad* gamepad);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetGamepadPlayerIndex(SDL_Gamepad* gamepad, int player_index);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetGamepadPlayerIndex(SDL_Gamepad* gamepad, int player_index);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint16")]
@@ -317,16 +322,18 @@ namespace SDL
         public static extern SDL_PowerState SDL_GetGamepadPowerInfo(SDL_Gamepad* gamepad, int* percent);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GamepadConnected(SDL_Gamepad* gamepad);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GamepadConnected(SDL_Gamepad* gamepad);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Joystick* SDL_GetGamepadJoystick(SDL_Gamepad* gamepad);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetGamepadEventsEnabled(SDL_bool enabled);
+        public static extern void SDL_SetGamepadEventsEnabled([NativeTypeName("bool")] byte enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GamepadEventsEnabled();
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GamepadEventsEnabled();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_GamepadBinding** SDL_GetGamepadBindings(SDL_Gamepad* gamepad, int* count);
@@ -349,7 +356,8 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetGamepadStringForAxis(SDL_GamepadAxis axis);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GamepadHasAxis(SDL_Gamepad* gamepad, SDL_GamepadAxis axis);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GamepadHasAxis(SDL_Gamepad* gamepad, SDL_GamepadAxis axis);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Sint16")]
@@ -363,10 +371,12 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetGamepadStringForButton(SDL_GamepadButton button);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GamepadHasButton(SDL_Gamepad* gamepad, SDL_GamepadButton button);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GamepadHasButton(SDL_Gamepad* gamepad, SDL_GamepadButton button);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetGamepadButton(SDL_Gamepad* gamepad, SDL_GamepadButton button);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GetGamepadButton(SDL_Gamepad* gamepad, SDL_GamepadButton button);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_GamepadButtonLabel SDL_GetGamepadButtonLabelForType(SDL_GamepadType type, SDL_GamepadButton button);
@@ -381,34 +391,43 @@ namespace SDL
         public static extern int SDL_GetNumGamepadTouchpadFingers(SDL_Gamepad* gamepad, int touchpad);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad* gamepad, int touchpad, int finger, SDL_bool* down, float* x, float* y, float* pressure);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GetGamepadTouchpadFinger(SDL_Gamepad* gamepad, int touchpad, int finger, bool* down, float* x, float* y, float* pressure);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GamepadHasSensor(SDL_Gamepad* gamepad, SDL_SensorType type);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GamepadHasSensor(SDL_Gamepad* gamepad, SDL_SensorType type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetGamepadSensorEnabled(SDL_Gamepad* gamepad, SDL_SensorType type, SDL_bool enabled);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetGamepadSensorEnabled(SDL_Gamepad* gamepad, SDL_SensorType type, [NativeTypeName("bool")] byte enabled);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GamepadSensorEnabled(SDL_Gamepad* gamepad, SDL_SensorType type);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GamepadSensorEnabled(SDL_Gamepad* gamepad, SDL_SensorType type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern float SDL_GetGamepadSensorDataRate(SDL_Gamepad* gamepad, SDL_SensorType type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetGamepadSensorData(SDL_Gamepad* gamepad, SDL_SensorType type, float* data, int num_values);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_GetGamepadSensorData(SDL_Gamepad* gamepad, SDL_SensorType type, float* data, int num_values);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_RumbleGamepad(SDL_Gamepad* gamepad, [NativeTypeName("Uint16")] ushort low_frequency_rumble, [NativeTypeName("Uint16")] ushort high_frequency_rumble, [NativeTypeName("Uint32")] uint duration_ms);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_RumbleGamepad(SDL_Gamepad* gamepad, [NativeTypeName("Uint16")] ushort low_frequency_rumble, [NativeTypeName("Uint16")] ushort high_frequency_rumble, [NativeTypeName("Uint32")] uint duration_ms);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_RumbleGamepadTriggers(SDL_Gamepad* gamepad, [NativeTypeName("Uint16")] ushort left_rumble, [NativeTypeName("Uint16")] ushort right_rumble, [NativeTypeName("Uint32")] uint duration_ms);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_RumbleGamepadTriggers(SDL_Gamepad* gamepad, [NativeTypeName("Uint16")] ushort left_rumble, [NativeTypeName("Uint16")] ushort right_rumble, [NativeTypeName("Uint32")] uint duration_ms);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetGamepadLED(SDL_Gamepad* gamepad, [NativeTypeName("Uint8")] byte red, [NativeTypeName("Uint8")] byte green, [NativeTypeName("Uint8")] byte blue);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SetGamepadLED(SDL_Gamepad* gamepad, [NativeTypeName("Uint8")] byte red, [NativeTypeName("Uint8")] byte green, [NativeTypeName("Uint8")] byte blue);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SendGamepadEffect(SDL_Gamepad* gamepad, [NativeTypeName("const void *")] IntPtr data, int size);
+        [return: NativeTypeName("bool")]
+        public static extern byte SDL_SendGamepadEffect(SDL_Gamepad* gamepad, [NativeTypeName("const void *")] IntPtr data, int size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CloseGamepad(SDL_Gamepad* gamepad);

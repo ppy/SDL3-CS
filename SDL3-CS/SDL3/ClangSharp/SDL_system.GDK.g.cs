@@ -39,11 +39,13 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Windows")]
-        public static extern SDL_bool SDL_GetGDKTaskQueue([NativeTypeName("XTaskQueueHandle *")] XTaskQueueObject** outTaskQueue);
+        public static extern byte SDL_GetGDKTaskQueue([NativeTypeName("XTaskQueueHandle *")] XTaskQueueObject** outTaskQueue);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Windows")]
-        public static extern SDL_bool SDL_GetGDKDefaultUser([NativeTypeName("XUserHandle *")] XUser** outUserHandle);
+        public static extern byte SDL_GetGDKDefaultUser([NativeTypeName("XUserHandle *")] XUser** outUserHandle);
     }
 }
