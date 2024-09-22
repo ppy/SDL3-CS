@@ -54,7 +54,7 @@ namespace SDL.Tests
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
-        private static void LogOutput(IntPtr userdata, SDL_LogCategory category, SDL_LogPriority priority, byte* message)
+        private static void LogOutput(IntPtr userdata, int category, SDL_LogPriority priority, byte* message)
         {
             Console.WriteLine(SDL3.PtrToStringUTF8(message));
         }

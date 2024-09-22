@@ -48,7 +48,7 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_Vulkan_LoadLibrary([NativeTypeName("const char *")] byte* path);
+        public static extern SDLBool SDL_Vulkan_LoadLibrary([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
@@ -63,13 +63,13 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_Vulkan_CreateSurface(SDL_Window* window, [NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("const struct VkAllocationCallbacks *")] VkAllocationCallbacks* allocator, [NativeTypeName("VkSurfaceKHR *")] VkSurfaceKHR_T** surface);
+        public static extern SDLBool SDL_Vulkan_CreateSurface(SDL_Window* window, [NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("const struct VkAllocationCallbacks *")] VkAllocationCallbacks* allocator, [NativeTypeName("VkSurfaceKHR *")] VkSurfaceKHR_T** surface);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Vulkan_DestroySurface([NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("VkSurfaceKHR")] VkSurfaceKHR_T* surface, [NativeTypeName("const struct VkAllocationCallbacks *")] VkAllocationCallbacks* allocator);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_Vulkan_GetPresentationSupport([NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("VkPhysicalDevice")] VkPhysicalDevice_T* physicalDevice, [NativeTypeName("Uint32")] uint queueFamilyIndex);
+        public static extern SDLBool SDL_Vulkan_GetPresentationSupport([NativeTypeName("VkInstance")] VkInstance_T* instance, [NativeTypeName("VkPhysicalDevice")] VkPhysicalDevice_T* physicalDevice, [NativeTypeName("Uint32")] uint queueFamilyIndex);
     }
 }

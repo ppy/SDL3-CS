@@ -232,10 +232,10 @@ namespace SDL
         public ushort raw;
 
         [NativeTypeName("bool")]
-        public byte down;
+        public SDLBool down;
 
         [NativeTypeName("bool")]
-        public byte repeat;
+        public SDLBool repeat;
     }
 
     public unsafe partial struct SDL_TextEditingEvent
@@ -282,7 +282,7 @@ namespace SDL
         public int selected_candidate;
 
         [NativeTypeName("bool")]
-        public byte horizontal;
+        public SDLBool horizontal;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -366,7 +366,7 @@ namespace SDL
         public byte button;
 
         [NativeTypeName("bool")]
-        public byte down;
+        public SDLBool down;
 
         [NativeTypeName("Uint8")]
         public byte clicks;
@@ -507,7 +507,7 @@ namespace SDL
         public byte button;
 
         [NativeTypeName("bool")]
-        public byte down;
+        public SDLBool down;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -593,7 +593,7 @@ namespace SDL
         public byte button;
 
         [NativeTypeName("bool")]
-        public byte down;
+        public SDLBool down;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -681,7 +681,7 @@ namespace SDL
         public SDL_AudioDeviceID which;
 
         [NativeTypeName("bool")]
-        public byte recording;
+        public SDLBool recording;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -790,10 +790,10 @@ namespace SDL
         public float y;
 
         [NativeTypeName("bool")]
-        public byte eraser;
+        public SDLBool eraser;
 
         [NativeTypeName("bool")]
-        public byte down;
+        public SDLBool down;
     }
 
     public partial struct SDL_PenButtonEvent
@@ -820,7 +820,7 @@ namespace SDL
         public byte button;
 
         [NativeTypeName("bool")]
-        public byte down;
+        public SDLBool down;
     }
 
     public partial struct SDL_PenAxisEvent
@@ -1084,11 +1084,11 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_HasEvent([NativeTypeName("Uint32")] uint type);
+        public static extern SDLBool SDL_HasEvent([NativeTypeName("Uint32")] uint type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_HasEvents([NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
+        public static extern SDLBool SDL_HasEvents([NativeTypeName("Uint32")] uint minType, [NativeTypeName("Uint32")] uint maxType);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_FlushEvent([NativeTypeName("Uint32")] uint type);
@@ -1098,43 +1098,43 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_PollEvent(SDL_Event* @event);
+        public static extern SDLBool SDL_PollEvent(SDL_Event* @event);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_WaitEvent(SDL_Event* @event);
+        public static extern SDLBool SDL_WaitEvent(SDL_Event* @event);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_WaitEventTimeout(SDL_Event* @event, [NativeTypeName("Sint32")] int timeoutMS);
+        public static extern SDLBool SDL_WaitEventTimeout(SDL_Event* @event, [NativeTypeName("Sint32")] int timeoutMS);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_PushEvent(SDL_Event* @event);
+        public static extern SDLBool SDL_PushEvent(SDL_Event* @event);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetEventFilter([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, byte> filter, [NativeTypeName("void*")] IntPtr userdata);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern byte SDL_GetEventFilter([NativeTypeName("SDL_EventFilter *")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, byte>* filter, [NativeTypeName("void **")] IntPtr* userdata);
+        public static extern void SDL_SetEventFilter([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDLBool> filter, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_AddEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, byte> filter, [NativeTypeName("void*")] IntPtr userdata);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_RemoveEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, byte> filter, [NativeTypeName("void*")] IntPtr userdata);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_FilterEvents([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, byte> filter, [NativeTypeName("void*")] IntPtr userdata);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetEventEnabled([NativeTypeName("Uint32")] uint type, [NativeTypeName("bool")] byte enabled);
+        public static extern SDLBool SDL_GetEventFilter([NativeTypeName("SDL_EventFilter *")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDLBool>* filter, [NativeTypeName("void **")] IntPtr* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_EventEnabled([NativeTypeName("Uint32")] uint type);
+        public static extern SDLBool SDL_AddEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDLBool> filter, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_RemoveEventWatch([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDLBool> filter, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_FilterEvents([NativeTypeName("SDL_EventFilter")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDLBool> filter, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_SetEventEnabled([NativeTypeName("Uint32")] uint type, [NativeTypeName("bool")] SDLBool enabled);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_EventEnabled([NativeTypeName("Uint32")] uint type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]

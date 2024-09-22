@@ -60,7 +60,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_RemoveTimer(SDL_TimerID id);
+        public static extern SDLBool SDL_RemoveTimer(SDL_TimerID id);
 
         [NativeTypeName("#define SDL_MS_PER_SECOND 1000")]
         public const int SDL_MS_PER_SECOND = 1000;

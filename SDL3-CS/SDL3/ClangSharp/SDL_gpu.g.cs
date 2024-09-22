@@ -556,10 +556,10 @@ namespace SDL
         public float max_lod;
 
         [NativeTypeName("bool")]
-        public byte enable_anisotropy;
+        public SDLBool enable_anisotropy;
 
         [NativeTypeName("bool")]
-        public byte enable_compare;
+        public SDLBool enable_compare;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -641,10 +641,10 @@ namespace SDL
         public SDL_GPUColorComponentFlags color_write_mask;
 
         [NativeTypeName("bool")]
-        public byte enable_blend;
+        public SDLBool enable_blend;
 
         [NativeTypeName("bool")]
-        public byte enable_color_write_mask;
+        public SDLBool enable_color_write_mask;
 
         [NativeTypeName("Uint8")]
         public byte padding2;
@@ -743,7 +743,7 @@ namespace SDL
         public float depth_bias_slope_factor;
 
         [NativeTypeName("bool")]
-        public byte enable_depth_bias;
+        public SDLBool enable_depth_bias;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -763,7 +763,7 @@ namespace SDL
         public uint sample_mask;
 
         [NativeTypeName("bool")]
-        public byte enable_mask;
+        public SDLBool enable_mask;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -790,13 +790,13 @@ namespace SDL
         public byte write_mask;
 
         [NativeTypeName("bool")]
-        public byte enable_depth_test;
+        public SDLBool enable_depth_test;
 
         [NativeTypeName("bool")]
-        public byte enable_depth_write;
+        public SDLBool enable_depth_write;
 
         [NativeTypeName("bool")]
-        public byte enable_stencil_test;
+        public SDLBool enable_stencil_test;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -826,7 +826,7 @@ namespace SDL
         public SDL_GPUTextureFormat depth_stencil_format;
 
         [NativeTypeName("bool")]
-        public byte has_depth_stencil_target;
+        public SDLBool has_depth_stencil_target;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -927,10 +927,10 @@ namespace SDL
         public uint resolve_layer;
 
         [NativeTypeName("bool")]
-        public byte cycle;
+        public SDLBool cycle;
 
         [NativeTypeName("bool")]
-        public byte cycle_resolve_texture;
+        public SDLBool cycle_resolve_texture;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -954,7 +954,7 @@ namespace SDL
         public SDL_GPUStoreOp stencil_store_op;
 
         [NativeTypeName("bool")]
-        public byte cycle;
+        public SDLBool cycle;
 
         [NativeTypeName("Uint8")]
         public byte clear_stencil;
@@ -981,7 +981,7 @@ namespace SDL
         public SDL_GPUFilter filter;
 
         [NativeTypeName("bool")]
-        public byte cycle;
+        public SDLBool cycle;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -1013,7 +1013,7 @@ namespace SDL
         public SDL_GPUBuffer* buffer;
 
         [NativeTypeName("bool")]
-        public byte cycle;
+        public SDLBool cycle;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -1036,7 +1036,7 @@ namespace SDL
         public uint layer;
 
         [NativeTypeName("bool")]
-        public byte cycle;
+        public SDLBool cycle;
 
         [NativeTypeName("Uint8")]
         public byte padding1;
@@ -1052,14 +1052,14 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, [NativeTypeName("const char *")] byte* name);
+        public static extern SDLBool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_GPUSupportsProperties(SDL_PropertiesID props);
+        public static extern SDLBool SDL_GPUSupportsProperties(SDL_PropertiesID props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GPUDevice* SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, [NativeTypeName("bool")] byte debug_mode, [NativeTypeName("const char *")] byte* name);
+        public static extern SDL_GPUDevice* SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, [NativeTypeName("bool")] SDLBool debug_mode, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_GPUDevice* SDL_CreateGPUDeviceWithProperties(SDL_PropertiesID props);
@@ -1233,7 +1233,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
-        public static extern IntPtr SDL_MapGPUTransferBuffer(SDL_GPUDevice* device, SDL_GPUTransferBuffer* transfer_buffer, [NativeTypeName("bool")] byte cycle);
+        public static extern IntPtr SDL_MapGPUTransferBuffer(SDL_GPUDevice* device, SDL_GPUTransferBuffer* transfer_buffer, [NativeTypeName("bool")] SDLBool cycle);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_UnmapGPUTransferBuffer(SDL_GPUDevice* device, SDL_GPUTransferBuffer* transfer_buffer);
@@ -1242,16 +1242,16 @@ namespace SDL
         public static extern SDL_GPUCopyPass* SDL_BeginGPUCopyPass(SDL_GPUCommandBuffer* command_buffer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_UploadToGPUTexture(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUTextureTransferInfo *")] SDL_GPUTextureTransferInfo* source, [NativeTypeName("const SDL_GPUTextureRegion *")] SDL_GPUTextureRegion* destination, [NativeTypeName("bool")] byte cycle);
+        public static extern void SDL_UploadToGPUTexture(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUTextureTransferInfo *")] SDL_GPUTextureTransferInfo* source, [NativeTypeName("const SDL_GPUTextureRegion *")] SDL_GPUTextureRegion* destination, [NativeTypeName("bool")] SDLBool cycle);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_UploadToGPUBuffer(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUTransferBufferLocation *")] SDL_GPUTransferBufferLocation* source, [NativeTypeName("const SDL_GPUBufferRegion *")] SDL_GPUBufferRegion* destination, [NativeTypeName("bool")] byte cycle);
+        public static extern void SDL_UploadToGPUBuffer(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUTransferBufferLocation *")] SDL_GPUTransferBufferLocation* source, [NativeTypeName("const SDL_GPUBufferRegion *")] SDL_GPUBufferRegion* destination, [NativeTypeName("bool")] SDLBool cycle);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUTextureLocation *")] SDL_GPUTextureLocation* source, [NativeTypeName("const SDL_GPUTextureLocation *")] SDL_GPUTextureLocation* destination, [NativeTypeName("Uint32")] uint w, [NativeTypeName("Uint32")] uint h, [NativeTypeName("Uint32")] uint d, [NativeTypeName("bool")] byte cycle);
+        public static extern void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUTextureLocation *")] SDL_GPUTextureLocation* source, [NativeTypeName("const SDL_GPUTextureLocation *")] SDL_GPUTextureLocation* destination, [NativeTypeName("Uint32")] uint w, [NativeTypeName("Uint32")] uint h, [NativeTypeName("Uint32")] uint d, [NativeTypeName("bool")] SDLBool cycle);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUBufferLocation *")] SDL_GPUBufferLocation* source, [NativeTypeName("const SDL_GPUBufferLocation *")] SDL_GPUBufferLocation* destination, [NativeTypeName("Uint32")] uint size, [NativeTypeName("bool")] byte cycle);
+        public static extern void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUBufferLocation *")] SDL_GPUBufferLocation* source, [NativeTypeName("const SDL_GPUBufferLocation *")] SDL_GPUBufferLocation* destination, [NativeTypeName("Uint32")] uint size, [NativeTypeName("bool")] SDLBool cycle);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DownloadFromGPUTexture(SDL_GPUCopyPass* copy_pass, [NativeTypeName("const SDL_GPUTextureRegion *")] SDL_GPUTextureRegion* source, [NativeTypeName("const SDL_GPUTextureTransferInfo *")] SDL_GPUTextureTransferInfo* destination);
@@ -1270,22 +1270,22 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_WindowSupportsGPUSwapchainComposition(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUSwapchainComposition swapchain_composition);
+        public static extern SDLBool SDL_WindowSupportsGPUSwapchainComposition(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUSwapchainComposition swapchain_composition);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_WindowSupportsGPUPresentMode(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUPresentMode present_mode);
+        public static extern SDLBool SDL_WindowSupportsGPUPresentMode(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUPresentMode present_mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_ClaimWindowForGPUDevice(SDL_GPUDevice* device, SDL_Window* window);
+        public static extern SDLBool SDL_ClaimWindowForGPUDevice(SDL_GPUDevice* device, SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_ReleaseWindowFromGPUDevice(SDL_GPUDevice* device, SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_SetGPUSwapchainParameters(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode);
+        public static extern SDLBool SDL_SetGPUSwapchainParameters(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_GPUTextureFormat SDL_GetGPUSwapchainTextureFormat(SDL_GPUDevice* device, SDL_Window* window);
@@ -1303,11 +1303,11 @@ namespace SDL
         public static extern void SDL_WaitForGPUIdle(SDL_GPUDevice* device);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_WaitForGPUFences(SDL_GPUDevice* device, [NativeTypeName("bool")] byte wait_all, [NativeTypeName("SDL_GPUFence *const *")] SDL_GPUFence** fences, [NativeTypeName("Uint32")] uint num_fences);
+        public static extern void SDL_WaitForGPUFences(SDL_GPUDevice* device, [NativeTypeName("bool")] SDLBool wait_all, [NativeTypeName("SDL_GPUFence *const *")] SDL_GPUFence** fences, [NativeTypeName("Uint32")] uint num_fences);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_QueryGPUFence(SDL_GPUDevice* device, SDL_GPUFence* fence);
+        public static extern SDLBool SDL_QueryGPUFence(SDL_GPUDevice* device, SDL_GPUFence* fence);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_ReleaseGPUFence(SDL_GPUDevice* device, SDL_GPUFence* fence);
@@ -1318,11 +1318,11 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_GPUTextureSupportsFormat(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage);
+        public static extern SDLBool SDL_GPUTextureSupportsFormat(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_GPUTextureSupportsSampleCount(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count);
+        public static extern SDLBool SDL_GPUTextureSupportsSampleCount(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count);
 
         [NativeTypeName("#define SDL_GPU_TEXTUREUSAGE_SAMPLER (1u << 0)")]
         public const uint SDL_GPU_TEXTUREUSAGE_SAMPLER = (1U << 0);

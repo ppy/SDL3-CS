@@ -25,11 +25,11 @@ namespace SDL.Tests
         public unsafe void TestClipboardData()
         {
             var ret = SDL3.SDL_SetClipboardData(&dataCallback, &cleanupCallback, IntPtr.Zero, "test/one", "test/two");
-            Assert.That(ret, Is.EqualTo(0), SDL3.SDL_GetError);
+            Assert.That(ret, SDL3.SDL_GetError);
 
-            Assert.That(SDL3.SDL_HasClipboardData("test/one"), Is.EqualTo(SDL_bool.SDL_TRUE));
-            Assert.That(SDL3.SDL_HasClipboardData("test/two"), Is.EqualTo(SDL_bool.SDL_TRUE));
-            Assert.That(SDL3.SDL_HasClipboardData("test/three"), Is.EqualTo(SDL_bool.SDL_FALSE));
+            Assert.That(SDL3.SDL_HasClipboardData("test/one"));
+            Assert.That(SDL3.SDL_HasClipboardData("test/two"));
+            Assert.That(!SDL3.SDL_HasClipboardData("test/three"));
 
             UIntPtr size;
             IntPtr data = SDL3.SDL_GetClipboardData("test/one", &size);
@@ -46,13 +46,13 @@ namespace SDL.Tests
             }
 
             ret = SDL3.SDL_ClearClipboardData();
-            Assert.That(ret, Is.EqualTo(SDL_bool.SDL_TRUE), SDL3.SDL_GetError);
+            Assert.That(ret, SDL3.SDL_GetError);
 
             Assert.That(cleanups, Is.EqualTo(1));
 
-            Assert.That(SDL3.SDL_HasClipboardData("test/one"), Is.EqualTo(SDL_bool.SDL_FALSE));
-            Assert.That(SDL3.SDL_HasClipboardData("test/two"), Is.EqualTo(SDL_bool.SDL_FALSE));
-            Assert.That(SDL3.SDL_HasClipboardData("test/three"), Is.EqualTo(SDL_bool.SDL_FALSE));
+            Assert.That(!SDL3.SDL_HasClipboardData("test/one"));
+            Assert.That(!SDL3.SDL_HasClipboardData("test/two"));
+            Assert.That(!SDL3.SDL_HasClipboardData("test/three"));
 
             data = SDL3.SDL_GetClipboardData("test/two", &size);
 

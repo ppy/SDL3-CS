@@ -33,11 +33,11 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Linux")]
-        public static extern byte SDL_SetLinuxThreadPriority([NativeTypeName("Sint64")] long threadID, int priority);
+        public static extern SDLBool SDL_SetLinuxThreadPriority([NativeTypeName("Sint64")] long threadID, int priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Linux")]
-        public static extern byte SDL_SetLinuxThreadPriorityAndPolicy([NativeTypeName("Sint64")] long threadID, int sdlPriority, int schedPolicy);
+        public static extern SDLBool SDL_SetLinuxThreadPriorityAndPolicy([NativeTypeName("Sint64")] long threadID, int sdlPriority, int schedPolicy);
     }
 }

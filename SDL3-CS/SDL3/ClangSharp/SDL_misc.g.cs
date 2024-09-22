@@ -31,6 +31,6 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_OpenURL([NativeTypeName("const char *")] byte* url);
+        public static extern SDLBool SDL_OpenURL([NativeTypeName("const char *")] byte* url);
     }
 }

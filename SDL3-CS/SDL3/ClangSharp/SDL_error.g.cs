@@ -31,11 +31,11 @@ namespace SDL
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_SetError([NativeTypeName("const char *")] byte* fmt, __arglist);
+        public static extern SDLBool SDL_SetError([NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_OutOfMemory();
+        public static extern SDLBool SDL_OutOfMemory();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetError", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -43,6 +43,6 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern byte SDL_ClearError();
+        public static extern SDLBool SDL_ClearError();
     }
 }

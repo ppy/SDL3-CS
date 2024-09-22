@@ -2,14 +2,40 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using System.Text;
 
 namespace SDL
 {
-    [Typedef]
-    public enum SDL_bool : byte
+    public readonly record struct SDLBool
     {
-        SDL_FALSE = SDL3.SDL_FALSE,
-        SDL_TRUE = SDL3.SDL_TRUE
+        private readonly byte value;
+
+        internal const byte FALSE_VALUE = 0;
+        internal const byte TRUE_VALUE = 1;
+
+        [Obsolete("Never explicitly construct an SDL bool.")]
+        public SDLBool()
+        {
+        }
+
+        internal SDLBool(byte value)
+        {
+            this.value = value;
+        }
+
+        public static implicit operator bool(SDLBool b) => b.value != FALSE_VALUE;
+
+        public static implicit operator SDLBool(bool b) => new SDLBool(b ? TRUE_VALUE : FALSE_VALUE);
+
+        public bool Equals(SDLBool other) => (bool)other == (bool)this;
+
+        public override int GetHashCode() => ((bool)this).GetHashCode();
+
+        private bool PrintMembers(StringBuilder builder)
+        {
+            builder.Append($"0x{value:x2}");
+            return true;
+        }
     }
 
     [Typedef]
