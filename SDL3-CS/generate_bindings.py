@@ -8,6 +8,18 @@ Prerequisites:
 - run `dotnet tool restore` (to install ClangSharpPInvokeGenerator)
 
 This script should be run manually.
+
+Usage:
+- Run the script without any command line parameters to generate all header files.
+- Provide header names as command line parameters to generate just those headers.
+
+Example:
+- python generate_bindings.py
+- python generate_bindings.py SDL3/SDL_audio.h
+- python generate_bindings.py SDL_audio.h
+- python generate_bindings.py SDL_audio
+- python generate_bindings.py audio
+- python generate_bindings.py SDL_camera.h SDL_init.h
 """
 
 import json
@@ -69,6 +81,24 @@ class Header:
             return csproj_root / f"{self.base}/{self.name}.cs"
         else:
             return csproj_root / f"{self.base}/{self.name}.{self.output_suffix}.cs"
+
+
+def make_header_fuzzy(s: str) -> Header:
+    match s.split("/"):
+        case [name]:  # one part, eg "SDL_audio.h" or "audio"
+            base = "SDL3"  # assume a default base
+        case [base, name]:  # two parts, eg "SDL3/SDL_audio.h"
+            pass
+        case _:
+            raise ValueError(f"Can't match \"{s}\" to header name.")
+
+    if not name.startswith("SDL_"):
+        name = f'SDL_{name}'
+
+    if name.endswith(".h"):
+        name = name.replace(".h", "")
+
+    return Header(base, name)
 
 
 def add(s: str):
@@ -301,7 +331,16 @@ def get_string_returning_functions(sdl_api):
             yield f
 
 
+def should_skip(solo_headers: list[Header], header: Header):
+    if len(solo_headers) == 0:
+        return False
+
+    return not any(header.input_file() == h.input_file() for h in solo_headers)
+
+
 def main():
+    solo_headers = [make_header_fuzzy(header_name) for header_name in sys.argv[1:]]
+
     prepare_sdl_source()
 
     sdl_api = get_sdl_api_dump()
@@ -322,22 +361,29 @@ def main():
             base_command.append(f"{name}={unsafe_prefix}{name}")
 
     for header in headers:
+        if should_skip(solo_headers, header):
+            continue
+
         output_file = run_clangsharp(base_command, header)
         check_generated_functions(sdl_api, header, [output_file])
 
-    generate_platform_specific_headers(sdl_api, add("SDL3/SDL_main.h"), [
-        (["SDL_PLATFORM_WINDOWS"], "Windows", "Windows"),
-        (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
-    ])
+    main_header = add("SDL3/SDL_main.h")
+    if not should_skip(solo_headers, main_header):
+        generate_platform_specific_headers(sdl_api, main_header, [
+            (["SDL_PLATFORM_WINDOWS"], "Windows", "Windows"),
+            (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
+        ])
 
-    generate_platform_specific_headers(sdl_api, add("SDL3/SDL_system.h"), [
-        # define macro, output_suffix, [SupportedOSPlatform]
-        (["SDL_PLATFORM_ANDROID"], "Android", "Android"),
-        (["SDL_PLATFORM_IOS"], "iOS", "iOS"),
-        (["SDL_PLATFORM_LINUX"], "Linux", "Linux"),
-        (["SDL_PLATFORM_WINDOWS", "SDL_PLATFORM_WIN32"], "Windows", "Windows"),
-        (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
-    ])
+    system_header = add("SDL3/SDL_system.h")
+    if not should_skip(solo_headers, system_header):
+        generate_platform_specific_headers(sdl_api, system_header, [
+            # define macro, output_suffix, [SupportedOSPlatform]
+            (["SDL_PLATFORM_ANDROID"], "Android", "Android"),
+            (["SDL_PLATFORM_IOS"], "iOS", "iOS"),
+            (["SDL_PLATFORM_LINUX"], "Linux", "Linux"),
+            (["SDL_PLATFORM_WINDOWS", "SDL_PLATFORM_WIN32"], "Windows", "Windows"),
+            (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
+        ])
 
 
 if __name__ == "__main__":
