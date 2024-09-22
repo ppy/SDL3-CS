@@ -9,7 +9,6 @@ namespace SDL
     [Typedef]
     public enum SDL_InitFlags : UInt32
     {
-        SDL_INIT_TIMER = SDL3.SDL_INIT_TIMER,
         SDL_INIT_AUDIO = SDL3.SDL_INIT_AUDIO,
         SDL_INIT_VIDEO = SDL3.SDL_INIT_VIDEO,
         SDL_INIT_JOYSTICK = SDL3.SDL_INIT_JOYSTICK,

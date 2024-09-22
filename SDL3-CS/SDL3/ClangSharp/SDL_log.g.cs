@@ -54,7 +54,9 @@ namespace SDL
 
     public enum SDL_LogPriority
     {
-        SDL_LOG_PRIORITY_VERBOSE = 1,
+        SDL_LOG_PRIORITY_INVALID,
+        SDL_LOG_PRIORITY_TRACE,
+        SDL_LOG_PRIORITY_VERBOSE,
         SDL_LOG_PRIORITY_DEBUG,
         SDL_LOG_PRIORITY_INFO,
         SDL_LOG_PRIORITY_WARN,
@@ -78,10 +80,14 @@ namespace SDL
         public static extern void SDL_ResetLogPriorities();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, [NativeTypeName("const char *")] byte* prefix);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, [NativeTypeName("const char *")] byte* prefix);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_Log([NativeTypeName("const char *")] byte* fmt, __arglist);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_LogTrace(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_LogVerbose(int category, [NativeTypeName("const char *")] byte* fmt, __arglist);
@@ -108,9 +114,9 @@ namespace SDL
         public static extern void SDL_LogMessageV(int category, SDL_LogPriority priority, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* ap);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_GetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction *")] delegate* unmanaged[Cdecl]<IntPtr, SDL_LogCategory, SDL_LogPriority, byte*, void>* callback, [NativeTypeName("void **")] IntPtr* userdata);
+        public static extern void SDL_GetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction *")] delegate* unmanaged[Cdecl]<IntPtr, int, SDL_LogPriority, byte*, void>* callback, [NativeTypeName("void **")] IntPtr* userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction")] delegate* unmanaged[Cdecl]<IntPtr, SDL_LogCategory, SDL_LogPriority, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
+        public static extern void SDL_SetLogOutputFunction([NativeTypeName("SDL_LogOutputFunction")] delegate* unmanaged[Cdecl]<IntPtr, int, SDL_LogPriority, byte*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
     }
 }

@@ -30,16 +30,19 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetError([NativeTypeName("const char *")] byte* fmt, __arglist);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetError([NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_OutOfMemory();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_OutOfMemory();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetError", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetError();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ClearError();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_ClearError();
     }
 }

@@ -187,10 +187,12 @@ namespace SDL
         public static extern byte* Unsafe_SDL_GetDisplayName(SDL_DisplayID displayID);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect* rect);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetDisplayBounds(SDL_DisplayID displayID, SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect* rect);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetDisplayUsableBounds(SDL_DisplayID displayID, SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_DisplayOrientation SDL_GetNaturalDisplayOrientation(SDL_DisplayID displayID);
@@ -205,7 +207,8 @@ namespace SDL
         public static extern SDL_DisplayMode** SDL_GetFullscreenDisplayModes(SDL_DisplayID displayID, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, SDL_bool include_high_density_modes, SDL_DisplayMode* mode);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, [NativeTypeName("bool")] SDLBool include_high_density_modes, SDL_DisplayMode* mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const SDL_DisplayMode *")]
@@ -231,7 +234,8 @@ namespace SDL
         public static extern float SDL_GetWindowDisplayScale(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowFullscreenMode(SDL_Window* window, [NativeTypeName("const SDL_DisplayMode *")] SDL_DisplayMode* mode);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowFullscreenMode(SDL_Window* window, [NativeTypeName("const SDL_DisplayMode *")] SDL_DisplayMode* mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const SDL_DisplayMode *")]
@@ -272,171 +276,220 @@ namespace SDL
         public static extern SDL_WindowFlags SDL_GetWindowFlags(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowTitle(SDL_Window* window, [NativeTypeName("const char *")] byte* title);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowTitle(SDL_Window* window, [NativeTypeName("const char *")] byte* title);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetWindowTitle", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         public static extern byte* Unsafe_SDL_GetWindowTitle(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowIcon(SDL_Window* window, SDL_Surface* icon);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowIcon(SDL_Window* window, SDL_Surface* icon);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowPosition(SDL_Window* window, int x, int y);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowPosition(SDL_Window* window, int x, int y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowPosition(SDL_Window* window, int* x, int* y);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowPosition(SDL_Window* window, int* x, int* y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowSize(SDL_Window* window, int w, int h);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowSize(SDL_Window* window, int w, int h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowSize(SDL_Window* window, int* w, int* h);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowSize(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowSafeArea(SDL_Window* window, SDL_Rect* rect);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowSafeArea(SDL_Window* window, SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowAspectRatio(SDL_Window* window, float min_aspect, float max_aspect);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowAspectRatio(SDL_Window* window, float min_aspect, float max_aspect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowAspectRatio(SDL_Window* window, float* min_aspect, float* max_aspect);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowAspectRatio(SDL_Window* window, float* min_aspect, float* max_aspect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowBordersSize(SDL_Window* window, int* top, int* left, int* bottom, int* right);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowBordersSize(SDL_Window* window, int* top, int* left, int* bottom, int* right);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowSizeInPixels(SDL_Window* window, int* w, int* h);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowSizeInPixels(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowMinimumSize(SDL_Window* window, int min_w, int min_h);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowMinimumSize(SDL_Window* window, int min_w, int min_h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowMinimumSize(SDL_Window* window, int* w, int* h);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowMinimumSize(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowMaximumSize(SDL_Window* window, int max_w, int max_h);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowMaximumSize(SDL_Window* window, int max_w, int max_h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowMaximumSize(SDL_Window* window, int* w, int* h);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowMaximumSize(SDL_Window* window, int* w, int* h);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowBordered(SDL_Window* window, SDL_bool bordered);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowBordered(SDL_Window* window, [NativeTypeName("bool")] SDLBool bordered);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowResizable(SDL_Window* window, SDL_bool resizable);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowResizable(SDL_Window* window, [NativeTypeName("bool")] SDLBool resizable);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowAlwaysOnTop(SDL_Window* window, SDL_bool on_top);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowAlwaysOnTop(SDL_Window* window, [NativeTypeName("bool")] SDLBool on_top);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ShowWindow(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_ShowWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HideWindow(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HideWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_RaiseWindow(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_RaiseWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_MaximizeWindow(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_MaximizeWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_MinimizeWindow(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_MinimizeWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_RestoreWindow(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_RestoreWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowFullscreen(SDL_Window* window, SDL_bool fullscreen);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowFullscreen(SDL_Window* window, [NativeTypeName("bool")] SDLBool fullscreen);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SyncWindow(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SyncWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_WindowHasSurface(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_WindowHasSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Surface* SDL_GetWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowSurfaceVSync(SDL_Window* window, int vsync);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowSurfaceVSync(SDL_Window* window, int vsync);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowSurfaceVSync(SDL_Window* window, int* vsync);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowSurfaceVSync(SDL_Window* window, int* vsync);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_UpdateWindowSurface(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_UpdateWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_UpdateWindowSurfaceRects(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rects, int numrects);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_UpdateWindowSurfaceRects(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rects, int numrects);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_DestroyWindowSurface(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_DestroyWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowKeyboardGrab(SDL_Window* window, SDL_bool grabbed);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowKeyboardGrab(SDL_Window* window, [NativeTypeName("bool")] SDLBool grabbed);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowMouseGrab(SDL_Window* window, SDL_bool grabbed);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowMouseGrab(SDL_Window* window, [NativeTypeName("bool")] SDLBool grabbed);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowKeyboardGrab(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowKeyboardGrab(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetWindowMouseGrab(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetWindowMouseGrab(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GetGrabbedWindow();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowMouseRect(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowMouseRect(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const SDL_Rect *")]
         public static extern SDL_Rect* SDL_GetWindowMouseRect(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowOpacity(SDL_Window* window, float opacity);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowOpacity(SDL_Window* window, float opacity);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern float SDL_GetWindowOpacity(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowParent(SDL_Window* window, SDL_Window* parent);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowParent(SDL_Window* window, SDL_Window* parent);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowModal(SDL_Window* window, SDL_bool modal);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowModal(SDL_Window* window, [NativeTypeName("bool")] SDLBool modal);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowFocusable(SDL_Window* window, SDL_bool focusable);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowFocusable(SDL_Window* window, [NativeTypeName("bool")] SDLBool focusable);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ShowWindowSystemMenu(SDL_Window* window, int x, int y);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_ShowWindowSystemMenu(SDL_Window* window, int x, int y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowHitTest(SDL_Window* window, [NativeTypeName("SDL_HitTest")] delegate* unmanaged[Cdecl]<SDL_Window*, SDL_Point*, IntPtr, SDL_HitTestResult> callback, [NativeTypeName("void*")] IntPtr callback_data);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowHitTest(SDL_Window* window, [NativeTypeName("SDL_HitTest")] delegate* unmanaged[Cdecl]<SDL_Window*, SDL_Point*, IntPtr, SDL_HitTestResult> callback, [NativeTypeName("void*")] IntPtr callback_data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetWindowShape(SDL_Window* window, SDL_Surface* shape);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowShape(SDL_Window* window, SDL_Surface* shape);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_FlashWindow(SDL_Window* window, SDL_FlashOperation operation);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_FlashWindow(SDL_Window* window, SDL_FlashOperation operation);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroyWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ScreenSaverEnabled();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_ScreenSaverEnabled();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_EnableScreenSaver();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_EnableScreenSaver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_DisableScreenSaver();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_DisableScreenSaver();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_LoadLibrary([NativeTypeName("const char *")] byte* path);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_LoadLibrary([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_FunctionPointer")]
@@ -450,23 +503,27 @@ namespace SDL
         public static extern void SDL_GL_UnloadLibrary();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_ExtensionSupported([NativeTypeName("const char *")] byte* extension);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_ExtensionSupported([NativeTypeName("const char *")] byte* extension);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_GL_ResetAttributes();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_SetAttribute(SDL_GLattr attr, int value);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_SetAttribute(SDL_GLattr attr, int value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_GetAttribute(SDL_GLattr attr, int* value);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_GetAttribute(SDL_GLattr attr, int* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_GLContext")]
         public static extern SDL_GLContextState* SDL_GL_CreateContext(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_MakeCurrent(SDL_Window* window, [NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_MakeCurrent(SDL_Window* window, [NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GL_GetCurrentWindow();
@@ -491,16 +548,20 @@ namespace SDL
         public static extern void SDL_EGL_SetAttributeCallbacks([NativeTypeName("SDL_EGLAttribArrayCallback")] delegate* unmanaged[Cdecl]<nint*> platformAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> surfaceAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> contextAttribCallback);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_SetSwapInterval(int interval);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_SetSwapInterval(int interval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_GetSwapInterval(int* interval);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_GetSwapInterval(int* interval);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_SwapWindow(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_SwapWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GL_DestroyContext([NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GL_DestroyContext([NativeTypeName("SDL_GLContext")] SDL_GLContextState* context);
 
         [NativeTypeName("#define SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER \"SDL.video.wayland.wl_display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER => "SDL.video.wayland.wl_display"u8;

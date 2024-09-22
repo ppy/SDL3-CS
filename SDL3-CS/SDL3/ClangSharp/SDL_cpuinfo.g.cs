@@ -30,52 +30,66 @@ namespace SDL
     public static partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetCPUCount();
+        public static extern int SDL_GetNumLogicalCPUCores();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetCPUCacheLineSize();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasAltiVec();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasAltiVec();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasMMX();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasMMX();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasSSE();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasSSE();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasSSE2();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasSSE2();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasSSE3();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasSSE3();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasSSE41();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasSSE41();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasSSE42();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasSSE42();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasAVX();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasAVX();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasAVX2();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasAVX2();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasAVX512F();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasAVX512F();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasARMSIMD();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasARMSIMD();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasNEON();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasNEON();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasLSX();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasLSX();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasLASX();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasLASX();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetSystemRAM();

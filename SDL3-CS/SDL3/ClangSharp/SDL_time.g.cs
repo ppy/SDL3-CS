@@ -64,16 +64,20 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetDateTimeLocalePreferences(SDL_DateFormat* dateFormat, SDL_TimeFormat* timeFormat);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetDateTimeLocalePreferences(SDL_DateFormat* dateFormat, SDL_TimeFormat* timeFormat);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetCurrentTime(SDL_Time* ticks);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetCurrentTime(SDL_Time* ticks);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime* dt, SDL_bool localTime);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_TimeToDateTime(SDL_Time ticks, SDL_DateTime* dt, [NativeTypeName("bool")] SDLBool localTime);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_DateTimeToTime([NativeTypeName("const SDL_DateTime *")] SDL_DateTime* dt, SDL_Time* ticks);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_DateTimeToTime([NativeTypeName("const SDL_DateTime *")] SDL_DateTime* dt, SDL_Time* ticks);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_TimeToWindows(SDL_Time ticks, [NativeTypeName("Uint32 *")] uint* dwLowDateTime, [NativeTypeName("Uint32 *")] uint* dwHighDateTime);

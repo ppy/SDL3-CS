@@ -19,7 +19,7 @@ namespace SDL.Tests
 
         public MyWindow()
         {
-            if (SDL_InitSubSystem(init_flags) == SDL_bool.SDL_FALSE)
+            if (!SDL_InitSubSystem(init_flags))
                 throw new InvalidOperationException($"failed to initialise SDL. Error: {SDL_GetError()}");
 
             initSuccess = true;
@@ -29,7 +29,7 @@ namespace SDL.Tests
 
         public void Setup()
         {
-            SDL_SetGamepadEventsEnabled(SDL_bool.SDL_TRUE);
+            SDL_SetGamepadEventsEnabled(true);
             SDL_SetEventFilter(&nativeFilter, objectHandle.Handle);
 
             if (OperatingSystem.IsWindows())
@@ -37,7 +37,7 @@ namespace SDL.Tests
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
-        private static SDL_bool wndProc(IntPtr userdata, MSG* message)
+        private static SDLBool wndProc(IntPtr userdata, MSG* message)
         {
             var handle = new ObjectHandle<MyWindow>(userdata);
 
@@ -46,23 +46,23 @@ namespace SDL.Tests
                 Console.WriteLine($"from {window}, message: {message->message}");
             }
 
-            return SDL_TRUE; // sample use of definition from SDL3 class, not SDL_bool enum
+            return true;
         }
 
         // ReSharper disable once UseCollectionExpression
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
-        private static SDL_bool nativeFilter(IntPtr userdata, SDL_Event* e)
+        private static SDLBool nativeFilter(IntPtr userdata, SDL_Event* e)
         {
             var handle = new ObjectHandle<MyWindow>(userdata);
             if (handle.GetTarget(out var window))
                 return window.handleEventFromFilter(e);
 
-            return SDL_bool.SDL_TRUE;
+            return true;
         }
 
         public Action<SDL_Event>? EventFilter;
 
-        private SDL_bool handleEventFromFilter(SDL_Event* e)
+        private bool handleEventFromFilter(SDL_Event* e)
         {
             switch (e->Type)
             {
@@ -76,7 +76,7 @@ namespace SDL.Tests
                     break;
             }
 
-            return SDL_bool.SDL_TRUE;
+            return true;
         }
 
         private void handleKeyFromFilter(SDL_KeyboardEvent e)
@@ -105,8 +105,8 @@ namespace SDL.Tests
                     switch (e.key.key)
                     {
                         case SDL_Keycode.SDLK_R:
-                            bool old = SDL_GetWindowRelativeMouseMode(sdlWindowHandle) == SDL_bool.SDL_TRUE;
-                            SDL_SetWindowRelativeMouseMode(sdlWindowHandle, old ? SDL_bool.SDL_FALSE : SDL_bool.SDL_TRUE);
+                            bool old = SDL_GetWindowRelativeMouseMode(sdlWindowHandle);
+                            SDL_SetWindowRelativeMouseMode(sdlWindowHandle, !old);
                             break;
 
                         case SDL_Keycode.SDLK_V:
@@ -115,11 +115,11 @@ namespace SDL.Tests
                             break;
 
                         case SDL_Keycode.SDLK_F10:
-                            SDL_SetWindowFullscreen(sdlWindowHandle, SDL_bool.SDL_FALSE);
+                            SDL_SetWindowFullscreen(sdlWindowHandle, false);
                             break;
 
                         case SDL_Keycode.SDLK_F11:
-                            SDL_SetWindowFullscreen(sdlWindowHandle, SDL_bool.SDL_TRUE);
+                            SDL_SetWindowFullscreen(sdlWindowHandle, true);
                             break;
 
                         case SDL_Keycode.SDLK_J:

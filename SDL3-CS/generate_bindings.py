@@ -27,6 +27,7 @@ SDL3_header_base = "SDL3"  # base folder of header files
 
 csproj_root = repository_root / "SDL3-CS"
 
+
 class Header:
     """Represents a SDL header file that is used in ClangSharp generation."""
 
@@ -130,20 +131,15 @@ headers = [
     add("SDL3/SDL_vulkan.h"),
 ]
 
+
 def prepare_sdl_source():
     subprocess.run([
         "git",
         "reset",
         "--hard",
         "HEAD"
-    ], cwd = SDL_root)
+    ], cwd=SDL_root)
 
-    subprocess.run([
-        "git",
-        "apply",
-        "--3way",
-        repository_root / "External" / "SDL-use-proper-types.patch"
-    ], cwd = SDL_root)
 
 def get_sdl_api_dump():
     subprocess.run([
@@ -233,6 +229,7 @@ base_command = [
     "void*=IntPtr",
     "char=byte",
     "wchar_t *=IntPtr",  # wchar_t has a platform-defined size
+    "bool=SDLBool",  # treat bool as C# helper type
 
     "--define-macro",
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",

@@ -52,7 +52,8 @@ namespace SDL
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasKeyboard();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasKeyboard();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_KeyboardID* SDL_GetKeyboards(int* count);
@@ -65,8 +66,8 @@ namespace SDL
         public static extern SDL_Window* SDL_GetKeyboardFocus();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const SDL_bool *")]
-        public static extern SDL_bool* SDL_GetKeyboardState(int* numkeys);
+        [return: NativeTypeName("const bool *")]
+        public static extern SDLBool* SDL_GetKeyboardState(int* numkeys);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_ResetKeyboard();
@@ -78,13 +79,14 @@ namespace SDL
         public static extern void SDL_SetModState(SDL_Keymod modstate);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, SDL_bool key_event);
+        public static extern SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, [NativeTypeName("bool")] SDLBool key_event);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Scancode SDL_GetScancodeFromKey(SDL_Keycode key, SDL_Keymod* modstate);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetScancodeName(SDL_Scancode scancode, [NativeTypeName("const char *")] byte* name);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetScancodeName(SDL_Scancode scancode, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetScancodeName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -101,31 +103,40 @@ namespace SDL
         public static extern SDL_Keycode SDL_GetKeyFromName([NativeTypeName("const char *")] byte* name);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_StartTextInput(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_StartTextInput(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_StartTextInputWithProperties(SDL_Window* window, SDL_PropertiesID props);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_StartTextInputWithProperties(SDL_Window* window, SDL_PropertiesID props);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_TextInputActive(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_TextInputActive(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_StopTextInput(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_StopTextInput(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ClearComposition(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_ClearComposition(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_SetTextInputArea(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect, int cursor);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetTextInputArea(SDL_Window* window, [NativeTypeName("const SDL_Rect *")] SDL_Rect* rect, int cursor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_GetTextInputArea(SDL_Window* window, SDL_Rect* rect, int* cursor);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetTextInputArea(SDL_Window* window, SDL_Rect* rect, int* cursor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_HasScreenKeyboardSupport();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasScreenKeyboardSupport();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_bool SDL_ScreenKeyboardShown(SDL_Window* window);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_ScreenKeyboardShown(SDL_Window* window);
 
         [NativeTypeName("#define SDL_PROP_TEXTINPUT_TYPE_NUMBER \"SDL.textinput.type\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_TYPE_NUMBER => "SDL.textinput.type"u8;
