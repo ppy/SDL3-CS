@@ -26,7 +26,6 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using static SDL.SDL_Colorspace;
-using static SDL.SDL_PixelFormat;
 
 namespace SDL
 {
@@ -404,30 +403,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_ALPHA_TRANSPARENT_FLOAT 0.0f")]
         public const float SDL_ALPHA_TRANSPARENT_FLOAT = 0.0f;
-
-        [NativeTypeName("#define SDL_PIXELFORMAT_RGBA32 SDL_PIXELFORMAT_ABGR8888")]
-        public const SDL_PixelFormat SDL_PIXELFORMAT_RGBA32 = SDL_PIXELFORMAT_ABGR8888;
-
-        [NativeTypeName("#define SDL_PIXELFORMAT_ARGB32 SDL_PIXELFORMAT_BGRA8888")]
-        public const SDL_PixelFormat SDL_PIXELFORMAT_ARGB32 = SDL_PIXELFORMAT_BGRA8888;
-
-        [NativeTypeName("#define SDL_PIXELFORMAT_BGRA32 SDL_PIXELFORMAT_ARGB8888")]
-        public const SDL_PixelFormat SDL_PIXELFORMAT_BGRA32 = SDL_PIXELFORMAT_ARGB8888;
-
-        [NativeTypeName("#define SDL_PIXELFORMAT_ABGR32 SDL_PIXELFORMAT_RGBA8888")]
-        public const SDL_PixelFormat SDL_PIXELFORMAT_ABGR32 = SDL_PIXELFORMAT_RGBA8888;
-
-        [NativeTypeName("#define SDL_PIXELFORMAT_RGBX32 SDL_PIXELFORMAT_XBGR8888")]
-        public const SDL_PixelFormat SDL_PIXELFORMAT_RGBX32 = SDL_PIXELFORMAT_XBGR8888;
-
-        [NativeTypeName("#define SDL_PIXELFORMAT_XRGB32 SDL_PIXELFORMAT_BGRX8888")]
-        public const SDL_PixelFormat SDL_PIXELFORMAT_XRGB32 = SDL_PIXELFORMAT_BGRX8888;
-
-        [NativeTypeName("#define SDL_PIXELFORMAT_BGRX32 SDL_PIXELFORMAT_XRGB8888")]
-        public const SDL_PixelFormat SDL_PIXELFORMAT_BGRX32 = SDL_PIXELFORMAT_XRGB8888;
-
-        [NativeTypeName("#define SDL_PIXELFORMAT_XBGR32 SDL_PIXELFORMAT_RGBX8888")]
-        public const SDL_PixelFormat SDL_PIXELFORMAT_XBGR32 = SDL_PIXELFORMAT_RGBX8888;
 
         [NativeTypeName("#define SDL_COLORSPACE_RGB_DEFAULT SDL_COLORSPACE_SRGB")]
         public const SDL_Colorspace SDL_COLORSPACE_RGB_DEFAULT = SDL_COLORSPACE_SRGB;
