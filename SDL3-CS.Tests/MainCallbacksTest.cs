@@ -49,7 +49,7 @@ namespace SDL.Tests
             return SDL_AppResult.SDL_APP_CONTINUE;
         }
 
-        protected virtual void Quit()
+        protected virtual void Quit(SDL_AppResult result)
         {
         }
 
@@ -93,11 +93,11 @@ namespace SDL.Tests
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)])]
-        private static void AppQuit(IntPtr appState)
+        private static void AppQuit(IntPtr appState, SDL_AppResult result)
         {
             using var objectHandle = new ObjectHandle<MainCallbacksTest>(appState, true);
             if (objectHandle.GetTarget(out var target))
-                target.Quit();
+                target.Quit(result);
         }
     }
 }

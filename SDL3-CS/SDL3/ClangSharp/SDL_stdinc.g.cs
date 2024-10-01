@@ -194,6 +194,10 @@ namespace SDL
         public static extern uint SDL_crc32([NativeTypeName("Uint32")] uint crc, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_murmur3_32([NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint len, [NativeTypeName("Uint32")] uint seed);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("void*")]
         public static extern IntPtr SDL_memcpy([NativeTypeName("void*")] IntPtr dst, [NativeTypeName("const void *")] IntPtr src, [NativeTypeName("size_t")] nuint len);
 

@@ -152,12 +152,18 @@ namespace SDL
         SDL_GPU_TEXTUREFORMAT_R16_UINT,
         SDL_GPU_TEXTUREFORMAT_R16G16_UINT,
         SDL_GPU_TEXTUREFORMAT_R16G16B16A16_UINT,
+        SDL_GPU_TEXTUREFORMAT_R32_UINT,
+        SDL_GPU_TEXTUREFORMAT_R32G32_UINT,
+        SDL_GPU_TEXTUREFORMAT_R32G32B32A32_UINT,
         SDL_GPU_TEXTUREFORMAT_R8_INT,
         SDL_GPU_TEXTUREFORMAT_R8G8_INT,
         SDL_GPU_TEXTUREFORMAT_R8G8B8A8_INT,
         SDL_GPU_TEXTUREFORMAT_R16_INT,
         SDL_GPU_TEXTUREFORMAT_R16G16_INT,
         SDL_GPU_TEXTUREFORMAT_R16G16B16A16_INT,
+        SDL_GPU_TEXTUREFORMAT_R32_INT,
+        SDL_GPU_TEXTUREFORMAT_R32G32_INT,
+        SDL_GPU_TEXTUREFORMAT_R32G32B32A32_INT,
         SDL_GPU_TEXTUREFORMAT_R8G8B8A8_UNORM_SRGB,
         SDL_GPU_TEXTUREFORMAT_B8G8R8A8_UNORM_SRGB,
         SDL_GPU_TEXTUREFORMAT_BC1_RGBA_UNORM_SRGB,
@@ -745,14 +751,14 @@ namespace SDL
         [NativeTypeName("bool")]
         public SDLBool enable_depth_bias;
 
+        [NativeTypeName("bool")]
+        public SDLBool enable_depth_clip;
+
         [NativeTypeName("Uint8")]
         public byte padding1;
 
         [NativeTypeName("Uint8")]
         public byte padding2;
-
-        [NativeTypeName("Uint8")]
-        public byte padding3;
     }
 
     public partial struct SDL_GPUMultisampleState
@@ -882,10 +888,10 @@ namespace SDL
         public uint num_readonly_storage_buffers;
 
         [NativeTypeName("Uint32")]
-        public uint num_writeonly_storage_textures;
+        public uint num_readwrite_storage_textures;
 
         [NativeTypeName("Uint32")]
-        public uint num_writeonly_storage_buffers;
+        public uint num_readwrite_storage_buffers;
 
         [NativeTypeName("Uint32")]
         public uint num_uniform_buffers;
@@ -1008,7 +1014,7 @@ namespace SDL
         public SDL_GPUSampler* sampler;
     }
 
-    public unsafe partial struct SDL_GPUStorageBufferWriteOnlyBinding
+    public unsafe partial struct SDL_GPUStorageBufferReadWriteBinding
     {
         public SDL_GPUBuffer* buffer;
 
@@ -1025,7 +1031,7 @@ namespace SDL
         public byte padding3;
     }
 
-    public unsafe partial struct SDL_GPUStorageTextureWriteOnlyBinding
+    public unsafe partial struct SDL_GPUStorageTextureReadWriteBinding
     {
         public SDL_GPUTexture* texture;
 
@@ -1208,7 +1214,7 @@ namespace SDL
         public static extern void SDL_EndGPURenderPass(SDL_GPURenderPass* render_pass);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GPUComputePass* SDL_BeginGPUComputePass(SDL_GPUCommandBuffer* command_buffer, [NativeTypeName("const SDL_GPUStorageTextureWriteOnlyBinding *")] SDL_GPUStorageTextureWriteOnlyBinding* storage_texture_bindings, [NativeTypeName("Uint32")] uint num_storage_texture_bindings, [NativeTypeName("const SDL_GPUStorageBufferWriteOnlyBinding *")] SDL_GPUStorageBufferWriteOnlyBinding* storage_buffer_bindings, [NativeTypeName("Uint32")] uint num_storage_buffer_bindings);
+        public static extern SDL_GPUComputePass* SDL_BeginGPUComputePass(SDL_GPUCommandBuffer* command_buffer, [NativeTypeName("const SDL_GPUStorageTextureReadWriteBinding *")] SDL_GPUStorageTextureReadWriteBinding* storage_texture_bindings, [NativeTypeName("Uint32")] uint num_storage_texture_bindings, [NativeTypeName("const SDL_GPUStorageBufferReadWriteBinding *")] SDL_GPUStorageBufferReadWriteBinding* storage_buffer_bindings, [NativeTypeName("Uint32")] uint num_storage_buffer_bindings);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_BindGPUComputePipeline(SDL_GPUComputePass* compute_pass, SDL_GPUComputePipeline* compute_pipeline);
@@ -1291,19 +1297,23 @@ namespace SDL
         public static extern SDL_GPUTextureFormat SDL_GetGPUSwapchainTextureFormat(SDL_GPUDevice* device, SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GPUTexture* SDL_AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer* command_buffer, SDL_Window* window, [NativeTypeName("Uint32 *")] uint* w, [NativeTypeName("Uint32 *")] uint* h);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer* command_buffer, SDL_Window* window, SDL_GPUTexture** swapchain_texture, [NativeTypeName("Uint32 *")] uint* swapchain_texture_width, [NativeTypeName("Uint32 *")] uint* swapchain_texture_height);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_SubmitGPUCommandBuffer(SDL_GPUCommandBuffer* command_buffer);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SubmitGPUCommandBuffer(SDL_GPUCommandBuffer* command_buffer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_GPUFence* SDL_SubmitGPUCommandBufferAndAcquireFence(SDL_GPUCommandBuffer* command_buffer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_WaitForGPUIdle(SDL_GPUDevice* device);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_WaitForGPUIdle(SDL_GPUDevice* device);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_WaitForGPUFences(SDL_GPUDevice* device, [NativeTypeName("bool")] SDLBool wait_all, [NativeTypeName("SDL_GPUFence *const *")] SDL_GPUFence** fences, [NativeTypeName("Uint32")] uint num_fences);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_WaitForGPUFences(SDL_GPUDevice* device, [NativeTypeName("bool")] SDLBool wait_all, [NativeTypeName("SDL_GPUFence *const *")] SDL_GPUFence** fences, [NativeTypeName("Uint32")] uint num_fences);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -1341,6 +1351,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE (1u << 5)")]
         public const uint SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_WRITE = (1U << 5);
+
+        [NativeTypeName("#define SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE (1u << 6)")]
+        public const uint SDL_GPU_TEXTUREUSAGE_COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE = (1U << 6);
 
         [NativeTypeName("#define SDL_GPU_BUFFERUSAGE_VERTEX (1u << 0)")]
         public const uint SDL_GPU_BUFFERUSAGE_VERTEX = (1U << 0);

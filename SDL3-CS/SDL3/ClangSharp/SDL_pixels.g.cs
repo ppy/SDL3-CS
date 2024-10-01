@@ -25,7 +25,6 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static SDL.SDL_Colorspace;
 
 namespace SDL
 {
@@ -255,6 +254,8 @@ namespace SDL
         SDL_COLORSPACE_BT709_FULL = 0x22100421U,
         SDL_COLORSPACE_BT2020_LIMITED = 0x21102609U,
         SDL_COLORSPACE_BT2020_FULL = 0x22102609U,
+        SDL_COLORSPACE_RGB_DEFAULT = SDL_COLORSPACE_SRGB,
+        SDL_COLORSPACE_YUV_DEFAULT = SDL_COLORSPACE_JPEG,
     }
 
     public partial struct SDL_Color
@@ -403,11 +404,5 @@ namespace SDL
 
         [NativeTypeName("#define SDL_ALPHA_TRANSPARENT_FLOAT 0.0f")]
         public const float SDL_ALPHA_TRANSPARENT_FLOAT = 0.0f;
-
-        [NativeTypeName("#define SDL_COLORSPACE_RGB_DEFAULT SDL_COLORSPACE_SRGB")]
-        public const SDL_Colorspace SDL_COLORSPACE_RGB_DEFAULT = SDL_COLORSPACE_SRGB;
-
-        [NativeTypeName("#define SDL_COLORSPACE_YUV_DEFAULT SDL_COLORSPACE_JPEG")]
-        public const SDL_Colorspace SDL_COLORSPACE_YUV_DEFAULT = SDL_COLORSPACE_JPEG;
     }
 }

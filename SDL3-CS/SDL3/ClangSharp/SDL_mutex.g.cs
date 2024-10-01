@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -41,6 +42,24 @@ namespace SDL
 
     public partial struct SDL_Condition
     {
+    }
+
+    public enum SDL_InitStatus
+    {
+        SDL_INIT_STATUS_UNINITIALIZED,
+        SDL_INIT_STATUS_INITIALIZING,
+        SDL_INIT_STATUS_INITIALIZED,
+        SDL_INIT_STATUS_UNINITIALIZING,
+    }
+
+    public partial struct SDL_InitState
+    {
+        public SDL_AtomicInt status;
+
+        public SDL_ThreadID thread;
+
+        [NativeTypeName("void*")]
+        public IntPtr reserved;
     }
 
     public static unsafe partial class SDL3
@@ -126,5 +145,16 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_WaitConditionTimeout(SDL_Condition* cond, SDL_Mutex* mutex, [NativeTypeName("Sint32")] int timeoutMS);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_ShouldInit(SDL_InitState* state);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_ShouldQuit(SDL_InitState* state);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_SetInitialized(SDL_InitState* state, [NativeTypeName("bool")] SDLBool initialized);
     }
 }

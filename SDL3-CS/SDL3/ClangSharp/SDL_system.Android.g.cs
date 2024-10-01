@@ -48,11 +48,6 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Android")]
-        public static extern SDLBool SDL_IsAndroidTV();
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        [SupportedOSPlatform("Android")]
         public static extern SDLBool SDL_IsChromebook();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

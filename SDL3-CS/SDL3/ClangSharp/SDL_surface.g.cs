@@ -41,11 +41,7 @@ namespace SDL
         SDL_FLIP_VERTICAL,
     }
 
-    public partial struct SDL_SurfaceData
-    {
-    }
-
-    public unsafe partial struct SDL_Surface
+    public partial struct SDL_Surface
     {
         public SDL_SurfaceFlags flags;
 
@@ -62,7 +58,8 @@ namespace SDL
 
         public int refcount;
 
-        public SDL_SurfaceData* @internal;
+        [NativeTypeName("void*")]
+        public IntPtr reserved;
     }
 
     public static unsafe partial class SDL3
