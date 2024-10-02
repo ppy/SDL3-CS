@@ -46,6 +46,20 @@ namespace SDL
         [Macro]
         public static uint SDL_FOURCC(byte A, byte B, byte C, byte D) => (uint)((A << 0) | (B << 8) | (C << 16) | (D << 24));
 
+        [Macro]
+        public static unsafe void SDL_INIT_INTERFACE(out SDL_IOStreamInterface iface)
+        {
+            iface = default;
+            iface.version = (uint)sizeof(SDL_IOStreamInterface);
+        }
+
+        [Macro]
+        public static unsafe void SDL_INIT_INTERFACE(out SDL_StorageInterface iface)
+        {
+            iface = default;
+            iface.version = (uint)sizeof(SDL_StorageInterface);
+        }
+
         public static unsafe void SDL_free(void* mem) => SDL_free((IntPtr)mem);
     }
 }
