@@ -545,7 +545,7 @@ namespace SDL
         public static extern IntPtr SDL_EGL_GetWindowSurface(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_EGL_SetAttributeCallbacks([NativeTypeName("SDL_EGLAttribArrayCallback")] delegate* unmanaged[Cdecl]<nint*> platformAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> surfaceAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<int*> contextAttribCallback);
+        public static extern void SDL_EGL_SetAttributeCallbacks([NativeTypeName("SDL_EGLAttribArrayCallback")] delegate* unmanaged[Cdecl]<IntPtr, nint*> platformAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<IntPtr, int*> surfaceAttribCallback, [NativeTypeName("SDL_EGLIntArrayCallback")] delegate* unmanaged[Cdecl]<IntPtr, int*> contextAttribCallback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]

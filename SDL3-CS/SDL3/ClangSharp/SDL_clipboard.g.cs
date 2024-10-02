@@ -69,5 +69,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_HasClipboardData([NativeTypeName("const char *")] byte* mime_type);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("char **")]
+        public static extern byte** SDL_GetClipboardMimeTypes([NativeTypeName("size_t *")] nuint* num_mime_types);
     }
 }

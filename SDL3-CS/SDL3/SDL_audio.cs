@@ -11,6 +11,10 @@ namespace SDL
 
     public static partial class SDL3
     {
+        [Macro]
+        public static SDL_AudioFormat SDL_DEFINE_AUDIO_FORMAT(UInt16 signed, UInt16 bigendian, UInt16 @float, UInt16 size) =>
+            (SDL_AudioFormat)(((UInt16)(signed) << 15) | ((UInt16)(bigendian) << 12) | ((UInt16)(@float) << 8) | ((size) & (UInt16)SDL_AUDIO_MASK_BITSIZE));
+
         [Constant]
         public static readonly SDL_AudioFormat SDL_AUDIO_S16 = BitConverter.IsLittleEndian ? SDL_AudioFormat.SDL_AUDIO_S16LE : SDL_AudioFormat.SDL_AUDIO_S16BE;
 
