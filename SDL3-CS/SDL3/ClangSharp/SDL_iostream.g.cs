@@ -264,6 +264,12 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER \"SDL.iostream.android.aasset\"")]
         public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_ANDROID_AASSET_POINTER => "SDL.iostream.android.aasset"u8;
 
+        [NativeTypeName("#define SDL_PROP_IOSTREAM_MEMORY_POINTER \"SDL.iostream.memory.base\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_MEMORY_POINTER => "SDL.iostream.memory.base"u8;
+
+        [NativeTypeName("#define SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER \"SDL.iostream.memory.size\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_MEMORY_SIZE_NUMBER => "SDL.iostream.memory.size"u8;
+
         [NativeTypeName("#define SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER \"SDL.iostream.dynamic.memory\"")]
         public static ReadOnlySpan<byte> SDL_PROP_IOSTREAM_DYNAMIC_MEMORY_POINTER => "SDL.iostream.dynamic.memory"u8;
 

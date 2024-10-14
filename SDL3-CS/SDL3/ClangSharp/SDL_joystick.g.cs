@@ -380,9 +380,6 @@ namespace SDL
         [NativeTypeName("#define SDL_JOYSTICK_AXIS_MIN -32768")]
         public const int SDL_JOYSTICK_AXIS_MIN = -32768;
 
-        [NativeTypeName("#define SDL_IPHONE_MAX_GFORCE 5.0")]
-        public const double SDL_IPHONE_MAX_GFORCE = 5.0;
-
         [NativeTypeName("#define SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN \"SDL.joystick.cap.mono_led\"")]
         public static ReadOnlySpan<byte> SDL_PROP_JOYSTICK_CAP_MONO_LED_BOOLEAN => "SDL.joystick.cap.mono_led"u8;
 
