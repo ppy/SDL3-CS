@@ -871,7 +871,7 @@ namespace SDL
         public byte* data;
     }
 
-    public partial struct SDL_ClipboardEvent
+    public unsafe partial struct SDL_ClipboardEvent
     {
         public SDL_EventType type;
 
@@ -880,6 +880,15 @@ namespace SDL
 
         [NativeTypeName("Uint64")]
         public ulong timestamp;
+
+        [NativeTypeName("bool")]
+        public SDLBool owner;
+
+        [NativeTypeName("Sint32")]
+        public int n_mime_types;
+
+        [NativeTypeName("const char **")]
+        public byte** mime_types;
     }
 
     public partial struct SDL_SensorEvent

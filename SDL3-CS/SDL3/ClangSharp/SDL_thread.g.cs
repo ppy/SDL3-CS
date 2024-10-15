@@ -60,7 +60,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_SetThreadPriority(SDL_ThreadPriority priority);
+        public static extern SDLBool SDL_SetCurrentThreadPriority(SDL_ThreadPriority priority);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_WaitThread(SDL_Thread* thread, int* status);

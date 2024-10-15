@@ -175,6 +175,48 @@ namespace SDL
         SDL_GPU_TEXTUREFORMAT_D32_FLOAT,
         SDL_GPU_TEXTUREFORMAT_D24_UNORM_S8_UINT,
         SDL_GPU_TEXTUREFORMAT_D32_FLOAT_S8_UINT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_4x4_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_5x4_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_5x5_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_6x5_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_6x6_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x5_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x6_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x8_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x5_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x6_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x8_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x10_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_12x10_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_12x12_UNORM,
+        SDL_GPU_TEXTUREFORMAT_ASTC_4x4_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_5x4_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_5x5_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_6x5_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_6x6_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x5_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x6_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x8_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x5_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x6_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x8_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x10_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_12x10_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_12x12_UNORM_SRGB,
+        SDL_GPU_TEXTUREFORMAT_ASTC_4x4_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_5x4_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_5x5_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_6x5_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_6x6_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x5_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x6_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_8x8_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x5_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x6_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x8_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_10x10_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_12x10_FLOAT,
+        SDL_GPU_TEXTUREFORMAT_ASTC_12x12_FLOAT,
     }
 
     public enum SDL_GPUTextureType
@@ -653,10 +695,10 @@ namespace SDL
         public SDLBool enable_color_write_mask;
 
         [NativeTypeName("Uint8")]
-        public byte padding2;
+        public byte padding1;
 
         [NativeTypeName("Uint8")]
-        public byte padding3;
+        public byte padding2;
     }
 
     public unsafe partial struct SDL_GPUShaderCreateInfo
@@ -1333,6 +1375,10 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_GPUTextureSupportsSampleCount(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_CalculateGPUTextureFormatSize(SDL_GPUTextureFormat format, [NativeTypeName("Uint32")] uint width, [NativeTypeName("Uint32")] uint height, [NativeTypeName("Uint32")] uint depth_or_layer_count);
 
         [NativeTypeName("#define SDL_GPU_TEXTUREUSAGE_SAMPLER (1u << 0)")]
         public const uint SDL_GPU_TEXTUREUSAGE_SAMPLER = (1U << 0);
