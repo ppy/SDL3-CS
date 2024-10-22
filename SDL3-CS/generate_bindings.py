@@ -260,12 +260,27 @@ base_command = [
     "char=byte",
     "wchar_t *=IntPtr",  # wchar_t has a platform-defined size
     "bool=SDLBool",  # treat bool as C# helper type
+    "__va_list=byte*",
 
     "--define-macro",
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
+    "SDL_DECLSPEC=", # Not supported by llvm
 
+    # Undefine platform-specific macros - these will be defined on a per-case basis later.
     "--additional",
     "--undefine-macro=_WIN32",
+    "--undefine-macro=linux",
+    "--undefine-macro=__linux",
+    "--undefine-macro=__linux__",
+    "--undefine-macro=unix",
+    "--undefine-macro=__unix",
+    "--undefine-macro=__unix__",
+    "--undefine-macro=__APPLE__",
+    # GCC and LLVM use `long int` => int64, whereas MSVC uses `long long int` => int64.
+    # In terms of C# code gen, it's more accurate if we disable these to force LL, so
+    # that they're transformed to longs instead of ints.
+    "--undefine-macro=__LP64__",
+    "--undefine-macro=_LP64",
 ]
 
 
