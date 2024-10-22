@@ -79,12 +79,6 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_CleanupTLS();
 
-        [NativeTypeName("#define SDL_BeginThreadFunction NULL")]
-        public const int SDL_BeginThreadFunction = 0;
-
-        [NativeTypeName("#define SDL_EndThreadFunction NULL")]
-        public const int SDL_EndThreadFunction = 0;
-
         [NativeTypeName("#define SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER \"SDL.thread.create.entry_function\"")]
         public static ReadOnlySpan<byte> SDL_PROP_THREAD_CREATE_ENTRY_FUNCTION_POINTER => "SDL.thread.create.entry_function"u8;
 
