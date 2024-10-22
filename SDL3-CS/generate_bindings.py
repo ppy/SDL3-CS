@@ -289,13 +289,13 @@ def run_clangsharp(command, header: Header):
 
 
 # regex for ClangSharp-generated SDL functions
-generated_function_regex = re.compile(r"public static extern \w+\** (SDL_\w+)\(")
+generated_symbol_regex = re.compile(r"public (enum|static extern \w+\**) (SDL_\w+)")
 
 
-def get_generated_functions(file):
+def get_generated_symbols(file):
     with open(file, "r", encoding="utf-8") as f:
-        for match in generated_function_regex.finditer(f.read()):
-            yield match.group(1)
+        for match in generated_symbol_regex.finditer(f.read()):
+            yield match.group(2)
 
 
 def generate_platform_specific_headers(sdl_api, header: Header, platforms):
@@ -303,15 +303,15 @@ def generate_platform_specific_headers(sdl_api, header: Header, platforms):
 
     print(f"💠 {header} platform agnostic")
     platform_agnostic_cs = run_clangsharp(base_command, header)
-    platform_agnostic_functions = list(get_generated_functions(platform_agnostic_cs))
+    platform_agnostic_symbols = list(get_generated_symbols(platform_agnostic_cs))
     output_files = [platform_agnostic_cs]
 
     for (defines, suffix, platform_name) in platforms:
         command = base_command + ["--define-macro"] + defines
 
-        if platform_agnostic_functions:
+        if platform_agnostic_symbols:
             command.append("--exclude")
-            command.extend(platform_agnostic_functions)
+            command.extend(platform_agnostic_symbols)
 
         if all_functions:
             command.append("--with-attribute")
