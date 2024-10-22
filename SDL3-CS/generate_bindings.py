@@ -288,7 +288,7 @@ def run_clangsharp(command, header: Header):
     return header.output_file()
 
 
-# regex for ClangSharp-generated SDL functions
+# regex for ClangSharp-generated SDL functions and enums
 generated_symbol_regex = re.compile(r"public (enum|static extern \w+\**) (SDL_\w+)")
 
 
