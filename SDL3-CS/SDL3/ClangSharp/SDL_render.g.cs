@@ -397,6 +397,10 @@ namespace SDL
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_GetRenderVSync(SDL_Renderer* renderer, int* vsync);
 
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_RenderDebugText(SDL_Renderer* renderer, float x, float y, [NativeTypeName("const char *")] byte* str);
+
         [NativeTypeName("#define SDL_SOFTWARE_RENDERER \"software\"")]
         public static ReadOnlySpan<byte> SDL_SOFTWARE_RENDERER => "software"u8;
 
@@ -654,5 +658,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_RENDERER_VSYNC_ADAPTIVE (-1)")]
         public const int SDL_RENDERER_VSYNC_ADAPTIVE = (-1);
+
+        [NativeTypeName("#define SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE 8")]
+        public const int SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE = 8;
     }
 }

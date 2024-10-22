@@ -502,6 +502,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_OPENGL_ES_DRIVER \"SDL_OPENGL_ES_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENGL_ES_DRIVER => "SDL_OPENGL_ES_DRIVER"u8;
 
+        [NativeTypeName("#define SDL_HINT_OPENVR_LIBRARY \"SDL_OPENVR_LIBRARY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_OPENVR_LIBRARY => "SDL_OPENVR_LIBRARY"u8;
+
         [NativeTypeName("#define SDL_HINT_ORIENTATIONS \"SDL_ORIENTATIONS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ORIENTATIONS => "SDL_ORIENTATIONS"u8;
 
@@ -585,6 +588,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_VIDEO_ALLOW_SCREENSAVER \"SDL_VIDEO_ALLOW_SCREENSAVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_ALLOW_SCREENSAVER => "SDL_VIDEO_ALLOW_SCREENSAVER"u8;
+
+        [NativeTypeName("#define SDL_HINT_VIDEO_DISPLAY_PRIORITY \"SDL_VIDEO_DISPLAY_PRIORITY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VIDEO_DISPLAY_PRIORITY => "SDL_VIDEO_DISPLAY_PRIORITY"u8;
 
         [NativeTypeName("#define SDL_HINT_VIDEO_DOUBLE_BUFFER \"SDL_VIDEO_DOUBLE_BUFFER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_DOUBLE_BUFFER => "SDL_VIDEO_DOUBLE_BUFFER"u8;

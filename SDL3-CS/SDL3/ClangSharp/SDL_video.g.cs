@@ -809,6 +809,9 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER \"SDL.window.cocoa.metal_view_tag\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER => "SDL.window.cocoa.metal_view_tag"u8;
 
+        [NativeTypeName("#define SDL_PROP_WINDOW_OPENVR_OVERLAY_ID \"SDL.window.openvr.overlay_id\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_OPENVR_OVERLAY_ID => "SDL.window.openvr.overlay_id"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER \"SDL.window.vivante.display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER => "SDL.window.vivante.display"u8;
 
