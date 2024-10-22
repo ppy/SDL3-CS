@@ -28,6 +28,15 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    public enum SDL_Sandbox
+    {
+        SDL_SANDBOX_NONE = 0,
+        SDL_SANDBOX_UNKNOWN_CONTAINER,
+        SDL_SANDBOX_FLATPAK,
+        SDL_SANDBOX_SNAP,
+        SDL_SANDBOX_MACOS,
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -40,6 +49,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_IsTV();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Sandbox SDL_GetSandbox();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_OnApplicationWillTerminate();
