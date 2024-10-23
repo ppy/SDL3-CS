@@ -263,6 +263,12 @@ base_command = [
     "__va_list=byte*",
     "__va_list_tag=byte",
 
+    "--nativeTypeNamesToStrip",
+    "unsigned int",
+
+    "--with-type",
+    "*=int", # all types should be ints by default
+
     "--define-macro",
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
     "SDL_DECLSPEC=", # Not supported by llvm
