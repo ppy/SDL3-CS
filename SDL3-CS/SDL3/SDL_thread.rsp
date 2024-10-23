@@ -8,3 +8,7 @@ SDL_CreateThread=System.Runtime.Versioning
 --with-attribute
 SDL_CreateThread=UnsupportedOSPlatform("windows")
 SDL_CreateThreadWithStackSize=UnsupportedOSPlatform("windows")
+
+--exclude
+SDL_BeginThreadFunction
+SDL_EndThreadFunction

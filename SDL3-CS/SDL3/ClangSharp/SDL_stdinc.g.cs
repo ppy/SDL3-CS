@@ -619,33 +619,6 @@ namespace SDL
         [return: NativeTypeName("char *")]
         public static extern byte* Unsafe_SDL_iconv_string([NativeTypeName("const char *")] byte* tocode, [NativeTypeName("const char *")] byte* fromcode, [NativeTypeName("const char *")] byte* inbuf, [NativeTypeName("size_t")] nuint inbytesleft);
 
-        [return: NativeTypeName("bool")]
-        public static SDLBool SDL_size_mul_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
-        {
-            if (a != 0 && b > 0xffffffffffffffffUL / a)
-            {
-                return false;
-            }
-
-            *ret = a * b;
-            return true;
-        }
-
-        [return: NativeTypeName("bool")]
-        public static SDLBool SDL_size_add_check_overflow([NativeTypeName("size_t")] nuint a, [NativeTypeName("size_t")] nuint b, [NativeTypeName("size_t *")] nuint* ret)
-        {
-            if (b > 0xffffffffffffffffUL - a)
-            {
-                return false;
-            }
-
-            *ret = a + b;
-            return true;
-        }
-
-        [NativeTypeName("#define SDL_SIZE_MAX SIZE_MAX")]
-        public const ulong SDL_SIZE_MAX = 0xffffffffffffffffUL;
-
         [NativeTypeName("#define SDL_MAX_SINT8 ((Sint8)0x7F)")]
         public const sbyte SDL_MAX_SINT8 = ((sbyte)(0x7F));
 
@@ -702,18 +675,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_FLT_EPSILON 1.1920928955078125e-07F")]
         public const float SDL_FLT_EPSILON = 1.1920928955078125e-07F;
-
-        [NativeTypeName("#define SDL_PRIs64 \"lld\"")]
-        public static ReadOnlySpan<byte> SDL_PRIs64 => "lld"u8;
-
-        [NativeTypeName("#define SDL_PRIu64 \"llu\"")]
-        public static ReadOnlySpan<byte> SDL_PRIu64 => "llu"u8;
-
-        [NativeTypeName("#define SDL_PRIx64 \"llx\"")]
-        public static ReadOnlySpan<byte> SDL_PRIx64 => "llx"u8;
-
-        [NativeTypeName("#define SDL_PRIX64 \"llX\"")]
-        public static ReadOnlySpan<byte> SDL_PRIX64 => "llX"u8;
 
         [NativeTypeName("#define SDL_PRIs32 \"d\"")]
         public static ReadOnlySpan<byte> SDL_PRIs32 => "d"u8;
