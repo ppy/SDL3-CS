@@ -338,7 +338,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_uitoa", ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern byte* Unsafe_SDL_uitoa([NativeTypeName("unsigned int")] uint value, [NativeTypeName("char *")] byte* str, int radix);
+        public static extern byte* Unsafe_SDL_uitoa(uint value, [NativeTypeName("char *")] byte* str, int radix);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_ltoa", ExactSpelling = true)]
         [return: NativeTypeName("char *")]
