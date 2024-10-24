@@ -269,8 +269,13 @@ base_command = [
     "--with-type",
     "*=int", # all types should be ints by default
 
+    "--nativeTypeNamesToStrip",
+    "unsigned int",
+
     "--define-macro",
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
+    "SDL_SINT64_C(c)=c ## LL",
+    "SDL_UINT64_C(c)=c ## ULL",
     "SDL_DECLSPEC=", # Not supported by llvm
 
     # Undefine platform-specific macros - these will be defined on a per-case basis later.

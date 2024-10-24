@@ -84,7 +84,7 @@ namespace SDL
     {
     }
 
-    public enum SDL_GLattr
+    public enum SDL_GLAttr
     {
         SDL_GL_RED_SIZE,
         SDL_GL_GREEN_SIZE,
@@ -114,33 +114,6 @@ namespace SDL
         SDL_GL_CONTEXT_NO_ERROR,
         SDL_GL_FLOATBUFFERS,
         SDL_GL_EGL_PLATFORM,
-    }
-
-    public enum SDL_GLprofile
-    {
-        SDL_GL_CONTEXT_PROFILE_CORE = 0x0001,
-        SDL_GL_CONTEXT_PROFILE_COMPATIBILITY = 0x0002,
-        SDL_GL_CONTEXT_PROFILE_ES = 0x0004,
-    }
-
-    public enum SDL_GLcontextFlag
-    {
-        SDL_GL_CONTEXT_DEBUG_FLAG = 0x0001,
-        SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG = 0x0002,
-        SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG = 0x0004,
-        SDL_GL_CONTEXT_RESET_ISOLATION_FLAG = 0x0008,
-    }
-
-    public enum SDL_GLcontextReleaseFlag
-    {
-        SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE = 0x0000,
-        SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x0001,
-    }
-
-    public enum SDL_GLContextResetNotification
-    {
-        SDL_GL_CONTEXT_RESET_NO_NOTIFICATION = 0x0000,
-        SDL_GL_CONTEXT_RESET_LOSE_CONTEXT = 0x0001,
     }
 
     public enum SDL_HitTestResult
@@ -511,11 +484,11 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_GL_SetAttribute(SDL_GLattr attr, int value);
+        public static extern SDLBool SDL_GL_SetAttribute(SDL_GLAttr attr, int value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_GL_GetAttribute(SDL_GLattr attr, int* value);
+        public static extern SDLBool SDL_GL_GetAttribute(SDL_GLAttr attr, int* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_GLContext")]
@@ -567,79 +540,79 @@ namespace SDL
         public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_VIDEO_WAYLAND_WL_DISPLAY_POINTER => "SDL.video.wayland.wl_display"u8;
 
         [NativeTypeName("#define SDL_WINDOW_FULLSCREEN SDL_UINT64_C(0x0000000000000001)")]
-        public const ulong SDL_WINDOW_FULLSCREEN = (0x0000000000000001UL);
+        public const ulong SDL_WINDOW_FULLSCREEN = 0x0000000000000001UL;
 
         [NativeTypeName("#define SDL_WINDOW_OPENGL SDL_UINT64_C(0x0000000000000002)")]
-        public const ulong SDL_WINDOW_OPENGL = (0x0000000000000002UL);
+        public const ulong SDL_WINDOW_OPENGL = 0x0000000000000002UL;
 
         [NativeTypeName("#define SDL_WINDOW_OCCLUDED SDL_UINT64_C(0x0000000000000004)")]
-        public const ulong SDL_WINDOW_OCCLUDED = (0x0000000000000004UL);
+        public const ulong SDL_WINDOW_OCCLUDED = 0x0000000000000004UL;
 
         [NativeTypeName("#define SDL_WINDOW_HIDDEN SDL_UINT64_C(0x0000000000000008)")]
-        public const ulong SDL_WINDOW_HIDDEN = (0x0000000000000008UL);
+        public const ulong SDL_WINDOW_HIDDEN = 0x0000000000000008UL;
 
         [NativeTypeName("#define SDL_WINDOW_BORDERLESS SDL_UINT64_C(0x0000000000000010)")]
-        public const ulong SDL_WINDOW_BORDERLESS = (0x0000000000000010UL);
+        public const ulong SDL_WINDOW_BORDERLESS = 0x0000000000000010UL;
 
         [NativeTypeName("#define SDL_WINDOW_RESIZABLE SDL_UINT64_C(0x0000000000000020)")]
-        public const ulong SDL_WINDOW_RESIZABLE = (0x0000000000000020UL);
+        public const ulong SDL_WINDOW_RESIZABLE = 0x0000000000000020UL;
 
         [NativeTypeName("#define SDL_WINDOW_MINIMIZED SDL_UINT64_C(0x0000000000000040)")]
-        public const ulong SDL_WINDOW_MINIMIZED = (0x0000000000000040UL);
+        public const ulong SDL_WINDOW_MINIMIZED = 0x0000000000000040UL;
 
         [NativeTypeName("#define SDL_WINDOW_MAXIMIZED SDL_UINT64_C(0x0000000000000080)")]
-        public const ulong SDL_WINDOW_MAXIMIZED = (0x0000000000000080UL);
+        public const ulong SDL_WINDOW_MAXIMIZED = 0x0000000000000080UL;
 
         [NativeTypeName("#define SDL_WINDOW_MOUSE_GRABBED SDL_UINT64_C(0x0000000000000100)")]
-        public const ulong SDL_WINDOW_MOUSE_GRABBED = (0x0000000000000100UL);
+        public const ulong SDL_WINDOW_MOUSE_GRABBED = 0x0000000000000100UL;
 
         [NativeTypeName("#define SDL_WINDOW_INPUT_FOCUS SDL_UINT64_C(0x0000000000000200)")]
-        public const ulong SDL_WINDOW_INPUT_FOCUS = (0x0000000000000200UL);
+        public const ulong SDL_WINDOW_INPUT_FOCUS = 0x0000000000000200UL;
 
         [NativeTypeName("#define SDL_WINDOW_MOUSE_FOCUS SDL_UINT64_C(0x0000000000000400)")]
-        public const ulong SDL_WINDOW_MOUSE_FOCUS = (0x0000000000000400UL);
+        public const ulong SDL_WINDOW_MOUSE_FOCUS = 0x0000000000000400UL;
 
         [NativeTypeName("#define SDL_WINDOW_EXTERNAL SDL_UINT64_C(0x0000000000000800)")]
-        public const ulong SDL_WINDOW_EXTERNAL = (0x0000000000000800UL);
+        public const ulong SDL_WINDOW_EXTERNAL = 0x0000000000000800UL;
 
         [NativeTypeName("#define SDL_WINDOW_MODAL SDL_UINT64_C(0x0000000000001000)")]
-        public const ulong SDL_WINDOW_MODAL = (0x0000000000001000UL);
+        public const ulong SDL_WINDOW_MODAL = 0x0000000000001000UL;
 
         [NativeTypeName("#define SDL_WINDOW_HIGH_PIXEL_DENSITY SDL_UINT64_C(0x0000000000002000)")]
-        public const ulong SDL_WINDOW_HIGH_PIXEL_DENSITY = (0x0000000000002000UL);
+        public const ulong SDL_WINDOW_HIGH_PIXEL_DENSITY = 0x0000000000002000UL;
 
         [NativeTypeName("#define SDL_WINDOW_MOUSE_CAPTURE SDL_UINT64_C(0x0000000000004000)")]
-        public const ulong SDL_WINDOW_MOUSE_CAPTURE = (0x0000000000004000UL);
+        public const ulong SDL_WINDOW_MOUSE_CAPTURE = 0x0000000000004000UL;
 
         [NativeTypeName("#define SDL_WINDOW_MOUSE_RELATIVE_MODE SDL_UINT64_C(0x0000000000008000)")]
-        public const ulong SDL_WINDOW_MOUSE_RELATIVE_MODE = (0x0000000000008000UL);
+        public const ulong SDL_WINDOW_MOUSE_RELATIVE_MODE = 0x0000000000008000UL;
 
         [NativeTypeName("#define SDL_WINDOW_ALWAYS_ON_TOP SDL_UINT64_C(0x0000000000010000)")]
-        public const ulong SDL_WINDOW_ALWAYS_ON_TOP = (0x0000000000010000UL);
+        public const ulong SDL_WINDOW_ALWAYS_ON_TOP = 0x0000000000010000UL;
 
         [NativeTypeName("#define SDL_WINDOW_UTILITY SDL_UINT64_C(0x0000000000020000)")]
-        public const ulong SDL_WINDOW_UTILITY = (0x0000000000020000UL);
+        public const ulong SDL_WINDOW_UTILITY = 0x0000000000020000UL;
 
         [NativeTypeName("#define SDL_WINDOW_TOOLTIP SDL_UINT64_C(0x0000000000040000)")]
-        public const ulong SDL_WINDOW_TOOLTIP = (0x0000000000040000UL);
+        public const ulong SDL_WINDOW_TOOLTIP = 0x0000000000040000UL;
 
         [NativeTypeName("#define SDL_WINDOW_POPUP_MENU SDL_UINT64_C(0x0000000000080000)")]
-        public const ulong SDL_WINDOW_POPUP_MENU = (0x0000000000080000UL);
+        public const ulong SDL_WINDOW_POPUP_MENU = 0x0000000000080000UL;
 
         [NativeTypeName("#define SDL_WINDOW_KEYBOARD_GRABBED SDL_UINT64_C(0x0000000000100000)")]
-        public const ulong SDL_WINDOW_KEYBOARD_GRABBED = (0x0000000000100000UL);
+        public const ulong SDL_WINDOW_KEYBOARD_GRABBED = 0x0000000000100000UL;
 
         [NativeTypeName("#define SDL_WINDOW_VULKAN SDL_UINT64_C(0x0000000010000000)")]
-        public const ulong SDL_WINDOW_VULKAN = (0x0000000010000000UL);
+        public const ulong SDL_WINDOW_VULKAN = 0x0000000010000000UL;
 
         [NativeTypeName("#define SDL_WINDOW_METAL SDL_UINT64_C(0x0000000020000000)")]
-        public const ulong SDL_WINDOW_METAL = (0x0000000020000000UL);
+        public const ulong SDL_WINDOW_METAL = 0x0000000020000000UL;
 
         [NativeTypeName("#define SDL_WINDOW_TRANSPARENT SDL_UINT64_C(0x0000000040000000)")]
-        public const ulong SDL_WINDOW_TRANSPARENT = (0x0000000040000000UL);
+        public const ulong SDL_WINDOW_TRANSPARENT = 0x0000000040000000UL;
 
         [NativeTypeName("#define SDL_WINDOW_NOT_FOCUSABLE SDL_UINT64_C(0x0000000080000000)")]
-        public const ulong SDL_WINDOW_NOT_FOCUSABLE = (0x0000000080000000UL);
+        public const ulong SDL_WINDOW_NOT_FOCUSABLE = 0x0000000080000000UL;
 
         [NativeTypeName("#define SDL_WINDOWPOS_UNDEFINED_MASK 0x1FFF0000u")]
         public const uint SDL_WINDOWPOS_UNDEFINED_MASK = 0x1FFF0000U;
@@ -652,6 +625,39 @@ namespace SDL
 
         [NativeTypeName("#define SDL_WINDOWPOS_CENTERED SDL_WINDOWPOS_CENTERED_DISPLAY(0)")]
         public const uint SDL_WINDOWPOS_CENTERED = (0x2FFF0000U | (0));
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_PROFILE_CORE 0x0001")]
+        public const int SDL_GL_CONTEXT_PROFILE_CORE = 0x0001;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_PROFILE_COMPATIBILITY 0x0002")]
+        public const int SDL_GL_CONTEXT_PROFILE_COMPATIBILITY = 0x0002;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_PROFILE_ES 0x0004")]
+        public const int SDL_GL_CONTEXT_PROFILE_ES = 0x0004;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_DEBUG_FLAG 0x0001")]
+        public const int SDL_GL_CONTEXT_DEBUG_FLAG = 0x0001;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG 0x0002")]
+        public const int SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG = 0x0002;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG 0x0004")]
+        public const int SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG = 0x0004;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RESET_ISOLATION_FLAG 0x0008")]
+        public const int SDL_GL_CONTEXT_RESET_ISOLATION_FLAG = 0x0008;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE 0x0000")]
+        public const int SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE = 0x0000;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH 0x0001")]
+        public const int SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x0001;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RESET_NO_NOTIFICATION 0x0000")]
+        public const int SDL_GL_CONTEXT_RESET_NO_NOTIFICATION = 0x0000;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RESET_LOSE_CONTEXT 0x0001")]
+        public const int SDL_GL_CONTEXT_RESET_LOSE_CONTEXT = 0x0001;
 
         [NativeTypeName("#define SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN \"SDL.display.HDR_enabled\"")]
         public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN => "SDL.display.HDR_enabled"u8;
