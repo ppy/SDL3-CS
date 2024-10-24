@@ -10,3 +10,13 @@ SDL_SLOW_MEMSET
 # Prevent SDL from using compiler intrinsics __builtin_mul_overflow and __builtin_add_overflow.
 --additional
 --undefine-macro=__has_builtin
+
+# Exclude symbols that differ on Windows and Unix
+--exclude
+SDL_size_mul_check_overflow
+SDL_size_add_check_overflow
+SDL_SIZE_MAX
+SDL_PRIs64
+SDL_PRIu64
+SDL_PRIx64
+SDL_PRIX64

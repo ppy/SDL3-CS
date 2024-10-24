@@ -261,8 +261,13 @@ base_command = [
     "wchar_t *=IntPtr",  # wchar_t has a platform-defined size
     "bool=SDLBool",  # treat bool as C# helper type
 
+    "--nativeTypeNamesToStrip",
+    "unsigned int",
+
     "--define-macro",
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
+    "SDL_SINT64_C(c)=c ## LL",
+    "SDL_UINT64_C(c)=c ## ULL",
 
     "--additional",
     "--undefine-macro=_WIN32",
