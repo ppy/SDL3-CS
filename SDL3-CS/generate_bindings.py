@@ -263,9 +263,6 @@ base_command = [
     "__va_list=byte*",
     "__va_list_tag=byte",
 
-    "--nativeTypeNamesToStrip",
-    "unsigned int",
-
     "--with-type",
     "*=int", # all types should be ints by default
 
