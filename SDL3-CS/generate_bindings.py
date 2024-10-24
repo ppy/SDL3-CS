@@ -24,6 +24,7 @@ Example:
 
 import json
 import pathlib
+import platform
 import re
 import subprocess
 import sys
@@ -361,6 +362,11 @@ def should_skip(solo_headers: list[Header], header: Header):
 
 def main():
     solo_headers = [make_header_fuzzy(header_name) for header_name in sys.argv[1:]]
+
+    if platform.system() != "Windows":
+        base_command.extend([
+            "--include-directory", csproj_root / "include"
+        ])
 
     prepare_sdl_source()
 
