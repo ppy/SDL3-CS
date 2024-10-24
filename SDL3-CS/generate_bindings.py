@@ -266,6 +266,8 @@ base_command = [
 
     "--define-macro",
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
+    "SDL_SINT64_C(c)=c ## LL",
+    "SDL_UINT64_C(c)=c ## ULL",
 
     "--additional",
     "--undefine-macro=_WIN32",
