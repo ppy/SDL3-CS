@@ -287,11 +287,6 @@ base_command = [
     "--undefine-macro=__unix",
     "--undefine-macro=__unix__",
     "--undefine-macro=__APPLE__",
-    # GCC and LLVM use `long int` => int64, whereas MSVC uses `long long int` => int64.
-    # In terms of C# code gen, it's more accurate if we disable these to force LL, so
-    # that they're transformed to longs instead of ints.
-    "--undefine-macro=__LP64__",
-    "--undefine-macro=_LP64",
 ]
 
 
