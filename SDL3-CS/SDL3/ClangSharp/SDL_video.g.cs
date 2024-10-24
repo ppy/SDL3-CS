@@ -84,7 +84,7 @@ namespace SDL
     {
     }
 
-    public enum SDL_GLattr
+    public enum SDL_GLAttr
     {
         SDL_GL_RED_SIZE,
         SDL_GL_GREEN_SIZE,
@@ -114,33 +114,6 @@ namespace SDL
         SDL_GL_CONTEXT_NO_ERROR,
         SDL_GL_FLOATBUFFERS,
         SDL_GL_EGL_PLATFORM,
-    }
-
-    public enum SDL_GLprofile
-    {
-        SDL_GL_CONTEXT_PROFILE_CORE = 0x0001,
-        SDL_GL_CONTEXT_PROFILE_COMPATIBILITY = 0x0002,
-        SDL_GL_CONTEXT_PROFILE_ES = 0x0004,
-    }
-
-    public enum SDL_GLcontextFlag
-    {
-        SDL_GL_CONTEXT_DEBUG_FLAG = 0x0001,
-        SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG = 0x0002,
-        SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG = 0x0004,
-        SDL_GL_CONTEXT_RESET_ISOLATION_FLAG = 0x0008,
-    }
-
-    public enum SDL_GLcontextReleaseFlag
-    {
-        SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE = 0x0000,
-        SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x0001,
-    }
-
-    public enum SDL_GLContextResetNotification
-    {
-        SDL_GL_CONTEXT_RESET_NO_NOTIFICATION = 0x0000,
-        SDL_GL_CONTEXT_RESET_LOSE_CONTEXT = 0x0001,
     }
 
     public enum SDL_HitTestResult
@@ -511,11 +484,11 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_GL_SetAttribute(SDL_GLattr attr, int value);
+        public static extern SDLBool SDL_GL_SetAttribute(SDL_GLAttr attr, int value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_GL_GetAttribute(SDL_GLattr attr, int* value);
+        public static extern SDLBool SDL_GL_GetAttribute(SDL_GLAttr attr, int* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("SDL_GLContext")]
@@ -652,6 +625,39 @@ namespace SDL
 
         [NativeTypeName("#define SDL_WINDOWPOS_CENTERED SDL_WINDOWPOS_CENTERED_DISPLAY(0)")]
         public const uint SDL_WINDOWPOS_CENTERED = (0x2FFF0000U | (0));
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_PROFILE_CORE 0x0001")]
+        public const int SDL_GL_CONTEXT_PROFILE_CORE = 0x0001;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_PROFILE_COMPATIBILITY 0x0002")]
+        public const int SDL_GL_CONTEXT_PROFILE_COMPATIBILITY = 0x0002;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_PROFILE_ES 0x0004")]
+        public const int SDL_GL_CONTEXT_PROFILE_ES = 0x0004;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_DEBUG_FLAG 0x0001")]
+        public const int SDL_GL_CONTEXT_DEBUG_FLAG = 0x0001;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG 0x0002")]
+        public const int SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG = 0x0002;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG 0x0004")]
+        public const int SDL_GL_CONTEXT_ROBUST_ACCESS_FLAG = 0x0004;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RESET_ISOLATION_FLAG 0x0008")]
+        public const int SDL_GL_CONTEXT_RESET_ISOLATION_FLAG = 0x0008;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE 0x0000")]
+        public const int SDL_GL_CONTEXT_RELEASE_BEHAVIOR_NONE = 0x0000;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH 0x0001")]
+        public const int SDL_GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x0001;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RESET_NO_NOTIFICATION 0x0000")]
+        public const int SDL_GL_CONTEXT_RESET_NO_NOTIFICATION = 0x0000;
+
+        [NativeTypeName("#define SDL_GL_CONTEXT_RESET_LOSE_CONTEXT 0x0001")]
+        public const int SDL_GL_CONTEXT_RESET_LOSE_CONTEXT = 0x0001;
 
         [NativeTypeName("#define SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN \"SDL.display.HDR_enabled\"")]
         public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_HDR_ENABLED_BOOLEAN => "SDL.display.HDR_enabled"u8;
