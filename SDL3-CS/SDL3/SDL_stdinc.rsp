@@ -6,6 +6,7 @@
 SDL_SLOW_MEMCPY
 SDL_SLOW_MEMMOVE
 SDL_SLOW_MEMSET
+SDL_DISABLE_ALLOCA
 
 # Prevent SDL from using compiler intrinsics __builtin_mul_overflow and __builtin_add_overflow.
 --additional

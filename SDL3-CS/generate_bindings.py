@@ -24,6 +24,7 @@ Example:
 
 import json
 import pathlib
+import platform
 import re
 import subprocess
 import sys
@@ -260,6 +261,13 @@ base_command = [
     "char=byte",
     "wchar_t *=IntPtr",  # wchar_t has a platform-defined size
     "bool=SDLBool",  # treat bool as C# helper type
+    "__va_list=byte*",
+    "__va_list_tag=byte",
+    "Sint64=long",
+    "Uint64=ulong",
+
+    "--with-type",
+    "*=int",  # all enum types should be ints by default
 
     "--nativeTypeNamesToStrip",
     "unsigned int",
@@ -268,9 +276,18 @@ base_command = [
     "SDL_FUNCTION_POINTER_IS_VOID_POINTER",
     "SDL_SINT64_C(c)=c ## LL",
     "SDL_UINT64_C(c)=c ## ULL",
+    "SDL_DECLSPEC=",  # Not supported by llvm
 
+    # Undefine platform-specific macros - these will be defined on a per-case basis later.
     "--additional",
     "--undefine-macro=_WIN32",
+    "--undefine-macro=linux",
+    "--undefine-macro=__linux",
+    "--undefine-macro=__linux__",
+    "--undefine-macro=unix",
+    "--undefine-macro=__unix",
+    "--undefine-macro=__unix__",
+    "--undefine-macro=__APPLE__",
 ]
 
 
@@ -345,6 +362,11 @@ def should_skip(solo_headers: list[Header], header: Header):
 
 def main():
     solo_headers = [make_header_fuzzy(header_name) for header_name in sys.argv[1:]]
+
+    if platform.system() != "Windows":
+        base_command.extend([
+            "--include-directory", csproj_root / "include"
+        ])
 
     prepare_sdl_source()
 
