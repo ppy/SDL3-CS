@@ -1,14 +1,13 @@
 FROM ubuntu:24.04
 
 RUN apt-get update && \
-    apt-get install -y dotnet-sdk-8.0 python3 git build-essential && \
-    ln -s /usr/bin/python3 /usr/bin/python
+    apt-get install -y dotnet-sdk-8.0 python3 git build-essential
 
-WORKDIR /app
-COPY . .
+WORKDIR /tmp
+COPY .config/dotnet-tools.json .config/dotnet-tools.json
+COPY SDL3-CS/SDL3-CS.csproj SDL3-CS/SDL3-CS.csproj
 RUN dotnet tool restore && \
-    dotnet restore --ucr SDL3-CS/SDL3-CS.csproj && \
-    rm -r /app
+    dotnet restore --ucr SDL3-CS/SDL3-CS.csproj
 
 WORKDIR /
 RUN echo '#!/bin/bash' >> entrypoint.sh && \
