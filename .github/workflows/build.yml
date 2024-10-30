@@ -151,8 +151,7 @@ jobs:
           rm -rf $OUTPUT && mkdir -p $OUTPUT
 
           # Build SDL3
-          sed -i 's/abi=.*/abi="armeabi-v7a arm64-v8a x86 x86_64"/g' ./External/SDL/build-scripts/androidbuildlibs.sh
-          ./External/SDL/build-scripts/androidbuildlibs.sh NDK_LIBS_OUT="$OUTPUT"
+          ./External/SDL/build-scripts/androidbuildlibs.sh APP_ABI="armeabi-v7a arm64-v8a x86 x86_64" NDK_LIBS_OUT="$OUTPUT"
 
       - name: Build SDL3 Android Java
         run: |
