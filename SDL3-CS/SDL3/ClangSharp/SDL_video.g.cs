@@ -181,7 +181,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, [NativeTypeName("bool")] SDLBool include_high_density_modes, SDL_DisplayMode* mode);
+        public static extern SDLBool SDL_GetClosestFullscreenDisplayMode(SDL_DisplayID displayID, int w, int h, float refresh_rate, [NativeTypeName("bool")] SDLBool include_high_density_modes, SDL_DisplayMode* closest);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const SDL_DisplayMode *")]
@@ -841,6 +841,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_WAYLAND_SURFACE_POINTER \"SDL.window.wayland.surface\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WAYLAND_SURFACE_POINTER => "SDL.window.wayland.surface"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_WAYLAND_VIEWPORT_POINTER \"SDL.window.wayland.viewport\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WAYLAND_VIEWPORT_POINTER => "SDL.window.wayland.viewport"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_WAYLAND_EGL_WINDOW_POINTER \"SDL.window.wayland.egl_window\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WAYLAND_EGL_WINDOW_POINTER => "SDL.window.wayland.egl_window"u8;

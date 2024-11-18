@@ -5,6 +5,7 @@ using System;
 
 namespace SDL
 {
+    using static SDL_ArrayOrder;
     using static SDL_PixelFormat;
     using static SDL_PixelType;
     using static SDL_PackedOrder;
@@ -29,7 +30,13 @@ namespace SDL
         public static SDL_PixelType SDL_PIXELTYPE(SDL_PixelFormat X) => (SDL_PixelType)(((int)X >> 24) & 0x0F);
 
         [Macro]
-        public static SDL_PackedOrder SDL_PIXELORDER(SDL_PixelFormat X) => (SDL_PackedOrder)(((int)X >> 20) & 0x0F);
+        public static int SDL_PIXELORDER(SDL_PixelFormat X) => (((int)X >> 20) & 0x0F);
+
+        [Macro]
+        public static SDL_ArrayOrder SDL_PIXELORDER_Array(SDL_PixelFormat X) => (SDL_ArrayOrder)SDL_PIXELORDER(X);
+
+        [Macro]
+        public static SDL_PackedOrder SDL_PIXELORDER_Packed(SDL_PixelFormat X) => (SDL_PackedOrder)SDL_PIXELORDER(X);
 
         [Macro]
         public static SDL_PackedLayout SDL_PIXELLAYOUT(SDL_PixelFormat X) => (SDL_PackedLayout)(((int)X >> 16) & 0x0F);
@@ -73,14 +80,6 @@ namespace SDL
               (SDL_PIXELTYPE(format) == SDL_PIXELTYPE_ARRAYF32)));
 
         [Macro]
-        public static bool SDL_ISPIXELFORMAT_ALPHA(SDL_PixelFormat format) =>
-            ((SDL_ISPIXELFORMAT_PACKED(format) &&
-              ((SDL_PIXELORDER(format) == SDL_PACKEDORDER_ARGB) ||
-               (SDL_PIXELORDER(format) == SDL_PACKEDORDER_RGBA) ||
-               (SDL_PIXELORDER(format) == SDL_PACKEDORDER_ABGR) ||
-               (SDL_PIXELORDER(format) == SDL_PACKEDORDER_BGRA))));
-
-        [Macro]
         public static bool SDL_ISPIXELFORMAT_10BIT(SDL_PixelFormat format) =>
             (!SDL_ISPIXELFORMAT_FOURCC(format) &&
              ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_PACKED32) &&
@@ -95,6 +94,19 @@ namespace SDL
         [Macro]
         public static bool SDL_ISPIXELFORMAT_FOURCC(SDL_PixelFormat format) =>
             ((format != 0) && (SDL_PIXELFLAG(format) != 1));
+
+        [Macro]
+        public static bool SDL_ISPIXELFORMAT_ALPHA(SDL_PixelFormat format) =>
+            ((SDL_ISPIXELFORMAT_PACKED(format) &&
+              ((SDL_PIXELORDER_Packed(format) == SDL_PACKEDORDER_ARGB) ||
+               (SDL_PIXELORDER_Packed(format) == SDL_PACKEDORDER_RGBA) ||
+               (SDL_PIXELORDER_Packed(format) == SDL_PACKEDORDER_ABGR) ||
+               (SDL_PIXELORDER_Packed(format) == SDL_PACKEDORDER_BGRA))) ||
+             (SDL_ISPIXELFORMAT_ARRAY(format) &&
+              ((SDL_PIXELORDER_Array(format) == SDL_ARRAYORDER_ARGB) ||
+               (SDL_PIXELORDER_Array(format) == SDL_ARRAYORDER_RGBA) ||
+               (SDL_PIXELORDER_Array(format) == SDL_ARRAYORDER_ABGR) ||
+               (SDL_PIXELORDER_Array(format) == SDL_ARRAYORDER_BGRA))));
 
         [Macro]
         public static SDL_Colorspace SDL_DEFINE_COLORSPACE(UInt32 type, UInt32 range, UInt32 primaries, UInt32 transfer, UInt32 matrix, UInt32 chroma)

@@ -76,6 +76,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_ANDROID_BLOCK_ON_PAUSE \"SDL_ANDROID_BLOCK_ON_PAUSE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ANDROID_BLOCK_ON_PAUSE => "SDL_ANDROID_BLOCK_ON_PAUSE"u8;
 
+        [NativeTypeName("#define SDL_HINT_ANDROID_LOW_LATENCY_AUDIO \"SDL_ANDROID_LOW_LATENCY_AUDIO\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_ANDROID_LOW_LATENCY_AUDIO => "SDL_ANDROID_LOW_LATENCY_AUDIO"u8;
+
         [NativeTypeName("#define SDL_HINT_ANDROID_TRAP_BACK_BUTTON \"SDL_ANDROID_TRAP_BACK_BUTTON\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ANDROID_TRAP_BACK_BUTTON => "SDL_ANDROID_TRAP_BACK_BUTTON"u8;
 

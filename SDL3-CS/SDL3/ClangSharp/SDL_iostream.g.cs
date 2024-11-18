@@ -142,6 +142,14 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SaveFile_IO(SDL_IOStream* src, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint datasize, [NativeTypeName("bool")] SDLBool closeio);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SaveFile([NativeTypeName("const char *")] byte* file, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint datasize);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_ReadU8(SDL_IOStream* src, [NativeTypeName("Uint8 *")] byte* value);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
