@@ -34,8 +34,14 @@ unsafe_prefix = "Unsafe_"
 
 repository_root = pathlib.Path(__file__).resolve().parents[1]
 
-SDL_root = repository_root / "External" / "SDL"
-SDL_include_root = SDL_root / "include"
+SDL_lib_root = "External"
+SDL_libs = ["SDL", "SDL_image", "SDL_ttf"]
+SDL_lib_include_root = {
+    "SDL3": SDL_lib_root + "/SDL/include",
+    "SDL3_image": SDL_lib_root + "/SDL_image/include",
+    "SDL3_ttf": SDL_lib_root + "/SDL_ttf/include"
+}
+
 SDL3_header_base = "SDL3"  # base folder of header files
 
 csproj_root = repository_root / "SDL3-CS"
@@ -44,12 +50,13 @@ csproj_root = repository_root / "SDL3-CS"
 class Header:
     """Represents a SDL header file that is used in ClangSharp generation."""
 
-    def __init__(self, base: str, name: str, output_suffix=None):
-        assert base == SDL3_header_base
+    def __init__(self, base: str, name: str, folder: str, output_suffix=None):
+        assert base in SDL_lib_include_root
         assert name.startswith("SDL")
         assert not name.endswith(".h")
         self.base = base
         self.name = name
+        self.folder = folder
         self.output_suffix = output_suffix
 
     def __str__(self):
@@ -60,8 +67,8 @@ class Header:
         return f"{self.name}.h"
 
     def input_file(self):
-        """Input header file relative to SDL_include_root."""
-        return f"{self.base}/{self.name}.h"
+        """Input header file relative to repository_root."""
+        return f"{self.folder}/{self.base}/{self.name}.h"
 
     def output_file(self):
         """Location of generated C# file."""
@@ -99,14 +106,14 @@ def make_header_fuzzy(s: str) -> Header:
     if name.endswith(".h"):
         name = name.replace(".h", "")
 
-    return Header(base, name)
+    return Header(base, name, SDL_lib_include_root[base])
 
 
 def add(s: str):
     base, name = s.split("/")
     assert s.endswith(".h")
     name = name.replace(".h", "")
-    return Header(base, name)
+    return Header(base, name, SDL_lib_include_root[base])
 
 
 headers = [
@@ -160,22 +167,26 @@ headers = [
     add("SDL3/SDL_version.h"),
     add("SDL3/SDL_video.h"),
     add("SDL3/SDL_vulkan.h"),
+    add("SDL3_image/SDL_image.h"),
+    add("SDL3_ttf/SDL_ttf.h"),
+    add("SDL3_ttf/SDL_textengine.h"),
 ]
 
 
 def prepare_sdl_source():
-    subprocess.run([
-        "git",
-        "reset",
-        "--hard",
-        "HEAD"
-    ], cwd=SDL_root)
+    for lib in SDL_libs:
+        subprocess.run([
+            "git",
+            "reset",
+            "--hard",
+            "HEAD"
+        ], cwd=repository_root / SDL_lib_root / lib)
 
 
 def get_sdl_api_dump():
     subprocess.run([
         sys.executable,
-        SDL_root / "src" / "dynapi" / "gendynapi.py",
+        repository_root / SDL_lib_root / "SDL" / "src" / "dynapi" / "gendynapi.py",
         "--dump"
     ])
 
@@ -250,9 +261,11 @@ base_command = [
     "windows-types",
     "generate-macro-bindings",
 
-    "--file-directory", SDL_include_root,
-    "--include-directory", SDL_include_root,
-    "--libraryPath", "SDL3",
+    "--file-directory", repository_root,
+    "--include-directory", repository_root / SDL_lib_include_root["SDL3"],
+    "--include-directory", repository_root / SDL_lib_include_root["SDL3_image"],
+    "--include-directory", repository_root / SDL_lib_include_root["SDL3_ttf"],
+#    "--libraryPath", "SDL3",
     "--methodClassName", "SDL3",
     "--namespace", "SDL",
 
@@ -295,6 +308,7 @@ def run_clangsharp(command, header: Header):
     cmd = command + [
         "--file", header.input_file(),
         "--output", header.output_file(),
+        "--libraryPath", header.base,
     ]
 
     for rsp in header.rsp_files():
