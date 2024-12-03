@@ -46,8 +46,7 @@ namespace SDL
         public static extern int IMG_Version();
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("IMG_InitFlags")]
-        public static extern uint IMG_Init([NativeTypeName("IMG_InitFlags")] uint flags);
+        public static extern IMG_InitFlags IMG_Init(IMG_InitFlags flags);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void IMG_Quit();
@@ -258,9 +257,6 @@ namespace SDL
 
         [NativeTypeName("#define SDL_IMAGE_MICRO_VERSION 0")]
         public const int SDL_IMAGE_MICRO_VERSION = 0;
-
-        [NativeTypeName("#define SDL_IMAGE_VERSION SDL_VERSIONNUM(SDL_IMAGE_MAJOR_VERSION, SDL_IMAGE_MINOR_VERSION, SDL_IMAGE_MICRO_VERSION)")]
-        public const int SDL_IMAGE_VERSION = ((3) * 1000000 + (1) * 1000 + (0));
 
         [NativeTypeName("#define IMG_INIT_JPG 0x00000001")]
         public const int IMG_INIT_JPG = 0x00000001;

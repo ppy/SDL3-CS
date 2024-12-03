@@ -221,7 +221,7 @@ def check_generated_functions(sdl_api, header, generated_file_paths):
             print(f"[⚠️ Warning] Function {name} not found in generated files:", *generated_file_paths)
 
 
-defined_constant_regex = re.compile(r"\[Constant]\s*public (const|static readonly) \w+ (SDL_\w+) = ", re.MULTILINE)
+defined_constant_regex = re.compile(r"\[Constant]\s*public (const|static readonly) \w+ (\w+_\w+) = ", re.MULTILINE)
 
 
 def get_manually_written_symbols(header):
@@ -232,11 +232,10 @@ def get_manually_written_symbols(header):
             text = f.read()
             for match in defined_constant_regex.finditer(text):
                 m = match.group(2)
-                assert m.startswith("SDL_")
                 yield m
 
 
-typedef_enum_regex = re.compile(r"\[Typedef]\s*public enum (SDL_\w+)", re.MULTILINE)
+typedef_enum_regex = re.compile(r"\[Typedef]\s*public enum (\w+_\w+)", re.MULTILINE)
 
 
 def get_typedefs():
