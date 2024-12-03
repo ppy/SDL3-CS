@@ -102,4 +102,48 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
     cp SDL/install_output/lib/libSDL3.dylib ../native/$NAME/libSDL3.dylib
 fi
 
+# Build SDL_image
+pushd SDL_image >/dev/null
+git reset --hard HEAD
+# -DSDLIMAGE_AVIF=OFF is used because windows requires special setup to build avif support (nasm)
+# TODO: Add support for avif on windows (VisualC script uses dynamic imports)
+cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/" -DSDLIMAGE_AVIF=OFF
+cmake --build build/ --config Release
+$SUDO cmake --install build/ --prefix install_output --config Release
+popd >/dev/null
+
+# Move build lib into correct folders
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    cp SDL_image/install_output/bin/SDL3_image.dll ../native/$NAME/SDL3_image.dll
+    cp SDL_image/install_output/bin/libwebp.dll ../native/$NAME/libwebp.dll
+    cp SDL_image/install_output/bin/libwebpdemux.dll ../native/$NAME/libwebpdemux.dll
+    cp SDL_image/install_output/bin/tiff.dll ../native/$NAME/tiff.dll
+elif [[ $RUNNER_OS == 'Linux' ]]; then
+    cp SDL_image/install_output/lib/libSDL3_image.so ../native/$NAME/libSDL3_image.so
+    # TODO: find out if webp, etc. are also needed on linux here
+elif [[ $RUNNER_OS == 'macOS' ]]; then
+    cp SDL_image/install_output/lib/libSDL3_image.dylib ../native/$NAME/libSDL3_image.dylib
+    # TODO: find out if webp, etc. are also needed on macOS here
+fi
+
+
+# Build SDL_ttf
+pushd SDL_ttf >/dev/null
+git reset --hard HEAD
+cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/"
+cmake --build build/ --config Release
+$SUDO cmake --install build/ --prefix install_output --config Release
+popd >/dev/null
+
+# Move build lib into correct folders
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    cp SDL3_ttf/install_output/bin/SDL3_ttf.dll ../native/$NAME/SDL3_ttf.dll
+elif [[ $RUNNER_OS == 'Linux' ]]; then
+    cp SDL3_ttf/install_output/lib/libSDL3_ttf.so ../native/$NAME/libSDL3_ttf.so
+elif [[ $RUNNER_OS == 'macOS' ]]; then
+    cp SDL3_ttf/install_output/lib/libSDL3_ttf.dylib ../native/$NAME/libSDL3_ttf.dylib
+fi
+
+
+# pop External
 popd >/dev/null
