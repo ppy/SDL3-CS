@@ -265,7 +265,6 @@ base_command = [
     "--include-directory", repository_root / SDL_lib_include_root["SDL3"],
     "--include-directory", repository_root / SDL_lib_include_root["SDL3_image"],
     "--include-directory", repository_root / SDL_lib_include_root["SDL3_ttf"],
-#    "--libraryPath", "SDL3",
     "--methodClassName", "SDL3",
     "--namespace", "SDL",
 

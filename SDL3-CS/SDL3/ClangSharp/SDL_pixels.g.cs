@@ -89,7 +89,6 @@ namespace SDL
         SDL_PACKEDLAYOUT_1010102,
     }
 
-    [NativeTypeName("int")]
     public enum SDL_PixelFormat : uint
     {
         SDL_PIXELFORMAT_UNKNOWN = 0,
@@ -240,7 +239,6 @@ namespace SDL
         SDL_CHROMA_LOCATION_TOPLEFT = 3,
     }
 
-    [NativeTypeName("int")]
     public enum SDL_Colorspace : uint
     {
         SDL_COLORSPACE_UNKNOWN = 0,

@@ -15,14 +15,43 @@ namespace SDL.SourceGeneration
     {
         public readonly Dictionary<string, List<GeneratedMethod>> Methods = new Dictionary<string, List<GeneratedMethod>>();
 
+        /// <summary>
+        /// Checks whether the method is from any SDL library.
+        /// It identifies those by checking if the method has a DllImport attribute for a library starting with "SDL".
+        /// </summary>
+        private static bool IsMethodFromSDL(MethodDeclarationSyntax methodNode)
+        {
+            if (methodNode.AttributeLists.Count == 0)
+                return false;
+
+            foreach (var attributeList in methodNode.AttributeLists)
+            {
+                foreach (var attribute in attributeList.Attributes)
+                {
+                    if (attribute.Name.ToString() != "DllImport") continue;
+                    if (attribute.ArgumentList == null || attribute.ArgumentList.Arguments.Count <= 0) continue; // this should never happen, but rather continue than throw
+
+                    var libraryNameArgument = attribute.ArgumentList.Arguments[0];
+
+                    if (libraryNameArgument.Expression is LiteralExpressionSyntax literal &&
+                        literal.Token.ValueText.StartsWith("SDL", StringComparison.Ordinal))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {
             if (syntaxNode is MethodDeclarationSyntax method)
             {
                 string name = method.Identifier.ValueText;
-                bool isUnsafe = name.StartsWith($"{Helper.UnsafePrefix}SDL_", StringComparison.Ordinal);
+                bool isUnsafe = name.StartsWith($"{Helper.UnsafePrefix}", StringComparison.Ordinal);
 
-                if (!name.StartsWith("SDL_", StringComparison.Ordinal) && !isUnsafe)
+                if (!IsMethodFromSDL(method) && !isUnsafe)
                     return;
 
                 if (method.ParameterList.Parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword)))
