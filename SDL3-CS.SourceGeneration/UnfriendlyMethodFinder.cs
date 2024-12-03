@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -15,33 +16,19 @@ namespace SDL.SourceGeneration
     {
         public readonly Dictionary<string, List<GeneratedMethod>> Methods = new Dictionary<string, List<GeneratedMethod>>();
 
+        private static readonly string[] sdlPrefixes = ["SDL", "TTF", "IMG"];
+
         /// <summary>
         /// Checks whether the method is from any SDL library.
-        /// It identifies those by checking if the method has a DllImport attribute for a library starting with "SDL".
+        /// It identifies those by checking the SDL prefix in the method name.
         /// </summary>
         private static bool IsMethodFromSDL(MethodDeclarationSyntax methodNode)
         {
-            if (methodNode.AttributeLists.Count == 0)
+            string? libraryPrefix = methodNode.Identifier.ValueText.Split('_').FirstOrDefault();
+            if (libraryPrefix == null)
                 return false;
 
-            foreach (var attributeList in methodNode.AttributeLists)
-            {
-                foreach (var attribute in attributeList.Attributes)
-                {
-                    if (attribute.Name.ToString() != "DllImport") continue;
-                    if (attribute.ArgumentList == null || attribute.ArgumentList.Arguments.Count <= 0) continue; // this should never happen, but rather continue than throw
-
-                    var libraryNameArgument = attribute.ArgumentList.Arguments[0];
-
-                    if (libraryNameArgument.Expression is LiteralExpressionSyntax literal &&
-                        literal.Token.ValueText.StartsWith("SDL", StringComparison.Ordinal))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
+            return sdlPrefixes.Contains(libraryPrefix);
         }
 
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)

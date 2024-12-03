@@ -40,7 +40,7 @@ namespace SDL
         public int* delays;
     }
 
-    public static unsafe partial class SDL3
+    public static unsafe partial class SDL3_image
     {
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int IMG_Version();

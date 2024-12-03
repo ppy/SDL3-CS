@@ -73,22 +73,22 @@ class Header:
     def output_file(self):
         """Location of generated C# file."""
         if self.output_suffix is None:
-            return csproj_root / f"{self.base}/ClangSharp/{self.name}.g.cs"
+            return repository_root / f"{self.base}-CS" / f"{self.base}/ClangSharp/{self.name}.g.cs"
         else:
-            return csproj_root / f"{self.base}/ClangSharp/{self.name}.{self.output_suffix}.g.cs"
+            return repository_root / f"{self.base}-CS" / f"{self.base}/ClangSharp/{self.name}.{self.output_suffix}.g.cs"
 
     def rsp_files(self):
         """Location of ClangSharp response files."""
-        yield csproj_root / f"{self.base}/{self.name}.rsp"
+        yield repository_root / f"{self.base}-CS" / f"{self.base}/{self.name}.rsp"
         if self.output_suffix is not None:
-            yield csproj_root / f"{self.base}/{self.name}.{self.output_suffix}.rsp"
+            yield repository_root / f"{self.base}-CS" / f"{self.base}/{self.name}.{self.output_suffix}.rsp"
 
     def cs_file(self):
         """Location of the manually-written C# file that implements some parts of the header."""
         if self.output_suffix is None:
-            return csproj_root / f"{self.base}/{self.name}.cs"
+            return repository_root / f"{self.base}-CS" / f"{self.base}/{self.name}.cs"
         else:
-            return csproj_root / f"{self.base}/{self.name}.{self.output_suffix}.cs"
+            return repository_root / f"{self.base}-CS" / f"{self.base}/{self.name}.{self.output_suffix}.cs"
 
 
 def make_header_fuzzy(s: str) -> Header:
@@ -265,7 +265,6 @@ base_command = [
     "--include-directory", repository_root / SDL_lib_include_root["SDL3"],
     "--include-directory", repository_root / SDL_lib_include_root["SDL3_image"],
     "--include-directory", repository_root / SDL_lib_include_root["SDL3_ttf"],
-    "--methodClassName", "SDL3",
     "--namespace", "SDL",
 
     "--remap",
@@ -308,6 +307,8 @@ def run_clangsharp(command, header: Header):
         "--file", header.input_file(),
         "--output", header.output_file(),
         "--libraryPath", header.base,
+        
+        "--methodClassName", header.base,
     ]
 
     for rsp in header.rsp_files():

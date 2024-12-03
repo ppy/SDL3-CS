@@ -12,8 +12,8 @@
     <Authors>ppy Pty Ltd</Authors>
     <Company>ppy Pty Ltd</Company>
     <Copyright>Copyright (c) 2024 ppy Pty Ltd</Copyright>
-    <Product>ppy.SDL3-CS</Product>
-    <PackageId>ppy.SDL3-CS</PackageId>
+    <Product>ppy.SDL3_ttf-CS</Product>
+    <PackageId>ppy.SDL3_ttf-CS</PackageId>
     <PackageReleaseNotes>Automated release.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/ppy/SDL3-CS</PackageProjectUrl>
@@ -34,42 +34,46 @@
     <PackageReference Include="libClangSharp" Version="17.0.4">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+
+    <PackageReference Include="ppy.SDL3-CS" Version="*">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-x64\SDL3.dll">
+    <None Include="$(MSBuildThisFileDirectory)..\native\win-x64\SDL3_ttf.dll">
       <PackagePath>runtimes/win-x64/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-arm64\SDL3.dll">
+    <None Include="$(MSBuildThisFileDirectory)..\native\win-arm64\SDL3_ttf.dll">
       <PackagePath>runtimes/win-arm64/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-x86\SDL3.dll">
+    <None Include="$(MSBuildThisFileDirectory)..\native\win-x86\SDL3_ttf.dll">
       <PackagePath>runtimes/win-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\osx-x64\libSDL3.dylib">
+    <None Include="$(MSBuildThisFileDirectory)..\native\osx-x64\libSDL3_ttf.dylib">
       <PackagePath>runtimes/osx-x64/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\osx-arm64\libSDL3.dylib">
+    <None Include="$(MSBuildThisFileDirectory)..\native\osx-arm64\libSDL3_ttf.dylib">
       <PackagePath>runtimes/osx-arm64/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\linux-x64\libSDL3.so">
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-x64\libSDL3_ttf.so">
       <PackagePath>runtimes/linux-x64/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\linux-x86\libSDL3.so">
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-x86\libSDL3_ttf.so">
       <PackagePath>runtimes/linux-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\linux-arm64\libSDL3.so">
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-arm64\libSDL3_ttf.so">
       <PackagePath>runtimes/linux-arm64/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\linux-arm\libSDL3.so">
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-arm\libSDL3_ttf.so">
       <PackagePath>runtimes/linux-arm/native</PackagePath>
       <Pack>true</Pack>
     </None>
@@ -77,19 +81,19 @@
       <PackagePath>runtimes/ios/native/SDL3.xcframework</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\android\armeabi-v7a\libSDL3.so">
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\armeabi-v7a\libSDL3_ttf.so">
       <PackagePath>runtimes/android-arm/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\android\arm64-v8a\libSDL3.so">
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\arm64-v8a\libSDL3_ttf.so">
       <PackagePath>runtimes/android-arm64/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\android\x86_64\libSDL3.so">
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\x86_64\libSDL3_ttf.so">
       <PackagePath>runtimes/android-x64/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\android\x86\libSDL3.so">
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\x86\libSDL3_ttf.so">
       <PackagePath>runtimes/android-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>

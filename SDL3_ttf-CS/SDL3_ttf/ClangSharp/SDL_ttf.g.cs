@@ -84,7 +84,7 @@ namespace SDL
         public SDL_Rect rect;
     }
 
-    public static unsafe partial class SDL3
+    public static unsafe partial class SDL3_ttf
     {
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int TTF_Version();
