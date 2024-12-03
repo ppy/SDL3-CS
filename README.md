@@ -8,6 +8,15 @@ The library is functional and available for public use. While it is actively mai
 
 Contributions to keep the bindings up-to-date with upstream SDL3 changes are welcome. If you have improvements or updates, feel free to submit a pull request.
 
+## Generating Bindings
+
+Bindings should be generated via the provided Dockerfile:
+
+```sh
+docker build -t 'sdl-gen' .
+docker run --rm -v .:/app -w /app -it sdl-gen
+```
+
 ## License
 
 This code is released under [MIT](LICENCE).
