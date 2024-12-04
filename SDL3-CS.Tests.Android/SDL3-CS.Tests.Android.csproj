@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SDL3-CS.Tests\SDL3-CS.Tests.csproj"/>
-    <ProjectReference Include="..\SDL3-CS.Android\SDL3-CS.Android.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
