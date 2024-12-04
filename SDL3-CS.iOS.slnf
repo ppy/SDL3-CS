@@ -3,6 +3,8 @@
     "path": "SDL3-CS.sln",
     "projects": [
       "SDL3-CS\\SDL3-CS.csproj",
+      "SDL3_ttf-CS\\SDL3-CS_ttf.csproj",
+      "SDL3_image-CS\\SDL3_image-CS.csproj",
       "SDL3-CS.SourceGeneration\\SDL3-CS.SourceGeneration.csproj",
       "SDL3-CS.Tests\\SDL3-CS.Tests.csproj",
       "SDL3-CS.Tests.iOS\\SDL3-CS.Tests.iOS.csproj"

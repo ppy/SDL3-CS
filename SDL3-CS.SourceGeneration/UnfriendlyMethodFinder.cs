@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -15,14 +16,29 @@ namespace SDL.SourceGeneration
     {
         public readonly Dictionary<string, List<GeneratedMethod>> Methods = new Dictionary<string, List<GeneratedMethod>>();
 
+        private static readonly string[] sdlPrefixes = ["SDL", "TTF", "IMG"];
+
+        /// <summary>
+        /// Checks whether the method is from any SDL library.
+        /// It identifies those by checking the SDL prefix in the method name.
+        /// </summary>
+        private static bool IsMethodFromSDL(MethodDeclarationSyntax methodNode)
+        {
+            string? libraryPrefix = methodNode.Identifier.ValueText.Split('_').FirstOrDefault();
+            if (libraryPrefix == null)
+                return false;
+
+            return sdlPrefixes.Contains(libraryPrefix);
+        }
+
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {
             if (syntaxNode is MethodDeclarationSyntax method)
             {
                 string name = method.Identifier.ValueText;
-                bool isUnsafe = name.StartsWith($"{Helper.UnsafePrefix}SDL_", StringComparison.Ordinal);
+                bool isUnsafe = name.StartsWith($"{Helper.UnsafePrefix}", StringComparison.Ordinal);
 
-                if (!name.StartsWith("SDL_", StringComparison.Ordinal) && !isUnsafe)
+                if (!IsMethodFromSDL(method) && !isUnsafe)
                     return;
 
                 if (method.ParameterList.Parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword)))
