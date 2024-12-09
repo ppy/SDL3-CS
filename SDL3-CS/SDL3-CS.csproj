@@ -73,7 +73,7 @@
       <PackagePath>runtimes/linux-arm/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3_ttf.xcframework\**\*">
+    <None Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3.xcframework\**\*">
       <PackagePath>runtimes/ios/native/SDL3.xcframework</PackagePath>
       <Pack>true</Pack>
     </None>
