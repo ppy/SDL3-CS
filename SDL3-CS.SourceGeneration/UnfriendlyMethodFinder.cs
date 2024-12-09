@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -16,7 +15,7 @@ namespace SDL.SourceGeneration
     {
         public readonly Dictionary<string, List<GeneratedMethod>> Methods = new Dictionary<string, List<GeneratedMethod>>();
 
-        private static readonly string[] sdlPrefixes = ["SDL", "TTF", "IMG"];
+        private static readonly string[] sdlPrefixes = ["SDL_", "TTF_", "IMG_"];
 
         /// <summary>
         /// Checks whether the method is from any SDL library.
@@ -24,11 +23,13 @@ namespace SDL.SourceGeneration
         /// </summary>
         private static bool IsMethodFromSDL(MethodDeclarationSyntax methodNode)
         {
-            string? libraryPrefix = methodNode.Identifier.ValueText.Split('_').FirstOrDefault();
-            if (libraryPrefix == null)
-                return false;
+            foreach (string prefix in sdlPrefixes)
+            {
+                if (methodNode.Identifier.ValueText.StartsWith(prefix, StringComparison.Ordinal))
+                    return true;
+            }
 
-            return sdlPrefixes.Contains(libraryPrefix);
+            return false;
         }
 
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
@@ -36,7 +37,7 @@ namespace SDL.SourceGeneration
             if (syntaxNode is MethodDeclarationSyntax method)
             {
                 string name = method.Identifier.ValueText;
-                bool isUnsafe = name.StartsWith($"{Helper.UnsafePrefix}", StringComparison.Ordinal);
+                bool isUnsafe = name.StartsWith(Helper.UnsafePrefix, StringComparison.Ordinal);
 
                 if (!IsMethodFromSDL(method) && !isUnsafe)
                     return;
