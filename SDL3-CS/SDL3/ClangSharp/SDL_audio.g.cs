@@ -89,6 +89,14 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_IsAudioDevicePhysical(SDL_AudioDeviceID devid);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_IsAudioDevicePlayback(SDL_AudioDeviceID devid);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_PauseAudioDevice(SDL_AudioDeviceID dev);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
