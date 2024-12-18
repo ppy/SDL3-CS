@@ -107,11 +107,11 @@ namespace SDL
         }
 
         [MustDisposeResource]
-        public static unsafe SDLPointerArray<SDL_Window>? SDL_GetWindows()
+        public static unsafe SDLOpaquePointerArray<SDL_Window>? SDL_GetWindows()
         {
             int count;
             var array = SDL_GetWindows(&count);
-            return SDLArray.Create(array, count);
+            return SDLArray.CreateOpaque(array, count);
         }
     }
 }
