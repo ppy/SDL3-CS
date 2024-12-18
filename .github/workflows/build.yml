@@ -89,6 +89,9 @@ jobs:
         with:
           submodules: true
 
+      - name: Disable CoreBluetooth
+        run: echo "#define SDL_HIDAPI_DISABLED 1" >> External/SDL/include/build_config/SDL_build_config_ios.h
+
       - name: Build (iOS)
         run: xcodebuild -project External/SDL/Xcode/SDL/SDL.xcodeproj -target SDL3.xcframework -configuration Release
 
