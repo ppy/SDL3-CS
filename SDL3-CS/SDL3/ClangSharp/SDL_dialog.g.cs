@@ -37,6 +37,13 @@ namespace SDL
         public byte* pattern;
     }
 
+    public enum SDL_FileDialogType
+    {
+        SDL_FILEDIALOG_OPENFILE,
+        SDL_FILEDIALOG_SAVEFILE,
+        SDL_FILEDIALOG_OPENFOLDER,
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -47,5 +54,32 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_ShowOpenFolderDialog([NativeTypeName("SDL_DialogFileCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte**, int, void> callback, [NativeTypeName("void*")] IntPtr userdata, SDL_Window* window, [NativeTypeName("const char *")] byte* default_location, [NativeTypeName("bool")] SDLBool allow_many);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_ShowFileDialogWithProperties(SDL_FileDialogType type, [NativeTypeName("SDL_DialogFileCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte**, int, void> callback, [NativeTypeName("void*")] IntPtr userdata, SDL_PropertiesID props);
+
+        [NativeTypeName("#define SDL_PROP_FILE_DIALOG_FILTERS_POINTER \"SDL.filedialog.filters\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_FILE_DIALOG_FILTERS_POINTER => "SDL.filedialog.filters"u8;
+
+        [NativeTypeName("#define SDL_PROP_FILE_DIALOG_NFILTERS_NUMBER \"SDL.filedialog.nfilters\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_FILE_DIALOG_NFILTERS_NUMBER => "SDL.filedialog.nfilters"u8;
+
+        [NativeTypeName("#define SDL_PROP_FILE_DIALOG_WINDOW_POINTER \"SDL.filedialog.window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_FILE_DIALOG_WINDOW_POINTER => "SDL.filedialog.window"u8;
+
+        [NativeTypeName("#define SDL_PROP_FILE_DIALOG_LOCATION_STRING \"SDL.filedialog.location\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_FILE_DIALOG_LOCATION_STRING => "SDL.filedialog.location"u8;
+
+        [NativeTypeName("#define SDL_PROP_FILE_DIALOG_MANY_BOOLEAN \"SDL.filedialog.many\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_FILE_DIALOG_MANY_BOOLEAN => "SDL.filedialog.many"u8;
+
+        [NativeTypeName("#define SDL_PROP_FILE_DIALOG_TITLE_STRING \"SDL.filedialog.title\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_FILE_DIALOG_TITLE_STRING => "SDL.filedialog.title"u8;
+
+        [NativeTypeName("#define SDL_PROP_FILE_DIALOG_ACCEPT_STRING \"SDL.filedialog.accept\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_FILE_DIALOG_ACCEPT_STRING => "SDL.filedialog.accept"u8;
+
+        [NativeTypeName("#define SDL_PROP_FILE_DIALOG_CANCEL_STRING \"SDL.filedialog.cancel\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_FILE_DIALOG_CANCEL_STRING => "SDL.filedialog.cancel"u8;
     }
 }

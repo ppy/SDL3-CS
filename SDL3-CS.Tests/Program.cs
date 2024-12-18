@@ -32,6 +32,8 @@ namespace SDL.Tests
                 window.Setup();
                 window.Create();
 
+                printWindows();
+
                 const SDL_Keymod state = SDL_Keymod.SDL_KMOD_CAPS | SDL_Keymod.SDL_KMOD_ALT;
                 SDL_SetModState(state);
                 Debug.Assert(SDL_GetModState() == state);
@@ -62,6 +64,18 @@ namespace SDL.Tests
                     SDL_DisplayMode mode = modes[j];
                     Console.WriteLine($"{mode.w}x{mode.h}@{mode.refresh_rate}");
                 }
+            }
+        }
+
+        private static unsafe void printWindows()
+        {
+            using var windows = SDL_GetWindows();
+            if (windows == null)
+                return;
+
+            for (int i = 0; i < windows.Count; i++)
+            {
+                Console.WriteLine($"Window {i} title: {SDL_GetWindowTitle(windows[i])}");
             }
         }
     }

@@ -711,6 +711,19 @@ namespace SDL
         public SDL_CameraID which;
     }
 
+    public partial struct SDL_RenderEvent
+    {
+        public SDL_EventType type;
+
+        [NativeTypeName("Uint32")]
+        public uint reserved;
+
+        [NativeTypeName("Uint64")]
+        public ulong timestamp;
+
+        public SDL_WindowID windowID;
+    }
+
     public partial struct SDL_TouchFingerEvent
     {
         public SDL_EventType type;
@@ -1063,6 +1076,9 @@ namespace SDL
 
         [FieldOffset(0)]
         public SDL_PenAxisEvent paxis;
+
+        [FieldOffset(0)]
+        public SDL_RenderEvent render;
 
         [FieldOffset(0)]
         public SDL_DropEvent drop;
