@@ -4,3 +4,7 @@
 # ClangSharp recommended remapping
 --remap
 SDL_hid_device_=SDL_hid_device
+
+# iOS builds opt out of HIDAPI
+--with-attribute
+*=UnsupportedOSPlatform("iOS")
