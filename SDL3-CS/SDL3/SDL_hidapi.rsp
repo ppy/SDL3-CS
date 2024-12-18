@@ -6,5 +6,36 @@
 SDL_hid_device_=SDL_hid_device
 
 # iOS builds opt out of HIDAPI
+--with-using
+# the SDL_CreateThread symbol name doesn't matter, it just needs to be any symbol defined in SDL_hidapi.h 
+SDL_hid_device=System.Runtime.Versioning
+# The wildcard '*' is supposed to be used here but it's currently broken in the tool
+# See: https://github.com/dotnet/ClangSharp/pull/567
+# --with-attribute
+# *=UnsupportedOSPlatform("iOS")
 --with-attribute
-*=UnsupportedOSPlatform("iOS")
+SDL_hid_device=UnsupportedOSPlatform("iOS")
+SDL_hid_bus_type=UnsupportedOSPlatform("iOS")
+SDL_hid_device_info=UnsupportedOSPlatform("iOS")
+SDL_hid_init=UnsupportedOSPlatform("iOS")
+SDL_hid_exit=UnsupportedOSPlatform("iOS")
+SDL_hid_device_change_count=UnsupportedOSPlatform("iOS")
+SDL_hid_enumerate=UnsupportedOSPlatform("iOS")
+SDL_hid_free_enumeration=UnsupportedOSPlatform("iOS")
+SDL_hid_open=UnsupportedOSPlatform("iOS")
+SDL_hid_open_path=UnsupportedOSPlatform("iOS")
+SDL_hid_write=UnsupportedOSPlatform("iOS")
+SDL_hid_read_timeout=UnsupportedOSPlatform("iOS")
+SDL_hid_read=UnsupportedOSPlatform("iOS")
+SDL_hid_set_nonblocking=UnsupportedOSPlatform("iOS")
+SDL_hid_send_feature_report=UnsupportedOSPlatform("iOS")
+SDL_hid_get_feature_report=UnsupportedOSPlatform("iOS")
+SDL_hid_get_input_report=UnsupportedOSPlatform("iOS")
+SDL_hid_close=UnsupportedOSPlatform("iOS")
+SDL_hid_get_manufacturer_string=UnsupportedOSPlatform("iOS")
+SDL_hid_get_product_string=UnsupportedOSPlatform("iOS")
+SDL_hid_get_serial_number_string=UnsupportedOSPlatform("iOS")
+SDL_hid_get_indexed_string=UnsupportedOSPlatform("iOS")
+SDL_hid_get_device_info=UnsupportedOSPlatform("iOS")
+SDL_hid_get_report_descriptor=UnsupportedOSPlatform("iOS")
+SDL_hid_ble_scan=UnsupportedOSPlatform("iOS")
