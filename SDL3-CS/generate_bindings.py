@@ -398,7 +398,6 @@ def main():
     if not should_skip(solo_headers, main_header):
         generate_platform_specific_headers(sdl_api, main_header, [
             (["SDL_PLATFORM_WINDOWS"], "Windows", "Windows"),
-            (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
         ])
 
     system_header = add("SDL3/SDL_system.h")
