@@ -156,6 +156,7 @@ headers = [
     add("SDL3/SDL_thread.h"),
     add("SDL3/SDL_time.h"),
     add("SDL3/SDL_timer.h"),
+    add("SDL3/SDL_tray.h"),
     add("SDL3/SDL_touch.h"),
     add("SDL3/SDL_version.h"),
     add("SDL3/SDL_video.h"),
