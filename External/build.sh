@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 pushd "$(dirname "$0")" >/dev/null
 
 # Check if environment variables are defined
@@ -8,7 +10,7 @@ if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
     exit 1
 fi
 
-SUDO=$(which sudo)
+SUDO=$(which sudo || exit 0)
 
 if [[ $RUNNER_OS == 'Linux' ]]; then
 # Setup Linux dependencies
