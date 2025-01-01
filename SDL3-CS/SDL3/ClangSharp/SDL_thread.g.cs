@@ -40,6 +40,14 @@ namespace SDL
         SDL_THREAD_PRIORITY_TIME_CRITICAL,
     }
 
+    public enum SDL_ThreadState
+    {
+        SDL_THREAD_UNKNOWN,
+        SDL_THREAD_ALIVE,
+        SDL_THREAD_DETACHED,
+        SDL_THREAD_COMPLETE,
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -64,6 +72,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_WaitThread(SDL_Thread* thread, int* status);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_ThreadState SDL_GetThreadState(SDL_Thread* thread);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DetachThread(SDL_Thread* thread);

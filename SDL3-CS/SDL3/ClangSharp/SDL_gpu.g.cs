@@ -403,7 +403,7 @@ namespace SDL
         SDL_GPU_SWAPCHAINCOMPOSITION_SDR,
         SDL_GPU_SWAPCHAINCOMPOSITION_SDR_LINEAR,
         SDL_GPU_SWAPCHAINCOMPOSITION_HDR_EXTENDED_LINEAR,
-        SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2048,
+        SDL_GPU_SWAPCHAINCOMPOSITION_HDR10_ST2084,
     }
 
     public partial struct SDL_GPUViewport
@@ -1468,24 +1468,6 @@ namespace SDL
         [NativeTypeName("#define SDL_GPU_COLORCOMPONENT_A (1u << 3)")]
         public const uint SDL_GPU_COLORCOMPONENT_A = (1U << 3);
 
-        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT \"SDL.gpu.createtexture.d3d12.clear.r\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT => "SDL.gpu.createtexture.d3d12.clear.r"u8;
-
-        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT \"SDL.gpu.createtexture.d3d12.clear.g\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT => "SDL.gpu.createtexture.d3d12.clear.g"u8;
-
-        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT \"SDL.gpu.createtexture.d3d12.clear.b\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT => "SDL.gpu.createtexture.d3d12.clear.b"u8;
-
-        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT \"SDL.gpu.createtexture.d3d12.clear.a\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT => "SDL.gpu.createtexture.d3d12.clear.a"u8;
-
-        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT \"SDL.gpu.createtexture.d3d12.clear.depth\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT => "SDL.gpu.createtexture.d3d12.clear.depth"u8;
-
-        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 \"SDL.gpu.createtexture.d3d12.clear.stencil\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 => "SDL.gpu.createtexture.d3d12.clear.stencil"u8;
-
         [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN \"SDL.gpu.device.create.debugmode\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_DEBUGMODE_BOOLEAN => "SDL.gpu.device.create.debugmode"u8;
 
@@ -1515,5 +1497,23 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING \"SDL.gpu.device.create.d3d12.semantic\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING => "SDL.gpu.device.create.d3d12.semantic"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT \"SDL.gpu.createtexture.d3d12.clear.r\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_R_FLOAT => "SDL.gpu.createtexture.d3d12.clear.r"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT \"SDL.gpu.createtexture.d3d12.clear.g\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_G_FLOAT => "SDL.gpu.createtexture.d3d12.clear.g"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT \"SDL.gpu.createtexture.d3d12.clear.b\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_B_FLOAT => "SDL.gpu.createtexture.d3d12.clear.b"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT \"SDL.gpu.createtexture.d3d12.clear.a\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_A_FLOAT => "SDL.gpu.createtexture.d3d12.clear.a"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT \"SDL.gpu.createtexture.d3d12.clear.depth\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_DEPTH_FLOAT => "SDL.gpu.createtexture.d3d12.clear.depth"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 \"SDL.gpu.createtexture.d3d12.clear.stencil\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_CREATETEXTURE_D3D12_CLEAR_STENCIL_UINT8 => "SDL.gpu.createtexture.d3d12.clear.stencil"u8;
     }
 }

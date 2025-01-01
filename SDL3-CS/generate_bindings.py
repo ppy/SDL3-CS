@@ -156,6 +156,7 @@ headers = [
     add("SDL3/SDL_thread.h"),
     add("SDL3/SDL_time.h"),
     add("SDL3/SDL_timer.h"),
+    add("SDL3/SDL_tray.h"),
     add("SDL3/SDL_touch.h"),
     add("SDL3/SDL_version.h"),
     add("SDL3/SDL_video.h"),
@@ -398,7 +399,6 @@ def main():
     if not should_skip(solo_headers, main_header):
         generate_platform_specific_headers(sdl_api, main_header, [
             (["SDL_PLATFORM_WINDOWS"], "Windows", "Windows"),
-            (["SDL_PLATFORM_GDK"], "GDK", "Windows"),
         ])
 
     system_header = add("SDL3/SDL_system.h")

@@ -38,5 +38,8 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_EnterAppMainCallbacks(int argc, [NativeTypeName("char *[]")] byte** argv, [NativeTypeName("SDL_AppInit_func")] delegate* unmanaged[Cdecl]<IntPtr*, int, byte**, SDL_AppResult> appinit, [NativeTypeName("SDL_AppIterate_func")] delegate* unmanaged[Cdecl]<IntPtr, SDL_AppResult> appiter, [NativeTypeName("SDL_AppEvent_func")] delegate* unmanaged[Cdecl]<IntPtr, SDL_Event*, SDL_AppResult> appevent, [NativeTypeName("SDL_AppQuit_func")] delegate* unmanaged[Cdecl]<IntPtr, SDL_AppResult, void> appquit);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_GDKSuspendComplete();
     }
 }

@@ -322,7 +322,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_strtok_r", ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern byte* Unsafe_SDL_strtok_r([NativeTypeName("char *")] byte* s1, [NativeTypeName("const char *")] byte* s2, [NativeTypeName("char **")] byte** saveptr);
+        public static extern byte* Unsafe_SDL_strtok_r([NativeTypeName("char *")] byte* str, [NativeTypeName("const char *")] byte* delim, [NativeTypeName("char **")] byte** saveptr);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
