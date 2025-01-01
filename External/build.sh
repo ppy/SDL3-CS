@@ -10,7 +10,9 @@ if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
     exit 1
 fi
 
-SUDO=$(which sudo || exit 0)
+if [[ $RUNNER_OS != 'Windows' ]]; then
+	SUDO=$(which sudo)
+fi
 
 if [[ $RUNNER_OS == 'Linux' ]]; then
 # Setup Linux dependencies
