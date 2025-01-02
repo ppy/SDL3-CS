@@ -89,7 +89,7 @@ fi
 
 # Build SDL
 pushd SDL
-git reset --hard HEAD
+git reset --hard HEAD || echo "Failed to clean up the repository"
 
 if [[ $RUNNER_OS == 'Windows' ]]; then
     echo "Patching SDL to not include gameinput.h"
