@@ -93,7 +93,7 @@ git reset --hard HEAD
 
 if [[ $RUNNER_OS == 'Windows' ]]; then
     echo "Patching SDL to not include gameinput.h"
-    patch -Np1 -i ../exclude-gameinput.patch
+    sed -i 's/#include <gameinput.h>/#_include <gameinput.h>/g' CMakeLists.txt
 fi
 
 cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
