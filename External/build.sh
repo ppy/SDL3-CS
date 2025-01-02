@@ -2,7 +2,7 @@
 
 set -e
 
-pushd "$(dirname "$0")" >/dev/null
+pushd "$(dirname "$0")"
 
 # Check if environment variables are defined
 if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
@@ -88,7 +88,7 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
 fi
 
 # Build SDL
-pushd SDL >/dev/null
+pushd SDL
 git reset --hard HEAD
 
 if [[ $RUNNER_OS == 'Windows' ]]; then
@@ -99,7 +99,7 @@ fi
 cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
-popd >/dev/null
+popd
 
 # Move build lib into correct folders
 if [[ $RUNNER_OS == 'Windows' ]]; then
@@ -110,4 +110,4 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
     cp SDL/install_output/lib/libSDL3.dylib ../native/$NAME/libSDL3.dylib
 fi
 
-popd >/dev/null
+popd
