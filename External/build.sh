@@ -1,6 +1,8 @@
 #!/bin/bash
 
-pushd "$(dirname "$0")" >/dev/null
+set -e
+
+pushd "$(dirname "$0")"
 
 # Check if environment variables are defined
 if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
@@ -8,7 +10,7 @@ if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
     exit 1
 fi
 
-SUDO=$(which sudo)
+SUDO=$(which sudo || exit 0)
 
 if [[ $RUNNER_OS == 'Linux' ]]; then
 # Setup Linux dependencies
@@ -34,12 +36,12 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
     $SUDO apt-get install -y \
         $GCC \
         $GPP \
-	git \
+        git \
         cmake \
         ninja-build \
         wayland-scanner++ \
         wayland-protocols \
-	meson \
+        meson \
         pkg-config$TARGET_APT_ARCH \
         libasound2-dev$TARGET_APT_ARCH \
         libdbus-1-dev$TARGET_APT_ARCH \
@@ -47,9 +49,9 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
         libgl1-mesa-dev$TARGET_APT_ARCH \
         libgles2-mesa-dev$TARGET_APT_ARCH \
         libglu1-mesa-dev$TARGET_APT_ARCH \
-	libgtk-3-dev$TARGET_APT_ARCH \
+        libgtk-3-dev$TARGET_APT_ARCH \
         libibus-1.0-dev$TARGET_APT_ARCH \
-	libpango1.0-dev$TARGET_APT_ARCH \
+        libpango1.0-dev$TARGET_APT_ARCH \
         libpulse-dev$TARGET_APT_ARCH \
         libsndio-dev$TARGET_APT_ARCH \
         libudev-dev$TARGET_APT_ARCH \
@@ -72,9 +74,9 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
     if [[ $TARGET_APT_ARCH != :i386 ]]; then
         # Build libdecor.
         # This is required so that window decorations can work on wayland.
-	# The support will only be enabled in SDL, but we're not shipping the libdecor binaries
-	# because making them work from a c# app as everything else does (via runtimes) is too difficult.
-	# Also skip i386 because attempting to support this for i386 is a pain.
+        # The support will only be enabled in SDL, but we're not shipping the libdecor binaries
+        # because making them work from a c# app as everything else does (via runtimes) is too difficult.
+        # Also skip i386 because attempting to support this for i386 is a pain.
         # Special shoutouts to gnome for refusing to support server-side decorations.
         git clone https://gitlab.freedesktop.org/libdecor/libdecor.git
         cd libdecor
@@ -86,12 +88,18 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
 fi
 
 # Build SDL
-pushd SDL >/dev/null
-git reset --hard HEAD
+pushd SDL
+git reset --hard HEAD || echo "Failed to clean up the repository"
+
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    echo "Patching SDL to not include gameinput.h"
+    sed -i 's/#include <gameinput.h>/#_include <gameinput.h>/g' CMakeLists.txt
+fi
+
 cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
-popd >/dev/null
+popd
 
 # Move build lib into correct folders
 if [[ $RUNNER_OS == 'Windows' ]]; then
@@ -102,4 +110,4 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
     cp SDL/install_output/lib/libSDL3.dylib ../native/$NAME/libSDL3.dylib
 fi
 
-popd >/dev/null
+popd
