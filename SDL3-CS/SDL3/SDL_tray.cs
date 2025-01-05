@@ -18,13 +18,11 @@ namespace SDL
 
     public static partial class SDL3
     {
-        // The code below is currently incorrect because of https://github.com/libsdl-org/SDL/issues/11787.
-        // [MustDisposeResource]
-        // public static unsafe SDLOpaquePointerArray<SDL_TrayEntry>? SDL_GetTrayEntries(SDL_TrayMenu* menu)
-        // {
-        //     int count;
-        //     var array = SDL_GetTrayEntries(menu, &count);
-        //     return SDLArray.CreateOpaque(array, count);
-        // }
+        public static unsafe SDLConstOpaquePointerArray<SDL_TrayEntry>? SDL_GetTrayEntries(SDL_TrayMenu* menu)
+        {
+            int count;
+            var array = SDL_GetTrayEntries(menu, &count);
+            return SDLArray.CreateConstOpaque(array, count);
+        }
     }
 }

@@ -25,6 +25,13 @@ namespace SDL.Tests
             Assert.That(exit != null, SDL_GetError);
             SetCallback(exit, () => running = false);
 
+            var entries = SDL_GetTrayEntries(RootMenu);
+            Assert.That(entries, Is.Not.Null, SDL_GetError);
+            Assert.That(entries!.Count, Is.EqualTo(3));
+
+            for (int i = 0; i < entries.Count; i++)
+                Console.WriteLine($"{i}. {SDL_GetTrayEntryLabel(entries[i]) ?? "<null>"}");
+
             running = true;
 
             while (running)
