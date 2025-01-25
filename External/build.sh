@@ -12,6 +12,8 @@ fi
 
 SUDO=$(which sudo || exit 0)
 
+export DEBIAN_FRONTEND=noninteractive
+
 if [[ $RUNNER_OS == 'Linux' ]]; then
 # Setup Linux dependencies
     if [[ $TARGET_APT_ARCH == :i386 ]]; then

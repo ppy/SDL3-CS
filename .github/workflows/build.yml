@@ -14,24 +14,20 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - { name: win-x64,     os: windows-latest, flags: -A x64 }
-          - { name: win-x86,     os: windows-latest, flags: -A Win32 }
-          - { name: win-arm64,   os: windows-latest, flags: -A ARM64 }
-          - { name: linux-x64,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":amd64" }
-          - { name: linux-x86,   os: ubuntu-20.04,   flags: -GNinja -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32", target_apt_arch: ":i386" }
-          - { name: linux-arm64, os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":arm64", container: arm64v8/ubuntu, docker_platform: linux/arm64/v8 }
-          - { name: linux-arm,   os: ubuntu-20.04,   flags: -GNinja, target_apt_arch: ":armhf", container: arm32v7/ubuntu, docker_platform: linux/arm/v7 }
-          - { name: osx-x64,     os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.14 }
+          - { name: win-x64,     os: windows-latest,   flags: -A x64 }
+          - { name: win-x86,     os: windows-latest,   flags: -A Win32 }
+          - { name: win-arm64,   os: windows-latest,   flags: -A ARM64 }
+          - { name: linux-x64,   os: ubuntu-20.04,     flags: -GNinja, target_apt_arch: ":amd64" }
+          - { name: linux-x86,   os: ubuntu-20.04,     flags: -GNinja -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32", target_apt_arch: ":i386" }
+          - { name: linux-arm64, os: ubuntu-22.04-arm, flags: -GNinja, target_apt_arch: ":arm64", container: "arm64v8/ubuntu:20.04" }
+          - { name: linux-arm,   os: ubuntu-22.04-arm, flags: -GNinja, target_apt_arch: ":armhf", container: "arm32v7/ubuntu:20.04" }
+          - { name: osx-x64,     os: macos-latest,     flags: -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.14 }
           # NOTE: macOS 11.0 is the first released supported by Apple Silicon.
-          - { name: osx-arm64,   os: macos-latest,   flags: -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 }
+          - { name: osx-arm64,   os: macos-latest,     flags: -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 }
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: true
-
-      - name: Set up QEMU
-        if: contains(matrix.platform.container, 'arm')
-        uses: docker/setup-qemu-action@v3
 
       - name: Build (Linux ARM)
         if: contains(matrix.platform.container, 'arm')
@@ -45,7 +41,6 @@ jobs:
             -e RUNNER_OS=${{ runner.os }}
             -e FLAGS=${{ matrix.platform.flags }}
             -e BUILD_TYPE=${{ env.BUILD_TYPE }}
-            --platform ${{ matrix.platform.docker_platform }}
           run: |
             cd /workspace
             ./External/build.sh
