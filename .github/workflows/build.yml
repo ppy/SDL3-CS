@@ -30,7 +30,7 @@ jobs:
           submodules: true
 
       - name: Build (Linux ARM)
-        if: contains(matrix.platform.target_apt_arch, 'arm')
+        if: contains(matrix.platform.container, 'arm')
         uses: addnab/docker-run-action@v3
         with:
           image: ${{ matrix.platform.container }}
