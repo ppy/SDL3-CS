@@ -27,7 +27,10 @@ namespace SDL
 {
     public static partial class SDL3
     {
-        [NativeTypeName("#define SDLK_SCANCODE_MASK (1u<<30)")]
+        [NativeTypeName("#define SDLK_EXTENDED_MASK (1u << 29)")]
+        public const uint SDLK_EXTENDED_MASK = (1U << 29);
+
+        [NativeTypeName("#define SDLK_SCANCODE_MASK (1u << 30)")]
         public const uint SDLK_SCANCODE_MASK = (1U << 30);
 
         [NativeTypeName("#define SDLK_UNKNOWN 0x00000000u")]
@@ -777,6 +780,27 @@ namespace SDL
         [NativeTypeName("#define SDLK_ENDCALL 0x40000122u")]
         public const uint SDLK_ENDCALL = 0x40000122U;
 
+        [NativeTypeName("#define SDLK_LEFT_TAB 0x20000001u")]
+        public const uint SDLK_LEFT_TAB = 0x20000001U;
+
+        [NativeTypeName("#define SDLK_LEVEL5_SHIFT 0x20000002u")]
+        public const uint SDLK_LEVEL5_SHIFT = 0x20000002U;
+
+        [NativeTypeName("#define SDLK_MULTI_KEY_COMPOSE 0x20000003u")]
+        public const uint SDLK_MULTI_KEY_COMPOSE = 0x20000003U;
+
+        [NativeTypeName("#define SDLK_LMETA 0x20000004u")]
+        public const uint SDLK_LMETA = 0x20000004U;
+
+        [NativeTypeName("#define SDLK_RMETA 0x20000005u")]
+        public const uint SDLK_RMETA = 0x20000005U;
+
+        [NativeTypeName("#define SDLK_LHYPER 0x20000006u")]
+        public const uint SDLK_LHYPER = 0x20000006U;
+
+        [NativeTypeName("#define SDLK_RHYPER 0x20000007u")]
+        public const uint SDLK_RHYPER = 0x20000007U;
+
         [NativeTypeName("#define SDL_KMOD_NONE 0x0000u")]
         public const uint SDL_KMOD_NONE = 0x0000U;
 
@@ -785,6 +809,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_KMOD_RSHIFT 0x0002u")]
         public const uint SDL_KMOD_RSHIFT = 0x0002U;
+
+        [NativeTypeName("#define SDL_KMOD_LEVEL5 0x0004u")]
+        public const uint SDL_KMOD_LEVEL5 = 0x0004U;
 
         [NativeTypeName("#define SDL_KMOD_LCTRL 0x0040u")]
         public const uint SDL_KMOD_LCTRL = 0x0040U;
