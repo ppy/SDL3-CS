@@ -39,12 +39,6 @@ namespace SDL
 
     public static partial class SDL3
     {
-        [NativeTypeName("#define SDL_PEN_MOUSEID ((SDL_MouseID)-2)")]
-        public const SDL_MouseID SDL_PEN_MOUSEID = ((SDL_MouseID)(-2));
-
-        [NativeTypeName("#define SDL_PEN_TOUCHID ((SDL_TouchID)-2)")]
-        public const SDL_TouchID SDL_PEN_TOUCHID = ((SDL_TouchID)(-2));
-
         [NativeTypeName("#define SDL_PEN_INPUT_DOWN (1u << 0)")]
         public const uint SDL_PEN_INPUT_DOWN = (1U << 0);
 
