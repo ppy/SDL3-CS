@@ -115,6 +115,7 @@ namespace SDL
         SDL_EVENT_FINGER_DOWN = 0x700,
         SDL_EVENT_FINGER_UP,
         SDL_EVENT_FINGER_MOTION,
+        SDL_EVENT_FINGER_CANCELED,
         SDL_EVENT_CLIPBOARD_UPDATE = 0x900,
         SDL_EVENT_DROP_FILE = 0x1000,
         SDL_EVENT_DROP_TEXT,
@@ -903,7 +904,7 @@ namespace SDL
         public SDLBool owner;
 
         [NativeTypeName("Sint32")]
-        public int n_mime_types;
+        public int num_mime_types;
 
         [NativeTypeName("const char **")]
         public byte** mime_types;

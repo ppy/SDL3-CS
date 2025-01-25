@@ -98,6 +98,9 @@ namespace SDL
         public static extern void SDL_SetTrayEntryCallback(SDL_TrayEntry* entry, [NativeTypeName("SDL_TrayCallback")] delegate* unmanaged[Cdecl]<IntPtr, SDL_TrayEntry*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_ClickTrayEntry(SDL_TrayEntry* entry);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroyTray(SDL_Tray* tray);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -108,6 +111,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Tray* SDL_GetTrayMenuParentTray(SDL_TrayMenu* menu);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void SDL_UpdateTrays();
 
         [NativeTypeName("#define SDL_TRAYENTRY_BUTTON 0x00000001u")]
         public const uint SDL_TRAYENTRY_BUTTON = 0x00000001U;

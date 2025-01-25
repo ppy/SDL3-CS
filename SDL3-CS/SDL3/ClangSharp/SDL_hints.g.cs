@@ -268,6 +268,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_JOYSTICK_DEVICE \"SDL_JOYSTICK_DEVICE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_DEVICE => "SDL_JOYSTICK_DEVICE"u8;
 
+        [NativeTypeName("#define SDL_HINT_JOYSTICK_ENHANCED_REPORTS \"SDL_JOYSTICK_ENHANCED_REPORTS\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_ENHANCED_REPORTS => "SDL_JOYSTICK_ENHANCED_REPORTS"u8;
+
         [NativeTypeName("#define SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES \"SDL_JOYSTICK_FLIGHTSTICK_DEVICES\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_FLIGHTSTICK_DEVICES => "SDL_JOYSTICK_FLIGHTSTICK_DEVICES"u8;
 
@@ -319,17 +322,11 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_PS4_REPORT_INTERVAL \"SDL_JOYSTICK_HIDAPI_PS4_REPORT_INTERVAL\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_PS4_REPORT_INTERVAL => "SDL_JOYSTICK_HIDAPI_PS4_REPORT_INTERVAL"u8;
 
-        [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_PS4_RUMBLE \"SDL_JOYSTICK_HIDAPI_PS4_RUMBLE\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_PS4_RUMBLE => "SDL_JOYSTICK_HIDAPI_PS4_RUMBLE"u8;
-
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_PS5 \"SDL_JOYSTICK_HIDAPI_PS5\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_PS5 => "SDL_JOYSTICK_HIDAPI_PS5"u8;
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_PS5_PLAYER_LED \"SDL_JOYSTICK_HIDAPI_PS5_PLAYER_LED\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_PS5_PLAYER_LED => "SDL_JOYSTICK_HIDAPI_PS5_PLAYER_LED"u8;
-
-        [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_PS5_RUMBLE \"SDL_JOYSTICK_HIDAPI_PS5_RUMBLE\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_PS5_RUMBLE => "SDL_JOYSTICK_HIDAPI_PS5_RUMBLE"u8;
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_SHIELD \"SDL_JOYSTICK_HIDAPI_SHIELD\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_SHIELD => "SDL_JOYSTICK_HIDAPI_SHIELD"u8;
@@ -454,6 +451,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH \"SDL_MAC_OPENGL_ASYNC_DISPATCH\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH => "SDL_MAC_OPENGL_ASYNC_DISPATCH"u8;
 
+        [NativeTypeName("#define SDL_HINT_MAC_OPTION_AS_ALT \"SDL_MAC_OPTION_AS_ALT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_MAC_OPTION_AS_ALT => "SDL_MAC_OPTION_AS_ALT"u8;
+
         [NativeTypeName("#define SDL_HINT_MAC_SCROLL_MOMENTUM \"SDL_MAC_SCROLL_MOMENTUM\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MAC_SCROLL_MOMENTUM => "SDL_MAC_SCROLL_MOMENTUM"u8;
 
@@ -507,6 +507,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_OPENGL_LIBRARY \"SDL_OPENGL_LIBRARY\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENGL_LIBRARY => "SDL_OPENGL_LIBRARY"u8;
+
+        [NativeTypeName("#define SDL_HINT_EGL_LIBRARY \"SDL_EGL_LIBRARY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_EGL_LIBRARY => "SDL_EGL_LIBRARY"u8;
 
         [NativeTypeName("#define SDL_HINT_OPENGL_ES_DRIVER \"SDL_OPENGL_ES_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENGL_ES_DRIVER => "SDL_OPENGL_ES_DRIVER"u8;
@@ -618,6 +621,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES \"SDL_VIDEO_MAC_FULLSCREEN_SPACES\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_MAC_FULLSCREEN_SPACES => "SDL_VIDEO_MAC_FULLSCREEN_SPACES"u8;
+
+        [NativeTypeName("#define SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY \"SDL_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY => "SDL_VIDEO_MAC_FULLSCREEN_MENU_VISIBILITY"u8;
 
         [NativeTypeName("#define SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS \"SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS => "SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS"u8;
@@ -762,5 +768,11 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_ASSERT \"SDL_ASSERT\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ASSERT => "SDL_ASSERT"u8;
+
+        [NativeTypeName("#define SDL_HINT_PEN_MOUSE_EVENTS \"SDL_PEN_MOUSE_EVENTS\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_PEN_MOUSE_EVENTS => "SDL_PEN_MOUSE_EVENTS"u8;
+
+        [NativeTypeName("#define SDL_HINT_PEN_TOUCH_EVENTS \"SDL_PEN_TOUCH_EVENTS\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_PEN_TOUCH_EVENTS => "SDL_PEN_TOUCH_EVENTS"u8;
     }
 }
