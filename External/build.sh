@@ -22,11 +22,6 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
 
     $SUDO apt-get update -y -qq
 
-    if [[ $TARGET_APT_ARCH == :i386 ]]; then
-        # Workaround GitHub's ubuntu-20.04 image issue <https://github.com/actions/virtual-environments/issues/4589>
-        $SUDO apt-get install -y --allow-downgrades libpcre2-8-0=10.34-7
-    fi
-
     if [[ $NAME != 'linux-x86' && $NAME != 'linux-x64' ]]; then
         GCC="gcc"
         GPP="g++"
