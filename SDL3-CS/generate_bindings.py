@@ -111,6 +111,7 @@ def add(s: str):
 
 headers = [
     add("SDL3/SDL_atomic.h"),
+    add("SDL3/SDL_asyncio.h"),
     add("SDL3/SDL_audio.h"),
     add("SDL3/SDL_blendmode.h"),
     add("SDL3/SDL_camera.h"),

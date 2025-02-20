@@ -65,7 +65,7 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const SDL_TrayEntry **")]
-        public static extern SDL_TrayEntry** SDL_GetTrayEntries(SDL_TrayMenu* menu, int* size);
+        public static extern SDL_TrayEntry** SDL_GetTrayEntries(SDL_TrayMenu* menu, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_RemoveTrayEntry(SDL_TrayEntry* entry);

@@ -155,6 +155,7 @@ namespace SDL
         SDL_PIXELFORMAT_NV21 = 0x3132564eU,
         SDL_PIXELFORMAT_P010 = 0x30313050U,
         SDL_PIXELFORMAT_EXTERNAL_OES = 0x2053454fU,
+        SDL_PIXELFORMAT_MJPG = 0x47504a4dU,
     }
 
     public enum SDL_ColorType

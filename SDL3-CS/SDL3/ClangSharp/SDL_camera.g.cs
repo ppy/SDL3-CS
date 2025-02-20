@@ -70,7 +70,7 @@ namespace SDL
         public static extern SDL_CameraID* SDL_GetCameras(int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_CameraSpec** SDL_GetCameraSupportedFormats(SDL_CameraID devid, int* count);
+        public static extern SDL_CameraSpec** SDL_GetCameraSupportedFormats(SDL_CameraID instance_id, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetCameraName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
