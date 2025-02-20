@@ -66,7 +66,8 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
         libxxf86vm-dev$TARGET_APT_ARCH \
         libdrm-dev$TARGET_APT_ARCH \
         libgbm-dev$TARGET_APT_ARCH \
-        libpulse-dev$TARGET_APT_ARCH
+        libpulse-dev$TARGET_APT_ARCH \
+        libpipewire-0.3-dev$TARGET_APT_ARCH
 
     if [[ $TARGET_APT_ARCH != :i386 ]]; then
         # Build libdecor.
