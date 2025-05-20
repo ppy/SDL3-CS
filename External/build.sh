@@ -1,6 +1,8 @@
 #!/bin/bash
 
-pushd "$(dirname "$0")" >/dev/null
+set -e
+
+pushd "$(dirname "$0")"
 
 # Check if environment variables are defined
 if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
@@ -8,7 +10,9 @@ if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
     exit 1
 fi
 
-SUDO=$(which sudo)
+SUDO=$(which sudo || exit 0)
+
+export DEBIAN_FRONTEND=noninteractive
 
 if [[ $RUNNER_OS == 'Linux' ]]; then
 # Setup Linux dependencies
@@ -17,11 +21,6 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
     fi
 
     $SUDO apt-get update -y -qq
-
-    if [[ $TARGET_APT_ARCH == :i386 ]]; then
-        # Workaround GitHub's ubuntu-20.04 image issue <https://github.com/actions/virtual-environments/issues/4589>
-        $SUDO apt-get install -y --allow-downgrades libpcre2-8-0=10.34-7
-    fi
 
     if [[ $NAME != 'linux-x86' && $NAME != 'linux-x64' ]]; then
         GCC="gcc"
@@ -34,12 +33,12 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
     $SUDO apt-get install -y \
         $GCC \
         $GPP \
-	git \
+        git \
         cmake \
         ninja-build \
         wayland-scanner++ \
         wayland-protocols \
-	meson \
+        meson \
         pkg-config$TARGET_APT_ARCH \
         libasound2-dev$TARGET_APT_ARCH \
         libdbus-1-dev$TARGET_APT_ARCH \
@@ -47,9 +46,9 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
         libgl1-mesa-dev$TARGET_APT_ARCH \
         libgles2-mesa-dev$TARGET_APT_ARCH \
         libglu1-mesa-dev$TARGET_APT_ARCH \
-	libgtk-3-dev$TARGET_APT_ARCH \
+        libgtk-3-dev$TARGET_APT_ARCH \
         libibus-1.0-dev$TARGET_APT_ARCH \
-	libpango1.0-dev$TARGET_APT_ARCH \
+        libpango1.0-dev$TARGET_APT_ARCH \
         libpulse-dev$TARGET_APT_ARCH \
         libsndio-dev$TARGET_APT_ARCH \
         libudev-dev$TARGET_APT_ARCH \
@@ -67,31 +66,24 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
         libxxf86vm-dev$TARGET_APT_ARCH \
         libdrm-dev$TARGET_APT_ARCH \
         libgbm-dev$TARGET_APT_ARCH \
-        libpulse-dev$TARGET_APT_ARCH
-
-    if [[ $TARGET_APT_ARCH != :i386 ]]; then
-        # Build libdecor.
-        # This is required so that window decorations can work on wayland.
-	# The support will only be enabled in SDL, but we're not shipping the libdecor binaries
-	# because making them work from a c# app as everything else does (via runtimes) is too difficult.
-	# Also skip i386 because attempting to support this for i386 is a pain.
-        # Special shoutouts to gnome for refusing to support server-side decorations.
-        git clone https://gitlab.freedesktop.org/libdecor/libdecor.git
-        cd libdecor
-        git checkout 0.2.2
-        meson build --buildtype release
-        $SUDO meson install -C build
-        cd ..
-    fi
+        libpulse-dev$TARGET_APT_ARCH \
+        libpipewire-0.3-dev$TARGET_APT_ARCH \
+        libdecor-0-dev$TARGET_APT_ARCH
 fi
 
 # Build SDL
-pushd SDL >/dev/null
-git reset --hard HEAD
+pushd SDL
+git reset --hard HEAD || echo "Failed to clean up the repository"
+
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    echo "Patching SDL to not include gameinput.h"
+    sed -i 's/#include <gameinput.h>/#_include <gameinput.h>/g' CMakeLists.txt
+fi
+
 cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
-popd >/dev/null
+popd
 
 # Move build lib into correct folders
 if [[ $RUNNER_OS == 'Windows' ]]; then
@@ -103,14 +95,14 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
 fi
 
 # Build SDL_image
-pushd SDL_image >/dev/null
+pushd SDL_image
 git reset --hard HEAD
 # -DSDLIMAGE_AVIF=OFF is used because windows requires special setup to build avif support (nasm)
 # TODO: Add support for avif on windows (VisualC script uses dynamic imports)
 cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/" -DSDLIMAGE_AVIF=OFF
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
-popd >/dev/null
+popd
 
 # Move build lib into correct folders
 if [[ $RUNNER_OS == 'Windows' ]]; then
@@ -126,14 +118,13 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
     # TODO: find out if webp, etc. are also needed on macOS here
 fi
 
-
 # Build SDL_ttf
-pushd SDL_ttf >/dev/null
+pushd SDL_ttf
 git reset --hard HEAD
 cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/"
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
-popd >/dev/null
+popd
 
 # Move build lib into correct folders
 if [[ $RUNNER_OS == 'Windows' ]]; then
@@ -144,6 +135,4 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
     cp SDL3_ttf/install_output/lib/libSDL3_ttf.dylib ../native/$NAME/libSDL3_ttf.dylib
 fi
 
-
-# pop External
-popd >/dev/null
+popd

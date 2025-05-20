@@ -115,6 +115,7 @@ namespace SDL
         SDL_EVENT_FINGER_DOWN = 0x700,
         SDL_EVENT_FINGER_UP,
         SDL_EVENT_FINGER_MOTION,
+        SDL_EVENT_FINGER_CANCELED,
         SDL_EVENT_CLIPBOARD_UPDATE = 0x900,
         SDL_EVENT_DROP_FILE = 0x1000,
         SDL_EVENT_DROP_TEXT,
@@ -711,6 +712,19 @@ namespace SDL
         public SDL_CameraID which;
     }
 
+    public partial struct SDL_RenderEvent
+    {
+        public SDL_EventType type;
+
+        [NativeTypeName("Uint32")]
+        public uint reserved;
+
+        [NativeTypeName("Uint64")]
+        public ulong timestamp;
+
+        public SDL_WindowID windowID;
+    }
+
     public partial struct SDL_TouchFingerEvent
     {
         public SDL_EventType type;
@@ -890,7 +904,7 @@ namespace SDL
         public SDLBool owner;
 
         [NativeTypeName("Sint32")]
-        public int n_mime_types;
+        public int num_mime_types;
 
         [NativeTypeName("const char **")]
         public byte** mime_types;
@@ -1063,6 +1077,9 @@ namespace SDL
 
         [FieldOffset(0)]
         public SDL_PenAxisEvent paxis;
+
+        [FieldOffset(0)]
+        public SDL_RenderEvent render;
 
         [FieldOffset(0)]
         public SDL_DropEvent drop;

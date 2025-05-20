@@ -346,6 +346,10 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_RenderTextureAffine(SDL_Renderer* renderer, SDL_Texture* texture, [NativeTypeName("const SDL_FRect *")] SDL_FRect* srcrect, [NativeTypeName("const SDL_FPoint *")] SDL_FPoint* origin, [NativeTypeName("const SDL_FPoint *")] SDL_FPoint* right, [NativeTypeName("const SDL_FPoint *")] SDL_FPoint* down);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_RenderTextureTiled(SDL_Renderer* renderer, SDL_Texture* texture, [NativeTypeName("const SDL_FRect *")] SDL_FRect* srcrect, float scale, [NativeTypeName("const SDL_FRect *")] SDL_FRect* dstrect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -400,6 +404,10 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_RenderDebugText(SDL_Renderer* renderer, float x, float y, [NativeTypeName("const char *")] byte* str);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_RenderDebugTextFormat(SDL_Renderer* renderer, float x, float y, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [NativeTypeName("#define SDL_SOFTWARE_RENDERER \"software\"")]
         public static ReadOnlySpan<byte> SDL_SOFTWARE_RENDERER => "software"u8;
@@ -505,6 +513,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER \"SDL.renderer.vulkan.swapchain_image_count\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_VULKAN_SWAPCHAIN_IMAGE_COUNT_NUMBER => "SDL.renderer.vulkan.swapchain_image_count"u8;
+
+        [NativeTypeName("#define SDL_PROP_RENDERER_GPU_DEVICE_POINTER \"SDL.renderer.gpu.device\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_GPU_DEVICE_POINTER => "SDL.renderer.gpu.device"u8;
 
         [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER \"SDL.texture.create.colorspace\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_COLORSPACE_NUMBER => "SDL.texture.create.colorspace"u8;

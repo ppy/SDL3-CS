@@ -6,7 +6,7 @@ on:
       - '*'
 
 jobs:
-  desktop:
+  pack:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,10 +16,19 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Build
-        run: dotnet build SDL3-CS.Desktop.slnf -c Release
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: microsoft
+          java-version: 17
 
-      - name: Pack
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install .NET workloads
+        run: dotnet workload restore SDL3-CS/SDL3-CS.csproj
+
+      - name: Build & pack
         run: dotnet pack SDL3-CS/SDL3-CS.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD)
 
       - name: Upload artifact
@@ -30,34 +39,3 @@ jobs:
 
       - name: Publish tagged release to nuget.org
         run: dotnet nuget push SDL3-CS/bin/Release/ppy.*.nupkg -s https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}
-
-  android:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Install Android workload
-        # since windows image 20241113.3.0, not specifying a version here
-        # installs the .NET 7 version of android workload for very unknown reasons.
-        # revisit once we upgrade to .NET 9, it's probably fixed there.
-        run: dotnet workload install android --version (dotnet --version)
-
-      - name: Build
-        run: dotnet build SDL3-CS.Android.slnf -c Release
-
-      - name: Pack
-        run: dotnet pack SDL3-CS.Android\SDL3-CS.Android.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD)
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: SDL3-CS.Android
-          path: SDL3-CS.Android\bin\Release\ppy.*.nupkg
-
-      - name: Publish tagged release to nuget.org
-        run: dotnet nuget push SDL3-CS.Android\bin\Release\ppy.*.nupkg -s https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}}

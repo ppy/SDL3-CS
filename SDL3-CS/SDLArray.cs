@@ -63,5 +63,24 @@ namespace SDL
 
             return new SDLPointerArray<T>(array, count);
         }
+
+        [MustDisposeResource]
+        internal static SDLOpaquePointerArray<T>? CreateOpaque<T>(T** array, int count)
+            where T : unmanaged
+        {
+            if (array == null)
+                return null;
+
+            return new SDLOpaquePointerArray<T>(array, count);
+        }
+
+        internal static SDLConstOpaquePointerArray<T>? CreateConstOpaque<T>(T** array, int count)
+            where T : unmanaged
+        {
+            if (array == null)
+                return null;
+
+            return new SDLConstOpaquePointerArray<T>(array, count);
+        }
     }
 }

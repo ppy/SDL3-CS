@@ -6,6 +6,12 @@ RUN apt-get update && \
 WORKDIR /tmp
 COPY .config/dotnet-tools.json .config/dotnet-tools.json
 COPY SDL3-CS/SDL3-CS.csproj SDL3-CS/SDL3-CS.csproj
+
+# .NET 8 installed using the distro package does not support the android workload.
+# Since the project is only used for reference purposes, we'll retarget it to a single framework.
+# See: https://github.com/dotnet/core/discussions/9258#discussioncomment-9548857
+RUN sed -i 's/<TargetFrameworks.*$/<TargetFramework>net8.0<\/TargetFramework>/' SDL3-CS/SDL3-CS.csproj
+
 RUN dotnet tool restore && \
     dotnet restore --ucr SDL3-CS/SDL3-CS.csproj
 

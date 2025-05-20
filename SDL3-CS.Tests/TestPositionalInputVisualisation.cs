@@ -2,10 +2,12 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System.Drawing;
+using NUnit.Framework;
 using static SDL.SDL3;
 
 namespace SDL.Tests
 {
+    [Explicit("Uses an interactive window.")]
     public unsafe class TestPositionalInputVisualisation : MainCallbacksTest
     {
         private SDL_Window* window;

@@ -115,6 +115,10 @@ namespace SDL
         [return: NativeTypeName("char **")]
         public static extern byte** SDL_GlobDirectory([NativeTypeName("const char *")] byte* path, [NativeTypeName("const char *")] byte* pattern, SDL_GlobFlags flags, int* count);
 
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetCurrentDirectory", ExactSpelling = true)]
+        [return: NativeTypeName("char *")]
+        public static extern byte* Unsafe_SDL_GetCurrentDirectory();
+
         [NativeTypeName("#define SDL_GLOB_CASEINSENSITIVE (1u << 0)")]
         public const uint SDL_GLOB_CASEINSENSITIVE = (1U << 0);
     }

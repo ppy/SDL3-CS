@@ -20,4 +20,13 @@ namespace SDL
         SDL_PEN_INPUT_BUTTON_5 = SDL3.SDL_PEN_INPUT_BUTTON_5,
         SDL_PEN_INPUT_ERASER_TIP = SDL3.SDL_PEN_INPUT_ERASER_TIP,
     }
+
+    public static partial class SDL3
+    {
+        [Constant]
+        public const SDL_MouseID SDL_PEN_MOUSEID = unchecked((SDL_MouseID)(-2));
+
+        [Constant]
+        public const SDL_TouchID SDL_PEN_TOUCHID = unchecked((SDL_TouchID)(-2));
+    }
 }
