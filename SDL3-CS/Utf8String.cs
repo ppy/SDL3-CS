@@ -24,10 +24,18 @@ namespace SDL
             if (str == null)
                 return new Utf8String(null);
 
-            if (str.EndsWith('\0'))
+            if (str.Length == 0)
+                return new Utf8String("\0"u8);
+
+            if (str[^1] == '\0')
                 return new Utf8String(Encoding.UTF8.GetBytes(str));
 
-            return new Utf8String(Encoding.UTF8.GetBytes(str + '\0'));
+            ReadOnlySpan<char> chars = str.AsSpan();
+            int len = Encoding.UTF8.GetByteCount(chars);
+            byte[] bytes = new byte[len + 1];
+            Encoding.UTF8.GetBytes(chars, bytes);
+
+            return new Utf8String(bytes);
         }
 
         public static implicit operator Utf8String(ReadOnlySpan<byte> raw)
@@ -36,14 +44,14 @@ namespace SDL
                 return new Utf8String(null);
 
             if (raw.Length == 0)
-                return new Utf8String(new ReadOnlySpan<byte>([0]));
+                return new Utf8String("\0"u8);
 
-            if (raw[^1] != 0)
-            {
-                byte[] copy = new byte[raw.Length + 1];
-                raw.CopyTo(copy);
-                raw = copy;
-            }
+            if (raw[^1] == 0)
+                return new Utf8String(raw);
+
+            byte[] copy = new byte[raw.Length + 1];
+            raw.CopyTo(copy);
+            raw = copy;
 
             return new Utf8String(raw);
         }
