@@ -30,11 +30,9 @@ namespace SDL
             if (str[^1] == '\0')
                 return new Utf8String(Encoding.UTF8.GetBytes(str));
 
-            ReadOnlySpan<char> chars = str.AsSpan();
-            int len = Encoding.UTF8.GetByteCount(chars);
+            int len = Encoding.UTF8.GetByteCount(str);
             byte[] bytes = new byte[len + 1];
-            Encoding.UTF8.GetBytes(chars, bytes);
-
+            Encoding.UTF8.GetBytes(str, bytes);
             return new Utf8String(bytes);
         }
 
@@ -51,9 +49,7 @@ namespace SDL
 
             byte[] copy = new byte[raw.Length + 1];
             raw.CopyTo(copy);
-            raw = copy;
-
-            return new Utf8String(raw);
+            return new Utf8String(copy);
         }
 
         internal ref readonly byte GetPinnableReference() => ref Raw.GetPinnableReference();
