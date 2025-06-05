@@ -42,5 +42,23 @@ namespace SDL
 
             SDL3.SDL_free(array);
         }
+
+        public Enumerator GetEnumerator() => new Enumerator(this);
+
+        public ref struct Enumerator
+        {
+            private readonly SDLOpaquePointerArray<T> array;
+            private int index;
+
+            internal Enumerator(SDLOpaquePointerArray<T> array)
+            {
+                this.array = array;
+                index = -1;
+            }
+
+            public bool MoveNext() => ++index < array.Count;
+
+            public T* Current => array[index];
+        }
     }
 }
