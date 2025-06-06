@@ -39,10 +39,10 @@ namespace SDL
         [NativeTypeName("#define SDL_MAJOR_VERSION 3")]
         public const int SDL_MAJOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_MINOR_VERSION 2")]
-        public const int SDL_MINOR_VERSION = 2;
+        [NativeTypeName("#define SDL_MINOR_VERSION 3")]
+        public const int SDL_MINOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_MICRO_VERSION 5")]
-        public const int SDL_MICRO_VERSION = 5;
+        [NativeTypeName("#define SDL_MICRO_VERSION 0")]
+        public const int SDL_MICRO_VERSION = 0;
     }
 }

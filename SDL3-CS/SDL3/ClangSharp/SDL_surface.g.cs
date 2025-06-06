@@ -30,8 +30,10 @@ namespace SDL
 {
     public enum SDL_ScaleMode
     {
+        SDL_SCALEMODE_INVALID = -1,
         SDL_SCALEMODE_NEAREST,
         SDL_SCALEMODE_LINEAR,
+        SDL_SCALEMODE_PIXELART,
     }
 
     public enum SDL_FlipMode

@@ -45,6 +45,7 @@ namespace SDL
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_LEFT,
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT,
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR,
+        SDL_GAMEPAD_TYPE_GAMECUBE,
         SDL_GAMEPAD_TYPE_COUNT,
     }
 
@@ -117,12 +118,12 @@ namespace SDL
     {
         public SDL_GamepadBindingType input_type;
 
-        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L265_C5")]
+        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L267_C5")]
         public _input_e__Union input;
 
         public SDL_GamepadBindingType output_type;
 
-        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L285_C5")]
+        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L287_C5")]
         public _output_e__Union output;
 
         [StructLayout(LayoutKind.Explicit)]
@@ -132,11 +133,11 @@ namespace SDL
             public int button;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L269_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L271_C9")]
             public _axis_e__Struct axis;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L276_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L278_C9")]
             public _hat_e__Struct hat;
 
             public partial struct _axis_e__Struct
@@ -163,7 +164,7 @@ namespace SDL
             public SDL_GamepadButton button;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L289_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L291_C9")]
             public _axis_e__Struct axis;
 
             public partial struct _axis_e__Struct

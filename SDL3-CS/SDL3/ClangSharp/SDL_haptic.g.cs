@@ -34,8 +34,7 @@ namespace SDL
 
     public partial struct SDL_HapticDirection
     {
-        [NativeTypeName("Uint8")]
-        public byte type;
+        public SDL_HapticDirectionType type;
 
         [NativeTypeName("Sint32[3]")]
         public _dir_e__FixedBuffer dir;
@@ -49,8 +48,7 @@ namespace SDL
 
     public partial struct SDL_HapticConstant
     {
-        [NativeTypeName("Uint16")]
-        public ushort type;
+        public SDL_HapticEffectType type;
 
         public SDL_HapticDirection direction;
 
@@ -84,8 +82,7 @@ namespace SDL
 
     public partial struct SDL_HapticPeriodic
     {
-        [NativeTypeName("Uint16")]
-        public ushort type;
+        public SDL_HapticEffectType type;
 
         public SDL_HapticDirection direction;
 
@@ -128,8 +125,7 @@ namespace SDL
 
     public partial struct SDL_HapticCondition
     {
-        [NativeTypeName("Uint16")]
-        public ushort type;
+        public SDL_HapticEffectType type;
 
         public SDL_HapticDirection direction;
 
@@ -202,8 +198,7 @@ namespace SDL
 
     public partial struct SDL_HapticRamp
     {
-        [NativeTypeName("Uint16")]
-        public ushort type;
+        public SDL_HapticEffectType type;
 
         public SDL_HapticDirection direction;
 
@@ -240,8 +235,7 @@ namespace SDL
 
     public partial struct SDL_HapticLeftRight
     {
-        [NativeTypeName("Uint16")]
-        public ushort type;
+        public SDL_HapticEffectType type;
 
         [NativeTypeName("Uint32")]
         public uint length;
@@ -255,8 +249,7 @@ namespace SDL
 
     public unsafe partial struct SDL_HapticCustom
     {
-        [NativeTypeName("Uint16")]
-        public ushort type;
+        public SDL_HapticEffectType type;
 
         public SDL_HapticDirection direction;
 
@@ -301,8 +294,7 @@ namespace SDL
     public partial struct SDL_HapticEffect
     {
         [FieldOffset(0)]
-        [NativeTypeName("Uint16")]
-        public ushort type;
+        public SDL_HapticEffectType type;
 
         [FieldOffset(0)]
         public SDL_HapticConstant constant;
@@ -380,26 +372,26 @@ namespace SDL
         public static extern SDLBool SDL_HapticEffectSupported(SDL_Haptic* haptic, [NativeTypeName("const SDL_HapticEffect *")] SDL_HapticEffect* effect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_CreateHapticEffect(SDL_Haptic* haptic, [NativeTypeName("const SDL_HapticEffect *")] SDL_HapticEffect* effect);
+        public static extern SDL_HapticEffectID SDL_CreateHapticEffect(SDL_Haptic* haptic, [NativeTypeName("const SDL_HapticEffect *")] SDL_HapticEffect* effect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_UpdateHapticEffect(SDL_Haptic* haptic, int effect, [NativeTypeName("const SDL_HapticEffect *")] SDL_HapticEffect* data);
+        public static extern SDLBool SDL_UpdateHapticEffect(SDL_Haptic* haptic, SDL_HapticEffectID effect, [NativeTypeName("const SDL_HapticEffect *")] SDL_HapticEffect* data);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_RunHapticEffect(SDL_Haptic* haptic, int effect, [NativeTypeName("Uint32")] uint iterations);
+        public static extern SDLBool SDL_RunHapticEffect(SDL_Haptic* haptic, SDL_HapticEffectID effect, [NativeTypeName("Uint32")] uint iterations);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_StopHapticEffect(SDL_Haptic* haptic, int effect);
+        public static extern SDLBool SDL_StopHapticEffect(SDL_Haptic* haptic, SDL_HapticEffectID effect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_DestroyHapticEffect(SDL_Haptic* haptic, int effect);
+        public static extern void SDL_DestroyHapticEffect(SDL_Haptic* haptic, SDL_HapticEffectID effect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_GetHapticEffectStatus(SDL_Haptic* haptic, int effect);
+        public static extern SDLBool SDL_GetHapticEffectStatus(SDL_Haptic* haptic, SDL_HapticEffectID effect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -436,6 +428,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_StopHapticRumble(SDL_Haptic* haptic);
+
+        [NativeTypeName("#define SDL_HAPTIC_INFINITY 4294967295U")]
+        public const uint SDL_HAPTIC_INFINITY = 4294967295U;
 
         [NativeTypeName("#define SDL_HAPTIC_CONSTANT (1u<<0)")]
         public const uint SDL_HAPTIC_CONSTANT = (1U << 0);
@@ -508,8 +503,5 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HAPTIC_STEERING_AXIS 3")]
         public const int SDL_HAPTIC_STEERING_AXIS = 3;
-
-        [NativeTypeName("#define SDL_HAPTIC_INFINITY 4294967295U")]
-        public const uint SDL_HAPTIC_INFINITY = 4294967295U;
     }
 }

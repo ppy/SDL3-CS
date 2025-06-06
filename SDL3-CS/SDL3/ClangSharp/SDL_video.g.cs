@@ -80,6 +80,16 @@ namespace SDL
         SDL_FLASH_UNTIL_FOCUSED,
     }
 
+    public enum SDL_ProgressState
+    {
+        SDL_PROGRESS_STATE_INVALID = -1,
+        SDL_PROGRESS_STATE_NONE,
+        SDL_PROGRESS_STATE_INDETERMINATE,
+        SDL_PROGRESS_STATE_NORMAL,
+        SDL_PROGRESS_STATE_PAUSED,
+        SDL_PROGRESS_STATE_ERROR,
+    }
+
     public partial struct SDL_GLContextState
     {
     }
@@ -446,6 +456,20 @@ namespace SDL
         public static extern SDLBool SDL_FlashWindow(SDL_Window* window, SDL_FlashOperation operation);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowProgressState(SDL_Window* window, SDL_ProgressState state);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_ProgressState SDL_GetWindowProgressState(SDL_Window* window);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetWindowProgressValue(SDL_Window* window, float value);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern float SDL_GetWindowProgressValue(SDL_Window* window);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroyWindow(SDL_Window* window);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -665,11 +689,17 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER \"SDL.display.KMSDRM.panel_orientation\"")]
         public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_KMSDRM_PANEL_ORIENTATION_NUMBER => "SDL.display.KMSDRM.panel_orientation"u8;
 
+        [NativeTypeName("#define SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER \"SDL.display.wayland.wl_output\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER => "SDL.display.wayland.wl_output"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN \"SDL.window.create.always_on_top\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN => "SDL.window.create.always_on_top"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN \"SDL.window.create.borderless\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_BORDERLESS_BOOLEAN => "SDL.window.create.borderless"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_CONSTRAIN_POPUP_BOOLEAN \"SDL.window.create.constrain_popup\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_CONSTRAIN_POPUP_BOOLEAN => "SDL.window.create.constrain_popup"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN \"SDL.window.create.focusable\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_FOCUSABLE_BOOLEAN => "SDL.window.create.focusable"u8;
@@ -767,6 +797,12 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER \"SDL.window.create.x11.window\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER => "SDL.window.create.x11.window"u8;
 
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING \"SDL.window.create.emscripten.canvas_id\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING => "SDL.window.create.emscripten.canvas_id"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING \"SDL.window.create.emscripten.keyboard_element\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING => "SDL.window.create.emscripten.keyboard_element"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_SHAPE_POINTER \"SDL.window.shape\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_SHAPE_POINTER => "SDL.window.shape"u8;
 
@@ -815,8 +851,8 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER \"SDL.window.cocoa.metal_view_tag\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_COCOA_METAL_VIEW_TAG_NUMBER => "SDL.window.cocoa.metal_view_tag"u8;
 
-        [NativeTypeName("#define SDL_PROP_WINDOW_OPENVR_OVERLAY_ID \"SDL.window.openvr.overlay_id\"")]
-        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_OPENVR_OVERLAY_ID => "SDL.window.openvr.overlay_id"u8;
+        [NativeTypeName("#define SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER \"SDL.window.openvr.overlay_id\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER => "SDL.window.openvr.overlay_id"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER \"SDL.window.vivante.display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER => "SDL.window.vivante.display"u8;
@@ -871,6 +907,12 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_X11_WINDOW_NUMBER \"SDL.window.x11.window\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_X11_WINDOW_NUMBER => "SDL.window.x11.window"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING \"SDL.window.emscripten.canvas_id\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING => "SDL.window.emscripten.canvas_id"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING \"SDL.window.emscripten.keyboard_element\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING => "SDL.window.emscripten.keyboard_element"u8;
 
         [NativeTypeName("#define SDL_WINDOW_SURFACE_VSYNC_DISABLED 0")]
         public const int SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0;
