@@ -28,5 +28,23 @@ namespace SDL
                 return array[index];
             }
         }
+
+        public Enumerator GetEnumerator() => new Enumerator(this);
+
+        public ref struct Enumerator
+        {
+            private readonly SDLConstOpaquePointerArray<T> array;
+            private int index;
+
+            internal Enumerator(SDLConstOpaquePointerArray<T> array)
+            {
+                this.array = array;
+                index = -1;
+            }
+
+            public bool MoveNext() => ++index < array.Count;
+
+            public T* Current => array[index];
+        }
     }
 }
