@@ -1,6 +1,9 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+using System;
+using System.Text;
+
 namespace SDL
 {
     public partial struct SDL_CommonEvent
@@ -63,5 +66,22 @@ namespace SDL
         public static void SDL_FlushEvents(SDL_EventType minType, SDL_EventType maxType) => SDL_FlushEvents((uint)minType, (uint)maxType);
         public static void SDL_SetEventEnabled(SDL_EventType type, bool enabled) => SDL_SetEventEnabled((uint)type, enabled);
         public static SDLBool SDL_EventEnabled(SDL_EventType type) => SDL_EventEnabled((uint)type);
+
+        public static string SDL_GetEventDescription(SDL_Event @event)
+        {
+            const int bufferSize = 256;
+            Span<byte> buf = stackalloc byte[bufferSize];
+
+            int bytesWritten;
+
+            unsafe
+            {
+                fixed (byte* ptr = buf)
+                    bytesWritten = SDL_GetEventDescription(&@event, ptr, bufferSize);
+            }
+
+            int bytesToRead = bytesWritten > bufferSize ? bufferSize : bytesWritten;
+            return Encoding.UTF8.GetString(buf[..bytesToRead]);
+        }
     }
 }
