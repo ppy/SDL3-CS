@@ -69,6 +69,7 @@ namespace SDL
 
         public static string SDL_GetEventDescription(SDL_Event @event)
         {
+            // Buffer size taken from https://github.com/libsdl-org/SDL/blob/7dd5e765df239986f78c9b0016e3f3023d885084/src/events/SDL_events.c#L908-L913.
             const int bufferSize = 256;
             Span<byte> buf = stackalloc byte[bufferSize];
 
