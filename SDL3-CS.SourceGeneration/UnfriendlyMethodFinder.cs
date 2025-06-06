@@ -15,14 +15,31 @@ namespace SDL.SourceGeneration
     {
         public readonly Dictionary<string, List<GeneratedMethod>> Methods = new Dictionary<string, List<GeneratedMethod>>();
 
+        private static readonly string[] sdlPrefixes = ["SDL_", "TTF_", "IMG_"];
+
+        /// <summary>
+        /// Checks whether the method is from any SDL library.
+        /// It identifies those by checking the SDL prefix in the method name.
+        /// </summary>
+        private static bool IsMethodFromSDL(MethodDeclarationSyntax methodNode)
+        {
+            foreach (string prefix in sdlPrefixes)
+            {
+                if (methodNode.Identifier.ValueText.StartsWith(prefix, StringComparison.Ordinal))
+                    return true;
+            }
+
+            return false;
+        }
+
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
         {
             if (syntaxNode is MethodDeclarationSyntax method)
             {
                 string name = method.Identifier.ValueText;
-                bool isUnsafe = name.StartsWith($"{Helper.UnsafePrefix}SDL_", StringComparison.Ordinal);
+                bool isUnsafe = name.StartsWith(Helper.UnsafePrefix, StringComparison.Ordinal);
 
-                if (!name.StartsWith("SDL_", StringComparison.Ordinal) && !isUnsafe)
+                if (!IsMethodFromSDL(method) && !isUnsafe)
                     return;
 
                 if (method.ParameterList.Parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword)))
