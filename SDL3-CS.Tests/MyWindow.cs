@@ -158,6 +158,10 @@ namespace SDL.Tests
                             SDL_Keymod mod = e.key.mod;
                             Console.WriteLine(mod);
                             break;
+
+                        case SDL_Keycode.SDLK_E:
+                            Console.WriteLine(SDL_GetEventDescription(e));
+                            break;
                     }
 
                     break;

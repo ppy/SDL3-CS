@@ -78,6 +78,9 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_PROCESS_CREATE_ENVIRONMENT_POINTER \"SDL.process.create.environment\"")]
         public static ReadOnlySpan<byte> SDL_PROP_PROCESS_CREATE_ENVIRONMENT_POINTER => "SDL.process.create.environment"u8;
 
+        [NativeTypeName("#define SDL_PROP_PROCESS_CREATE_WORKING_DIRECTORY_STRING \"SDL.process.create.working_directory\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_PROCESS_CREATE_WORKING_DIRECTORY_STRING => "SDL.process.create.working_directory"u8;
+
         [NativeTypeName("#define SDL_PROP_PROCESS_CREATE_STDIN_NUMBER \"SDL.process.create.stdin_option\"")]
         public static ReadOnlySpan<byte> SDL_PROP_PROCESS_CREATE_STDIN_NUMBER => "SDL.process.create.stdin_option"u8;
 
@@ -101,6 +104,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_PROCESS_CREATE_BACKGROUND_BOOLEAN \"SDL.process.create.background\"")]
         public static ReadOnlySpan<byte> SDL_PROP_PROCESS_CREATE_BACKGROUND_BOOLEAN => "SDL.process.create.background"u8;
+
+        [NativeTypeName("#define SDL_PROP_PROCESS_CREATE_CMDLINE_STRING \"SDL.process.create.cmdline\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_PROCESS_CREATE_CMDLINE_STRING => "SDL.process.create.cmdline"u8;
 
         [NativeTypeName("#define SDL_PROP_PROCESS_PID_NUMBER \"SDL.process.pid\"")]
         public static ReadOnlySpan<byte> SDL_PROP_PROCESS_PID_NUMBER => "SDL.process.pid"u8;

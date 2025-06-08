@@ -387,10 +387,10 @@ namespace SDL
         public static extern uint SDL_MapRGBA([NativeTypeName("const SDL_PixelFormatDetails *")] SDL_PixelFormatDetails* format, [NativeTypeName("const SDL_Palette *")] SDL_Palette* palette, [NativeTypeName("Uint8")] byte r, [NativeTypeName("Uint8")] byte g, [NativeTypeName("Uint8")] byte b, [NativeTypeName("Uint8")] byte a);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_GetRGB([NativeTypeName("Uint32")] uint pixel, [NativeTypeName("const SDL_PixelFormatDetails *")] SDL_PixelFormatDetails* format, [NativeTypeName("const SDL_Palette *")] SDL_Palette* palette, [NativeTypeName("Uint8 *")] byte* r, [NativeTypeName("Uint8 *")] byte* g, [NativeTypeName("Uint8 *")] byte* b);
+        public static extern void SDL_GetRGB([NativeTypeName("Uint32")] uint pixelvalue, [NativeTypeName("const SDL_PixelFormatDetails *")] SDL_PixelFormatDetails* format, [NativeTypeName("const SDL_Palette *")] SDL_Palette* palette, [NativeTypeName("Uint8 *")] byte* r, [NativeTypeName("Uint8 *")] byte* g, [NativeTypeName("Uint8 *")] byte* b);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void SDL_GetRGBA([NativeTypeName("Uint32")] uint pixel, [NativeTypeName("const SDL_PixelFormatDetails *")] SDL_PixelFormatDetails* format, [NativeTypeName("const SDL_Palette *")] SDL_Palette* palette, [NativeTypeName("Uint8 *")] byte* r, [NativeTypeName("Uint8 *")] byte* g, [NativeTypeName("Uint8 *")] byte* b, [NativeTypeName("Uint8 *")] byte* a);
+        public static extern void SDL_GetRGBA([NativeTypeName("Uint32")] uint pixelvalue, [NativeTypeName("const SDL_PixelFormatDetails *")] SDL_PixelFormatDetails* format, [NativeTypeName("const SDL_Palette *")] SDL_Palette* palette, [NativeTypeName("Uint8 *")] byte* r, [NativeTypeName("Uint8 *")] byte* g, [NativeTypeName("Uint8 *")] byte* b, [NativeTypeName("Uint8 *")] byte* a);
 
         [NativeTypeName("#define SDL_ALPHA_OPAQUE 255")]
         public const int SDL_ALPHA_OPAQUE = 255;

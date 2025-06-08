@@ -181,6 +181,14 @@ namespace SDL
         public static extern SDLBool SDL_PutAudioStreamData(SDL_AudioStream* stream, [NativeTypeName("const void *")] IntPtr buf, int len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_PutAudioStreamDataNoCopy(SDL_AudioStream* stream, [NativeTypeName("const void *")] IntPtr buf, int len, [NativeTypeName("SDL_AudioStreamDataCompleteCallback")] delegate* unmanaged[Cdecl]<IntPtr, IntPtr, int, void> callback, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_PutAudioStreamPlanarData(SDL_AudioStream* stream, [NativeTypeName("const void *const *")] IntPtr* channel_buffers, int num_channels, int num_samples);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_GetAudioStreamData(SDL_AudioStream* stream, [NativeTypeName("void*")] IntPtr buf, int len);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -230,6 +238,10 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_AudioStream* SDL_OpenAudioDeviceStream(SDL_AudioDeviceID devid, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec, [NativeTypeName("SDL_AudioStreamCallback")] delegate* unmanaged[Cdecl]<IntPtr, SDL_AudioStream*, int, int, void> callback, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetAudioIterationCallbacks(SDL_AudioDeviceID devid, [NativeTypeName("SDL_AudioIterationCallback")] delegate* unmanaged[Cdecl]<IntPtr, SDL_AudioDeviceID, SDLBool, void> start, [NativeTypeName("SDL_AudioIterationCallback")] delegate* unmanaged[Cdecl]<IntPtr, SDL_AudioDeviceID, SDLBool, void> end, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]

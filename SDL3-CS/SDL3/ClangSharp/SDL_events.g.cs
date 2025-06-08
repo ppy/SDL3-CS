@@ -408,6 +408,12 @@ namespace SDL
         public float mouse_x;
 
         public float mouse_y;
+
+        [NativeTypeName("Sint32")]
+        public int integer_x;
+
+        [NativeTypeName("Sint32")]
+        public int integer_y;
     }
 
     public partial struct SDL_JoyAxisEvent
@@ -1173,5 +1179,8 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Window* SDL_GetWindowFromEvent([NativeTypeName("const SDL_Event *")] SDL_Event* @event);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_GetEventDescription([NativeTypeName("const SDL_Event *")] SDL_Event* @event, [NativeTypeName("char *")] byte* buf, int buflen);
     }
 }

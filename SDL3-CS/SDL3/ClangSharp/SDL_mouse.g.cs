@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -93,6 +94,10 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_WarpMouseGlobal(float x, float y);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetRelativeMouseTransform([NativeTypeName("SDL_MouseMotionTransformCallback")] delegate* unmanaged[Cdecl]<IntPtr, ulong, SDL_Window*, SDL_MouseID, float*, float*, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
