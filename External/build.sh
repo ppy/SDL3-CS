@@ -102,9 +102,9 @@ fi
 if [[ $RUNNER_OS == 'Windows' ]]; then
     CMAKE_PREFIX_PATH="../SDL/install_output/cmake/"
 elif [[ $RUNNER_OS == 'Linux' ]]; then
-    CMAKE_PREFIX_PATH="../SDL/install_output/cmake/SDL3/"
+    CMAKE_PREFIX_PATH="../SDL/install_output/lib/cmake/SDL3/"
 elif [[ $RUNNER_OS == 'macOS' ]]; then
-    CMAKE_PREFIX_PATH="../SDL/install_output/cmake/SDL3/"
+    CMAKE_PREFIX_PATH="../SDL/install_output/lib/cmake/SDL3/"
 fi
 
 # Build SDL_image
