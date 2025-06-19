@@ -62,6 +62,7 @@
       <PackagePath>runtimes/linux-arm/native</PackagePath>
       <Pack>true</Pack>
     </None>
+    <!-- Todo: Build these platforms with the CI script:
     <None Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3_ttf.xcframework\**\*">
       <PackagePath>runtimes/ios/native/SDL3.xcframework</PackagePath>
       <Pack>true</Pack>
@@ -82,6 +83,7 @@
       <PackagePath>runtimes/android-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
+    -->
   </ItemGroup>
 
 </Project>
