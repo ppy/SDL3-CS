@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using System.Runtime.CompilerServices;
 
 namespace SDL
 {
@@ -19,5 +20,13 @@ namespace SDL
     {
         [Constant]
         public static readonly int SDL_TTF_VERSION = SDL3.SDL_VERSIONNUM(SDL_TTF_MAJOR_VERSION, SDL_TTF_MINOR_VERSION, SDL_TTF_MICRO_VERSION);
+
+#pragma warning disable CA2255
+        [ModuleInitializer]
+        internal static void ModuleInitializer()
+        {
+            SDL3.SDL_Init(0);
+        }
+#pragma warning restore CA2255
     }
 }
