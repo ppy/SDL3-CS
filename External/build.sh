@@ -10,7 +10,11 @@ if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
     exit 1
 fi
 
-SUDO=$(which sudo || exit 0)
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    SUDO=""
+else
+    SUDO=$(which sudo || exit 0)
+fi
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -69,6 +73,10 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
         libpulse-dev$TARGET_APT_ARCH \
         libpipewire-0.3-dev$TARGET_APT_ARCH \
         libdecor-0-dev$TARGET_APT_ARCH
+
+    git config --global --add safe.directory /workspace/External/SDL
+    git config --global --add safe.directory /workspace/External/SDL_image
+    git config --global --add safe.directory /workspace/External/SDL_ttf
 fi
 
 # Build SDL
@@ -94,12 +102,21 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
     cp SDL/install_output/lib/libSDL3.dylib ../native/$NAME/libSDL3.dylib
 fi
 
+# Use the correct CMAKE_PREFIX_PATH for SDL_image and SDL_ttf, probably due differences in Cmake versions
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    CMAKE_PREFIX_PATH="../SDL/install_output/cmake/"
+elif [[ $RUNNER_OS == 'Linux' ]]; then
+    CMAKE_PREFIX_PATH="../SDL/install_output/lib/cmake/"
+elif [[ $RUNNER_OS == 'macOS' ]]; then
+    CMAKE_PREFIX_PATH="../SDL/install_output/lib/cmake/"
+fi
+
 # Build SDL_image
 pushd SDL_image
 git reset --hard HEAD
 # -DSDLIMAGE_AVIF=OFF is used because windows requires special setup to build avif support (nasm)
 # TODO: Add support for avif on windows (VisualC script uses dynamic imports)
-cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/" -DSDLIMAGE_AVIF=OFF
+cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLIMAGE_AVIF=OFF
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
 popd
@@ -121,18 +138,18 @@ fi
 # Build SDL_ttf
 pushd SDL_ttf
 git reset --hard HEAD
-cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/"
+cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
 popd
 
 # Move build lib into correct folders
 if [[ $RUNNER_OS == 'Windows' ]]; then
-    cp SDL3_ttf/install_output/bin/SDL3_ttf.dll ../native/$NAME/SDL3_ttf.dll
+    cp SDL_ttf/install_output/bin/SDL3_ttf.dll ../native/$NAME/SDL3_ttf.dll
 elif [[ $RUNNER_OS == 'Linux' ]]; then
-    cp SDL3_ttf/install_output/lib/libSDL3_ttf.so ../native/$NAME/libSDL3_ttf.so
+    cp SDL_ttf/install_output/lib/libSDL3_ttf.so ../native/$NAME/libSDL3_ttf.so
 elif [[ $RUNNER_OS == 'macOS' ]]; then
-    cp SDL3_ttf/install_output/lib/libSDL3_ttf.dylib ../native/$NAME/libSDL3_ttf.dylib
+    cp SDL_ttf/install_output/lib/libSDL3_ttf.dylib ../native/$NAME/libSDL3_ttf.dylib
 fi
 
 popd
