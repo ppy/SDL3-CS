@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
 
       - name: Build (Linux ARM)
         if: contains(matrix.platform.container, 'arm')
