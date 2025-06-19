@@ -98,12 +98,21 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
     cp SDL/install_output/lib/libSDL3.dylib ../native/$NAME/libSDL3.dylib
 fi
 
+# Use the correct CMAKE_PREFIX_PATH for SDL_image and SDL_ttf, probably due differences in Cmake versions
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    CMAKE_PREFIX_PATH="../SDL/install_output/cmake/"
+elif [[ $RUNNER_OS == 'Linux' ]]; then
+    CMAKE_PREFIX_PATH="../SDL/install_output/cmake/SDL3/"
+elif [[ $RUNNER_OS == 'macOS' ]]; then
+    CMAKE_PREFIX_PATH="../SDL/install_output/cmake/SDL3/"
+fi
+
 # Build SDL_image
 pushd SDL_image
 git reset --hard HEAD
 # -DSDLIMAGE_AVIF=OFF is used because windows requires special setup to build avif support (nasm)
 # TODO: Add support for avif on windows (VisualC script uses dynamic imports)
-cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/" -DSDLIMAGE_AVIF=OFF
+cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLIMAGE_AVIF=OFF
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
 popd
