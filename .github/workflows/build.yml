@@ -43,9 +43,6 @@ jobs:
             -e BUILD_TYPE=${{ env.BUILD_TYPE }}
           run: |
             cd /workspace
-            git config --global --add safe.directory /workspace/External/SDL
-            git config --global --add safe.directory /workspace/External/SDL_image
-            git config --global --add safe.directory /workspace/External/SDL_ttf
             ./External/build.sh
 
       - name: Build

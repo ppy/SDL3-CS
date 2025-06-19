@@ -73,6 +73,10 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
         libpulse-dev$TARGET_APT_ARCH \
         libpipewire-0.3-dev$TARGET_APT_ARCH \
         libdecor-0-dev$TARGET_APT_ARCH
+
+    git config --global --add safe.directory /workspace/External/SDL
+    git config --global --add safe.directory /workspace/External/SDL_image
+    git config --global --add safe.directory /workspace/External/SDL_ttf
 fi
 
 # Build SDL
