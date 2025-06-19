@@ -10,7 +10,11 @@ if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
     exit 1
 fi
 
-SUDO=$(which sudo || exit 0)
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    SUDO=""
+else
+    SUDO=$(which sudo || exit 0)
+fi
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -121,18 +125,18 @@ fi
 # Build SDL_ttf
 pushd SDL_ttf
 git reset --hard HEAD
-cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/"
+cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH="../SDL/install_output/cmake/" -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 cmake --build build/ --config Release
 $SUDO cmake --install build/ --prefix install_output --config Release
 popd
 
 # Move build lib into correct folders
 if [[ $RUNNER_OS == 'Windows' ]]; then
-    cp SDL3_ttf/install_output/bin/SDL3_ttf.dll ../native/$NAME/SDL3_ttf.dll
+    cp SDL_ttf/install_output/bin/SDL3_ttf.dll ../native/$NAME/SDL3_ttf.dll
 elif [[ $RUNNER_OS == 'Linux' ]]; then
-    cp SDL3_ttf/install_output/lib/libSDL3_ttf.so ../native/$NAME/libSDL3_ttf.so
+    cp SDL_ttf/install_output/lib/libSDL3_ttf.so ../native/$NAME/libSDL3_ttf.so
 elif [[ $RUNNER_OS == 'macOS' ]]; then
-    cp SDL3_ttf/install_output/lib/libSDL3_ttf.dylib ../native/$NAME/libSDL3_ttf.dylib
+    cp SDL_ttf/install_output/lib/libSDL3_ttf.dylib ../native/$NAME/libSDL3_ttf.dylib
 fi
 
 popd
