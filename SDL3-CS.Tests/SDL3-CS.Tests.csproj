@@ -10,6 +10,10 @@
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
 
+  <PropertyGroup Label="NuGet">
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0"/>
     <PackageReference Include="NUnit" Version="3.13.3"/>

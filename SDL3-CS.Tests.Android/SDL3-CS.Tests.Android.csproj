@@ -11,6 +11,10 @@
     <ApplicationId>SDL.Tests.Android</ApplicationId>
   </PropertyGroup>
 
+  <PropertyGroup Label="NuGet">
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\SDL3-CS.Tests\SDL3-CS.Tests.csproj"/>
   </ItemGroup>

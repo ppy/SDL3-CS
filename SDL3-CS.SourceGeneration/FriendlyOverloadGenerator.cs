@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -32,8 +33,13 @@ using System;
 
             foreach (var kvp in finder.Methods)
             {
+                if (kvp.Value.Count == 0)
+                    return;
+
                 string filename = kvp.Key;
                 var foundMethods = kvp.Value;
+
+                string className = ClassNameFromMethod(foundMethods.First().NativeMethod);
 
                 var result = new StringBuilder();
                 result.Append(file_header);
@@ -42,7 +48,7 @@ using System;
                                      SyntaxFactory.IdentifierName("SDL"))
                                  .WithMembers(
                                      SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
-                                         SyntaxFactory.ClassDeclaration("SDL3")
+                                         SyntaxFactory.ClassDeclaration(className)
                                                       .WithModifiers(
                                                           SyntaxFactory.TokenList(
                                                               SyntaxFactory.Token(SyntaxKind.UnsafeKeyword),
@@ -52,6 +58,16 @@ using System;
 
                 context.AddSource(filename, result.ToString());
             }
+        }
+
+        private static string ClassNameFromMethod(MethodDeclarationSyntax methodNode)
+        {
+            if (methodNode.Parent is ClassDeclarationSyntax classDeclaration)
+            {
+                return classDeclaration.Identifier.Text;
+            }
+
+            return "SDL3"; // fallback!
         }
 
         private static MemberDeclarationSyntax makeFriendlyMethod(GeneratedMethod gm)

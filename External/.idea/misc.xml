@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectUserFactors">
+    <factor id="completionFinishedType">
+      <dailyData date="26-06-2023">
+        <observation name="cancelled" value="31.0" />
+        <observation name="explicitSelect" value="7.0" />
+      </dailyData>
+    </factor>
+    <factor id="completionType">
+      <dailyData date="26-06-2023">
+        <observation name="BASIC" value="31.0" />
+      </dailyData>
+    </factor>
+    <factor id="completionUsage">
+      <dailyData date="26-06-2023">
+        <observation name="count" value="38.0" />
+      </dailyData>
+    </factor>
+    <factor id="itemPosition">
+      <dailyData date="26-06-2023">
+        <observation name="0" value="6.0" />
+        <observation name="86" value="1.0" />
+      </dailyData>
+    </factor>
+    <factor id="mnemonicsUsage">
+      <dailyData date="26-06-2023">
+        <observation name="total" value="7.0" />
+        <observation name="withMnemonics" value="0.0" />
+      </dailyData>
+    </factor>
+    <factor id="prefixLength">
+      <dailyData date="26-06-2023">
+        <observation name="21" value="1.0" />
+        <observation name="24" value="1.0" />
+        <observation name="26" value="1.0" />
+        <observation name="28" value="1.0" />
+        <observation name="29" value="2.0" />
+        <observation name="32" value="1.0" />
+      </dailyData>
+    </factor>
+    <factor id="prefixMatchingType">
+      <dailyData date="26-06-2023">
+        <observation name="GREEDY_WITH_CASE" value="4.0" />
+        <observation name="WORDS_FIRST_CHAR" value="1.0" />
+      </dailyData>
+    </factor>
+    <factor id="templatesUsage">
+      <dailyData date="26-06-2023">
+        <observation name="totalStartingWithPrefix" value="7.0" />
+      </dailyData>
+    </factor>
+    <factor id="timeBetweenTyping">
+      <dailyData date="26-06-2023">
+        <observation name="average" value="115.76087" />
+        <observation name="count" value="92.0" />
+      </dailyData>
+    </factor>
+  </component>
+</project>

@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS.Tests.iOS", "SDL3-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3-CS.Tests.Desktop", "SDL3-CS.Tests.Desktop\SDL3-CS.Tests.Desktop.csproj", "{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDL3_ttf-CS", "SDL3_ttf-CS\SDL3_ttf-CS.csproj", "{8E37EB82-ACC4-4656-A6E5-DB298AE72066}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDL3_image-CS", "SDL3_image-CS\SDL3_image-CS.csproj", "{A0D6FC5F-BA26-4298-ABF0-234D2481E323}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,14 @@ Global
 		{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E8D719A-5B69-43B7-A9D5-385B6FE7F411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E37EB82-ACC4-4656-A6E5-DB298AE72066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E37EB82-ACC4-4656-A6E5-DB298AE72066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E37EB82-ACC4-4656-A6E5-DB298AE72066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E37EB82-ACC4-4656-A6E5-DB298AE72066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D6FC5F-BA26-4298-ABF0-234D2481E323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D6FC5F-BA26-4298-ABF0-234D2481E323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D6FC5F-BA26-4298-ABF0-234D2481E323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D6FC5F-BA26-4298-ABF0-234D2481E323}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

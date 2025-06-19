@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0-ios</TargetFramework>
@@ -9,6 +9,10 @@
     <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
