@@ -43,42 +43,6 @@
       <PackagePath>runtimes/win-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-x64\libwebp.dll">
-      <PackagePath>runtimes/win-x64/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-arm64\libwebp.dll">
-      <PackagePath>runtimes/win-arm64/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-x86\libwebp.dll">
-      <PackagePath>runtimes/win-x86/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-x64\libwebpdemux.dll">
-      <PackagePath>runtimes/win-x64/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-arm64\libwebpdemux.dll">
-      <PackagePath>runtimes/win-arm64/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-x86\libwebpdemux.dll">
-      <PackagePath>runtimes/win-x86/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-x64\tiff.dll">
-      <PackagePath>runtimes/win-x64/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-arm64\tiff.dll">
-      <PackagePath>runtimes/win-arm64/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)..\native\win-x86\tiff.dll">
-      <PackagePath>runtimes/win-x86/native</PackagePath>
-      <Pack>true</Pack>
-    </None>
     <None Include="$(MSBuildThisFileDirectory)..\native\osx-x64\libSDL3_image.dylib">
       <PackagePath>runtimes/osx-x64/native</PackagePath>
       <Pack>true</Pack>
