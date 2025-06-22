@@ -22,6 +22,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SDL3-CS\SDL3-CS.csproj"/>
+    <ProjectReference Include="..\SDL3_image-CS\SDL3_image-CS.csproj"/>
+    <ProjectReference Include="..\SDL3_ttf-CS\SDL3_ttf-CS.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\External\SDL_image\test\sample.png">
+      <Link>sample.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
