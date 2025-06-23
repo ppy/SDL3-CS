@@ -46,18 +46,20 @@ namespace SDL
         [Macro]
         public static uint SDL_FOURCC(byte A, byte B, byte C, byte D) => (uint)((A << 0) | (B << 8) | (C << 16) | (D << 24));
 
-        [Macro]
-        public static unsafe void SDL_INIT_INTERFACE(out SDL_IOStreamInterface iface)
+        [Obsolete("Do not use.")] // used internally
+        public interface ISDLInterface
         {
-            iface = default;
-            iface.version = (uint)sizeof(SDL_IOStreamInterface);
+            internal uint version { set; }
         }
 
         [Macro]
-        public static unsafe void SDL_INIT_INTERFACE(out SDL_StorageInterface iface)
+        public static unsafe void SDL_INIT_INTERFACE<T>(out T iface)
+#pragma warning disable CS0618 // Type or member is obsolete
+            where T : unmanaged, ISDLInterface
+#pragma warning restore CS0618 // Type or member is obsolete
         {
             iface = default;
-            iface.version = (uint)sizeof(SDL_StorageInterface);
+            iface.version = (uint)sizeof(T);
         }
 
         public static unsafe void SDL_free(void* mem) => SDL_free((IntPtr)mem);

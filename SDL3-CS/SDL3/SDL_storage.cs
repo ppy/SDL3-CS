@@ -7,6 +7,13 @@ using JetBrains.Annotations;
 
 namespace SDL
 {
+#pragma warning disable CS0618 // Type or member is obsolete
+    public partial struct SDL_StorageInterface : SDL3.ISDLInterface
+#pragma warning restore CS0618 // Type or member is obsolete
+    {
+        uint SDL3.ISDLInterface.version { set => version = value; }
+    }
+
     public static partial class SDL3
     {
         /// <returns>

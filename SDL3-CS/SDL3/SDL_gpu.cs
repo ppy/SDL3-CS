@@ -51,7 +51,10 @@ namespace SDL
         SDL_GPU_COLORCOMPONENT_A = (byte)SDL3.SDL_GPU_COLORCOMPONENT_A,
     }
 
-    public static partial class SDL3
+#pragma warning disable CS0618 // Type or member is obsolete
+    public partial struct SDL_GPURenderStateDesc : SDL3.ISDLInterface
+#pragma warning restore CS0618 // Type or member is obsolete
     {
+        uint SDL3.ISDLInterface.version { set => version = value; }
     }
 }
