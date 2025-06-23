@@ -12,6 +12,8 @@ namespace SDL.Tests
         [Test]
         public void TestBasic()
         {
+            SDL_Init(0);
+
             const IMG_InitFlags flags = IMG_InitFlags.IMG_INIT_PNG;
             var actual = IMG_Init(flags);
 
@@ -37,6 +39,7 @@ namespace SDL.Tests
             finally
             {
                 IMG_Quit();
+                SDL_Quit();
             }
         }
     }

@@ -12,6 +12,8 @@ namespace SDL.Tests
         [Test]
         public void TestBasic()
         {
+            SDL_Init(0);
+
             bool init = TTF_Init();
 
             try
@@ -36,6 +38,7 @@ namespace SDL.Tests
             finally
             {
                 TTF_Quit();
+                SDL_Quit();
             }
         }
     }
