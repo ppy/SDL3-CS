@@ -14,12 +14,8 @@ namespace SDL.Tests
         {
             SDL_Init(0);
 
-            const IMG_InitFlags flags = IMG_InitFlags.IMG_INIT_PNG;
-            var actual = IMG_Init(flags);
-
             try
             {
-                Assert.That(actual, Is.EqualTo(flags), SDL_GetError);
                 Assert.That(IMG_Version(), Is.EqualTo(SDL_IMAGE_VERSION));
 
                 Assume.That("sample.png", Does.Exist);
@@ -38,7 +34,6 @@ namespace SDL.Tests
             }
             finally
             {
-                IMG_Quit();
                 SDL_Quit();
             }
         }
