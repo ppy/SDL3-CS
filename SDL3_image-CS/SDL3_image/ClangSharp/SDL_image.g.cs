@@ -46,12 +46,6 @@ namespace SDL
         public static extern int IMG_Version();
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern IMG_InitFlags IMG_Init(IMG_InitFlags flags);
-
-        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void IMG_Quit();
-
-        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Surface* IMG_LoadTyped_IO(SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio, [NativeTypeName("const char *")] byte* type);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -213,7 +207,7 @@ namespace SDL
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool IMG_SaveAVIF_IO(SDL_Surface* surface, SDL_IOStream* dst, int closeio, int quality);
+        public static extern SDLBool IMG_SaveAVIF_IO(SDL_Surface* surface, SDL_IOStream* dst, [NativeTypeName("bool")] SDLBool closeio, int quality);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -221,7 +215,7 @@ namespace SDL
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool IMG_SavePNG_IO(SDL_Surface* surface, SDL_IOStream* dst, int closeio);
+        public static extern SDLBool IMG_SavePNG_IO(SDL_Surface* surface, SDL_IOStream* dst, [NativeTypeName("bool")] SDLBool closeio);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -229,7 +223,7 @@ namespace SDL
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool IMG_SaveJPG_IO(SDL_Surface* surface, SDL_IOStream* dst, int closeio, int quality);
+        public static extern SDLBool IMG_SaveJPG_IO(SDL_Surface* surface, SDL_IOStream* dst, [NativeTypeName("bool")] SDLBool closeio, int quality);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern IMG_Animation* IMG_LoadAnimation([NativeTypeName("const char *")] byte* file);
@@ -252,28 +246,10 @@ namespace SDL
         [NativeTypeName("#define SDL_IMAGE_MAJOR_VERSION 3")]
         public const int SDL_IMAGE_MAJOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_IMAGE_MINOR_VERSION 1")]
-        public const int SDL_IMAGE_MINOR_VERSION = 1;
+        [NativeTypeName("#define SDL_IMAGE_MINOR_VERSION 3")]
+        public const int SDL_IMAGE_MINOR_VERSION = 3;
 
         [NativeTypeName("#define SDL_IMAGE_MICRO_VERSION 0")]
         public const int SDL_IMAGE_MICRO_VERSION = 0;
-
-        [NativeTypeName("#define IMG_INIT_JPG 0x00000001")]
-        public const int IMG_INIT_JPG = 0x00000001;
-
-        [NativeTypeName("#define IMG_INIT_PNG 0x00000002")]
-        public const int IMG_INIT_PNG = 0x00000002;
-
-        [NativeTypeName("#define IMG_INIT_TIF 0x00000004")]
-        public const int IMG_INIT_TIF = 0x00000004;
-
-        [NativeTypeName("#define IMG_INIT_WEBP 0x00000008")]
-        public const int IMG_INIT_WEBP = 0x00000008;
-
-        [NativeTypeName("#define IMG_INIT_JXL 0x00000010")]
-        public const int IMG_INIT_JXL = 0x00000010;
-
-        [NativeTypeName("#define IMG_INIT_AVIF 0x00000020")]
-        public const int IMG_INIT_AVIF = 0x00000020;
     }
 }

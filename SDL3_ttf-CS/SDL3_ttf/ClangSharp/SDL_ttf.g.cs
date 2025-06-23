@@ -32,6 +32,16 @@ namespace SDL
     {
     }
 
+    public enum TTF_HintingFlags
+    {
+        TTF_HINTING_INVALID = -1,
+        TTF_HINTING_NORMAL,
+        TTF_HINTING_LIGHT,
+        TTF_HINTING_MONO,
+        TTF_HINTING_NONE,
+        TTF_HINTING_LIGHT_SUBPIXEL,
+    }
+
     public enum TTF_HorizontalAlignment
     {
         TTF_HORIZONTAL_ALIGN_INVALID = -1,
@@ -42,10 +52,19 @@ namespace SDL
 
     public enum TTF_Direction
     {
-        TTF_DIRECTION_LTR = 0,
+        TTF_DIRECTION_INVALID = 0,
+        TTF_DIRECTION_LTR = 4,
         TTF_DIRECTION_RTL,
         TTF_DIRECTION_TTB,
         TTF_DIRECTION_BTT,
+    }
+
+    public enum TTF_ImageType
+    {
+        TTF_IMAGE_INVALID,
+        TTF_IMAGE_ALPHA,
+        TTF_IMAGE_COLOR,
+        TTF_IMAGE_SDF,
     }
 
     public partial struct TTF_TextEngine
@@ -66,6 +85,33 @@ namespace SDL
         public int refcount;
 
         public TTF_TextData* @internal;
+    }
+
+    public unsafe partial struct TTF_GPUAtlasDrawSequence
+    {
+        public SDL_GPUTexture* atlas_texture;
+
+        public SDL_FPoint* xy;
+
+        public SDL_FPoint* uv;
+
+        public int num_vertices;
+
+        public int* indices;
+
+        public int num_indices;
+
+        public TTF_ImageType image_type;
+
+        [NativeTypeName("struct TTF_GPUAtlasDrawSequence *")]
+        public TTF_GPUAtlasDrawSequence* next;
+    }
+
+    public enum TTF_GPUTextEngineWinding
+    {
+        TTF_GPU_TEXTENGINE_WINDING_INVALID = -1,
+        TTF_GPU_TEXTENGINE_WINDING_CLOCKWISE,
+        TTF_GPU_TEXTENGINE_WINDING_COUNTER_CLOCKWISE,
     }
 
     public partial struct TTF_SubString
@@ -108,11 +154,24 @@ namespace SDL
         public static extern TTF_Font* TTF_OpenFontWithProperties(SDL_PropertiesID props);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern TTF_Font* TTF_CopyFont(TTF_Font* existing_font);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID TTF_GetFontProperties(TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]
         public static extern uint TTF_GetFontGeneration(TTF_Font* font);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool TTF_AddFallbackFont(TTF_Font* font, TTF_Font* fallback);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void TTF_RemoveFallbackFont(TTF_Font* font, TTF_Font* fallback);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void TTF_ClearFallbackFonts(TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -130,10 +189,10 @@ namespace SDL
         public static extern SDLBool TTF_GetFontDPI(TTF_Font* font, int* hdpi, int* vdpi);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void TTF_SetFontStyle(TTF_Font* font, int style);
+        public static extern void TTF_SetFontStyle(TTF_Font* font, TTF_FontStyleFlags style);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int TTF_GetFontStyle([NativeTypeName("const TTF_Font *")] TTF_Font* font);
+        public static extern TTF_FontStyleFlags TTF_GetFontStyle([NativeTypeName("const TTF_Font *")] TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -143,10 +202,13 @@ namespace SDL
         public static extern int TTF_GetFontOutline([NativeTypeName("const TTF_Font *")] TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void TTF_SetFontHinting(TTF_Font* font, int hinting);
+        public static extern void TTF_SetFontHinting(TTF_Font* font, TTF_HintingFlags hinting);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int TTF_GetFontHinting([NativeTypeName("const TTF_Font *")] TTF_Font* font);
+        public static extern int TTF_GetNumFontFaces([NativeTypeName("const TTF_Font *")] TTF_Font* font);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern TTF_HintingFlags TTF_GetFontHinting([NativeTypeName("const TTF_Font *")] TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -155,6 +217,9 @@ namespace SDL
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool TTF_GetFontSDF([NativeTypeName("const TTF_Font *")] TTF_Font* font);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int TTF_GetFontWeight([NativeTypeName("const TTF_Font *")] TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void TTF_SetFontWrapAlignment(TTF_Font* font, TTF_HorizontalAlignment align);
@@ -201,15 +266,6 @@ namespace SDL
         public static extern byte* TTF_GetFontStyleName([NativeTypeName("const TTF_Font *")] TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* TTF_RenderText_Solid(TTF_Font* font, [NativeTypeName("const char *")] byte* text, [NativeTypeName("size_t")] nuint length, SDL_Color fg);
-
-        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* TTF_RenderText_Solid_Wrapped(TTF_Font* font, [NativeTypeName("const char *")] byte* text, [NativeTypeName("size_t")] nuint length, SDL_Color fg, int wrapLength);
-
-        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* TTF_RenderGlyph_Solid(TTF_Font* font, [NativeTypeName("Uint32")] uint ch, SDL_Color fg);
-
-        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool TTF_SetFontDirection(TTF_Font* font, TTF_Direction direction);
 
@@ -217,12 +273,23 @@ namespace SDL
         public static extern TTF_Direction TTF_GetFontDirection(TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern SDLBool TTF_SetFontScript(TTF_Font* font, [NativeTypeName("const char *")] byte* script);
+        [return: NativeTypeName("Uint32")]
+        public static extern uint TTF_StringToTag([NativeTypeName("const char *")] byte* @string);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void TTF_TagToString([NativeTypeName("Uint32")] uint tag, [NativeTypeName("char *")] byte* @string, [NativeTypeName("size_t")] nuint size);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool TTF_GetGlyphScript([NativeTypeName("Uint32")] uint ch, [NativeTypeName("char *")] byte* script, [NativeTypeName("size_t")] nuint script_size);
+        public static extern SDLBool TTF_SetFontScript(TTF_Font* font, [NativeTypeName("Uint32")] uint script);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint TTF_GetFontScript(TTF_Font* font);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint TTF_GetGlyphScript([NativeTypeName("Uint32")] uint ch);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -233,10 +300,10 @@ namespace SDL
         public static extern SDLBool TTF_FontHasGlyph(TTF_Font* font, [NativeTypeName("Uint32")] uint ch);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* TTF_GetGlyphImage(TTF_Font* font, [NativeTypeName("Uint32")] uint ch);
+        public static extern SDL_Surface* TTF_GetGlyphImage(TTF_Font* font, [NativeTypeName("Uint32")] uint ch, TTF_ImageType* image_type);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_Surface* TTF_GetGlyphImageForIndex(TTF_Font* font, [NativeTypeName("Uint32")] uint glyph_index);
+        public static extern SDL_Surface* TTF_GetGlyphImageForIndex(TTF_Font* font, [NativeTypeName("Uint32")] uint glyph_index, TTF_ImageType* image_type);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -257,6 +324,15 @@ namespace SDL
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool TTF_MeasureString(TTF_Font* font, [NativeTypeName("const char *")] byte* text, [NativeTypeName("size_t")] nuint length, int max_width, int* measured_width, [NativeTypeName("size_t *")] nuint* measured_length);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* TTF_RenderText_Solid(TTF_Font* font, [NativeTypeName("const char *")] byte* text, [NativeTypeName("size_t")] nuint length, SDL_Color fg);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* TTF_RenderText_Solid_Wrapped(TTF_Font* font, [NativeTypeName("const char *")] byte* text, [NativeTypeName("size_t")] nuint length, SDL_Color fg, int wrapLength);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* TTF_RenderGlyph_Solid(TTF_Font* font, [NativeTypeName("Uint32")] uint ch, SDL_Color fg);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Surface* TTF_RenderText_Shaded(TTF_Font* font, [NativeTypeName("const char *")] byte* text, [NativeTypeName("size_t")] nuint length, SDL_Color fg, SDL_Color bg);
@@ -299,11 +375,32 @@ namespace SDL
         public static extern TTF_TextEngine* TTF_CreateRendererTextEngine(SDL_Renderer* renderer);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern TTF_TextEngine* TTF_CreateRendererTextEngineWithProperties(SDL_PropertiesID props);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool TTF_DrawRendererText(TTF_Text* text, float x, float y);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void TTF_DestroyRendererTextEngine(TTF_TextEngine* engine);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern TTF_TextEngine* TTF_CreateGPUTextEngine(SDL_GPUDevice* device);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern TTF_TextEngine* TTF_CreateGPUTextEngineWithProperties(SDL_PropertiesID props);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern TTF_GPUAtlasDrawSequence* TTF_GetGPUTextDrawData(TTF_Text* text);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void TTF_DestroyGPUTextEngine(TTF_TextEngine* engine);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void TTF_SetGPUTextEngineWinding(TTF_TextEngine* engine, TTF_GPUTextEngineWinding winding);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern TTF_GPUTextEngineWinding TTF_GetGPUTextEngineWinding([NativeTypeName("const TTF_TextEngine *")] TTF_TextEngine* engine);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern TTF_Text* TTF_CreateText(TTF_TextEngine* engine, TTF_Font* font, [NativeTypeName("const char *")] byte* text, [NativeTypeName("size_t")] nuint length);
@@ -324,6 +421,21 @@ namespace SDL
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern TTF_Font* TTF_GetTextFont(TTF_Text* text);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool TTF_SetTextDirection(TTF_Text* text, TTF_Direction direction);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern TTF_Direction TTF_GetTextDirection(TTF_Text* text);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool TTF_SetTextScript(TTF_Text* text, [NativeTypeName("Uint32")] uint script);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint TTF_GetTextScript(TTF_Text* text);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -427,8 +539,8 @@ namespace SDL
         [NativeTypeName("#define SDL_TTF_MAJOR_VERSION 3")]
         public const int SDL_TTF_MAJOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_TTF_MINOR_VERSION 0")]
-        public const int SDL_TTF_MINOR_VERSION = 0;
+        [NativeTypeName("#define SDL_TTF_MINOR_VERSION 3")]
+        public const int SDL_TTF_MINOR_VERSION = 3;
 
         [NativeTypeName("#define SDL_TTF_MICRO_VERSION 0")]
         public const int SDL_TTF_MICRO_VERSION = 0;
@@ -457,6 +569,18 @@ namespace SDL
         [NativeTypeName("#define TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER \"SDL_ttf.font.create.vdpi\"")]
         public static ReadOnlySpan<byte> TTF_PROP_FONT_CREATE_VERTICAL_DPI_NUMBER => "SDL_ttf.font.create.vdpi"u8;
 
+        [NativeTypeName("#define TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER \"SDL_ttf.font.create.existing_font\"")]
+        public static ReadOnlySpan<byte> TTF_PROP_FONT_CREATE_EXISTING_FONT_POINTER => "SDL_ttf.font.create.existing_font"u8;
+
+        [NativeTypeName("#define TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER \"SDL_ttf.font.outline.line_cap\"")]
+        public static ReadOnlySpan<byte> TTF_PROP_FONT_OUTLINE_LINE_CAP_NUMBER => "SDL_ttf.font.outline.line_cap"u8;
+
+        [NativeTypeName("#define TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER \"SDL_ttf.font.outline.line_join\"")]
+        public static ReadOnlySpan<byte> TTF_PROP_FONT_OUTLINE_LINE_JOIN_NUMBER => "SDL_ttf.font.outline.line_join"u8;
+
+        [NativeTypeName("#define TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER \"SDL_ttf.font.outline.miter_limit\"")]
+        public static ReadOnlySpan<byte> TTF_PROP_FONT_OUTLINE_MITER_LIMIT_NUMBER => "SDL_ttf.font.outline.miter_limit"u8;
+
         [NativeTypeName("#define TTF_STYLE_NORMAL 0x00")]
         public const int TTF_STYLE_NORMAL = 0x00;
 
@@ -472,31 +596,61 @@ namespace SDL
         [NativeTypeName("#define TTF_STYLE_STRIKETHROUGH 0x08")]
         public const int TTF_STYLE_STRIKETHROUGH = 0x08;
 
-        [NativeTypeName("#define TTF_HINTING_NORMAL 0")]
-        public const int TTF_HINTING_NORMAL = 0;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_THIN 100")]
+        public const int TTF_FONT_WEIGHT_THIN = 100;
 
-        [NativeTypeName("#define TTF_HINTING_LIGHT 1")]
-        public const int TTF_HINTING_LIGHT = 1;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_EXTRA_LIGHT 200")]
+        public const int TTF_FONT_WEIGHT_EXTRA_LIGHT = 200;
 
-        [NativeTypeName("#define TTF_HINTING_MONO 2")]
-        public const int TTF_HINTING_MONO = 2;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_LIGHT 300")]
+        public const int TTF_FONT_WEIGHT_LIGHT = 300;
 
-        [NativeTypeName("#define TTF_HINTING_NONE 3")]
-        public const int TTF_HINTING_NONE = 3;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_NORMAL 400")]
+        public const int TTF_FONT_WEIGHT_NORMAL = 400;
 
-        [NativeTypeName("#define TTF_HINTING_LIGHT_SUBPIXEL 4")]
-        public const int TTF_HINTING_LIGHT_SUBPIXEL = 4;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_MEDIUM 500")]
+        public const int TTF_FONT_WEIGHT_MEDIUM = 500;
 
-        [NativeTypeName("#define TTF_SUBSTRING_TEXT_START 0x00000001")]
-        public const int TTF_SUBSTRING_TEXT_START = 0x00000001;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_SEMI_BOLD 600")]
+        public const int TTF_FONT_WEIGHT_SEMI_BOLD = 600;
 
-        [NativeTypeName("#define TTF_SUBSTRING_LINE_START 0x00000002")]
-        public const int TTF_SUBSTRING_LINE_START = 0x00000002;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_BOLD 700")]
+        public const int TTF_FONT_WEIGHT_BOLD = 700;
 
-        [NativeTypeName("#define TTF_SUBSTRING_LINE_END 0x00000004")]
-        public const int TTF_SUBSTRING_LINE_END = 0x00000004;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_EXTRA_BOLD 800")]
+        public const int TTF_FONT_WEIGHT_EXTRA_BOLD = 800;
 
-        [NativeTypeName("#define TTF_SUBSTRING_TEXT_END 0x00000008")]
-        public const int TTF_SUBSTRING_TEXT_END = 0x00000008;
+        [NativeTypeName("#define TTF_FONT_WEIGHT_BLACK 900")]
+        public const int TTF_FONT_WEIGHT_BLACK = 900;
+
+        [NativeTypeName("#define TTF_FONT_WEIGHT_EXTRA_BLACK 950")]
+        public const int TTF_FONT_WEIGHT_EXTRA_BLACK = 950;
+
+        [NativeTypeName("#define TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER_POINTER \"SDL_ttf.renderer_text_engine.create.renderer\"")]
+        public static ReadOnlySpan<byte> TTF_PROP_RENDERER_TEXT_ENGINE_RENDERER_POINTER => "SDL_ttf.renderer_text_engine.create.renderer"u8;
+
+        [NativeTypeName("#define TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER \"SDL_ttf.renderer_text_engine.create.atlas_texture_size\"")]
+        public static ReadOnlySpan<byte> TTF_PROP_RENDERER_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER => "SDL_ttf.renderer_text_engine.create.atlas_texture_size"u8;
+
+        [NativeTypeName("#define TTF_PROP_GPU_TEXT_ENGINE_DEVICE_POINTER \"SDL_ttf.gpu_text_engine.create.device\"")]
+        public static ReadOnlySpan<byte> TTF_PROP_GPU_TEXT_ENGINE_DEVICE_POINTER => "SDL_ttf.gpu_text_engine.create.device"u8;
+
+        [NativeTypeName("#define TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER \"SDL_ttf.gpu_text_engine.create.atlas_texture_size\"")]
+        public static ReadOnlySpan<byte> TTF_PROP_GPU_TEXT_ENGINE_ATLAS_TEXTURE_SIZE_NUMBER => "SDL_ttf.gpu_text_engine.create.atlas_texture_size"u8;
+
+        [NativeTypeName("#define TTF_SUBSTRING_DIRECTION_MASK 0x000000FF")]
+        public const int TTF_SUBSTRING_DIRECTION_MASK = 0x000000FF;
+
+        [NativeTypeName("#define TTF_SUBSTRING_TEXT_START 0x00000100")]
+        public const int TTF_SUBSTRING_TEXT_START = 0x00000100;
+
+        [NativeTypeName("#define TTF_SUBSTRING_LINE_START 0x00000200")]
+        public const int TTF_SUBSTRING_LINE_START = 0x00000200;
+
+        [NativeTypeName("#define TTF_SUBSTRING_LINE_END 0x00000400")]
+        public const int TTF_SUBSTRING_LINE_END = 0x00000400;
+
+        [NativeTypeName("#define TTF_SUBSTRING_TEXT_END 0x00000800")]
+        public const int TTF_SUBSTRING_TEXT_END = 0x00000800;
     }
 }

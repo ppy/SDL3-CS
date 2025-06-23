@@ -287,5 +287,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_RECORDING ((SDL_AudioDeviceID) 0xFFFFFFFEu)")]
         public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_RECORDING = ((SDL_AudioDeviceID)(0xFFFFFFFEU));
+
+        [NativeTypeName("#define SDL_PROP_AUDIOSTREAM_AUTO_CLEANUP_BOOLEAN \"SDL.audiostream.auto_cleanup\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_AUDIOSTREAM_AUTO_CLEANUP_BOOLEAN => "SDL.audiostream.auto_cleanup"u8;
     }
 }
