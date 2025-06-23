@@ -7,6 +7,17 @@ namespace SDL
 {
     [Flags]
     [Typedef]
+    public enum TTF_FontStyleFlags : UInt32
+    {
+        TTF_STYLE_NORMAL = SDL3_ttf.TTF_STYLE_NORMAL,
+        TTF_STYLE_BOLD = SDL3_ttf.TTF_STYLE_BOLD,
+        TTF_STYLE_ITALIC = SDL3_ttf.TTF_STYLE_ITALIC,
+        TTF_STYLE_UNDERLINE = SDL3_ttf.TTF_STYLE_UNDERLINE,
+        TTF_STYLE_STRIKETHROUGH = SDL3_ttf.TTF_STYLE_STRIKETHROUGH,
+    }
+
+    [Flags]
+    [Typedef]
     public enum TTF_SubStringFlags : UInt32
     {
         TTF_SUBSTRING_TEXT_START = SDL3_ttf.TTF_SUBSTRING_TEXT_START,
