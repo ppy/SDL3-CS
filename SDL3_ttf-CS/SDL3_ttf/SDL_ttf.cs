@@ -7,7 +7,7 @@ namespace SDL
 {
     [Flags]
     [Typedef]
-    public enum TTF_SubStringFlags : int
+    public enum TTF_SubStringFlags : UInt32
     {
         TTF_SUBSTRING_TEXT_START = SDL3_ttf.TTF_SUBSTRING_TEXT_START,
         TTF_SUBSTRING_LINE_START = SDL3_ttf.TTF_SUBSTRING_LINE_START,

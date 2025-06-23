@@ -7,7 +7,7 @@ namespace SDL
 {
     [Flags]
     [Typedef]
-    public enum IMG_InitFlags : int
+    public enum IMG_InitFlags : UInt32
     {
         IMG_INIT_JPG = SDL3_image.IMG_INIT_JPG,
         IMG_INIT_PNG = SDL3_image.IMG_INIT_PNG,
