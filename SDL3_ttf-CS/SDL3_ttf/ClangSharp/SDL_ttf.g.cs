@@ -257,13 +257,13 @@ namespace SDL
         [return: NativeTypeName("bool")]
         public static extern SDLBool TTF_FontIsScalable([NativeTypeName("const TTF_Font *")] TTF_Font* font);
 
-        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, EntryPoint = "TTF_GetFontFamilyName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* TTF_GetFontFamilyName([NativeTypeName("const TTF_Font *")] TTF_Font* font);
+        public static extern byte* Unsafe_TTF_GetFontFamilyName([NativeTypeName("const TTF_Font *")] TTF_Font* font);
 
-        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, EntryPoint = "TTF_GetFontStyleName", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* TTF_GetFontStyleName([NativeTypeName("const TTF_Font *")] TTF_Font* font);
+        public static extern byte* Unsafe_TTF_GetFontStyleName([NativeTypeName("const TTF_Font *")] TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
