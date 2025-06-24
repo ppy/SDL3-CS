@@ -545,6 +545,9 @@ namespace SDL
         [NativeTypeName("#define SDL_TTF_MICRO_VERSION 0")]
         public const int SDL_TTF_MICRO_VERSION = 0;
 
+        [NativeTypeName("#define SDL_TTF_VERSION SDL_VERSIONNUM(SDL_TTF_MAJOR_VERSION, SDL_TTF_MINOR_VERSION, SDL_TTF_MICRO_VERSION)")]
+        public const int SDL_TTF_VERSION = ((3) * 1000000 + (3) * 1000 + (0));
+
         [NativeTypeName("#define TTF_PROP_FONT_CREATE_FILENAME_STRING \"SDL_ttf.font.create.filename\"")]
         public static ReadOnlySpan<byte> TTF_PROP_FONT_CREATE_FILENAME_STRING => "SDL_ttf.font.create.filename"u8;
 

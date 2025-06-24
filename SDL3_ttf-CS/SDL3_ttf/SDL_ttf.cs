@@ -29,9 +29,6 @@ namespace SDL
 
     public static unsafe partial class SDL3_ttf
     {
-        [Constant]
-        public static readonly int SDL_TTF_VERSION = SDL3.SDL_VERSIONNUM(SDL_TTF_MAJOR_VERSION, SDL_TTF_MINOR_VERSION, SDL_TTF_MICRO_VERSION);
-
         [Macro]
         public static bool SDL_TTF_VERSION_ATLEAST(int X, int Y, int Z) =>
             ((SDL_TTF_MAJOR_VERSION >= X) &&

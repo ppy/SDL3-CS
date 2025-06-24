@@ -18,9 +18,6 @@ namespace SDL
         [Macro]
         public static int SDL_VERSIONNUM_MICRO(int version) => ((version) % 1000);
 
-        [Constant]
-        public static readonly int SDL_VERSION = SDL_VERSIONNUM(SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_MICRO_VERSION);
-
         [Macro]
         public static bool SDL_VERSION_ATLEAST(int X, int Y, int Z) => SDL_VERSION >= SDL_VERSIONNUM(X, Y, Z);
     }

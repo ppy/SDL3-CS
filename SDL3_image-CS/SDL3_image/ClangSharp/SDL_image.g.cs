@@ -251,5 +251,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_IMAGE_MICRO_VERSION 0")]
         public const int SDL_IMAGE_MICRO_VERSION = 0;
+
+        [NativeTypeName("#define SDL_IMAGE_VERSION SDL_VERSIONNUM(SDL_IMAGE_MAJOR_VERSION, SDL_IMAGE_MINOR_VERSION, SDL_IMAGE_MICRO_VERSION)")]
+        public const int SDL_IMAGE_VERSION = ((3) * 1000000 + (3) * 1000 + (0));
     }
 }
