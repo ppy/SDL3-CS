@@ -255,7 +255,7 @@ def typedef(t):
 
 base_command = [
     "dotnet", "tool", "run", "ClangSharpPInvokeGenerator",
-    "--headerFile", csproj_root / "SDL.licenseheader",
+    "--headerFile", csproj_root / "SDL-license-header.txt",
 
     "--config",
     "latest-codegen",

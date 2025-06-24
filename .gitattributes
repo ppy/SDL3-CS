@@ -23,3 +23,7 @@ App.config text eol=crlf
 .gitattributes text eol=lf
 *.md text eol=lf
 .travis.yml text eol=lf
+
+# Use lf for files used by ClangSharpPInvokeGenerator
+*-license-header.txt text eol=lf
+*.g.cs text eol=lf
