@@ -27,8 +27,7 @@ namespace SDL.Tests
                 try
                 {
                     Assert.That(font != null, SDL_GetError);
-                    string? name = PtrToStringUTF8(TTF_GetFontFamilyName(font)); // TODO: fix Unsafe_ generation
-                    Assert.That(name, Is.EqualTo("Times New Roman"));
+                    Assert.That(TTF_GetFontFamilyName(font), Is.EqualTo("Times New Roman"));
                 }
                 finally
                 {

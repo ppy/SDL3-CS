@@ -16,6 +16,7 @@ Usage:
 Example:
 - python generate_bindings.py
 - python generate_bindings.py SDL3/SDL_audio.h
+- python generate_bindings.py SDL3_ttf/SDL_ttf.h
 - python generate_bindings.py SDL_audio.h
 - python generate_bindings.py SDL_audio
 - python generate_bindings.py audio
@@ -365,7 +366,10 @@ def generate_platform_specific_headers(sdl_api, header: Header, platforms):
 def get_string_returning_functions(sdl_api):
     for f in sdl_api:
         if f["retval"] in ("const char*", "char*"):
-            yield f
+            yield f["name"]
+
+    yield "TTF_GetFontFamilyName"
+    yield "TTF_GetFontStyleName"
 
 
 def should_skip(solo_headers: list[Header], header: Header):
@@ -397,8 +401,7 @@ def main():
     str_ret_funcs = list(get_string_returning_functions(sdl_api))
     if str_ret_funcs:
         base_command.append("--remap")
-        for func in str_ret_funcs:
-            name = func["name"]
+        for name in str_ret_funcs:
             # add unsafe prefix to `const char *` functions so that the source generator can make friendly overloads with the unprefixed name.
             base_command.append(f"{name}={unsafe_prefix}{name}")
 

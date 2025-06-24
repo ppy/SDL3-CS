@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -142,7 +141,10 @@ using System;
             if (gm.RequiredChanges.HasFlag(Changes.ChangeReturnTypeToString))
             {
                 expr = SyntaxFactory.InvocationExpression(
-                                        SyntaxFactory.IdentifierName("PtrToStringUTF8"))
+                                        SyntaxFactory.MemberAccessExpression(
+                                            SyntaxKind.SimpleMemberAccessExpression,
+                                            SyntaxFactory.IdentifierName("SDL3"),
+                                            SyntaxFactory.IdentifierName("PtrToStringUTF8")))
                                     .WithArguments(new[]
                                         {
                                             SyntaxFactory.Argument(makeFunctionCall(gm)),
