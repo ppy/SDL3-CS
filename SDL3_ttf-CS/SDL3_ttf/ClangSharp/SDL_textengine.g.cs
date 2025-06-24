@@ -42,11 +42,13 @@ namespace SDL
         public SDL_Rect rect;
     }
 
-    public partial struct TTF_CopyOperation
+    public unsafe partial struct TTF_CopyOperation
     {
         public TTF_DrawCommand cmd;
 
         public int text_offset;
+
+        public TTF_Font* glyph_font;
 
         [NativeTypeName("Uint32")]
         public uint glyph_index;
