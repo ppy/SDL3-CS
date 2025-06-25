@@ -32,7 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0"/>
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
 
     <PackageReference Include="libclang" Version="17.0.4">
       <PrivateAssets>all</PrivateAssets>
@@ -100,7 +102,7 @@
       <PackagePath>runtimes/android-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    <EmbeddedJar Include="Jars\SDL3AndroidBridge.jar" />
+    <EmbeddedJar Include="Jars\SDL3AndroidBridge.jar"/>
   </ItemGroup>
 
 </Project>
