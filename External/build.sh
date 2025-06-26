@@ -111,6 +111,23 @@ elif [[ $RUNNER_OS == 'macOS' ]]; then
     CMAKE_PREFIX_PATH="../SDL/install_output/lib/cmake/"
 fi
 
+# Build SDL_mixer
+pushd SDL_mixer
+git reset --hard HEAD
+cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLMIXER_VENDORED=ON
+cmake --build build/ --config Release
+$SUDO cmake --install build/ --prefix install_output --config Release
+popd
+
+# Move build lib into correct folders
+if [[ $RUNNER_OS == 'Windows' ]]; then
+    cp SDL_mixer/install_output/bin/SDL3_mixer.dll ../native/$NAME/SDL3_mixer.dll
+elif [[ $RUNNER_OS == 'Linux' ]]; then
+    cp SDL_mixer/install_output/lib/libSDL3_mixer.so ../native/$NAME/libSDL3_mixer.so
+elif [[ $RUNNER_OS == 'macOS' ]]; then
+    cp SDL_mixer/install_output/lib/libSDL3_mixer.dylib ../native/$NAME/libSDL3_mixer.dylib
+fi
+
 # Build SDL_image
 pushd SDL_image
 git reset --hard HEAD
