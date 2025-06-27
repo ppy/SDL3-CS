@@ -39,11 +39,10 @@ jobs:
             -e NAME=${{ matrix.platform.name }}
             -e TARGET_APT_ARCH=${{ matrix.platform.target_apt_arch }}
             -e RUNNER_OS=${{ runner.os }}
-            -e FLAGS="${{ matrix.platform.flags }}"
             -e BUILD_TYPE=${{ env.BUILD_TYPE }}
           run: |
             cd /workspace
-            ./External/build.sh
+            FLAGS="${{ matrix.platform.flags }}" ./External/build.sh
 
       - name: Build
         if: ${{ !contains(matrix.platform.container, 'arm') }}
