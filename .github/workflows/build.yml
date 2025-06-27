@@ -81,23 +81,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
 
       - name: Build (iOS)
-        run: xcodebuild -project External/SDL/Xcode/SDL/SDL.xcodeproj -target SDL3.xcframework -configuration Release
-
-      - name: Prepare release directory (iOS)
-        run: mkdir -p native/ios
-
-      - name: Prepare release (iOS)
         run: |
-          mkdir -p native/ios/SDL3.xcframework/ios-arm64/SDL3.framework;
-          mkdir -p native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework;
-          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/Info.plist                                           native/ios/SDL3.xcframework/Info.plist;
-          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64/SDL3.framework/SDL3                        native/ios/SDL3.xcframework/ios-arm64/SDL3.framework/SDL3;
-          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64/SDL3.framework/Info.plist                  native/ios/SDL3.xcframework/ios-arm64/SDL3.framework/Info.plist;
-          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/SDL3       native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/SDL3;
-          cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist;
+          modules=("SDL3" "SDL3_image" "SDL3_ttf" "SDL3_mixer")
+          architectures=("ios-arm64" "ios-arm64_x86_64-simulator")
+
+          for module in "${modules[@]}"; do
+            module0="${module/SDL3/SDL}"
+            directory="External/${module0}/Xcode"
+            if [ "$module" == "SDL3" ]; then
+              directory+="/SDL"
+            fi
+
+            target="${module}.xcframework"
+            framework="${module}.framework"
+            output_dir="native/ios/${target}"
+
+            xcodebuild -project "${directory}/${module0}.xcodeproj" -target "${target}" -configuration Release
+            build_dir="${directory}/build/${target}"
+
+            ls -lRh "${directory}"
+
+            for arch in "${architectures[@]}"; do
+              mkdir -p "${output_dir}/${arch}/${framework}"
+              cp "${build_dir}/${arch}/${framework}/${module}" "${output_dir}/${arch}/${framework}/${module}"
+              cp "${build_dir}/${arch}/${framework}/Info.plist" "${output_dir}/${arch}/${framework}/Info.plist"
+            done
+            cp "${build_dir}/Info.plist" "${output_dir}/Info.plist"
+          done
 
       - name: Compress native directory
         run: tar -cf native-ios.tar native/ios
