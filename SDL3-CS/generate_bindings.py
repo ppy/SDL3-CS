@@ -181,10 +181,6 @@ headers = [
 def prepare_sdl_source():
     for lib in SDL_libs:
         subprocess.run([
-            "git", "config", "--global", "--add", "safe.directory", 
-            repository_root / SDL_lib_root / lib
-        ])
-        subprocess.run([
             "git",
             "reset",
             "--hard",
