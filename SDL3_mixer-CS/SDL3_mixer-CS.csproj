@@ -1,0 +1,94 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SDL</RootNamespace>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);SYSLIB1054;CA1401</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet">
+    <Authors>ppy Pty Ltd</Authors>
+    <Company>ppy Pty Ltd</Company>
+    <Copyright>Copyright (c) 2024 ppy Pty Ltd</Copyright>
+    <Product>ppy.SDL3_mixer-CS</Product>
+    <PackageId>ppy.SDL3_mixer-CS</PackageId>
+    <PackageReleaseNotes>Automated release.</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ppy/SDL3-CS</PackageProjectUrl>
+    <PackageReadmeFile>README_nuget.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/ppy/SDL3-CS</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\README_nuget.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SDL3-CS.SourceGeneration\SDL3-CS.SourceGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\SDL3-CS\SDL3-CS.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\native\win-x64\SDL3_mixer.dll">
+      <PackagePath>runtimes/win-x64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\win-arm64\SDL3_mixer.dll">
+      <PackagePath>runtimes/win-arm64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\win-x86\SDL3_mixer.dll">
+      <PackagePath>runtimes/win-x86/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\osx-x64\libSDL3_mixer.dylib">
+      <PackagePath>runtimes/osx-x64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\osx-arm64\libSDL3_mixer.dylib">
+      <PackagePath>runtimes/osx-arm64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-x64\libSDL3_mixer.so">
+      <PackagePath>runtimes/linux-x64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-x86\libSDL3_mixer.so">
+      <PackagePath>runtimes/linux-x86/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-arm64\libSDL3_mixer.so">
+      <PackagePath>runtimes/linux-arm64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\linux-arm\libSDL3_mixer.so">
+      <PackagePath>runtimes/linux-arm/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <!-- Todo: Build these platforms with the CI script:
+    <None Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3_mixer.xcframework\**\*">
+      <PackagePath>runtimes/ios/native/SDL3.xcframework</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\armeabi-v7a\libSDL3_mixer.so">
+      <PackagePath>runtimes/android-arm/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\arm64-v8a\libSDL3_mixer.so">
+      <PackagePath>runtimes/android-arm64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\x86_64\libSDL3_mixer.so">
+      <PackagePath>runtimes/android-x64/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\android\x86\libSDL3_mixer.so">
+      <PackagePath>runtimes/android-x86/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
+    -->
+  </ItemGroup>
+
+</Project>
