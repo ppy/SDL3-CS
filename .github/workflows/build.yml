@@ -5,6 +5,8 @@ on:
 #    - cron: '0 0 * * *'
 env:
   BUILD_TYPE: Release
+  NDK_VER: 27.2.12479018
+  PLATFORM_VER: 35
 
 jobs:
   build:
@@ -24,10 +26,31 @@ jobs:
           - { name: osx-x64,     os: macos-13,     flags: -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.14 }
           # NOTE: macOS 11.0 is the first released supported by Apple Silicon.
           - { name: osx-arm64,   os: macos-latest,     flags: -DCMAKE_OSX_ARCHITECTURES=arm64 -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 }
+          - { name: android-arm64, os: ubuntu-22.04,  flags: -GNinja, abi: arm64-v8a }
+          - { name: android-arm,   os: ubuntu-22.04,  flags: -GNinja, abi: armeabi-v7a }
+          - { name: android-x64,   os: ubuntu-22.04,  flags: -GNinja, abi: x86_64 }
+          - { name: android-x86,   os: ubuntu-22.04,  flags: -GNinja, abi: x86 }
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      - name: Setup JDK
+        if: contains(matrix.platform.name, 'android')
+        uses: actions/setup-java@v4
+        with:
+          distribution: microsoft
+          java-version: 17
+
+      - name: Install Android SDK Manager
+        if: contains(matrix.platform.name, 'android')
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK
+        if: contains(matrix.platform.name, 'android')
+        run: |
+          sdkmanager --install "platforms;android-$PLATFORM_VER"
+          sdkmanager --install "ndk;$NDK_VER"
 
       - name: Build (Linux ARM)
         if: contains(matrix.platform.container, 'arm')
@@ -52,6 +75,7 @@ jobs:
           TARGET_APT_ARCH: ${{ matrix.platform.target_apt_arch }}
           RUNNER_OS: ${{ runner.os }}
           FLAGS: ${{ matrix.platform.flags }}
+          ANDROID_ABI: ${{ matrix.platform.abi }}
         run: ./External/build.sh
 
       - name: Get Actions user id
@@ -66,7 +90,12 @@ jobs:
           user_id: ${{ steps.get_uid.outputs.uid }}
 
       - name: Compress native directory
-        run: tar -cf native-${{ matrix.platform.name }}.tar native/${{ matrix.platform.name }}
+        if: ${{ !contains(matrix.platform.name, 'android') }}
+        run: tar -cvf native-${{ matrix.platform.name }}.tar native/${{ matrix.platform.name }}
+
+      - name: Compress native directory (Android)
+        if: contains(matrix.platform.name, 'android')
+        run: tar -cvf native-${{ matrix.platform.name }}.tar native/android/${{ matrix.platform.abi }}
 
       - name: Upload native artifact
         uses: actions/upload-artifact@v4
@@ -100,7 +129,7 @@ jobs:
           cp External/SDL/Xcode/SDL/build/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist native/ios/SDL3.xcframework/ios-arm64_x86_64-simulator/SDL3.framework/Info.plist;
 
       - name: Compress native directory
-        run: tar -cf native-ios.tar native/ios
+        run: tar -cvf native-ios.tar native/ios
 
       - name: Upload native artifact
         uses: actions/upload-artifact@v4
@@ -109,12 +138,9 @@ jobs:
           path: native-ios.tar
           if-no-files-found: error
 
-  build-android:
-    name: android
+  build-android-jar:
+    name: android-jar
     runs-on: ubuntu-22.04
-    env:
-      NDK_VER: 23.1.7779620
-      PLATFORM_VER: android-34
     steps:
       - uses: actions/checkout@v4
         with:
@@ -130,22 +156,10 @@ jobs:
 
       - name: Install Android SDK Manager
         uses: android-actions/setup-android@v3
-        with:
-          packages: ''
 
       - name: Install Android SDK
         run: |
-          sdkmanager --install "platform-tools" "platforms;$PLATFORM_VER"
-          sdkmanager --install "ndk;$NDK_VER" --channel=3
-
-      - name: Build (Android)
-        run: |
-          export PATH=$ANDROID_HOME/ndk/$NDK_VER:$PATH
-          export OUTPUT=$PWD/native/android
-          rm -rf $OUTPUT && mkdir -p $OUTPUT
-
-          # Build SDL3
-          ./External/SDL/build-scripts/androidbuildlibs.sh APP_ABI="armeabi-v7a arm64-v8a x86 x86_64" NDK_LIBS_OUT="$OUTPUT"
+          sdkmanager --install "platforms;android-$PLATFORM_VER"
 
       - name: Build SDL3 Android Java
         run: |
@@ -156,18 +170,8 @@ jobs:
 
           # Build SDL3 Android Java part
           cd ./External/SDL/android-project/app/src/main/java
-          javac -cp $ANDROID_HOME/platforms/$PLATFORM_VER/android.jar -encoding utf8 org/libsdl/app/*.java
+          javac -cp $ANDROID_HOME/platforms/android-$PLATFORM_VER/android.jar -encoding utf8 org/libsdl/app/*.java
           jar cvf $OUTPUT/SDL3AndroidBridge.jar org/libsdl/app/*.class
-
-      - name: Compress native directory
-        run: tar -cf native-android.tar native/android
-
-      - name: Upload native artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: native-android
-          path: native-android.tar
-          if-no-files-found: error
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
@@ -179,7 +183,7 @@ jobs:
   make-pr:
     name: Submit pull request
     runs-on: ubuntu-latest
-    needs: [ build, build-ios, build-android ]
+    needs: [ build, build-ios, build-android-jar ]
     steps:
       - uses: actions/checkout@v4
 

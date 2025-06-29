@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net8.0;net8.0-android</TargetFrameworks>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <RootNamespace>SDL</RootNamespace>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -72,6 +73,7 @@
       <PackagePath>runtimes/ios/native/SDL3.xcframework</PackagePath>
       <Pack>true</Pack>
     </None>
+    -->
     <None Include="$(MSBuildThisFileDirectory)..\native\android\armeabi-v7a\libSDL3_mixer.so">
       <PackagePath>runtimes/android-arm/native</PackagePath>
       <Pack>true</Pack>
@@ -88,7 +90,6 @@
       <PackagePath>runtimes/android-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
-    -->
   </ItemGroup>
 
 </Project>

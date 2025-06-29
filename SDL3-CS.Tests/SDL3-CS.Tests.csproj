@@ -24,6 +24,7 @@
     <ProjectReference Include="..\SDL3-CS\SDL3-CS.csproj"/>
     <ProjectReference Include="..\SDL3_image-CS\SDL3_image-CS.csproj"/>
     <ProjectReference Include="..\SDL3_ttf-CS\SDL3_ttf-CS.csproj"/>
+    <ProjectReference Include="..\SDL3_mixer-CS\SDL3_mixer-CS.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
