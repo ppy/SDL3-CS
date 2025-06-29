@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDL3_ttf-CS", "SDL3_ttf-CS\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDL3_image-CS", "SDL3_image-CS\SDL3_image-CS.csproj", "{A0D6FC5F-BA26-4298-ABF0-234D2481E323}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDL3_mixer-CS", "SDL3_mixer-CS\SDL3_mixer-CS.csproj", "{421748C4-B51F-4B00-9637-566DBFD96E02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{A0D6FC5F-BA26-4298-ABF0-234D2481E323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0D6FC5F-BA26-4298-ABF0-234D2481E323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0D6FC5F-BA26-4298-ABF0-234D2481E323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421748C4-B51F-4B00-9637-566DBFD96E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421748C4-B51F-4B00-9637-566DBFD96E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421748C4-B51F-4B00-9637-566DBFD96E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421748C4-B51F-4B00-9637-566DBFD96E02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

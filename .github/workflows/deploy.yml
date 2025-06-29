@@ -33,6 +33,7 @@ jobs:
           dotnet pack SDL3-CS/SDL3-CS.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD) -o artifacts
           dotnet pack SDL3_image-CS/SDL3_image-CS.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD) -o artifacts
           dotnet pack SDL3_ttf-CS/SDL3_ttf-CS.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD) -o artifacts
+          dotnet pack SDL3_mixer-CS/SDL3_mixer-CS.csproj -c Release /p:Version=$(git describe --exact-match --tags HEAD) -o artifacts
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
