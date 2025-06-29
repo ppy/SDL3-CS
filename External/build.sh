@@ -5,7 +5,7 @@ set -e
 pushd "$(dirname "$0")"
 
 # Check if environment variables are defined
-if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS ]]; then
+if [[ -z $NAME || -z $RUNNER_OS || -z $FLAGS || -z $BUILD_TYPE ]]; then
     echo "One or more required environment variables are not defined."
     exit 1
 fi
@@ -16,153 +16,163 @@ else
     SUDO=$(which sudo || exit 0)
 fi
 
+if [[ -n $ANDROID_ABI ]]; then
+    BUILD_PLATFORM="Android"
+else
+    BUILD_PLATFORM="$RUNNER_OS"
+fi
+
 export DEBIAN_FRONTEND=noninteractive
 
-if [[ $RUNNER_OS == 'Linux' ]]; then
-# Setup Linux dependencies
-    if [[ $TARGET_APT_ARCH == :i386 ]]; then
-        $SUDO dpkg --add-architecture i386
+if [[ $BUILD_PLATFORM != 'Android' ]]; then
+    NATIVE_PATH="$NAME"
+
+    if [[ $BUILD_PLATFORM == 'Linux' ]]; then
+        # Setup Linux dependencies
+        if [[ $TARGET_APT_ARCH == :i386 ]]; then
+            $SUDO dpkg --add-architecture i386
+        fi
+
+        $SUDO apt-get update -y -qq
+
+        if [[ $NAME != 'linux-x86' && $NAME != 'linux-x64' ]]; then
+            GCC="gcc"
+            GPP="g++"
+        else
+            GCC="gcc-multilib"
+            GPP="g++-multilib"
+        fi
+
+        $SUDO apt-get install -y \
+            $GCC \
+            $GPP \
+            git \
+            cmake \
+            ninja-build \
+            wayland-scanner++ \
+            wayland-protocols \
+            meson \
+            pkg-config$TARGET_APT_ARCH \
+            libasound2-dev$TARGET_APT_ARCH \
+            libdbus-1-dev$TARGET_APT_ARCH \
+            libegl1-mesa-dev$TARGET_APT_ARCH \
+            libgl1-mesa-dev$TARGET_APT_ARCH \
+            libgles2-mesa-dev$TARGET_APT_ARCH \
+            libglu1-mesa-dev$TARGET_APT_ARCH \
+            libgtk-3-dev$TARGET_APT_ARCH \
+            libibus-1.0-dev$TARGET_APT_ARCH \
+            libpango1.0-dev$TARGET_APT_ARCH \
+            libpulse-dev$TARGET_APT_ARCH \
+            libsndio-dev$TARGET_APT_ARCH \
+            libudev-dev$TARGET_APT_ARCH \
+            libwayland-dev$TARGET_APT_ARCH \
+            libx11-dev$TARGET_APT_ARCH \
+            libxcursor-dev$TARGET_APT_ARCH \
+            libxext-dev$TARGET_APT_ARCH \
+            libxi-dev$TARGET_APT_ARCH \
+            libxinerama-dev$TARGET_APT_ARCH \
+            libxkbcommon-dev$TARGET_APT_ARCH \
+            libxrandr-dev$TARGET_APT_ARCH \
+            libxss-dev$TARGET_APT_ARCH \
+            libxt-dev$TARGET_APT_ARCH \
+            libxv-dev$TARGET_APT_ARCH \
+            libxxf86vm-dev$TARGET_APT_ARCH \
+            libdrm-dev$TARGET_APT_ARCH \
+            libgbm-dev$TARGET_APT_ARCH \
+            libpulse-dev$TARGET_APT_ARCH \
+            libpipewire-0.3-dev$TARGET_APT_ARCH \
+            libdecor-0-dev$TARGET_APT_ARCH
+    fi
+else
+    if [[ -z $ANDROID_HOME || -z $NDK_VER || -z $PLATFORM_VER || -z $ANDROID_ABI ]]; then
+        echo "One or more required environment variables are not defined."
+        exit 1
     fi
 
-    $SUDO apt-get update -y -qq
+    NATIVE_PATH="android/$ANDROID_ABI"
 
-    if [[ $NAME != 'linux-x86' && $NAME != 'linux-x64' ]]; then
-        GCC="gcc"
-        GPP="g++"
-    else
-        GCC="gcc-multilib"
-        GPP="g++-multilib"
-    fi
+    export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/$NDK_VER"
+    export FLAGS="$FLAGS -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
+                         -DANDROID_HOME=$ANDROID_HOME \
+                         -DANDROID_PLATFORM=$PLATFORM_VER \
+                         -DANDROID_ABI=$ANDROID_ABI \
+                         -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+                         -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
+                         -DCMAKE_INSTALL_INCLUDEDIR=include \
+                         -DCMAKE_INSTALL_LIBDIR=lib \
+                         -DCMAKE_INSTALL_DATAROOTDIR=share \
+                         -DSDL_ANDROID_JAR=OFF"
 
     $SUDO apt-get install -y \
-        $GCC \
-        $GPP \
-        git \
-        cmake \
-        ninja-build \
-        wayland-scanner++ \
-        wayland-protocols \
-        meson \
-        pkg-config$TARGET_APT_ARCH \
-        libasound2-dev$TARGET_APT_ARCH \
-        libdbus-1-dev$TARGET_APT_ARCH \
-        libegl1-mesa-dev$TARGET_APT_ARCH \
-        libgl1-mesa-dev$TARGET_APT_ARCH \
-        libgles2-mesa-dev$TARGET_APT_ARCH \
-        libglu1-mesa-dev$TARGET_APT_ARCH \
-        libgtk-3-dev$TARGET_APT_ARCH \
-        libibus-1.0-dev$TARGET_APT_ARCH \
-        libpango1.0-dev$TARGET_APT_ARCH \
-        libpulse-dev$TARGET_APT_ARCH \
-        libsndio-dev$TARGET_APT_ARCH \
-        libudev-dev$TARGET_APT_ARCH \
-        libwayland-dev$TARGET_APT_ARCH \
-        libx11-dev$TARGET_APT_ARCH \
-        libxcursor-dev$TARGET_APT_ARCH \
-        libxext-dev$TARGET_APT_ARCH \
-        libxi-dev$TARGET_APT_ARCH \
-        libxinerama-dev$TARGET_APT_ARCH \
-        libxkbcommon-dev$TARGET_APT_ARCH \
-        libxrandr-dev$TARGET_APT_ARCH \
-        libxss-dev$TARGET_APT_ARCH \
-        libxt-dev$TARGET_APT_ARCH \
-        libxv-dev$TARGET_APT_ARCH \
-        libxxf86vm-dev$TARGET_APT_ARCH \
-        libdrm-dev$TARGET_APT_ARCH \
-        libgbm-dev$TARGET_APT_ARCH \
-        libpulse-dev$TARGET_APT_ARCH \
-        libpipewire-0.3-dev$TARGET_APT_ARCH \
-        libdecor-0-dev$TARGET_APT_ARCH
-
-    git config --global --add safe.directory /workspace/External/SDL
-    git config --global --add safe.directory /workspace/External/SDL_image
-    git config --global --add safe.directory /workspace/External/SDL_ttf
-    git config --global --add safe.directory /workspace/External/SDL_mixer
+            git \
+            cmake \
+            ninja-build \
+            meson
 fi
 
-# Build SDL
-pushd SDL
-git reset --hard HEAD || echo "Failed to clean up the repository"
-
-if [[ $RUNNER_OS == 'Windows' ]]; then
-    echo "Patching SDL to not include gameinput.h"
-    sed -i 's/#include <gameinput.h>/#_include <gameinput.h>/g' CMakeLists.txt
+if [[ $RUNNER_OS == 'Linux' ]]; then
+    git config --global --add safe.directory $PWD/SDL
+    git config --global --add safe.directory $PWD/SDL_image
+    git config --global --add safe.directory $PWD/SDL_ttf
+    git config --global --add safe.directory $PWD/SDL_mixer
 fi
 
-cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON
-cmake --build build/ --config Release
-$SUDO cmake --install build/ --prefix install_output --config Release
-popd
+CMAKE_INSTALL_PREFIX="$PWD/install_output"
+rm -rf $CMAKE_INSTALL_PREFIX
 
-# Move build lib into correct folders
-if [[ $RUNNER_OS == 'Windows' ]]; then
-    cp SDL/install_output/bin/SDL3.dll ../native/$NAME/SDL3.dll
-elif [[ $RUNNER_OS == 'Linux' ]]; then
-    cp SDL/install_output/lib/libSDL3.so ../native/$NAME/libSDL3.so
-elif [[ $RUNNER_OS == 'macOS' ]]; then
-    cp SDL/install_output/lib/libSDL3.dylib ../native/$NAME/libSDL3.dylib
+if [[ $BUILD_PLATFORM == 'Android' ]]; then
+    OUTPUT_LIB="lib/libSDL3variant.so"
+elif [[ $BUILD_PLATFORM == 'Windows' ]]; then
+    OUTPUT_LIB="bin/SDL3variant.dll"
+elif [[ $BUILD_PLATFORM == 'Linux' ]]; then
+    OUTPUT_LIB="lib/libSDL3variant.so"
+elif [[ $BUILD_PLATFORM == 'macOS' ]]; then
+    OUTPUT_LIB="lib/libSDL3variant.dylib"
 fi
 
-# Use the correct CMAKE_PREFIX_PATH for SDL_image and SDL_ttf, probably due differences in Cmake versions
-if [[ $RUNNER_OS == 'Windows' ]]; then
-    CMAKE_PREFIX_PATH="../SDL/install_output/cmake/"
-elif [[ $RUNNER_OS == 'Linux' ]]; then
-    CMAKE_PREFIX_PATH="../SDL/install_output/lib/cmake/"
-elif [[ $RUNNER_OS == 'macOS' ]]; then
-    CMAKE_PREFIX_PATH="../SDL/install_output/lib/cmake/"
+# Use the correct CMAKE_PREFIX_PATH for SDL_image and SDL_ttf, probably due differences in Cmake versions.
+if [[ $BUILD_PLATFORM == 'Android' ]]; then
+    CMAKE_PREFIX_PATH="$CMAKE_INSTALL_PREFIX"
+elif [[ $BUILD_PLATFORM == 'Windows' ]]; then
+    CMAKE_PREFIX_PATH="$CMAKE_INSTALL_PREFIX/cmake/"
+elif [[ $BUILD_PLATFORM == 'Linux' ]]; then
+    CMAKE_PREFIX_PATH="$CMAKE_INSTALL_PREFIX/lib/cmake/"
+elif [[ $BUILD_PLATFORM == 'macOS' ]]; then
+    CMAKE_PREFIX_PATH="$CMAKE_INSTALL_PREFIX/lib/cmake/"
 fi
 
-# Build SDL_image
-pushd SDL_image
-git reset --hard HEAD
+run_cmake() {
+    LIB_NAME=$1
+    LIB_OUTPUT=$2
+
+    pushd $LIB_NAME
+
+    git reset --hard HEAD || echo "Failed to clean up the repository"
+
+    if [[ $BUILD_PLATFORM == 'Windows' && $LIB_NAME == 'SDL' ]]; then
+        echo "Patching SDL to not include gameinput.h"
+        sed -i 's/#include <gameinput.h>/#_include <gameinput.h>/g' CMakeLists.txt
+    fi
+
+    rm -rf build
+    cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED=ON -DSDL_STATIC=OFF "${@:3}"
+    cmake --build build/ --config $BUILD_TYPE --verbose
+    cmake --install build/ --prefix $CMAKE_INSTALL_PREFIX --config $BUILD_TYPE
+
+    # Move build lib into correct folders
+    cp $CMAKE_INSTALL_PREFIX/$LIB_OUTPUT ../../native/$NATIVE_PATH
+
+    popd
+}
+
+run_cmake SDL ${OUTPUT_LIB/variant/}
+
+run_cmake SDL_ttf ${OUTPUT_LIB/variant/_ttf} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DSDLTTF_VENDORED=ON
+
 # -DSDLIMAGE_AVIF=OFF is used because windows requires special setup to build avif support (nasm)
 # TODO: Add support for avif on windows (VisualC script uses dynamic imports)
-cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLIMAGE_AVIF=OFF -DSDLIMAGE_DEPS_SHARED=OFF -DSDLIMAGE_VENDORED=ON
-cmake --build build/ --config Release
-$SUDO cmake --install build/ --prefix install_output --config Release
-popd
+run_cmake SDL_image ${OUTPUT_LIB/variant/_image} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLIMAGE_AVIF=OFF -DSDLIMAGE_DEPS_SHARED=OFF -DSDLIMAGE_VENDORED=ON
 
-# Move build lib into correct folders
-if [[ $RUNNER_OS == 'Windows' ]]; then
-    cp SDL_image/install_output/bin/SDL3_image.dll ../native/$NAME/SDL3_image.dll
-elif [[ $RUNNER_OS == 'Linux' ]]; then
-    cp SDL_image/install_output/lib/libSDL3_image.so ../native/$NAME/libSDL3_image.so
-elif [[ $RUNNER_OS == 'macOS' ]]; then
-    cp SDL_image/install_output/lib/libSDL3_image.dylib ../native/$NAME/libSDL3_image.dylib
-fi
-
-# Build SDL_ttf
-pushd SDL_ttf
-git reset --hard HEAD
-cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DSDLTTF_VENDORED=ON
-cmake --build build/ --config Release
-$SUDO cmake --install build/ --prefix install_output --config Release
-popd
-
-# Move build lib into correct folders
-if [[ $RUNNER_OS == 'Windows' ]]; then
-    cp SDL_ttf/install_output/bin/SDL3_ttf.dll ../native/$NAME/SDL3_ttf.dll
-elif [[ $RUNNER_OS == 'Linux' ]]; then
-    cp SDL_ttf/install_output/lib/libSDL3_ttf.so ../native/$NAME/libSDL3_ttf.so
-elif [[ $RUNNER_OS == 'macOS' ]]; then
-    cp SDL_ttf/install_output/lib/libSDL3_ttf.dylib ../native/$NAME/libSDL3_ttf.dylib
-fi
-
-# Build SDL_mixer
-pushd SDL_mixer
-git reset --hard HEAD
-cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED_ENABLED_BY_DEFAULT=ON -DSDL_STATIC_ENABLED_BY_DEFAULT=ON -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLMIXER_VENDORED=ON
-cmake --build build/ --config Release
-$SUDO cmake --install build/ --prefix install_output --config Release
-popd
-
-# Move build lib into correct folders
-if [[ $RUNNER_OS == 'Windows' ]]; then
-    cp SDL_mixer/install_output/bin/SDL3_mixer.dll ../native/$NAME/SDL3_mixer.dll
-elif [[ $RUNNER_OS == 'Linux' ]]; then
-    cp SDL_mixer/install_output/lib/libSDL3_mixer.so ../native/$NAME/libSDL3_mixer.so
-elif [[ $RUNNER_OS == 'macOS' ]]; then
-    cp SDL_mixer/install_output/lib/libSDL3_mixer.dylib ../native/$NAME/libSDL3_mixer.dylib
-fi
+run_cmake SDL_mixer ${OUTPUT_LIB/variant/_mixer} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLMIXER_DEPS_SHARED=OFF -DSDLMIXER_VENDORED=ON
 
 popd
