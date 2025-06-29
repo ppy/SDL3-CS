@@ -102,8 +102,6 @@ jobs:
             xcodebuild -project "${directory}/${module0}.xcodeproj" -target "${target}" -configuration Release
             build_dir="${directory}/build/${target}"
 
-            ls -lRh "${directory}"
-
             for arch in "${architectures[@]}"; do
               mkdir -p "${output_dir}/${arch}/${framework}"
               cp "${build_dir}/${arch}/${framework}/${module}" "${output_dir}/${arch}/${framework}/${module}"
