@@ -69,7 +69,7 @@
       <Pack>true</Pack>
     </None>
     <None Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3_mixer.xcframework\**\*">
-      <PackagePath>runtimes/ios/native/SDL3.xcframework</PackagePath>
+      <PackagePath>runtimes/ios/native/SDL3_mixer.xcframework</PackagePath>
       <Pack>true</Pack>
     </None>
     <None Include="$(MSBuildThisFileDirectory)..\native\android\armeabi-v7a\libSDL3_mixer.so">
