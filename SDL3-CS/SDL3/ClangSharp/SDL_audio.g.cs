@@ -241,10 +241,6 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool SDL_SetAudioIterationCallbacks(SDL_AudioDeviceID devid, [NativeTypeName("SDL_AudioIterationCallback")] delegate* unmanaged[Cdecl]<IntPtr, SDL_AudioDeviceID, SDLBool, void> start, [NativeTypeName("SDL_AudioIterationCallback")] delegate* unmanaged[Cdecl]<IntPtr, SDL_AudioDeviceID, SDLBool, void> end, [NativeTypeName("void*")] IntPtr userdata);
-
-        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_SetAudioPostmixCallback(SDL_AudioDeviceID devid, [NativeTypeName("SDL_AudioPostmixCallback")] delegate* unmanaged[Cdecl]<IntPtr, SDL_AudioSpec*, float*, int, void> callback, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

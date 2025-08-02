@@ -28,417 +28,439 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
-    public unsafe partial struct Mix_Chunk
+    public partial struct MIX_Mixer
     {
-        public int allocated;
-
-        [NativeTypeName("Uint8 *")]
-        public byte* abuf;
-
-        [NativeTypeName("Uint32")]
-        public uint alen;
-
-        [NativeTypeName("Uint8")]
-        public byte volume;
     }
 
-    public enum Mix_Fading
+    public partial struct MIX_Audio
     {
-        MIX_NO_FADING,
-        MIX_FADING_OUT,
-        MIX_FADING_IN,
     }
 
-    public enum Mix_MusicType
+    public partial struct MIX_Track
     {
-        MUS_NONE,
-        MUS_WAV,
-        MUS_MOD,
-        MUS_MID,
-        MUS_OGG,
-        MUS_MP3,
-        MUS_FLAC,
-        MUS_OPUS,
-        MUS_WAVPACK,
-        MUS_GME,
     }
 
-    public partial struct Mix_Music
+    public partial struct MIX_Group
+    {
+    }
+
+    public partial struct MIX_StereoGains
+    {
+        public float left;
+
+        public float right;
+    }
+
+    public partial struct MIX_Point3D
+    {
+        public float x;
+
+        public float y;
+
+        public float z;
+    }
+
+    public partial struct MIX_AudioDecoder
     {
     }
 
     public static unsafe partial class SDL3_mixer
     {
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_Version();
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("MIX_InitFlags")]
-        public static extern uint Mix_Init([NativeTypeName("MIX_InitFlags")] uint flags);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_Quit();
+        public static extern int MIX_Version();
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_OpenAudio(SDL_AudioDeviceID devid, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec);
+        public static extern SDLBool MIX_Init();
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_PauseAudio(int pause_on);
+        public static extern void MIX_Quit();
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_QuerySpec(int* frequency, SDL_AudioFormat* format, int* channels);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_AllocateChannels(int numchans);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Chunk* Mix_LoadWAV_IO(SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Chunk* Mix_LoadWAV([NativeTypeName("const char *")] byte* file);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Music* Mix_LoadMUS([NativeTypeName("const char *")] byte* file);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Music* Mix_LoadMUS_IO(SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Music* Mix_LoadMUSType_IO(SDL_IOStream* src, Mix_MusicType type, [NativeTypeName("bool")] SDLBool closeio);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Chunk* Mix_QuickLoad_WAV([NativeTypeName("Uint8 *")] byte* mem);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Chunk* Mix_QuickLoad_RAW([NativeTypeName("Uint8 *")] byte* mem, [NativeTypeName("Uint32")] uint len);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_FreeChunk(Mix_Chunk* chunk);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_FreeMusic(Mix_Music* music);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_GetNumChunkDecoders();
+        public static extern int MIX_GetNumAudioDecoders();
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetChunkDecoder(int index);
+        public static extern byte* MIX_GetAudioDecoder(int index);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_Mixer* MIX_CreateMixerDevice(SDL_AudioDeviceID devid, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_Mixer* MIX_CreateMixer([NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void MIX_DestroyMixer(MIX_Mixer* mixer);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_PropertiesID MIX_GetMixerProperties(MIX_Mixer* mixer);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_HasChunkDecoder([NativeTypeName("const char *")] byte* name);
+        public static extern SDLBool MIX_GetMixerFormat(MIX_Mixer* mixer, SDL_AudioSpec* spec);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_GetNumMusicDecoders();
+        public static extern MIX_Audio* MIX_LoadAudio_IO(MIX_Mixer* mixer, SDL_IOStream* io, [NativeTypeName("bool")] SDLBool predecode, [NativeTypeName("bool")] SDLBool closeio);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetMusicDecoder(int index);
+        public static extern MIX_Audio* MIX_LoadAudio(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* path, [NativeTypeName("bool")] SDLBool predecode);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_HasMusicDecoder([NativeTypeName("const char *")] byte* name);
+        public static extern MIX_Audio* MIX_LoadAudioWithProperties(SDL_PropertiesID props);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_MusicType Mix_GetMusicType([NativeTypeName("const Mix_Music *")] Mix_Music* music);
+        public static extern MIX_Audio* MIX_LoadRawAudio_IO(MIX_Mixer* mixer, SDL_IOStream* io, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec, [NativeTypeName("bool")] SDLBool closeio);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetMusicTitle([NativeTypeName("const Mix_Music *")] Mix_Music* music);
+        public static extern MIX_Audio* MIX_LoadRawAudio(MIX_Mixer* mixer, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint datalen, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetMusicTitleTag([NativeTypeName("const Mix_Music *")] Mix_Music* music);
+        public static extern MIX_Audio* MIX_LoadRawAudioNoCopy(MIX_Mixer* mixer, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint datalen, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec, [NativeTypeName("bool")] SDLBool free_when_done);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetMusicArtistTag([NativeTypeName("const Mix_Music *")] Mix_Music* music);
+        public static extern MIX_Audio* MIX_CreateSineWaveAudio(MIX_Mixer* mixer, int hz, float amplitude);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetMusicAlbumTag([NativeTypeName("const Mix_Music *")] Mix_Music* music);
+        public static extern SDL_PropertiesID MIX_GetAudioProperties(MIX_Audio* audio);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetMusicCopyrightTag([NativeTypeName("const Mix_Music *")] Mix_Music* music);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_SetPostMix([NativeTypeName("Mix_MixCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, int, void> mix_func, [NativeTypeName("void*")] IntPtr arg);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_HookMusic([NativeTypeName("Mix_MixCallback")] delegate* unmanaged[Cdecl]<IntPtr, byte*, int, void> mix_func, [NativeTypeName("void*")] IntPtr arg);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_HookMusicFinished([NativeTypeName("Mix_MusicFinishedCallback")] delegate* unmanaged[Cdecl]<void> music_finished);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("void*")]
-        public static extern IntPtr Mix_GetMusicHookData();
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_ChannelFinished([NativeTypeName("Mix_ChannelFinishedCallback")] delegate* unmanaged[Cdecl]<int, void> channel_finished);
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_GetAudioDuration(MIX_Audio* audio);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_RegisterEffect(int chan, [NativeTypeName("Mix_EffectFunc_t")] delegate* unmanaged[Cdecl]<int, IntPtr, int, IntPtr, void> f, [NativeTypeName("Mix_EffectDone_t")] delegate* unmanaged[Cdecl]<int, IntPtr, void> d, [NativeTypeName("void*")] IntPtr arg);
+        public static extern SDLBool MIX_GetAudioFormat(MIX_Audio* audio, SDL_AudioSpec* spec);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void MIX_DestroyAudio(MIX_Audio* audio);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_Track* MIX_CreateTrack(MIX_Mixer* mixer);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void MIX_DestroyTrack(MIX_Track* track);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_PropertiesID MIX_GetTrackProperties(MIX_Track* track);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_Mixer* MIX_GetTrackMixer(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_UnregisterEffect(int channel, [NativeTypeName("Mix_EffectFunc_t")] delegate* unmanaged[Cdecl]<int, IntPtr, int, IntPtr, void> f);
+        public static extern SDLBool MIX_SetTrackAudio(MIX_Track* track, MIX_Audio* audio);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_UnregisterAllEffects(int channel);
+        public static extern SDLBool MIX_SetTrackAudioStream(MIX_Track* track, SDL_AudioStream* stream);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_SetPanning(int channel, [NativeTypeName("Uint8")] byte left, [NativeTypeName("Uint8")] byte right);
+        public static extern SDLBool MIX_SetTrackIOStream(MIX_Track* track, SDL_IOStream* io, [NativeTypeName("bool")] SDLBool closeio);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_SetPosition(int channel, [NativeTypeName("Sint16")] short angle, [NativeTypeName("Uint8")] byte distance);
+        public static extern SDLBool MIX_TagTrack(MIX_Track* track, [NativeTypeName("const char *")] byte* tag);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void MIX_UntagTrack(MIX_Track* track, [NativeTypeName("const char *")] byte* tag);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_SetDistance(int channel, [NativeTypeName("Uint8")] byte distance);
+        public static extern SDLBool MIX_SetTrackPlaybackPosition(MIX_Track* track, [NativeTypeName("Sint64")] long frames);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_GetTrackPlaybackPosition(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_SetReverseStereo(int channel, int flip);
+        public static extern SDLBool MIX_TrackLooping(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_ReserveChannels(int num);
+        public static extern MIX_Audio* MIX_GetTrackAudio(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_GroupChannel(int which, int tag);
+        public static extern SDL_AudioStream* MIX_GetTrackAudioStream(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_GroupChannels(int from, int to, int tag);
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_GetTrackRemaining(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_GroupAvailable(int tag);
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_TrackMSToFrames(MIX_Track* track, [NativeTypeName("Sint64")] long ms);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_GroupCount(int tag);
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_TrackFramesToMS(MIX_Track* track, [NativeTypeName("Sint64")] long frames);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_GroupOldest(int tag);
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_AudioMSToFrames(MIX_Audio* audio, [NativeTypeName("Sint64")] long ms);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_GroupNewer(int tag);
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_AudioFramesToMS(MIX_Audio* audio, [NativeTypeName("Sint64")] long frames);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_PlayChannel(int channel, Mix_Chunk* chunk, int loops);
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_MSToFrames(int sample_rate, [NativeTypeName("Sint64")] long ms);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_PlayChannelTimed(int channel, Mix_Chunk* chunk, int loops, int ticks);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_PlayMusic(Mix_Music* music, int loops);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_FadeInMusic(Mix_Music* music, int loops, int ms);
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_FramesToMS(int sample_rate, [NativeTypeName("Sint64")] long frames);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_FadeInMusicPos(Mix_Music* music, int loops, int ms, double position);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_FadeInChannel(int channel, Mix_Chunk* chunk, int loops, int ms);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_FadeInChannelTimed(int channel, Mix_Chunk* chunk, int loops, int ms, int ticks);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_Volume(int channel, int volume);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_VolumeChunk(Mix_Chunk* chunk, int volume);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_VolumeMusic(int volume);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_GetMusicVolume(Mix_Music* music);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_MasterVolume(int volume);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_HaltChannel(int channel);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_HaltGroup(int tag);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_HaltMusic();
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_ExpireChannel(int channel, int ticks);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_FadeOutChannel(int which, int ms);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_FadeOutGroup(int tag, int ms);
+        public static extern SDLBool MIX_PlayTrack(MIX_Track* track, SDL_PropertiesID options);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_FadeOutMusic(int ms);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Fading Mix_FadingMusic();
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Fading Mix_FadingChannel(int which);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_Pause(int channel);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_PauseGroup(int tag);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_Resume(int channel);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_ResumeGroup(int tag);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_Paused(int channel);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_PauseMusic();
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_ResumeMusic();
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_RewindMusic();
+        public static extern SDLBool MIX_PlayTag(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* tag, SDL_PropertiesID options);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_PausedMusic();
+        public static extern SDLBool MIX_PlayAudio(MIX_Mixer* mixer, MIX_Audio* audio);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_ModMusicJumpToOrder(int order);
+        public static extern SDLBool MIX_StopTrack(MIX_Track* track, [NativeTypeName("Sint64")] long fade_out_frames);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_StartTrack(Mix_Music* music, int track);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_GetNumTracks(Mix_Music* music);
+        public static extern SDLBool MIX_StopAllTracks(MIX_Mixer* mixer, [NativeTypeName("Sint64")] long fade_out_ms);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_SetMusicPosition(double position);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double Mix_GetMusicPosition(Mix_Music* music);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double Mix_MusicDuration(Mix_Music* music);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double Mix_GetMusicLoopStartTime(Mix_Music* music);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double Mix_GetMusicLoopEndTime(Mix_Music* music);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double Mix_GetMusicLoopLengthTime(Mix_Music* music);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Mix_Playing(int channel);
+        public static extern SDLBool MIX_StopTag(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* tag, [NativeTypeName("Sint64")] long fade_out_ms);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_PlayingMusic();
+        public static extern SDLBool MIX_PauseTrack(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_SetSoundFonts([NativeTypeName("const char *")] byte* paths);
-
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetSoundFonts();
+        public static extern SDLBool MIX_PauseAllTracks(MIX_Mixer* mixer);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_EachSoundFont([NativeTypeName("Mix_EachSoundFontCallback")] delegate* unmanaged[Cdecl]<byte*, IntPtr, SDLBool> function, [NativeTypeName("void*")] IntPtr data);
+        public static extern SDLBool MIX_PauseTag(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* tag);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool Mix_SetTimidityCfg([NativeTypeName("const char *")] byte* path);
+        public static extern SDLBool MIX_ResumeTrack(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern byte* Mix_GetTimidityCfg();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_ResumeAllTracks(MIX_Mixer* mixer);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Mix_Chunk* Mix_GetChunk(int channel);
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_ResumeTag(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* tag);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void Mix_CloseAudio();
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_TrackPlaying(MIX_Track* track);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_TrackPaused(MIX_Track* track);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetMasterGain(MIX_Mixer* mixer, float gain);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern float MIX_GetMasterGain(MIX_Mixer* mixer);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackGain(MIX_Track* track, float gain);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern float MIX_GetTrackGain(MIX_Track* track);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTagGain(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* tag, float gain);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackFrequencyRatio(MIX_Track* track, float ratio);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern float MIX_GetTrackFrequencyRatio(MIX_Track* track);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackOutputChannelMap(MIX_Track* track, [NativeTypeName("const int *")] int* chmap, int count);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackStereo(MIX_Track* track, [NativeTypeName("const MIX_StereoGains *")] MIX_StereoGains* gains);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrack3DPosition(MIX_Track* track, [NativeTypeName("const MIX_Point3D *")] MIX_Point3D* position);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_GetTrack3DPosition(MIX_Track* track, MIX_Point3D* position);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_Group* MIX_CreateGroup(MIX_Mixer* mixer);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void MIX_DestroyGroup(MIX_Group* group);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_PropertiesID MIX_GetGroupProperties(MIX_Group* group);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_Mixer* MIX_GetGroupMixer(MIX_Group* group);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackGroup(MIX_Track* track, MIX_Group* group);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackStoppedCallback(MIX_Track* track, [NativeTypeName("MIX_TrackStoppedCallback")] delegate* unmanaged[Cdecl]<IntPtr, MIX_Track*, void> cb, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackRawCallback(MIX_Track* track, [NativeTypeName("MIX_TrackMixCallback")] delegate* unmanaged[Cdecl]<IntPtr, MIX_Track*, SDL_AudioSpec*, float*, int, void> cb, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackCookedCallback(MIX_Track* track, [NativeTypeName("MIX_TrackMixCallback")] delegate* unmanaged[Cdecl]<IntPtr, MIX_Track*, SDL_AudioSpec*, float*, int, void> cb, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetGroupPostMixCallback(MIX_Group* group, [NativeTypeName("MIX_GroupMixCallback")] delegate* unmanaged[Cdecl]<IntPtr, MIX_Group*, SDL_AudioSpec*, float*, int, void> cb, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetPostMixCallback(MIX_Mixer* mixer, [NativeTypeName("MIX_PostMixCallback")] delegate* unmanaged[Cdecl]<IntPtr, MIX_Mixer*, SDL_AudioSpec*, float*, int, void> cb, [NativeTypeName("void*")] IntPtr userdata);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_Generate(MIX_Mixer* mixer, [NativeTypeName("void*")] IntPtr buffer, int buflen);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_AudioDecoder* MIX_CreateAudioDecoder([NativeTypeName("const char *")] byte* path, SDL_PropertiesID props);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_AudioDecoder* MIX_CreateAudioDecoder_IO(SDL_IOStream* io, [NativeTypeName("bool")] SDLBool closeio, SDL_PropertiesID props);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void MIX_DestroyAudioDecoder(MIX_AudioDecoder* audiodecoder);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_PropertiesID MIX_GetAudioDecoderProperties(MIX_AudioDecoder* audiodecoder);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_GetAudioDecoderFormat(MIX_AudioDecoder* audiodecoder, SDL_AudioSpec* spec);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int MIX_DecodeAudio(MIX_AudioDecoder* audiodecoder, [NativeTypeName("void*")] IntPtr buffer, int buflen, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec);
 
         [NativeTypeName("#define SDL_MIXER_MAJOR_VERSION 3")]
         public const int SDL_MIXER_MAJOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_MIXER_MINOR_VERSION 0")]
-        public const int SDL_MIXER_MINOR_VERSION = 0;
+        [NativeTypeName("#define SDL_MIXER_MINOR_VERSION 1")]
+        public const int SDL_MIXER_MINOR_VERSION = 1;
 
         [NativeTypeName("#define SDL_MIXER_MICRO_VERSION 0")]
         public const int SDL_MIXER_MICRO_VERSION = 0;
 
         [NativeTypeName("#define SDL_MIXER_VERSION SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_MICRO_VERSION)")]
-        public const int SDL_MIXER_VERSION = ((3) * 1000000 + (0) * 1000 + (0));
+        public const int SDL_MIXER_VERSION = ((3) * 1000000 + (1) * 1000 + (0));
 
-        [NativeTypeName("#define MIX_INIT_FLAC 0x00000001")]
-        public const int MIX_INIT_FLAC = 0x00000001;
+        [NativeTypeName("#define MIX_PROP_AUDIO_LOAD_IOSTREAM_POINTER \"SDL_mixer.audio.load.iostream\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_AUDIO_LOAD_IOSTREAM_POINTER => "SDL_mixer.audio.load.iostream"u8;
 
-        [NativeTypeName("#define MIX_INIT_MOD 0x00000002")]
-        public const int MIX_INIT_MOD = 0x00000002;
+        [NativeTypeName("#define MIX_PROP_AUDIO_LOAD_CLOSEIO_BOOLEAN \"SDL_mixer.audio.load.closeio\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_AUDIO_LOAD_CLOSEIO_BOOLEAN => "SDL_mixer.audio.load.closeio"u8;
 
-        [NativeTypeName("#define MIX_INIT_MP3 0x00000008")]
-        public const int MIX_INIT_MP3 = 0x00000008;
+        [NativeTypeName("#define MIX_PROP_AUDIO_LOAD_PREDECODE_BOOLEAN \"SDL_mixer.audio.load.predecode\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_AUDIO_LOAD_PREDECODE_BOOLEAN => "SDL_mixer.audio.load.predecode"u8;
 
-        [NativeTypeName("#define MIX_INIT_OGG 0x00000010")]
-        public const int MIX_INIT_OGG = 0x00000010;
+        [NativeTypeName("#define MIX_PROP_AUDIO_LOAD_PREFERRED_MIXER_POINTER \"SDL_mixer.audio.load.preferred_mixer\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_AUDIO_LOAD_PREFERRED_MIXER_POINTER => "SDL_mixer.audio.load.preferred_mixer"u8;
 
-        [NativeTypeName("#define MIX_INIT_MID 0x00000020")]
-        public const int MIX_INIT_MID = 0x00000020;
+        [NativeTypeName("#define MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN \"SDL_mixer.audio.load.skip_metadata_tags\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN => "SDL_mixer.audio.load.skip_metadata_tags"u8;
 
-        [NativeTypeName("#define MIX_INIT_OPUS 0x00000040")]
-        public const int MIX_INIT_OPUS = 0x00000040;
+        [NativeTypeName("#define MIX_PROP_AUDIO_DECODER_STRING \"SDL_mixer.audio.decoder\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_AUDIO_DECODER_STRING => "SDL_mixer.audio.decoder"u8;
 
-        [NativeTypeName("#define MIX_INIT_WAVPACK 0x00000080")]
-        public const int MIX_INIT_WAVPACK = 0x00000080;
+        [NativeTypeName("#define MIX_PROP_METADATA_TITLE_STRING \"SDL_mixer.metadata.title\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_TITLE_STRING => "SDL_mixer.metadata.title"u8;
 
-        [NativeTypeName("#define MIX_CHANNELS 8")]
-        public const int MIX_CHANNELS = 8;
+        [NativeTypeName("#define MIX_PROP_METADATA_ARTIST_STRING \"SDL_mixer.metadata.artist\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_ARTIST_STRING => "SDL_mixer.metadata.artist"u8;
 
-        [NativeTypeName("#define MIX_DEFAULT_FREQUENCY 44100")]
-        public const int MIX_DEFAULT_FREQUENCY = 44100;
+        [NativeTypeName("#define MIX_PROP_METADATA_ALBUM_STRING \"SDL_mixer.metadata.album\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_ALBUM_STRING => "SDL_mixer.metadata.album"u8;
 
-        [NativeTypeName("#define MIX_DEFAULT_CHANNELS 2")]
-        public const int MIX_DEFAULT_CHANNELS = 2;
+        [NativeTypeName("#define MIX_PROP_METADATA_COPYRIGHT_STRING \"SDL_mixer.metadata.copyright\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_COPYRIGHT_STRING => "SDL_mixer.metadata.copyright"u8;
 
-        [NativeTypeName("#define MIX_MAX_VOLUME 128")]
-        public const int MIX_MAX_VOLUME = 128;
+        [NativeTypeName("#define MIX_PROP_METADATA_TRACK_NUMBER \"SDL_mixer.metadata.track\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_TRACK_NUMBER => "SDL_mixer.metadata.track"u8;
 
-        [NativeTypeName("#define MIX_CHANNEL_POST (-2)")]
-        public const int MIX_CHANNEL_POST = (-2);
+        [NativeTypeName("#define MIX_PROP_METADATA_TOTAL_TRACKS_NUMBER \"SDL_mixer.metadata.total_tracks\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_TOTAL_TRACKS_NUMBER => "SDL_mixer.metadata.total_tracks"u8;
 
-        [NativeTypeName("#define MIX_EFFECTSMAXSPEED \"MIX_EFFECTSMAXSPEED\"")]
-        public static ReadOnlySpan<byte> MIX_EFFECTSMAXSPEED => "MIX_EFFECTSMAXSPEED"u8;
+        [NativeTypeName("#define MIX_PROP_METADATA_YEAR_NUMBER \"SDL_mixer.metadata.year\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_YEAR_NUMBER => "SDL_mixer.metadata.year"u8;
+
+        [NativeTypeName("#define MIX_PROP_METADATA_DURATION_FRAMES_NUMBER \"SDL_mixer.metadata.duration_frames\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_DURATION_FRAMES_NUMBER => "SDL_mixer.metadata.duration_frames"u8;
+
+        [NativeTypeName("#define MIX_PROP_METADATA_DURATION_INFINITE_BOOLEAN \"SDL_mixer.metadata.duration_infinite\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_METADATA_DURATION_INFINITE_BOOLEAN => "SDL_mixer.metadata.duration_infinite"u8;
+
+        [NativeTypeName("#define MIX_DURATION_UNKNOWN -1")]
+        public const int MIX_DURATION_UNKNOWN = -1;
+
+        [NativeTypeName("#define MIX_DURATION_INFINITE -2")]
+        public const int MIX_DURATION_INFINITE = -2;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_LOOPS_NUMBER \"SDL_mixer.play.loops\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_LOOPS_NUMBER => "SDL_mixer.play.loops"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_MAX_FRAME_NUMBER \"SDL_mixer.play.max_frame\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_MAX_FRAME_NUMBER => "SDL_mixer.play.max_frame"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_MAX_MILLISECONDS_NUMBER \"SDL_mixer.play.max_milliseconds\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_MAX_MILLISECONDS_NUMBER => "SDL_mixer.play.max_milliseconds"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_START_FRAME_NUMBER \"SDL_mixer.play.start_frame\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_START_FRAME_NUMBER => "SDL_mixer.play.start_frame"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_START_MILLISECOND_NUMBER \"SDL_mixer.play.start_millisecond\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_START_MILLISECOND_NUMBER => "SDL_mixer.play.start_millisecond"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER \"SDL_mixer.play.loop_start_frame\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER => "SDL_mixer.play.loop_start_frame"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_LOOP_START_MILLISECOND_NUMBER \"SDL_mixer.play.loop_start_millisecond\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_LOOP_START_MILLISECOND_NUMBER => "SDL_mixer.play.loop_start_millisecond"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_FADE_IN_FRAMES_NUMBER \"SDL_mixer.play.fade_in_frames\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_FADE_IN_FRAMES_NUMBER => "SDL_mixer.play.fade_in_frames"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER \"SDL_mixer.play.fade_in_milliseconds\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER => "SDL_mixer.play.fade_in_milliseconds"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER \"SDL_mixer.play.append_silence_frames\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER => "SDL_mixer.play.append_silence_frames"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER \"SDL_mixer.play.append_silence_milliseconds\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER => "SDL_mixer.play.append_silence_milliseconds"u8;
     }
 }
