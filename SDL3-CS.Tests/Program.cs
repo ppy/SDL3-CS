@@ -29,7 +29,7 @@ namespace SDL.Tests
             using (var window = new MyWindow())
             {
                 // Check if satellite libraries exist.
-                Console.WriteLine($"SDL revision: {SDL_GetRevision()}, IMG {IMG_Version()}, TTF {TTF_Version()}, Mixer {Mix_Version()}");
+                Console.WriteLine($"SDL revision: {SDL_GetRevision()}, IMG {IMG_Version()}, TTF {TTF_Version()}, Mixer {MIX_Version()}");
 
                 printDisplays();
 
