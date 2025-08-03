@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 
 namespace SDL
@@ -38,6 +39,10 @@ namespace SDL
         public SDL_Surface** frames;
 
         public int* delays;
+    }
+
+    public partial struct IMG_AnimationStream
+    {
     }
 
     public static unsafe partial class SDL3_image
@@ -226,6 +231,22 @@ namespace SDL
         public static extern SDLBool IMG_SaveJPG_IO(SDL_Surface* surface, SDL_IOStream* dst, [NativeTypeName("bool")] SDLBool closeio, int quality);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool IMG_SaveWEBP_IO(SDL_Surface* surface, SDL_IOStream* dst, [NativeTypeName("bool")] SDLBool closeio, float quality);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool IMG_SaveWEBP(SDL_Surface* surface, [NativeTypeName("const char *")] byte* file, float quality);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool IMG_SaveTGA_IO(SDL_Surface* surface, SDL_IOStream* dst);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool IMG_SaveTGA(SDL_Surface* surface, [NativeTypeName("const char *")] byte* file);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern IMG_Animation* IMG_LoadAnimation([NativeTypeName("const char *")] byte* file);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -243,6 +264,23 @@ namespace SDL
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern IMG_Animation* IMG_LoadWEBPAnimation_IO(SDL_IOStream* src);
 
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern IMG_AnimationStream* IMG_CreateAnimationStream([NativeTypeName("const char *")] byte* file);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern IMG_AnimationStream* IMG_CreateAnimationStream_IO(SDL_IOStream* dst, [NativeTypeName("bool")] SDLBool closeio, [NativeTypeName("const char *")] byte* type);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern IMG_AnimationStream* IMG_CreateAnimationStreamWithProperties(SDL_PropertiesID props);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool IMG_AddAnimationFrame(IMG_AnimationStream* stream, SDL_Surface* surface, [NativeTypeName("Uint64")] ulong pts);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool IMG_CloseAnimationStream(IMG_AnimationStream* stream);
+
         [NativeTypeName("#define SDL_IMAGE_MAJOR_VERSION 3")]
         public const int SDL_IMAGE_MAJOR_VERSION = 3;
 
@@ -254,5 +292,26 @@ namespace SDL
 
         [NativeTypeName("#define SDL_IMAGE_VERSION SDL_VERSIONNUM(SDL_IMAGE_MAJOR_VERSION, SDL_IMAGE_MINOR_VERSION, SDL_IMAGE_MICRO_VERSION)")]
         public const int SDL_IMAGE_VERSION = ((3) * 1000000 + (3) * 1000 + (0));
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_STREAM_CREATE_FILENAME_STRING \"SDL_image.animation_stream.create.filename\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_STREAM_CREATE_FILENAME_STRING => "SDL_image.animation_stream.create.filename"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_POINTER \"SDL_image.animation_stream.create.iostream\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_POINTER => "SDL_image.animation_stream.create.iostream"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN \"SDL_image.animation_stream.create.iostream.autoclose\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_STREAM_CREATE_IOSTREAM_AUTOCLOSE_BOOLEAN => "SDL_image.animation_stream.create.iostream.autoclose"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_STREAM_CREATE_TYPE_STRING \"SDL_image.animation_stream.create.type\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_STREAM_CREATE_TYPE_STRING => "SDL_image.animation_stream.create.type"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_STREAM_CREATE_QUALITY_NUMBER \"SDL_image.animation_stream.create.quality\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_STREAM_CREATE_QUALITY_NUMBER => "SDL_image.animation_stream.create.quality"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_NUMERATOR_NUMBER \"SDL_image.animation_stream.create.timebase.numerator\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_NUMERATOR_NUMBER => "SDL_image.animation_stream.create.timebase.numerator"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_DENOMINATOR_NUMBER \"SDL_image.animation_stream.create.timebase.denominator\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_STREAM_CREATE_TIMEBASE_DENOMINATOR_NUMBER => "SDL_image.animation_stream.create.timebase.denominator"u8;
     }
 }

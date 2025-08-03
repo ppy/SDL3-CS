@@ -9,5 +9,11 @@ namespace SDL
     {
         [Constant]
         public static readonly SDL_AudioFormat MIX_DEFAULT_FORMAT = SDL_AUDIO_S16;
+
+        [Macro]
+        public static bool SDL_MIXER_VERSION_ATLEAST(int X, int Y, int Z) =>
+            ((SDL_MIXER_MAJOR_VERSION >= X) &&
+             (SDL_MIXER_MAJOR_VERSION > X || SDL_MIXER_MINOR_VERSION >= Y) &&
+             (SDL_MIXER_MAJOR_VERSION > X || SDL_MIXER_MINOR_VERSION > Y || SDL_MIXER_MICRO_VERSION >= Z));
     }
 }

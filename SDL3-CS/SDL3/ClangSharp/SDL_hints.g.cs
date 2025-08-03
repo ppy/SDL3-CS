@@ -352,6 +352,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_8BITDO \"SDL_JOYSTICK_HIDAPI_8BITDO\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_8BITDO => "SDL_JOYSTICK_HIDAPI_8BITDO"u8;
 
+        [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_SINPUT \"SDL_JOYSTICK_HIDAPI_SINPUT\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_SINPUT => "SDL_JOYSTICK_HIDAPI_SINPUT"u8;
+
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_FLYDIGI \"SDL_JOYSTICK_HIDAPI_FLYDIGI\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_FLYDIGI => "SDL_JOYSTICK_HIDAPI_FLYDIGI"u8;
 
@@ -798,5 +801,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_PEN_TOUCH_EVENTS \"SDL_PEN_TOUCH_EVENTS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_PEN_TOUCH_EVENTS => "SDL_PEN_TOUCH_EVENTS"u8;
+
+        [NativeTypeName("#define SDL_HINT_DEBUG_LOGGING \"SDL_DEBUG_LOGGING\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_DEBUG_LOGGING => "SDL_DEBUG_LOGGING"u8;
     }
 }
