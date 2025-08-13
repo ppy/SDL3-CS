@@ -173,6 +173,12 @@ run_cmake SDL_ttf ${OUTPUT_LIB/variant/_ttf} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_P
 # TODO: Add support for avif on windows (VisualC script uses dynamic imports)
 run_cmake SDL_image ${OUTPUT_LIB/variant/_image} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLIMAGE_AVIF=OFF -DSDLIMAGE_DEPS_SHARED=OFF -DSDLIMAGE_VENDORED=ON
 
-run_cmake SDL_mixer ${OUTPUT_LIB/variant/_mixer} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLMIXER_DEPS_SHARED=OFF -DSDLMIXER_VENDORED=ON
+# -DSDLMIXER_MP3_MPG123=OFF is used because upstream build is broken. Fallback to dr_mp3.
+# See: https://github.com/libsdl-org/SDL_mixer/pull/744#issuecomment-3180682130
+# Fixing using the proposed solution causes more issues.
+#
+# -DSDLMIXER_FLAC_LIBFLAC is used because the build fails on android-x86. Fallback to dr_flac.
+# See: https://github.com/libsdl-org/SDL_mixer/issues/745
+run_cmake SDL_mixer ${OUTPUT_LIB/variant/_mixer} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLMIXER_MP3_MPG123=OFF -DSDLMIXER_FLAC_LIBFLAC=OFF -DSDLMIXER_DEPS_SHARED=OFF -DSDLMIXER_VENDORED=ON
 
 popd
