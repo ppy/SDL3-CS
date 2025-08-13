@@ -273,6 +273,13 @@ namespace SDL
         public static extern TTF_Direction TTF_GetFontDirection(TTF_Font* font);
 
         [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool TTF_SetFontCharSpacing(TTF_Font* font, int spacing);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int TTF_GetFontCharSpacing(TTF_Font* font);
+
+        [DllImport("SDL3_ttf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("Uint32")]
         public static extern uint TTF_StringToTag([NativeTypeName("const char *")] byte* @string);
 
