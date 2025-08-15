@@ -177,7 +177,7 @@ run_cmake SDL_image ${OUTPUT_LIB/variant/_image} -DCMAKE_PREFIX_PATH=$CMAKE_PREF
 # See: https://github.com/libsdl-org/SDL_mixer/pull/744#issuecomment-3180682130
 # Fixing using the proposed solution causes more issues.
 #
-# -DSDLMIXER_FLAC_LIBFLAC is used because the build fails on android-x86. Fallback to dr_flac.
+# -DSDLMIXER_FLAC_LIBFLAC=OFF is used because the build fails on android-x86. Fallback to dr_flac.
 # See: https://github.com/libsdl-org/SDL_mixer/issues/745
 run_cmake SDL_mixer ${OUTPUT_LIB/variant/_mixer} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLMIXER_MP3_MPG123=OFF -DSDLMIXER_FLAC_LIBFLAC=OFF -DSDLMIXER_DEPS_SHARED=OFF -DSDLMIXER_VENDORED=ON
 
