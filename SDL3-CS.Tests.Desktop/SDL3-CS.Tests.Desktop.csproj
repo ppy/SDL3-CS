@@ -17,21 +17,12 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <SDLArch>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</SDLArch>
-
-    <!-- If RID is specified -->
-    <SDLNativeLib Condition=" $(RuntimeIdentifier.StartsWith('win')) ">$(RuntimeIdentifier)\SDL3.dll</SDLNativeLib>
-    <SDLNativeLib Condition=" $(RuntimeIdentifier.StartsWith('linux')) ">$(RuntimeIdentifier)\libSDL3.so</SDLNativeLib>
-    <SDLNativeLib Condition=" $(RuntimeIdentifier.StartsWith('osx')) ">$(RuntimeIdentifier)\libSDL3.dylib</SDLNativeLib>
-
-    <!-- If RID is not specified -->
-    <SDLNativeLib Condition=" '$(SDLNativeLib)' == '' And '$([MSBuild]::IsOSPlatform(Windows))' ">win-$(SDLArch.ToLower())\SDL3.dll</SDLNativeLib>
-    <SDLNativeLib Condition=" '$(SDLNativeLib)' == '' And '$([MSBuild]::IsOSPlatform(Linux))' ">linux-$(SDLArch.ToLower())\libSDL3.so</SDLNativeLib>
-    <SDLNativeLib Condition=" '$(SDLNativeLib)' == '' And '$([MSBuild]::IsOSPlatform(OSX))' ">osx-$(SDLArch.ToLower())\libSDL3.dylib</SDLNativeLib>
+    <SDLArch Condition="'$(RuntimeIdentifier)' == ''">$(NETCoreSdkRuntimeIdentifier)</SDLArch>
+    <SDLArch Condition="'$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</SDLArch>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)..\native\$(SDLNativeLib)">
+    <Content Include="$(MSBuildThisFileDirectory)..\native\$(SDLArch)\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
