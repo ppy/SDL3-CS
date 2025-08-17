@@ -21,6 +21,9 @@
 
   <ItemGroup>
     <NativeReference Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3.xcframework"/>
+    <NativeReference Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3_image.xcframework"/>
+    <NativeReference Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3_ttf.xcframework"/>
+    <NativeReference Include="$(MSBuildThisFileDirectory)..\native\ios\SDL3_mixer.xcframework"/>
   </ItemGroup>
 
 </Project>
