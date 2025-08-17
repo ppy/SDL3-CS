@@ -5,7 +5,7 @@ on:
 #    - cron: '0 0 * * *'
 env:
   BUILD_TYPE: Release
-  NDK_VER: 27.2.12479018
+  NDK_VER: 28.2.13676358
   PLATFORM_VER: 35
 
 jobs:
