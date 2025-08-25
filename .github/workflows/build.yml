@@ -106,11 +106,16 @@ jobs:
 
   build-ios:
     name: ios
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      # https://github.com/dotnet/macios/issues/19157
+      # https://github.com/actions/runner-images/issues/12758
+      - name: Use Xcode 16.4
+        run: sudo xcode-select -switch /Applications/Xcode_16.4.app
 
       - name: Build (iOS)
         run: |
