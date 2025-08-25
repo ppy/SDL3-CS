@@ -53,6 +53,13 @@ namespace SDL
         SDL_CAMERA_POSITION_BACK_FACING,
     }
 
+    public enum SDL_CameraPermissionState
+    {
+        SDL_CAMERA_PERMISSION_STATE_DENIED = -1,
+        SDL_CAMERA_PERMISSION_STATE_PENDING,
+        SDL_CAMERA_PERMISSION_STATE_APPROVED,
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -83,7 +90,7 @@ namespace SDL
         public static extern SDL_Camera* SDL_OpenCamera(SDL_CameraID instance_id, [NativeTypeName("const SDL_CameraSpec *")] SDL_CameraSpec* spec);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int SDL_GetCameraPermissionState(SDL_Camera* camera);
+        public static extern SDL_CameraPermissionState SDL_GetCameraPermissionState(SDL_Camera* camera);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_CameraID SDL_GetCameraID(SDL_Camera* camera);

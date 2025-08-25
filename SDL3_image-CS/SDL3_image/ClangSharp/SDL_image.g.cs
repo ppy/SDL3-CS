@@ -45,6 +45,14 @@ namespace SDL
     {
     }
 
+    public enum IMG_AnimationDecoderStatus
+    {
+        IMG_DECODER_STATUS_INVALID = -1,
+        IMG_DECODER_STATUS_OK,
+        IMG_DECODER_STATUS_FAILED,
+        IMG_DECODER_STATUS_COMPLETE,
+    }
+
     public partial struct IMG_AnimationDecoder
     {
     }
@@ -309,7 +317,7 @@ namespace SDL
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool IMG_AddAnimationEncoderFrame(IMG_AnimationEncoder* encoder, SDL_Surface* surface, [NativeTypeName("Uint64")] ulong pts);
+        public static extern SDLBool IMG_AddAnimationEncoderFrame(IMG_AnimationEncoder* encoder, SDL_Surface* surface, [NativeTypeName("Uint64")] ulong duration);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -329,7 +337,10 @@ namespace SDL
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool IMG_GetAnimationDecoderFrame(IMG_AnimationDecoder* decoder, SDL_Surface** frame, [NativeTypeName("Uint64 *")] ulong* pts);
+        public static extern SDLBool IMG_GetAnimationDecoderFrame(IMG_AnimationDecoder* decoder, SDL_Surface** frame, [NativeTypeName("Uint64 *")] ulong* duration);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern IMG_AnimationDecoderStatus IMG_GetAnimationDecoderStatus(IMG_AnimationDecoder* decoder);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
