@@ -76,11 +76,8 @@ namespace SDL
         public int refcount;
     }
 
-    public unsafe partial struct SDL_GPURenderStateDesc
+    public unsafe partial struct SDL_GPURenderStateCreateInfo
     {
-        [NativeTypeName("Uint32")]
-        public uint version;
-
         public SDL_GPUShader* fragment_shader;
 
         [NativeTypeName("Sint32")]
@@ -100,6 +97,8 @@ namespace SDL
 
         [NativeTypeName("SDL_GPUBuffer *const *")]
         public SDL_GPUBuffer** storage_buffers;
+
+        public SDL_PropertiesID props;
     }
 
     public partial struct SDL_GPURenderState
@@ -471,7 +470,7 @@ namespace SDL
         public static extern SDLBool SDL_GetDefaultTextureScaleMode(SDL_Renderer* renderer, SDL_ScaleMode* scale_mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GPURenderState* SDL_CreateGPURenderState(SDL_Renderer* renderer, SDL_GPURenderStateDesc* desc);
+        public static extern SDL_GPURenderState* SDL_CreateGPURenderState(SDL_Renderer* renderer, SDL_GPURenderStateCreateInfo* createinfo);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]

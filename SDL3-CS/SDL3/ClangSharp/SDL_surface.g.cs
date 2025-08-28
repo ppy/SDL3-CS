@@ -41,6 +41,7 @@ namespace SDL
         SDL_FLIP_NONE,
         SDL_FLIP_HORIZONTAL,
         SDL_FLIP_VERTICAL,
+        SDL_FLIP_HORIZONTAL_AND_VERTICAL = (SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL),
     }
 
     public partial struct SDL_Surface

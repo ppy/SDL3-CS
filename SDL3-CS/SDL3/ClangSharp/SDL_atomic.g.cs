@@ -83,6 +83,10 @@ namespace SDL
         public static extern uint SDL_GetAtomicU32(SDL_AtomicU32* a);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Uint32")]
+        public static extern uint SDL_AddAtomicU32(SDL_AtomicU32* a, int v);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_CompareAndSwapAtomicPointer([NativeTypeName("void **")] IntPtr* a, [NativeTypeName("void*")] IntPtr oldval, [NativeTypeName("void*")] IntPtr newval);
 
