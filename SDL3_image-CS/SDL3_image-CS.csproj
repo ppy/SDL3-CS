@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net8.0-android</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(CI_DONT_TARGET_ANDROID)' != '1' ">net8.0;net8.0-android</TargetFrameworks>
+    <TargetFramework Condition=" '$(CI_DONT_TARGET_ANDROID)' == '1' ">net8.0</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <RootNamespace>SDL</RootNamespace>
     <Nullable>enable</Nullable>
