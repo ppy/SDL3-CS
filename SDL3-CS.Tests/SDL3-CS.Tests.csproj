@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\External\SDL_image\test\sample.png">
+    <None Include="..\External\SDL_image\test\sample.png" Condition="Exists('..\External\SDL_image\test\sample.png')">
       <Link>sample.png</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
