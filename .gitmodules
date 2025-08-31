@@ -13,3 +13,6 @@
 	path = External/SDL_mixer
 	url = https://github.com/libsdl-org/SDL_mixer.git
 	branch = main
+[submodule "External/SDL_shadercross"]
+	path = External/SDL_shadercross
+	url = https://github.com/libsdl-org/SDL_shadercross.git
