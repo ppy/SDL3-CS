@@ -119,7 +119,7 @@ jobs:
 
       - name: Build (iOS)
         run: |
-          modules=("SDL3" "SDL3_image" "SDL3_ttf" "SDL3_mixer")
+          modules=("SDL3" "SDL3_image" "SDL3_ttf" "SDL3_mixer" "SDL_shadercross")
           architectures=("ios-arm64" "ios-arm64_x86_64-simulator")
 
           for module in "${modules[@]}"; do

@@ -52,6 +52,7 @@ if [[ $BUILD_PLATFORM != 'Android' ]]; then
             wayland-scanner++ \
             wayland-protocols \
             meson \
+            patchelf \
             pkg-config$TARGET_APT_ARCH \
             libasound2-dev$TARGET_APT_ARCH \
             libdbus-1-dev$TARGET_APT_ARCH \
@@ -115,6 +116,7 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
     git config --global --add safe.directory $PWD/SDL_image
     git config --global --add safe.directory $PWD/SDL_ttf
     git config --global --add safe.directory $PWD/SDL_mixer
+    git config --global --add safe.directory $PWD/SDL_shadercross
 fi
 
 CMAKE_INSTALL_PREFIX="$PWD/install_output"
@@ -159,8 +161,19 @@ run_cmake() {
     cmake --build build/ --config $BUILD_TYPE --verbose
     cmake --install build/ --prefix $CMAKE_INSTALL_PREFIX --config $BUILD_TYPE
 
+    # Add loader rpath
+    if [[ $BUILD_PLATFORM == 'Linux' ]]; then
+        patchelf $CMAKE_INSTALL_PREFIX/$LIB_OUTPUT --add-rpath "\$ORIGIN"
+    elif [[ $BUILD_PLATFORM == 'macOS' ]]; then
+        install_name_tool $CMAKE_INSTALL_PREFIX/$LIB_OUTPUT -add_rpath "@loader_path"
+    fi
+
     # Move build lib into correct folders
     cp $CMAKE_INSTALL_PREFIX/$LIB_OUTPUT ../../native/$NATIVE_PATH
+
+    if [[ $LIB_NAME == 'SDL_shadercross' ]]; then
+        cp $CMAKE_INSTALL_PREFIX/${OUTPUT_LIB/SDL3variant/spirv-cross-c-shared} ../../native/$NATIVE_PATH
+    fi
 
     popd
 }
@@ -181,4 +194,8 @@ run_cmake SDL_image ${OUTPUT_LIB/variant/_image} -DCMAKE_PREFIX_PATH=$CMAKE_PREF
 # See: https://github.com/libsdl-org/SDL_mixer/issues/745
 run_cmake SDL_mixer ${OUTPUT_LIB/variant/_mixer} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLMIXER_MP3_MPG123=OFF -DSDLMIXER_FLAC_LIBFLAC=OFF -DSDLMIXER_DEPS_SHARED=OFF -DSDLMIXER_VENDORED=ON
 
+# Build SDL_shadercross
+run_cmake SDL_shadercross ${OUTPUT_LIB/variant/_shadercross} -DCMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH -DSDLSHADERCROSS_DXC=OFF -DSDLSHADERCROSS_INSTALL=ON -DSDLSHADERCROSS_SHARED=ON -DSDLSHADERCROSS_VENDORED=ON
+
 popd
+
