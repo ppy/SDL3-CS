@@ -747,6 +747,9 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER \"SDL.texture.vulkan.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER => "SDL.texture.vulkan.texture"u8;
 
+        [NativeTypeName("#define SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER \"SDL.texture.gpu.texture\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER => "SDL.texture.gpu.texture"u8;
+
         [NativeTypeName("#define SDL_RENDERER_VSYNC_DISABLED 0")]
         public const int SDL_RENDERER_VSYNC_DISABLED = 0;
 

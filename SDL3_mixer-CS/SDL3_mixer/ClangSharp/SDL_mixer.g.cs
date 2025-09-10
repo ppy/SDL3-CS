@@ -160,6 +160,10 @@ namespace SDL
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetTrackRawIOStream(MIX_Track* track, SDL_IOStream* io, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec, [NativeTypeName("bool")] SDLBool closeio);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         public static extern SDLBool MIX_TagTrack(MIX_Track* track, [NativeTypeName("const char *")] byte* tag);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

@@ -41,6 +41,7 @@ namespace SDL
         SDL_SENSOR_GYRO_L,
         SDL_SENSOR_ACCEL_R,
         SDL_SENSOR_GYRO_R,
+        SDL_SENSOR_COUNT,
     }
 
     public static unsafe partial class SDL3
