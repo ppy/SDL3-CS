@@ -109,6 +109,9 @@ namespace SDL
         public static extern SDL_hid_device* SDL_hid_open_path([NativeTypeName("const char *")] byte* path);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_PropertiesID SDL_hid_get_properties(SDL_hid_device* dev);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int SDL_hid_write(SDL_hid_device* dev, [NativeTypeName("const unsigned char *")] byte* data, [NativeTypeName("size_t")] nuint length);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -152,5 +155,8 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_hid_ble_scan([NativeTypeName("bool")] SDLBool active);
+
+        [NativeTypeName("#define SDL_PROP_HIDAPI_LIBUSB_DEVICE_HANDLE_POINTER \"SDL.hidapi.libusb.device.handle\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_HIDAPI_LIBUSB_DEVICE_HANDLE_POINTER => "SDL.hidapi.libusb.device.handle"u8;
     }
 }
