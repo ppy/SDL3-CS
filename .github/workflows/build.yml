@@ -17,7 +17,7 @@ jobs:
       matrix:
         platform:
           - { name: win-x64,     os: windows-latest,   flags: -A x64 }
-          - { name: win-x86,     os: windows-latest,   flags: -A Win32 }
+          - { name: win-x86,     os: windows-2022,     flags: -A Win32 }
           - { name: win-arm64,   os: windows-latest,   flags: -A ARM64 }
           - { name: linux-x64,   os: ubuntu-22.04,     flags: -GNinja, target_apt_arch: ":amd64" }
           - { name: linux-x86,   os: ubuntu-22.04,     flags: -GNinja -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32 -DWAVPACK_ENABLE_ASM=OFF, target_apt_arch: ":i386" }
