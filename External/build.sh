@@ -94,7 +94,7 @@ else
     export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/$NDK_VER"
     export FLAGS="$FLAGS -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
                          -DANDROID_HOME=$ANDROID_HOME \
-                         -DANDROID_PLATFORM=21 \
+                         -DANDROID_PLATFORM=24 \
                          -DANDROID_ABI=$ANDROID_ABI \
                          -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
                          -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
