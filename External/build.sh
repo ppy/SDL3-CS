@@ -84,7 +84,7 @@ if [[ $BUILD_PLATFORM != 'Android' ]]; then
             libdecor-0-dev$TARGET_APT_ARCH
     fi
 else
-    if [[ -z $ANDROID_HOME || -z $NDK_VER || -z $PLATFORM_VER || -z $ANDROID_ABI ]]; then
+    if [[ -z $ANDROID_HOME || -z $NDK_VER || -z $ANDROID_ABI ]]; then
         echo "One or more required environment variables are not defined."
         exit 1
     fi
@@ -94,7 +94,7 @@ else
     export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/$NDK_VER"
     export FLAGS="$FLAGS -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
                          -DANDROID_HOME=$ANDROID_HOME \
-                         -DANDROID_PLATFORM=$PLATFORM_VER \
+                         -DANDROID_PLATFORM=21 \
                          -DANDROID_ABI=$ANDROID_ABI \
                          -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
                          -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH \
@@ -152,6 +152,11 @@ run_cmake() {
     if [[ $BUILD_PLATFORM == 'Windows' && $LIB_NAME == 'SDL' ]]; then
         echo "Patching SDL to not include gameinput.h"
         sed -i 's/#include <gameinput.h>/#_include <gameinput.h>/g' CMakeLists.txt
+    fi
+
+    # Change the minumum Android API level for SDL_mixer to API 24 as opusfile and libflac fail to build on lower versions.
+    if [[ $BUILD_PLATFORM == 'Android' && $LIB_NAME == 'SDL_mixer' ]]; then
+        export FLAGS="${FLAGS/-DANDROID_PLATFORM=21/-DANDROID_PLATFORM=24}"
     fi
 
     rm -rf build
