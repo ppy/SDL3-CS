@@ -154,6 +154,7 @@ run_cmake() {
         sed -i 's/#include <gameinput.h>/#_include <gameinput.h>/g' CMakeLists.txt
     fi
 
+    # Change the minumum Android API level for SDL_mixer to API 24 as opusfile and libflac fail to build on lower versions.
     if [[ $BUILD_PLATFORM == 'Android' && $LIB_NAME == 'SDL_mixer' ]]; then
         export FLAGS="${FLAGS/-DANDROID_PLATFORM=21/-DANDROID_PLATFORM=24}"
     fi
