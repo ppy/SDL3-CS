@@ -98,6 +98,9 @@ namespace SDL
         [return: NativeTypeName("size_t")]
         public static extern nuint SDL_GetSIMDAlignment();
 
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int SDL_GetSystemPageSize();
+
         [NativeTypeName("#define SDL_CACHELINE_SIZE 128")]
         public const int SDL_CACHELINE_SIZE = 128;
     }

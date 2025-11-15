@@ -117,5 +117,8 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_DestroyProperties(SDL_PropertiesID props);
+
+        [NativeTypeName("#define SDL_PROP_NAME_STRING \"SDL.name\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_NAME_STRING => "SDL.name"u8;
     }
 }

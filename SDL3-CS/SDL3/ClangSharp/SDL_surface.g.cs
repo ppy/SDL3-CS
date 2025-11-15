@@ -118,6 +118,12 @@ namespace SDL
         public static extern void SDL_UnlockSurface(SDL_Surface* surface);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* SDL_LoadSurface_IO(SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* SDL_LoadSurface([NativeTypeName("const char *")] byte* file);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Surface* SDL_LoadBMP_IO(SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -130,6 +136,20 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_SaveBMP(SDL_Surface* surface, [NativeTypeName("const char *")] byte* file);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* SDL_LoadPNG_IO(SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* SDL_LoadPNG([NativeTypeName("const char *")] byte* file);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SavePNG_IO(SDL_Surface* surface, SDL_IOStream* dst, [NativeTypeName("bool")] SDLBool closeio);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SavePNG(SDL_Surface* surface, [NativeTypeName("const char *")] byte* file);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -186,6 +206,9 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_FlipSurface(SDL_Surface* surface, SDL_FlipMode flip);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* SDL_RotateSurface(SDL_Surface* surface, float angle);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Surface* SDL_DuplicateSurface(SDL_Surface* surface);

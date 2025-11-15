@@ -48,8 +48,9 @@ namespace SDL
         SDL_EVENT_DISPLAY_DESKTOP_MODE_CHANGED,
         SDL_EVENT_DISPLAY_CURRENT_MODE_CHANGED,
         SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED,
+        SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED,
         SDL_EVENT_DISPLAY_FIRST = SDL_EVENT_DISPLAY_ORIENTATION,
-        SDL_EVENT_DISPLAY_LAST = SDL_EVENT_DISPLAY_CONTENT_SCALE_CHANGED,
+        SDL_EVENT_DISPLAY_LAST = SDL_EVENT_DISPLAY_USABLE_BOUNDS_CHANGED,
         SDL_EVENT_WINDOW_SHOWN = 0x202,
         SDL_EVENT_WINDOW_HIDDEN,
         SDL_EVENT_WINDOW_EXPOSED,
@@ -85,6 +86,8 @@ namespace SDL
         SDL_EVENT_KEYBOARD_ADDED,
         SDL_EVENT_KEYBOARD_REMOVED,
         SDL_EVENT_TEXT_EDITING_CANDIDATES,
+        SDL_EVENT_SCREEN_KEYBOARD_SHOWN,
+        SDL_EVENT_SCREEN_KEYBOARD_HIDDEN,
         SDL_EVENT_MOUSE_MOTION = 0x400,
         SDL_EVENT_MOUSE_BUTTON_DOWN,
         SDL_EVENT_MOUSE_BUTTON_UP,
@@ -116,6 +119,9 @@ namespace SDL
         SDL_EVENT_FINGER_UP,
         SDL_EVENT_FINGER_MOTION,
         SDL_EVENT_FINGER_CANCELED,
+        SDL_EVENT_PINCH_BEGIN = 0x710,
+        SDL_EVENT_PINCH_UPDATE,
+        SDL_EVENT_PINCH_END,
         SDL_EVENT_CLIPBOARD_UPDATE = 0x900,
         SDL_EVENT_DROP_FILE = 0x1000,
         SDL_EVENT_DROP_TEXT,
@@ -758,6 +764,21 @@ namespace SDL
         public SDL_WindowID windowID;
     }
 
+    public partial struct SDL_PinchFingerEvent
+    {
+        public SDL_EventType type;
+
+        [NativeTypeName("Uint32")]
+        public uint reserved;
+
+        [NativeTypeName("Uint64")]
+        public ulong timestamp;
+
+        public float scale;
+
+        public SDL_WindowID windowID;
+    }
+
     public partial struct SDL_PenProximityEvent
     {
         public SDL_EventType type;
@@ -1068,6 +1089,9 @@ namespace SDL
 
         [FieldOffset(0)]
         public SDL_TouchFingerEvent tfinger;
+
+        [FieldOffset(0)]
+        public SDL_PinchFingerEvent pinch;
 
         [FieldOffset(0)]
         public SDL_PenProximityEvent pproximity;
