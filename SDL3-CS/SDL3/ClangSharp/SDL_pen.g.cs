@@ -23,6 +23,8 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System.Runtime.InteropServices;
+
 namespace SDL
 {
     public enum SDL_PenAxis
@@ -37,8 +39,19 @@ namespace SDL
         SDL_PEN_AXIS_COUNT,
     }
 
+    public enum SDL_PenDeviceType
+    {
+        SDL_PEN_DEVICE_TYPE_INVALID = -1,
+        SDL_PEN_DEVICE_TYPE_UNKNOWN,
+        SDL_PEN_DEVICE_TYPE_DIRECT,
+        SDL_PEN_DEVICE_TYPE_INDIRECT,
+    }
+
     public static partial class SDL3
     {
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_PenDeviceType SDL_GetPenDeviceType(SDL_PenID instance_id);
+
         [NativeTypeName("#define SDL_PEN_INPUT_DOWN (1u << 0)")]
         public const uint SDL_PEN_INPUT_DOWN = (1U << 0);
 

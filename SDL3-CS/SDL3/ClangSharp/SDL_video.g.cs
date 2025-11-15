@@ -800,6 +800,9 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING \"SDL.window.create.emscripten.canvas_id\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_CANVAS_ID_STRING => "SDL.window.create.emscripten.canvas_id"u8;
 
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN \"SDL.window.create.emscripten.fill_document\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN => "SDL.window.create.emscripten.fill_document"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING \"SDL.window.create.emscripten.keyboard_element\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING => "SDL.window.create.emscripten.keyboard_element"u8;
 
@@ -910,6 +913,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING \"SDL.window.emscripten.canvas_id\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_EMSCRIPTEN_CANVAS_ID_STRING => "SDL.window.emscripten.canvas_id"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN \"SDL.window.emscripten.fill_document\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_EMSCRIPTEN_FILL_DOCUMENT_BOOLEAN => "SDL.window.emscripten.fill_document"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING \"SDL.window.emscripten.keyboard_element\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING => "SDL.window.emscripten.keyboard_element"u8;

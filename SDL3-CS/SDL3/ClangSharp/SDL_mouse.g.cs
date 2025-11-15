@@ -63,6 +63,14 @@ namespace SDL
         SDL_MOUSEWHEEL_FLIPPED,
     }
 
+    public unsafe partial struct SDL_CursorFrameInfo
+    {
+        public SDL_Surface* surface;
+
+        [NativeTypeName("Uint32")]
+        public uint duration;
+    }
+
     public static unsafe partial class SDL3
     {
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -116,6 +124,9 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Cursor* SDL_CreateColorCursor(SDL_Surface* surface, int hot_x, int hot_y);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Cursor* SDL_CreateAnimatedCursor(SDL_CursorFrameInfo* frames, int frame_count, int hot_x, int hot_y);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Cursor* SDL_CreateSystemCursor(SDL_SystemCursor id);
