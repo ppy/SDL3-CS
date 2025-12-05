@@ -692,6 +692,9 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER \"SDL.display.wayland.wl_output\"")]
         public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_WAYLAND_WL_OUTPUT_POINTER => "SDL.display.wayland.wl_output"u8;
 
+        [NativeTypeName("#define SDL_PROP_DISPLAY_WINDOWS_HMONITOR_POINTER \"SDL.display.windows.hmonitor\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_DISPLAY_WINDOWS_HMONITOR_POINTER => "SDL.display.windows.hmonitor"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN \"SDL.window.create.always_on_top\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_ALWAYS_ON_TOP_BOOLEAN => "SDL.window.create.always_on_top"u8;
 
@@ -778,6 +781,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER \"SDL.window.create.cocoa.view\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_COCOA_VIEW_POINTER => "SDL.window.create.cocoa.view"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WINDOWSCENE_POINTER \"SDL.window.create.uikit.windowscene\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WINDOWSCENE_POINTER => "SDL.window.create.uikit.windowscene"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN \"SDL.window.create.wayland.surface_role_custom\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_SURFACE_ROLE_CUSTOM_BOOLEAN => "SDL.window.create.wayland.surface_role_custom"u8;

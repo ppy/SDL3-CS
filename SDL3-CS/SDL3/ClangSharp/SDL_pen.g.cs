@@ -72,5 +72,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PEN_INPUT_ERASER_TIP (1u << 30)")]
         public const uint SDL_PEN_INPUT_ERASER_TIP = (1U << 30);
+
+        [NativeTypeName("#define SDL_PEN_INPUT_IN_PROXIMITY (1u << 31)")]
+        public const uint SDL_PEN_INPUT_IN_PROXIMITY = (1U << 31);
     }
 }
