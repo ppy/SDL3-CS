@@ -496,6 +496,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_MAC_SCROLL_MOMENTUM \"SDL_MAC_SCROLL_MOMENTUM\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MAC_SCROLL_MOMENTUM => "SDL_MAC_SCROLL_MOMENTUM"u8;
 
+        [NativeTypeName("#define SDL_HINT_MAC_PRESS_AND_HOLD \"SDL_MAC_PRESS_AND_HOLD\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_MAC_PRESS_AND_HOLD => "SDL_MAC_PRESS_AND_HOLD"u8;
+
         [NativeTypeName("#define SDL_HINT_MAIN_CALLBACK_RATE \"SDL_MAIN_CALLBACK_RATE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MAIN_CALLBACK_RATE => "SDL_MAIN_CALLBACK_RATE"u8;
 
