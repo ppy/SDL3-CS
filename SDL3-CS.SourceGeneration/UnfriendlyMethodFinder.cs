@@ -15,7 +15,7 @@ namespace SDL.SourceGeneration
     {
         public readonly Dictionary<string, List<GeneratedMethod>> Methods = new Dictionary<string, List<GeneratedMethod>>();
 
-        private static readonly string[] sdlPrefixes = ["SDL_", "TTF_", "IMG_", "Mix_"];
+        private static readonly string[] sdlPrefixes = ["SDL_", "TTF_", "IMG_", "MIX_"];
 
         /// <summary>
         /// Checks whether the method is from any SDL library.
