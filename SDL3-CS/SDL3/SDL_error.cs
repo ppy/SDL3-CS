@@ -8,14 +8,14 @@ namespace SDL
         [Macro]
         public static unsafe SDLBool SDL_Unsupported()
         {
-            fixed (byte* fmt = "That operation is not supported"u8)
+            fixed (byte* fmt = "That operation is not supported\0"u8)
                 return SDL_SetError(fmt, __arglist());
         }
 
         [Macro]
         public static unsafe SDLBool SDL_InvalidParamError([NativeTypeName("const char *")] byte* param)
         {
-            fixed (byte* fmt = "Parameter '%s' is invalid"u8)
+            fixed (byte* fmt = "Parameter '%s' is invalid\0"u8)
                 return SDL_SetError(fmt, __arglist(param));
         }
     }
