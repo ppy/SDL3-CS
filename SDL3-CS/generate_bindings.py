@@ -312,7 +312,6 @@ def run_clangsharp(command, header: Header):
         "--file", header.input_file(),
         "--output", header.output_file(),
         "--libraryPath", header.base,
-        
         "--methodClassName", header.base,
     ]
 
@@ -373,6 +372,8 @@ def get_string_returning_functions(sdl_api):
 
     yield "TTF_GetFontFamilyName"
     yield "TTF_GetFontStyleName"
+
+    yield "MIX_GetAudioDecoder"
 
 
 def should_skip(solo_headers: list[Header], header: Header):

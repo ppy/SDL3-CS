@@ -79,9 +79,9 @@ namespace SDL
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int MIX_GetNumAudioDecoders();
 
-        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, EntryPoint = "MIX_GetAudioDecoder", ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern byte* MIX_GetAudioDecoder(int index);
+        public static extern byte* Unsafe_MIX_GetAudioDecoder(int index);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern MIX_Mixer* MIX_CreateMixerDevice(SDL_AudioDeviceID devid, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec);
