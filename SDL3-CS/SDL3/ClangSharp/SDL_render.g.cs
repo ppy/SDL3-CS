@@ -691,6 +691,9 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER \"SDL.texture.create.vulkan.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER => "SDL.texture.create.vulkan.texture"u8;
 
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER \"SDL.texture.create.vulkan.layout\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER => "SDL.texture.create.vulkan.layout"u8;
+
         [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER \"SDL.texture.create.gpu.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER => "SDL.texture.create.gpu.texture"u8;
 
