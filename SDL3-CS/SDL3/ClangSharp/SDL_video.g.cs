@@ -867,6 +867,12 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER \"SDL.window.openvr.overlay_id\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_OPENVR_OVERLAY_ID_NUMBER => "SDL.window.openvr.overlay_id"u8;
 
+        [NativeTypeName("#define SDL_PROP_WINDOW_QNX_WINDOW_POINTER \"SDL.window.qnx.window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_QNX_WINDOW_POINTER => "SDL.window.qnx.window"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_QNX_SURFACE_POINTER \"SDL.window.qnx.surface\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_QNX_SURFACE_POINTER => "SDL.window.qnx.surface"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER \"SDL.window.vivante.display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_VIVANTE_DISPLAY_POINTER => "SDL.window.vivante.display"u8;
 

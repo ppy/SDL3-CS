@@ -1549,11 +1549,59 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING \"SDL.gpu.device.create.d3d12.semantic\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_D3D12_SEMANTIC_NAME_STRING => "SDL.gpu.device.create.d3d12.semantic"u8;
 
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_VERSION_NUMBER \"SDL.gpu.device.create.d3d12.agility_sdk_version\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_VERSION_NUMBER => "SDL.gpu.device.create.d3d12.agility_sdk_version"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_PATH_STRING \"SDL.gpu.device.create.d3d12.agility_sdk_path\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_D3D12_AGILITY_SDK_PATH_STRING => "SDL.gpu.device.create.d3d12.agility_sdk_path"u8;
+
         [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN \"SDL.gpu.device.create.vulkan.requirehardwareacceleration\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_VULKAN_REQUIRE_HARDWARE_ACCELERATION_BOOLEAN => "SDL.gpu.device.create.vulkan.requirehardwareacceleration"u8;
 
         [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER \"SDL.gpu.device.create.vulkan.options\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_VULKAN_OPTIONS_POINTER => "SDL.gpu.device.create.vulkan.options"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_METAL_ALLOW_MACFAMILY1_BOOLEAN \"SDL.gpu.device.create.metal.allowmacfamily1\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_METAL_ALLOW_MACFAMILY1_BOOLEAN => "SDL.gpu.device.create.metal.allowmacfamily1"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_ENABLE_BOOLEAN \"SDL.gpu.device.create.xr.enable\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_ENABLE_BOOLEAN => "SDL.gpu.device.create.xr.enable"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_INSTANCE_POINTER \"SDL.gpu.device.create.xr.instance_out\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_INSTANCE_POINTER => "SDL.gpu.device.create.xr.instance_out"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_SYSTEM_ID_POINTER \"SDL.gpu.device.create.xr.system_id_out\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_SYSTEM_ID_POINTER => "SDL.gpu.device.create.xr.system_id_out"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_VERSION_NUMBER \"SDL.gpu.device.create.xr.version\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_VERSION_NUMBER => "SDL.gpu.device.create.xr.version"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_FORM_FACTOR_NUMBER \"SDL.gpu.device.create.xr.form_factor\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_FORM_FACTOR_NUMBER => "SDL.gpu.device.create.xr.form_factor"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_EXTENSION_COUNT_NUMBER \"SDL.gpu.device.create.xr.extensions.count\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_EXTENSION_COUNT_NUMBER => "SDL.gpu.device.create.xr.extensions.count"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_EXTENSION_NAMES_POINTER \"SDL.gpu.device.create.xr.extensions.names\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_EXTENSION_NAMES_POINTER => "SDL.gpu.device.create.xr.extensions.names"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_LAYER_COUNT_NUMBER \"SDL.gpu.device.create.xr.layers.count\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_LAYER_COUNT_NUMBER => "SDL.gpu.device.create.xr.layers.count"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_LAYER_NAMES_POINTER \"SDL.gpu.device.create.xr.layers.names\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_LAYER_NAMES_POINTER => "SDL.gpu.device.create.xr.layers.names"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_APPLICATION_NAME_STRING \"SDL.gpu.device.create.xr.application.name\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_APPLICATION_NAME_STRING => "SDL.gpu.device.create.xr.application.name"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_APPLICATION_VERSION_NUMBER \"SDL.gpu.device.create.xr.application.version\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_APPLICATION_VERSION_NUMBER => "SDL.gpu.device.create.xr.application.version"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_ENGINE_NAME_STRING \"SDL.gpu.device.create.xr.engine.name\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_ENGINE_NAME_STRING => "SDL.gpu.device.create.xr.engine.name"u8;
+
+        [NativeTypeName("#define SDL_PROP_GPU_DEVICE_CREATE_XR_ENGINE_VERSION_NUMBER \"SDL.gpu.device.create.xr.engine.version\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_CREATE_XR_ENGINE_VERSION_NUMBER => "SDL.gpu.device.create.xr.engine.version"u8;
 
         [NativeTypeName("#define SDL_PROP_GPU_DEVICE_NAME_STRING \"SDL.gpu.device.name\"")]
         public static ReadOnlySpan<byte> SDL_PROP_GPU_DEVICE_NAME_STRING => "SDL.gpu.device.name"u8;

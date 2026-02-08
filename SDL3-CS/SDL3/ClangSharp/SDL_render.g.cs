@@ -480,7 +480,7 @@ namespace SDL
         public static extern SDLBool SDL_GetDefaultTextureScaleMode(SDL_Renderer* renderer, SDL_ScaleMode* scale_mode);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern SDL_GPURenderState* SDL_CreateGPURenderState(SDL_Renderer* renderer, SDL_GPURenderStateCreateInfo* createinfo);
+        public static extern SDL_GPURenderState* SDL_CreateGPURenderState(SDL_Renderer* renderer, [NativeTypeName("const SDL_GPURenderStateCreateInfo *")] SDL_GPURenderStateCreateInfo* createinfo);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]

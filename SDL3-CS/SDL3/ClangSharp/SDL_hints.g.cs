@@ -247,6 +247,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_GPU_DRIVER \"SDL_GPU_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_GPU_DRIVER => "SDL_GPU_DRIVER"u8;
 
+        [NativeTypeName("#define SDL_HINT_OPENXR_LIBRARY \"SDL_OPENXR_LIBRARY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_OPENXR_LIBRARY => "SDL_OPENXR_LIBRARY"u8;
+
         [NativeTypeName("#define SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS \"SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS => "SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS"u8;
 
@@ -369,6 +372,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_FLYDIGI \"SDL_JOYSTICK_HIDAPI_FLYDIGI\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_FLYDIGI => "SDL_JOYSTICK_HIDAPI_FLYDIGI"u8;
+
+        [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_GAMESIR \"SDL_JOYSTICK_HIDAPI_GAMESIR\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_GAMESIR => "SDL_JOYSTICK_HIDAPI_GAMESIR"u8;
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_SWITCH \"SDL_JOYSTICK_HIDAPI_SWITCH\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_SWITCH => "SDL_JOYSTICK_HIDAPI_SWITCH"u8;
@@ -558,6 +564,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_OPENGL_ES_DRIVER \"SDL_OPENGL_ES_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENGL_ES_DRIVER => "SDL_OPENGL_ES_DRIVER"u8;
+
+        [NativeTypeName("#define SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE \"SDL_OPENGL_FORCE_SRGB_CAPABLE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE => "SDL_OPENGL_FORCE_SRGB_CAPABLE"u8;
 
         [NativeTypeName("#define SDL_HINT_OPENVR_LIBRARY \"SDL_OPENVR_LIBRARY\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENVR_LIBRARY => "SDL_OPENVR_LIBRARY"u8;

@@ -398,11 +398,11 @@ namespace SDL
         [NativeTypeName("#define SDL_MIXER_MINOR_VERSION 1")]
         public const int SDL_MIXER_MINOR_VERSION = 1;
 
-        [NativeTypeName("#define SDL_MIXER_MICRO_VERSION 2")]
-        public const int SDL_MIXER_MICRO_VERSION = 2;
+        [NativeTypeName("#define SDL_MIXER_MICRO_VERSION 3")]
+        public const int SDL_MIXER_MICRO_VERSION = 3;
 
         [NativeTypeName("#define SDL_MIXER_VERSION SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_MICRO_VERSION)")]
-        public const int SDL_MIXER_VERSION = ((3) * 1000000 + (1) * 1000 + (2));
+        public const int SDL_MIXER_VERSION = ((3) * 1000000 + (1) * 1000 + (3));
 
         [NativeTypeName("#define MIX_PROP_MIXER_DEVICE_NUMBER \"SDL_mixer.mixer.device\"")]
         public static ReadOnlySpan<byte> MIX_PROP_MIXER_DEVICE_NUMBER => "SDL_mixer.mixer.device"u8;

@@ -419,14 +419,14 @@ namespace SDL
         [NativeTypeName("#define SDL_IMAGE_MAJOR_VERSION 3")]
         public const int SDL_IMAGE_MAJOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_IMAGE_MINOR_VERSION 4")]
-        public const int SDL_IMAGE_MINOR_VERSION = 4;
+        [NativeTypeName("#define SDL_IMAGE_MINOR_VERSION 5")]
+        public const int SDL_IMAGE_MINOR_VERSION = 5;
 
         [NativeTypeName("#define SDL_IMAGE_MICRO_VERSION 0")]
         public const int SDL_IMAGE_MICRO_VERSION = 0;
 
         [NativeTypeName("#define SDL_IMAGE_VERSION SDL_VERSIONNUM(SDL_IMAGE_MAJOR_VERSION, SDL_IMAGE_MINOR_VERSION, SDL_IMAGE_MICRO_VERSION)")]
-        public const int SDL_IMAGE_VERSION = ((3) * 1000000 + (4) * 1000 + (0));
+        public const int SDL_IMAGE_VERSION = ((3) * 1000000 + (5) * 1000 + (0));
 
         [NativeTypeName("#define IMG_PROP_ANIMATION_ENCODER_CREATE_FILENAME_STRING \"SDL_image.animation_encoder.create.filename\"")]
         public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_ENCODER_CREATE_FILENAME_STRING => "SDL_image.animation_encoder.create.filename"u8;
