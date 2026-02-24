@@ -565,8 +565,8 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_OPENGL_ES_DRIVER \"SDL_OPENGL_ES_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENGL_ES_DRIVER => "SDL_OPENGL_ES_DRIVER"u8;
 
-        [NativeTypeName("#define SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE \"SDL_OPENGL_FORCE_SRGB_CAPABLE\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE => "SDL_OPENGL_FORCE_SRGB_CAPABLE"u8;
+        [NativeTypeName("#define SDL_HINT_OPENGL_FORCE_SRGB_FRAMEBUFFER \"SDL_OPENGL_FORCE_SRGB_FRAMEBUFFER\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_OPENGL_FORCE_SRGB_FRAMEBUFFER => "SDL_OPENGL_FORCE_SRGB_FRAMEBUFFER"u8;
 
         [NativeTypeName("#define SDL_HINT_OPENVR_LIBRARY \"SDL_OPENVR_LIBRARY\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENVR_LIBRARY => "SDL_OPENVR_LIBRARY"u8;
