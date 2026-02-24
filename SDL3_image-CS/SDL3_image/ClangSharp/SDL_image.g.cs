@@ -81,6 +81,15 @@ namespace SDL
         public static extern SDL_Texture* IMG_LoadTextureTyped_IO(SDL_Renderer* renderer, SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio, [NativeTypeName("const char *")] byte* type);
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_GPUTexture* IMG_LoadGPUTexture(SDL_GPUDevice* device, SDL_GPUCopyPass* copy_pass, [NativeTypeName("const char *")] byte* file, int* width, int* height);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_GPUTexture* IMG_LoadGPUTexture_IO(SDL_GPUDevice* device, SDL_GPUCopyPass* copy_pass, SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio, int* width, int* height);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_GPUTexture* IMG_LoadGPUTextureTyped_IO(SDL_GPUDevice* device, SDL_GPUCopyPass* copy_pass, SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio, [NativeTypeName("const char *")] byte* type, int* width, int* height);
+
+        [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Surface* IMG_GetClipboardImage();
 
         [DllImport("SDL3_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -410,14 +419,14 @@ namespace SDL
         [NativeTypeName("#define SDL_IMAGE_MAJOR_VERSION 3")]
         public const int SDL_IMAGE_MAJOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_IMAGE_MINOR_VERSION 3")]
-        public const int SDL_IMAGE_MINOR_VERSION = 3;
+        [NativeTypeName("#define SDL_IMAGE_MINOR_VERSION 5")]
+        public const int SDL_IMAGE_MINOR_VERSION = 5;
 
         [NativeTypeName("#define SDL_IMAGE_MICRO_VERSION 0")]
         public const int SDL_IMAGE_MICRO_VERSION = 0;
 
         [NativeTypeName("#define SDL_IMAGE_VERSION SDL_VERSIONNUM(SDL_IMAGE_MAJOR_VERSION, SDL_IMAGE_MINOR_VERSION, SDL_IMAGE_MICRO_VERSION)")]
-        public const int SDL_IMAGE_VERSION = ((3) * 1000000 + (3) * 1000 + (0));
+        public const int SDL_IMAGE_VERSION = ((3) * 1000000 + (5) * 1000 + (0));
 
         [NativeTypeName("#define IMG_PROP_ANIMATION_ENCODER_CREATE_FILENAME_STRING \"SDL_image.animation_encoder.create.filename\"")]
         public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_ENCODER_CREATE_FILENAME_STRING => "SDL_image.animation_encoder.create.filename"u8;
@@ -440,6 +449,15 @@ namespace SDL
         [NativeTypeName("#define IMG_PROP_ANIMATION_ENCODER_CREATE_TIMEBASE_DENOMINATOR_NUMBER \"SDL_image.animation_encoder.create.timebase.denominator\"")]
         public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_ENCODER_CREATE_TIMEBASE_DENOMINATOR_NUMBER => "SDL_image.animation_encoder.create.timebase.denominator"u8;
 
+        [NativeTypeName("#define IMG_PROP_ANIMATION_ENCODER_CREATE_AVIF_MAX_THREADS_NUMBER \"SDL_image.animation_encoder.create.avif.max_threads\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_ENCODER_CREATE_AVIF_MAX_THREADS_NUMBER => "SDL_image.animation_encoder.create.avif.max_threads"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_ENCODER_CREATE_AVIF_KEYFRAME_INTERVAL_NUMBER \"SDL_image.animation_encoder.create.avif.keyframe_interval\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_ENCODER_CREATE_AVIF_KEYFRAME_INTERVAL_NUMBER => "SDL_image.animation_encoder.create.avif.keyframe_interval"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_ENCODER_CREATE_GIF_USE_LUT_BOOLEAN \"SDL_image.animation_encoder.create.gif.use_lut\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_ENCODER_CREATE_GIF_USE_LUT_BOOLEAN => "SDL_image.animation_encoder.create.gif.use_lut"u8;
+
         [NativeTypeName("#define IMG_PROP_ANIMATION_DECODER_CREATE_FILENAME_STRING \"SDL_image.animation_decoder.create.filename\"")]
         public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_DECODER_CREATE_FILENAME_STRING => "SDL_image.animation_decoder.create.filename"u8;
 
@@ -458,6 +476,21 @@ namespace SDL
         [NativeTypeName("#define IMG_PROP_ANIMATION_DECODER_CREATE_TIMEBASE_DENOMINATOR_NUMBER \"SDL_image.animation_decoder.create.timebase.denominator\"")]
         public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_DECODER_CREATE_TIMEBASE_DENOMINATOR_NUMBER => "SDL_image.animation_decoder.create.timebase.denominator"u8;
 
+        [NativeTypeName("#define IMG_PROP_ANIMATION_DECODER_CREATE_AVIF_MAX_THREADS_NUMBER \"SDL_image.animation_decoder.create.avif.max_threads\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_DECODER_CREATE_AVIF_MAX_THREADS_NUMBER => "SDL_image.animation_decoder.create.avif.max_threads"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_DECODER_CREATE_AVIF_ALLOW_INCREMENTAL_BOOLEAN \"SDL_image.animation_decoder.create.avif.allow_incremental\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_DECODER_CREATE_AVIF_ALLOW_INCREMENTAL_BOOLEAN => "SDL_image.animation_decoder.create.avif.allow_incremental"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_DECODER_CREATE_AVIF_ALLOW_PROGRESSIVE_BOOLEAN \"SDL_image.animation_decoder.create.avif.allow_progressive\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_DECODER_CREATE_AVIF_ALLOW_PROGRESSIVE_BOOLEAN => "SDL_image.animation_decoder.create.avif.allow_progressive"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_DECODER_CREATE_GIF_TRANSPARENT_COLOR_INDEX_NUMBER \"SDL_image.animation_encoder.create.gif.transparent_color_index\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_DECODER_CREATE_GIF_TRANSPARENT_COLOR_INDEX_NUMBER => "SDL_image.animation_encoder.create.gif.transparent_color_index"u8;
+
+        [NativeTypeName("#define IMG_PROP_ANIMATION_DECODER_CREATE_GIF_NUM_COLORS_NUMBER \"SDL_image.animation_encoder.create.gif.num_colors\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_ANIMATION_DECODER_CREATE_GIF_NUM_COLORS_NUMBER => "SDL_image.animation_encoder.create.gif.num_colors"u8;
+
         [NativeTypeName("#define IMG_PROP_METADATA_IGNORE_PROPS_BOOLEAN \"SDL_image.metadata.ignore_props\"")]
         public static ReadOnlySpan<byte> IMG_PROP_METADATA_IGNORE_PROPS_BOOLEAN => "SDL_image.metadata.ignore_props"u8;
 
@@ -475,6 +508,9 @@ namespace SDL
 
         [NativeTypeName("#define IMG_PROP_METADATA_CREATION_TIME_STRING \"SDL_image.metadata.creation_time\"")]
         public static ReadOnlySpan<byte> IMG_PROP_METADATA_CREATION_TIME_STRING => "SDL_image.metadata.creation_time"u8;
+
+        [NativeTypeName("#define IMG_PROP_METADATA_FRAME_COUNT_NUMBER \"SDL_image.metadata.frame_count\"")]
+        public static ReadOnlySpan<byte> IMG_PROP_METADATA_FRAME_COUNT_NUMBER => "SDL_image.metadata.frame_count"u8;
 
         [NativeTypeName("#define IMG_PROP_METADATA_LOOP_COUNT_NUMBER \"SDL_image.metadata.loop_count\"")]
         public static ReadOnlySpan<byte> IMG_PROP_METADATA_LOOP_COUNT_NUMBER => "SDL_image.metadata.loop_count"u8;

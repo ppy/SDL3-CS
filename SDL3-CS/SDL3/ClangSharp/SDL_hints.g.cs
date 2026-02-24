@@ -184,9 +184,6 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT \"SDL_EMSCRIPTEN_KEYBOARD_ELEMENT\"")]
         public static ReadOnlySpan<byte> SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT => "SDL_EMSCRIPTEN_KEYBOARD_ELEMENT"u8;
 
-        [NativeTypeName("#define SDL_HINT_EMSCRIPTEN_FILL_DOCUMENT \"SDL_EMSCRIPTEN_FILL_DOCUMENT\"")]
-        public static ReadOnlySpan<byte> SDL_HINT_EMSCRIPTEN_FILL_DOCUMENT => "SDL_EMSCRIPTEN_FILL_DOCUMENT"u8;
-
         [NativeTypeName("#define SDL_HINT_ENABLE_SCREEN_KEYBOARD \"SDL_ENABLE_SCREEN_KEYBOARD\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ENABLE_SCREEN_KEYBOARD => "SDL_ENABLE_SCREEN_KEYBOARD"u8;
 
@@ -238,6 +235,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_HIDAPI_LIBUSB \"SDL_HIDAPI_LIBUSB\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_LIBUSB => "SDL_HIDAPI_LIBUSB"u8;
 
+        [NativeTypeName("#define SDL_HINT_HIDAPI_LIBUSB_GAMECUBE \"SDL_HIDAPI_LIBUSB_GAMECUBE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_LIBUSB_GAMECUBE => "SDL_HIDAPI_LIBUSB_GAMECUBE"u8;
+
         [NativeTypeName("#define SDL_HINT_HIDAPI_LIBUSB_WHITELIST \"SDL_HIDAPI_LIBUSB_WHITELIST\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_LIBUSB_WHITELIST => "SDL_HIDAPI_LIBUSB_WHITELIST"u8;
 
@@ -246,6 +246,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_GPU_DRIVER \"SDL_GPU_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_GPU_DRIVER => "SDL_GPU_DRIVER"u8;
+
+        [NativeTypeName("#define SDL_HINT_OPENXR_LIBRARY \"SDL_OPENXR_LIBRARY\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_OPENXR_LIBRARY => "SDL_OPENXR_LIBRARY"u8;
 
         [NativeTypeName("#define SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS \"SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS\"")]
         public static ReadOnlySpan<byte> SDL_HINT_HIDAPI_ENUMERATE_ONLY_CONTROLLERS => "SDL_HIDAPI_ENUMERATE_ONLY_CONTROLLERS"u8;
@@ -369,6 +372,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_FLYDIGI \"SDL_JOYSTICK_HIDAPI_FLYDIGI\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_FLYDIGI => "SDL_JOYSTICK_HIDAPI_FLYDIGI"u8;
+
+        [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_GAMESIR \"SDL_JOYSTICK_HIDAPI_GAMESIR\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_GAMESIR => "SDL_JOYSTICK_HIDAPI_GAMESIR"u8;
 
         [NativeTypeName("#define SDL_HINT_JOYSTICK_HIDAPI_SWITCH \"SDL_JOYSTICK_HIDAPI_SWITCH\"")]
         public static ReadOnlySpan<byte> SDL_HINT_JOYSTICK_HIDAPI_SWITCH => "SDL_JOYSTICK_HIDAPI_SWITCH"u8;
@@ -514,6 +520,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_MOUSE_DEFAULT_SYSTEM_CURSOR \"SDL_MOUSE_DEFAULT_SYSTEM_CURSOR\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MOUSE_DEFAULT_SYSTEM_CURSOR => "SDL_MOUSE_DEFAULT_SYSTEM_CURSOR"u8;
 
+        [NativeTypeName("#define SDL_HINT_MOUSE_DPI_SCALE_CURSORS \"SDL_MOUSE_DPI_SCALE_CURSORS\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_MOUSE_DPI_SCALE_CURSORS => "SDL_MOUSE_DPI_SCALE_CURSORS"u8;
+
         [NativeTypeName("#define SDL_HINT_MOUSE_EMULATE_WARP_WITH_RELATIVE \"SDL_MOUSE_EMULATE_WARP_WITH_RELATIVE\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MOUSE_EMULATE_WARP_WITH_RELATIVE => "SDL_MOUSE_EMULATE_WARP_WITH_RELATIVE"u8;
 
@@ -555,6 +564,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_OPENGL_ES_DRIVER \"SDL_OPENGL_ES_DRIVER\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENGL_ES_DRIVER => "SDL_OPENGL_ES_DRIVER"u8;
+
+        [NativeTypeName("#define SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE \"SDL_OPENGL_FORCE_SRGB_CAPABLE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_OPENGL_FORCE_SRGB_CAPABLE => "SDL_OPENGL_FORCE_SRGB_CAPABLE"u8;
 
         [NativeTypeName("#define SDL_HINT_OPENVR_LIBRARY \"SDL_OPENVR_LIBRARY\"")]
         public static ReadOnlySpan<byte> SDL_HINT_OPENVR_LIBRARY => "SDL_OPENVR_LIBRARY"u8;

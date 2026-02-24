@@ -332,5 +332,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER \"SDL.surface.hotspot.y\"")]
         public static ReadOnlySpan<byte> SDL_PROP_SURFACE_HOTSPOT_Y_NUMBER => "SDL.surface.hotspot.y"u8;
+
+        [NativeTypeName("#define SDL_PROP_SURFACE_ROTATION_FLOAT \"SDL.surface.rotation\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_SURFACE_ROTATION_FLOAT => "SDL.surface.rotation"u8;
     }
 }

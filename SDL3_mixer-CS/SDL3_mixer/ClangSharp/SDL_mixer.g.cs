@@ -118,7 +118,7 @@ namespace SDL
         public static extern MIX_Audio* MIX_LoadRawAudioNoCopy(MIX_Mixer* mixer, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint datalen, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec, [NativeTypeName("bool")] SDLBool free_when_done);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern MIX_Audio* MIX_CreateSineWaveAudio(MIX_Mixer* mixer, int hz, float amplitude);
+        public static extern MIX_Audio* MIX_CreateSineWaveAudio(MIX_Mixer* mixer, int hz, float amplitude, [NativeTypeName("Sint64")] long ms);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_PropertiesID MIX_GetAudioProperties(MIX_Audio* audio);
@@ -170,6 +170,13 @@ namespace SDL
         public static extern void MIX_UntagTrack(MIX_Track* track, [NativeTypeName("const char *")] byte* tag);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("char **")]
+        public static extern byte** MIX_GetTrackTags(MIX_Track* track, int* count);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_Track** MIX_GetTaggedTracks(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* tag, int* count);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool MIX_SetTrackPlaybackPosition(MIX_Track* track, [NativeTypeName("Sint64")] long frames);
 
@@ -178,8 +185,15 @@ namespace SDL
         public static extern long MIX_GetTrackPlaybackPosition(MIX_Track* track);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("Sint64")]
+        public static extern long MIX_GetTrackFadeFrames(MIX_Track* track);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int MIX_GetTrackLoops(MIX_Track* track);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool MIX_TrackLooping(MIX_Track* track);
+        public static extern SDLBool MIX_SetTrackLoops(MIX_Track* track, int num_loops);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern MIX_Audio* MIX_GetTrackAudio(MIX_Track* track);
@@ -273,10 +287,10 @@ namespace SDL
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
-        public static extern SDLBool MIX_SetMasterGain(MIX_Mixer* mixer, float gain);
+        public static extern SDLBool MIX_SetMixerGain(MIX_Mixer* mixer, float gain);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float MIX_GetMasterGain(MIX_Mixer* mixer);
+        public static extern float MIX_GetMixerGain(MIX_Mixer* mixer);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -288,6 +302,13 @@ namespace SDL
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool MIX_SetTagGain(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* tag, float gain);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool MIX_SetMixerFrequencyRatio(MIX_Mixer* mixer, float ratio);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern float MIX_GetMixerFrequencyRatio(MIX_Mixer* mixer);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -377,11 +398,14 @@ namespace SDL
         [NativeTypeName("#define SDL_MIXER_MINOR_VERSION 1")]
         public const int SDL_MIXER_MINOR_VERSION = 1;
 
-        [NativeTypeName("#define SDL_MIXER_MICRO_VERSION 0")]
-        public const int SDL_MIXER_MICRO_VERSION = 0;
+        [NativeTypeName("#define SDL_MIXER_MICRO_VERSION 3")]
+        public const int SDL_MIXER_MICRO_VERSION = 3;
 
         [NativeTypeName("#define SDL_MIXER_VERSION SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_MICRO_VERSION)")]
-        public const int SDL_MIXER_VERSION = ((3) * 1000000 + (1) * 1000 + (0));
+        public const int SDL_MIXER_VERSION = ((3) * 1000000 + (1) * 1000 + (3));
+
+        [NativeTypeName("#define MIX_PROP_MIXER_DEVICE_NUMBER \"SDL_mixer.mixer.device\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_MIXER_DEVICE_NUMBER => "SDL_mixer.mixer.device"u8;
 
         [NativeTypeName("#define MIX_PROP_AUDIO_LOAD_IOSTREAM_POINTER \"SDL_mixer.audio.load.iostream\"")]
         public static ReadOnlySpan<byte> MIX_PROP_AUDIO_LOAD_IOSTREAM_POINTER => "SDL_mixer.audio.load.iostream"u8;
@@ -460,6 +484,9 @@ namespace SDL
 
         [NativeTypeName("#define MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER \"SDL_mixer.play.fade_in_milliseconds\"")]
         public static ReadOnlySpan<byte> MIX_PROP_PLAY_FADE_IN_MILLISECONDS_NUMBER => "SDL_mixer.play.fade_in_milliseconds"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_FADE_IN_START_GAIN_FLOAT \"SDL_mixer.play.fade_in_start_gain\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_FADE_IN_START_GAIN_FLOAT => "SDL_mixer.play.fade_in_start_gain"u8;
 
         [NativeTypeName("#define MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER \"SDL_mixer.play.append_silence_frames\"")]
         public static ReadOnlySpan<byte> MIX_PROP_PLAY_APPEND_SILENCE_FRAMES_NUMBER => "SDL_mixer.play.append_silence_frames"u8;

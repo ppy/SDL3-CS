@@ -46,6 +46,9 @@ namespace SDL
         public static extern SDL_Tray* SDL_CreateTray(SDL_Surface* icon, [NativeTypeName("const char *")] byte* tooltip);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Tray* SDL_CreateTrayWithProperties(SDL_PropertiesID props);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_SetTrayIcon(SDL_Tray* tray, SDL_Surface* icon);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -129,5 +132,23 @@ namespace SDL
 
         [NativeTypeName("#define SDL_TRAYENTRY_CHECKED 0x40000000u")]
         public const uint SDL_TRAYENTRY_CHECKED = 0x40000000U;
+
+        [NativeTypeName("#define SDL_PROP_TRAY_CREATE_ICON_POINTER \"SDL.tray.create.icon\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TRAY_CREATE_ICON_POINTER => "SDL.tray.create.icon"u8;
+
+        [NativeTypeName("#define SDL_PROP_TRAY_CREATE_TOOLTIP_STRING \"SDL.tray.create.tooltip\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TRAY_CREATE_TOOLTIP_STRING => "SDL.tray.create.tooltip"u8;
+
+        [NativeTypeName("#define SDL_PROP_TRAY_CREATE_USERDATA_POINTER \"SDL.tray.create.userdata\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TRAY_CREATE_USERDATA_POINTER => "SDL.tray.create.userdata"u8;
+
+        [NativeTypeName("#define SDL_PROP_TRAY_CREATE_LEFTCLICK_CALLBACK_POINTER \"SDL.tray.create.leftclick_callback\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TRAY_CREATE_LEFTCLICK_CALLBACK_POINTER => "SDL.tray.create.leftclick_callback"u8;
+
+        [NativeTypeName("#define SDL_PROP_TRAY_CREATE_RIGHTCLICK_CALLBACK_POINTER \"SDL.tray.create.rightclick_callback\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TRAY_CREATE_RIGHTCLICK_CALLBACK_POINTER => "SDL.tray.create.rightclick_callback"u8;
+
+        [NativeTypeName("#define SDL_PROP_TRAY_CREATE_MIDDLECLICK_CALLBACK_POINTER \"SDL.tray.create.middleclick_callback\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TRAY_CREATE_MIDDLECLICK_CALLBACK_POINTER => "SDL.tray.create.middleclick_callback"u8;
     }
 }
