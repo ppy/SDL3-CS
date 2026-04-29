@@ -81,7 +81,9 @@ if [[ $BUILD_PLATFORM != 'Android' ]]; then
             libgbm-dev$TARGET_APT_ARCH \
             libpulse-dev$TARGET_APT_ARCH \
             libpipewire-0.3-dev$TARGET_APT_ARCH \
-            libdecor-0-dev$TARGET_APT_ARCH
+            libdecor-0-dev$TARGET_APT_ARCH \
+            libjack-dev$TARGET_APT_ARCH \
+            libusb-1.0-0-dev$TARGET_APT_ARCH
     fi
 else
     if [[ -z $ANDROID_HOME || -z $NDK_VER || -z $ANDROID_ABI ]]; then
