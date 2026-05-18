@@ -85,6 +85,10 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_HasSVE2();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_HasLSX();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

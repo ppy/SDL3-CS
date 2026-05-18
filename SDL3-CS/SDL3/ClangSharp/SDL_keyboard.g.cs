@@ -150,6 +150,18 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN \"SDL.textinput.multiline\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_MULTILINE_BOOLEAN => "SDL.textinput.multiline"u8;
 
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_TITLE_STRING \"SDL.textinput.title\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_TITLE_STRING => "SDL.textinput.title"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_PLACEHOLDER_STRING \"SDL.textinput.placeholder\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_PLACEHOLDER_STRING => "SDL.textinput.placeholder"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_DEFAULT_TEXT_STRING \"SDL.textinput.default_text\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_DEFAULT_TEXT_STRING => "SDL.textinput.default_text"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_MAX_LENGTH_NUMBER \"SDL.textinput.max_length\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_MAX_LENGTH_NUMBER => "SDL.textinput.max_length"u8;
+
         [NativeTypeName("#define SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER \"SDL.textinput.android.inputtype\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER => "SDL.textinput.android.inputtype"u8;
     }

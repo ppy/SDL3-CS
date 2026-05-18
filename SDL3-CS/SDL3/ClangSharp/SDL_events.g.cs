@@ -76,8 +76,9 @@ namespace SDL
         SDL_EVENT_WINDOW_LEAVE_FULLSCREEN,
         SDL_EVENT_WINDOW_DESTROYED,
         SDL_EVENT_WINDOW_HDR_STATE_CHANGED,
+        SDL_EVENT_WINDOW_SETTINGS_CHANGED,
         SDL_EVENT_WINDOW_FIRST = SDL_EVENT_WINDOW_SHOWN,
-        SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_HDR_STATE_CHANGED,
+        SDL_EVENT_WINDOW_LAST = SDL_EVENT_WINDOW_SETTINGS_CHANGED,
         SDL_EVENT_KEY_DOWN = 0x300,
         SDL_EVENT_KEY_UP,
         SDL_EVENT_TEXT_EDITING,
@@ -115,6 +116,8 @@ namespace SDL
         SDL_EVENT_GAMEPAD_SENSOR_UPDATE,
         SDL_EVENT_GAMEPAD_UPDATE_COMPLETE,
         SDL_EVENT_GAMEPAD_STEAM_HANDLE_UPDATED,
+        SDL_EVENT_GAMEPAD_CAPSENSE_TOUCH,
+        SDL_EVENT_GAMEPAD_CAPSENSE_RELEASE,
         SDL_EVENT_FINGER_DOWN = 0x700,
         SDL_EVENT_FINGER_UP,
         SDL_EVENT_FINGER_MOTION,
@@ -686,6 +689,31 @@ namespace SDL
         }
     }
 
+    public partial struct SDL_GamepadCapSenseEvent
+    {
+        public SDL_EventType type;
+
+        [NativeTypeName("Uint32")]
+        public uint reserved;
+
+        [NativeTypeName("Uint64")]
+        public ulong timestamp;
+
+        public SDL_JoystickID which;
+
+        [NativeTypeName("Uint8")]
+        public byte capsense;
+
+        [NativeTypeName("bool")]
+        public SDLBool down;
+
+        [NativeTypeName("Uint8")]
+        public byte padding1;
+
+        [NativeTypeName("Uint8")]
+        public byte padding2;
+    }
+
     public partial struct SDL_AudioDeviceEvent
     {
         public SDL_EventType type;
@@ -1071,6 +1099,9 @@ namespace SDL
 
         [FieldOffset(0)]
         public SDL_GamepadSensorEvent gsensor;
+
+        [FieldOffset(0)]
+        public SDL_GamepadCapSenseEvent gcapsense;
 
         [FieldOffset(0)]
         public SDL_AudioDeviceEvent adevice;

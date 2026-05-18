@@ -44,6 +44,10 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_IsPhone();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_IsTablet();
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]

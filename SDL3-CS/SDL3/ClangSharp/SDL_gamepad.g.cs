@@ -46,6 +46,7 @@ namespace SDL
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT,
         SDL_GAMEPAD_TYPE_NINTENDO_SWITCH_JOYCON_PAIR,
         SDL_GAMEPAD_TYPE_GAMECUBE,
+        SDL_GAMEPAD_TYPE_STEAM,
         SDL_GAMEPAD_TYPE_COUNT,
     }
 
@@ -106,6 +107,16 @@ namespace SDL
         SDL_GAMEPAD_AXIS_COUNT,
     }
 
+    public enum SDL_GamepadCapSenseType
+    {
+        SDL_GAMEPAD_CAPSENSE_INVALID = -1,
+        SDL_GAMEPAD_CAPSENSE_LEFT_STICK,
+        SDL_GAMEPAD_CAPSENSE_RIGHT_STICK,
+        SDL_GAMEPAD_CAPSENSE_LEFT_GRIP,
+        SDL_GAMEPAD_CAPSENSE_RIGHT_GRIP,
+        SDL_GAMEPAD_CAPSENSE_COUNT,
+    }
+
     public enum SDL_GamepadBindingType
     {
         SDL_GAMEPAD_BINDTYPE_NONE = 0,
@@ -118,12 +129,12 @@ namespace SDL
     {
         public SDL_GamepadBindingType input_type;
 
-        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L270_C5")]
+        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L289_C5")]
         public _input_e__Union input;
 
         public SDL_GamepadBindingType output_type;
 
-        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L290_C5")]
+        [NativeTypeName("__AnonymousRecord_SDL_gamepad_L309_C5")]
         public _output_e__Union output;
 
         [StructLayout(LayoutKind.Explicit)]
@@ -133,11 +144,11 @@ namespace SDL
             public int button;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L274_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L293_C9")]
             public _axis_e__Struct axis;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L281_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L300_C9")]
             public _hat_e__Struct hat;
 
             public partial struct _axis_e__Struct
@@ -164,7 +175,7 @@ namespace SDL
             public SDL_GamepadButton button;
 
             [FieldOffset(0)]
-            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L294_C9")]
+            [NativeTypeName("__AnonymousRecord_SDL_gamepad_L313_C9")]
             public _axis_e__Struct axis;
 
             public partial struct _axis_e__Struct
@@ -413,6 +424,14 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_GetGamepadSensorData(SDL_Gamepad* gamepad, SDL_SensorType type, float* data, int num_values);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GamepadHasCapSense(SDL_Gamepad* gamepad, SDL_GamepadCapSenseType type);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetGamepadCapSense(SDL_Gamepad* gamepad, SDL_GamepadCapSenseType type);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]

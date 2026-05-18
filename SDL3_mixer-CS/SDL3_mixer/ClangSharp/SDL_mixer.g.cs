@@ -100,10 +100,19 @@ namespace SDL
         public static extern SDLBool MIX_GetMixerFormat(MIX_Mixer* mixer, SDL_AudioSpec* spec);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void MIX_LockMixer(MIX_Mixer* mixer);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void MIX_UnlockMixer(MIX_Mixer* mixer);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern MIX_Audio* MIX_LoadAudio_IO(MIX_Mixer* mixer, SDL_IOStream* io, [NativeTypeName("bool")] SDLBool predecode, [NativeTypeName("bool")] SDLBool closeio);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern MIX_Audio* MIX_LoadAudio(MIX_Mixer* mixer, [NativeTypeName("const char *")] byte* path, [NativeTypeName("bool")] SDLBool predecode);
+
+        [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern MIX_Audio* MIX_LoadAudioNoCopy(MIX_Mixer* mixer, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("size_t")] nuint datalen, [NativeTypeName("bool")] SDLBool free_when_done);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern MIX_Audio* MIX_LoadAudioWithProperties(SDL_PropertiesID props);
@@ -370,8 +379,7 @@ namespace SDL
         public static extern SDLBool MIX_SetPostMixCallback(MIX_Mixer* mixer, [NativeTypeName("MIX_PostMixCallback")] delegate* unmanaged[Cdecl]<IntPtr, MIX_Mixer*, SDL_AudioSpec*, float*, int, void> cb, [NativeTypeName("void*")] IntPtr userdata);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("bool")]
-        public static extern SDLBool MIX_Generate(MIX_Mixer* mixer, [NativeTypeName("void*")] IntPtr buffer, int buflen);
+        public static extern int MIX_Generate(MIX_Mixer* mixer, [NativeTypeName("void*")] IntPtr buffer, int buflen);
 
         [DllImport("SDL3_mixer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern MIX_AudioDecoder* MIX_CreateAudioDecoder([NativeTypeName("const char *")] byte* path, SDL_PropertiesID props);
@@ -395,14 +403,14 @@ namespace SDL
         [NativeTypeName("#define SDL_MIXER_MAJOR_VERSION 3")]
         public const int SDL_MIXER_MAJOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_MIXER_MINOR_VERSION 1")]
-        public const int SDL_MIXER_MINOR_VERSION = 1;
+        [NativeTypeName("#define SDL_MIXER_MINOR_VERSION 3")]
+        public const int SDL_MIXER_MINOR_VERSION = 3;
 
-        [NativeTypeName("#define SDL_MIXER_MICRO_VERSION 3")]
-        public const int SDL_MIXER_MICRO_VERSION = 3;
+        [NativeTypeName("#define SDL_MIXER_MICRO_VERSION 0")]
+        public const int SDL_MIXER_MICRO_VERSION = 0;
 
         [NativeTypeName("#define SDL_MIXER_VERSION SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_MICRO_VERSION)")]
-        public const int SDL_MIXER_VERSION = ((3) * 1000000 + (1) * 1000 + (3));
+        public const int SDL_MIXER_VERSION = ((3) * 1000000 + (3) * 1000 + (0));
 
         [NativeTypeName("#define MIX_PROP_MIXER_DEVICE_NUMBER \"SDL_mixer.mixer.device\"")]
         public static ReadOnlySpan<byte> MIX_PROP_MIXER_DEVICE_NUMBER => "SDL_mixer.mixer.device"u8;
@@ -421,6 +429,9 @@ namespace SDL
 
         [NativeTypeName("#define MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN \"SDL_mixer.audio.load.skip_metadata_tags\"")]
         public static ReadOnlySpan<byte> MIX_PROP_AUDIO_LOAD_SKIP_METADATA_TAGS_BOOLEAN => "SDL_mixer.audio.load.skip_metadata_tags"u8;
+
+        [NativeTypeName("#define MIX_PROP_AUDIO_LOAD_IGNORE_LOOPS_BOOLEAN \"SDL_mixer.audio.load.ignore_loops\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_AUDIO_LOAD_IGNORE_LOOPS_BOOLEAN => "SDL_mixer.audio.load.ignore_loops"u8;
 
         [NativeTypeName("#define MIX_PROP_AUDIO_DECODER_STRING \"SDL_mixer.audio.decoder\"")]
         public static ReadOnlySpan<byte> MIX_PROP_AUDIO_DECODER_STRING => "SDL_mixer.audio.decoder"u8;
@@ -473,6 +484,9 @@ namespace SDL
         [NativeTypeName("#define MIX_PROP_PLAY_START_MILLISECOND_NUMBER \"SDL_mixer.play.start_millisecond\"")]
         public static ReadOnlySpan<byte> MIX_PROP_PLAY_START_MILLISECOND_NUMBER => "SDL_mixer.play.start_millisecond"u8;
 
+        [NativeTypeName("#define MIX_PROP_PLAY_START_ORDER_NUMBER \"SDL_mixer.play.start_order\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_START_ORDER_NUMBER => "SDL_mixer.play.start_order"u8;
+
         [NativeTypeName("#define MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER \"SDL_mixer.play.loop_start_frame\"")]
         public static ReadOnlySpan<byte> MIX_PROP_PLAY_LOOP_START_FRAME_NUMBER => "SDL_mixer.play.loop_start_frame"u8;
 
@@ -493,5 +507,8 @@ namespace SDL
 
         [NativeTypeName("#define MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER \"SDL_mixer.play.append_silence_milliseconds\"")]
         public static ReadOnlySpan<byte> MIX_PROP_PLAY_APPEND_SILENCE_MILLISECONDS_NUMBER => "SDL_mixer.play.append_silence_milliseconds"u8;
+
+        [NativeTypeName("#define MIX_PROP_PLAY_HALT_WHEN_EXHAUSTED_BOOLEAN \"SDL_mixer.play.halt_when_exhausted\"")]
+        public static ReadOnlySpan<byte> MIX_PROP_PLAY_HALT_WHEN_EXHAUSTED_BOOLEAN => "SDL_mixer.play.halt_when_exhausted"u8;
     }
 }
