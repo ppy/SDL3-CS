@@ -816,6 +816,9 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING \"SDL.window.create.emscripten.keyboard_element\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING => "SDL.window.create.emscripten.keyboard_element"u8;
 
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_VISIONOS_SETTINGS_STRING \"SDL.window.create.visionos.settings\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_VISIONOS_SETTINGS_STRING => "SDL.window.create.visionos.settings"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_SHAPE_POINTER \"SDL.window.shape\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_SHAPE_POINTER => "SDL.window.shape"u8;
 
@@ -932,6 +935,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING \"SDL.window.emscripten.keyboard_element\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_EMSCRIPTEN_KEYBOARD_ELEMENT_STRING => "SDL.window.emscripten.keyboard_element"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_VISIONOS_SETTINGS_STRING \"SDL.window.visionos.settings\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_VISIONOS_SETTINGS_STRING => "SDL.window.visionos.settings"u8;
 
         [NativeTypeName("#define SDL_WINDOW_SURFACE_VSYNC_DISABLED 0")]
         public const int SDL_WINDOW_SURFACE_VSYNC_DISABLED = 0;

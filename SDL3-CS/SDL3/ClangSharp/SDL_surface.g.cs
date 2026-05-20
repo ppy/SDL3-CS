@@ -152,6 +152,12 @@ namespace SDL
         public static extern SDLBool SDL_SavePNG(SDL_Surface* surface, [NativeTypeName("const char *")] byte* file);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* SDL_LoadJPG_IO(SDL_IOStream* src, [NativeTypeName("bool")] SDLBool closeio);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_Surface* SDL_LoadJPG([NativeTypeName("const char *")] byte* file);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_SetSurfaceRLE(SDL_Surface* surface, [NativeTypeName("bool")] SDLBool enabled);
 

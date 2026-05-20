@@ -484,6 +484,18 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetGPURenderStateSamplerBindings(SDL_GPURenderState* state, int num_sampler_bindings, [NativeTypeName("const SDL_GPUTextureSamplerBinding *")] SDL_GPUTextureSamplerBinding* sampler_bindings);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetGPURenderStateStorageTextures(SDL_GPURenderState* state, int num_storage_textures, [NativeTypeName("SDL_GPUTexture *const *")] SDL_GPUTexture** storage_textures);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetGPURenderStateStorageBuffers(SDL_GPURenderState* state, int num_storage_buffers, [NativeTypeName("SDL_GPUBuffer *const *")] SDL_GPUBuffer** storage_buffers);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState* state, [NativeTypeName("Uint32")] uint slot_index, [NativeTypeName("const void *")] IntPtr data, [NativeTypeName("Uint32")] uint length);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
