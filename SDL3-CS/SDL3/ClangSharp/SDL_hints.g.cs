@@ -196,6 +196,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_ENABLE_SCREEN_KEYBOARD \"SDL_ENABLE_SCREEN_KEYBOARD\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ENABLE_SCREEN_KEYBOARD => "SDL_ENABLE_SCREEN_KEYBOARD"u8;
 
+        [NativeTypeName("#define SDL_HINT_ENABLE_STEAM_SCREEN_KEYBOARD \"SDL_ENABLE_STEAM_SCREEN_KEYBOARD\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_ENABLE_STEAM_SCREEN_KEYBOARD => "SDL_ENABLE_STEAM_SCREEN_KEYBOARD"u8;
+
         [NativeTypeName("#define SDL_HINT_EVDEV_DEVICES \"SDL_EVDEV_DEVICES\"")]
         public static ReadOnlySpan<byte> SDL_HINT_EVDEV_DEVICES => "SDL_EVDEV_DEVICES"u8;
 

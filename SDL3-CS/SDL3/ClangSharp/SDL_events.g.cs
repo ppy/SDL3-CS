@@ -147,6 +147,7 @@ namespace SDL
         SDL_EVENT_CAMERA_DEVICE_REMOVED,
         SDL_EVENT_CAMERA_DEVICE_APPROVED,
         SDL_EVENT_CAMERA_DEVICE_DENIED,
+        SDL_EVENT_NOTIFICATION_ACTION_INVOKED = 0x1500,
         SDL_EVENT_RENDER_TARGETS_RESET = 0x2000,
         SDL_EVENT_RENDER_DEVICE_RESET,
         SDL_EVENT_RENDER_DEVICE_LOST,
@@ -752,6 +753,23 @@ namespace SDL
         public SDL_CameraID which;
     }
 
+    public unsafe partial struct SDL_NotificationEvent
+    {
+        public SDL_EventType type;
+
+        [NativeTypeName("Uint32")]
+        public uint reserved;
+
+        [NativeTypeName("Uint64")]
+        public ulong timestamp;
+
+        [NativeTypeName("SDL_NotificationID")]
+        public uint which;
+
+        [NativeTypeName("const char *")]
+        public byte* action_id;
+    }
+
     public partial struct SDL_RenderEvent
     {
         public SDL_EventType type;
@@ -805,6 +823,14 @@ namespace SDL
         public float scale;
 
         public SDL_WindowID windowID;
+
+        public float span_x;
+
+        public float span_y;
+
+        public float focus_x;
+
+        public float focus_y;
     }
 
     public partial struct SDL_PenProximityEvent
@@ -1147,6 +1173,9 @@ namespace SDL
 
         [FieldOffset(0)]
         public SDL_ClipboardEvent clipboard;
+
+        [FieldOffset(0)]
+        public SDL_NotificationEvent notification;
 
         [FieldOffset(0)]
         [NativeTypeName("Uint8[128]")]
