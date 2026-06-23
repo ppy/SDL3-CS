@@ -38,6 +38,11 @@ namespace SDL
         public string? GetData() => SDL3.PtrToStringUTF8(data);
     }
 
+    public unsafe partial struct SDL_NotificationEvent
+    {
+        public string? GetActionId() => SDL3.PtrToStringUTF8(action_id);
+    }
+
     public partial struct SDL_MouseButtonEvent
     {
         public SDLButton Button => (SDLButton)button;

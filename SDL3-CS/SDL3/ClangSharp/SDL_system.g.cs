@@ -28,6 +28,21 @@ using System.Runtime.InteropServices;
 
 namespace SDL
 {
+    public enum SDL_FormFactor
+    {
+        SDL_FORMFACTOR_UNKNOWN = 0,
+        SDL_FORMFACTOR_DESKTOP,
+        SDL_FORMFACTOR_LAPTOP,
+        SDL_FORMFACTOR_PHONE,
+        SDL_FORMFACTOR_TABLET,
+        SDL_FORMFACTOR_CONSOLE,
+        SDL_FORMFACTOR_HANDHELD,
+        SDL_FORMFACTOR_WATCH,
+        SDL_FORMFACTOR_TV,
+        SDL_FORMFACTOR_HEADSET,
+        SDL_FORMFACTOR_CAR,
+    }
+
     public enum SDL_Sandbox
     {
         SDL_SANDBOX_NONE = 0,
@@ -35,6 +50,7 @@ namespace SDL
         SDL_SANDBOX_FLATPAK,
         SDL_SANDBOX_SNAP,
         SDL_SANDBOX_MACOS,
+        SDL_SANDBOX_LOMIRI,
     }
 
     public static unsafe partial class SDL3
@@ -53,6 +69,13 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_IsTV();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_FormFactor SDL_GetDeviceFormFactor();
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_GetDeviceFormFactorName", ExactSpelling = true)]
+        [return: NativeTypeName("const char *")]
+        public static extern byte* Unsafe_SDL_GetDeviceFormFactorName(SDL_FormFactor form_factor);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_Sandbox SDL_GetSandbox();

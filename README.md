@@ -20,14 +20,19 @@ Contributions to keep the bindings up-to-date with upstream changes are welcome.
 | `SDL3_ttf-CS`   | &check;   | &check;   | &check;     | &check;     | &check;   | &check;     | &check;     | &check;       | &check;     | &check; | &check;   |
 | `SDL3_mixer-CS` | &check;   | &check;   | &check;     | &check;     | &check;   | &check;     | &check;     | &check;       | &check;     | &check; | API 24+   |
 
-## Generating bindings
+## How to update SDL
 
-Bindings are generated via the provided Dockerfile:
-
-```sh
-docker build -t 'sdl-gen' .
-docker run --rm -v .:/app -w /app -it sdl-gen
-```
+1. Ensure all submodules are correctly initialised:
+   ```sh
+   git submodule update --init --recursive
+   ```
+2. Check out submodules at new desired upstream commits.
+3. Regenerate C# bindings via:
+   ```sh
+   docker build -t 'sdl-gen' .
+   docker run --rm -v .:/app -w /app -it sdl-gen
+   ```
+4. Run the "Build Native" (`.github/workflows/build.yml`) workflow to generate platform binaries.
 
 ## License
 

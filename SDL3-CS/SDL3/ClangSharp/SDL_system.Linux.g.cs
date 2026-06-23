@@ -23,6 +23,7 @@
   3. This notice may not be removed or altered from any source distribution.
 */
 
+using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -39,5 +40,19 @@ namespace SDL
         [return: NativeTypeName("bool")]
         [SupportedOSPlatform("Linux")]
         public static extern SDLBool SDL_SetLinuxThreadPriorityAndPolicy([NativeTypeName("Sint64")] long threadID, int sdlPriority, int schedPolicy);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        [SupportedOSPlatform("Linux")]
+        public static extern SDLBool SDL_IsUbuntuTouch();
+
+        [NativeTypeName("#define SDL_PROP_GLOBAL_SYSTEM_UBUNTU_TOUCH_APPID_STRING \"SDL.system.ubuntu_touch.appid\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_SYSTEM_UBUNTU_TOUCH_APPID_STRING => "SDL.system.ubuntu_touch.appid"u8;
+
+        [NativeTypeName("#define SDL_PROP_GLOBAL_SYSTEM_UBUNTU_TOUCH_HOOK_STRING \"SDL.system.ubuntu_touch.hook\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_SYSTEM_UBUNTU_TOUCH_HOOK_STRING => "SDL.system.ubuntu_touch.hook"u8;
+
+        [NativeTypeName("#define SDL_PROP_GLOBAL_SYSTEM_UBUNTU_TOUCH_APP_VERSION_STRING \"SDL.system.ubuntu_touch.app_version\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_GLOBAL_SYSTEM_UBUNTU_TOUCH_APP_VERSION_STRING => "SDL.system.ubuntu_touch.app_version"u8;
     }
 }

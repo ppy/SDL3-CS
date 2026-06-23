@@ -82,6 +82,10 @@ namespace SDL
         public static extern IntPtr SDL_aligned_alloc([NativeTypeName("size_t")] nuint alignment, [NativeTypeName("size_t")] nuint size);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr SDL_aligned_alloc_zero([NativeTypeName("size_t")] nuint alignment, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void SDL_aligned_free([NativeTypeName("void*")] IntPtr mem);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -259,6 +263,18 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("long")]
         public static extern int SDL_wcstol([NativeTypeName("const wchar_t *")] IntPtr str, [NativeTypeName("wchar_t **")] IntPtr* endp, int @base);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("unsigned long")]
+        public static extern uint SDL_wcstoul([NativeTypeName("const wchar_t *")] IntPtr str, [NativeTypeName("wchar_t **")] IntPtr* endp, int @base);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("long long")]
+        public static extern long SDL_wcstoll([NativeTypeName("const wchar_t *")] IntPtr str, [NativeTypeName("wchar_t **")] IntPtr* endp, int @base);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("unsigned long long")]
+        public static extern ulong SDL_wcstoull([NativeTypeName("const wchar_t *")] IntPtr str, [NativeTypeName("wchar_t **")] IntPtr* endp, int @base);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
