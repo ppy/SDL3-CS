@@ -100,6 +100,10 @@
       <PackagePath>runtimes/android-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\browser-wasm\libSDL3.a">
+      <PackagePath>runtimes/browser-wasm/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
     <EmbeddedJar Include="Jars\SDL3AndroidBridge.jar"/>
   </ItemGroup>
 

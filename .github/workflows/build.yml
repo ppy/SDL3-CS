@@ -30,6 +30,7 @@ jobs:
           - { name: android-arm,   os: ubuntu-22.04,  flags: -GNinja, abi: armeabi-v7a }
           - { name: android-x64,   os: ubuntu-22.04,  flags: -GNinja, abi: x86_64 }
           - { name: android-x86,   os: ubuntu-22.04,  flags: -GNinja, abi: x86 }
+          - { name: browser-wasm,  os: ubuntu-22.04,  flags: -GNinja, emscripten: 1 }
     steps:
       - uses: actions/checkout@v4
         with:
@@ -51,6 +52,12 @@ jobs:
         run: |
           sdkmanager --install "platforms;android-$PLATFORM_VER"
           sdkmanager --install "ndk;$NDK_VER"
+
+      - name: Setup Emscripten
+        if: matrix.platform.emscripten == 1
+        uses: emscripten-core/setup-emsdk@v16
+        with:
+          version: 6.0.2
 
       - name: Build (Linux ARM)
         if: contains(matrix.platform.container, 'arm')
@@ -76,6 +83,7 @@ jobs:
           RUNNER_OS: ${{ runner.os }}
           FLAGS: ${{ matrix.platform.flags }}
           ANDROID_ABI: ${{ matrix.platform.abi }}
+          EMSCRIPTEN: ${{ matrix.platform.emscripten }}
         run: ./External/build.sh
 
       - name: Get Actions user id

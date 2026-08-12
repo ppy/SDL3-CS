@@ -16,15 +16,31 @@ else
     SUDO=$(which sudo || exit 0)
 fi
 
-if [[ -n $ANDROID_ABI ]]; then
+if [[ -n $EMSCRIPTEN ]]; then
+    BUILD_PLATFORM="Emscripten"
+elif [[ -n $ANDROID_ABI ]]; then
     BUILD_PLATFORM="Android"
 else
     BUILD_PLATFORM="$RUNNER_OS"
 fi
 
+if [[ $BUILD_PLATFORM == 'Emscripten' ]]; then
+    CMAKE_WRAPPER="emcmake"
+    SDL_SHARED_FLAG=OFF
+    SDL_STATIC_FLAG=ON
+    EXTRA_CMAKE_FLAGS="-DCMAKE_PROJECT_INCLUDE=${PWD}/wasm.cmake -DBUILD_SHARED_LIBS=OFF -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=BOTH -DSDL_TESTS=OFF -DSDL_TEST_LIBRARY=OFF -DSDLTTF_SAMPLES=OFF -DSDLIMAGE_SAMPLES=OFF -DSDLMIXER_SAMPLES=OFF"
+else
+    CMAKE_WRAPPER=""
+    SDL_SHARED_FLAG=ON
+    SDL_STATIC_FLAG=OFF
+    EXTRA_CMAKE_FLAGS=""
+fi
+
 export DEBIAN_FRONTEND=noninteractive
 
-if [[ $BUILD_PLATFORM != 'Android' ]]; then
+if [[ $BUILD_PLATFORM == 'Emscripten' ]]; then
+    NATIVE_PATH="browser-wasm"
+elif [[ $BUILD_PLATFORM != 'Android' ]]; then
     NATIVE_PATH="$NAME"
 
     if [[ $BUILD_PLATFORM == 'Linux' ]]; then
@@ -130,6 +146,8 @@ elif [[ $BUILD_PLATFORM == 'Linux' ]]; then
     OUTPUT_LIB="lib/libSDL3variant.so"
 elif [[ $BUILD_PLATFORM == 'macOS' ]]; then
     OUTPUT_LIB="lib/libSDL3variant.dylib"
+elif [[ $BUILD_PLATFORM == 'Emscripten' ]]; then
+    OUTPUT_LIB="lib/libSDL3variant.a"
 fi
 
 # Use the correct CMAKE_PREFIX_PATH for SDL_image and SDL_ttf, probably due differences in Cmake versions.
@@ -141,6 +159,13 @@ elif [[ $BUILD_PLATFORM == 'Linux' ]]; then
     CMAKE_PREFIX_PATH="$CMAKE_INSTALL_PREFIX/lib/cmake/"
 elif [[ $BUILD_PLATFORM == 'macOS' ]]; then
     CMAKE_PREFIX_PATH="$CMAKE_INSTALL_PREFIX/lib/cmake/"
+elif [[ $BUILD_PLATFORM == 'Emscripten' ]]; then
+    CMAKE_PREFIX_PATH="$CMAKE_INSTALL_PREFIX/lib/cmake/"
+fi
+
+if [[ $BUILD_PLATFORM == 'Emscripten' ]]
+then
+    declare -A has_copied
 fi
 
 run_cmake() {
@@ -162,12 +187,26 @@ run_cmake() {
     fi
 
     rm -rf build
-    cmake -B build $FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED=ON -DSDL_STATIC=OFF "${@:3}"
+    $CMAKE_WRAPPER cmake -B build $FLAGS $EXTRA_CMAKE_FLAGS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSDL_SHARED=$SDL_SHARED_FLAG -DSDL_STATIC=$SDL_STATIC_FLAG "${@:3}"
     cmake --build build/ --config $BUILD_TYPE --verbose
     cmake --install build/ --prefix $CMAKE_INSTALL_PREFIX --config $BUILD_TYPE
 
     # Move build lib into correct folders
-    cp $CMAKE_INSTALL_PREFIX/$LIB_OUTPUT ../../native/$NATIVE_PATH
+    if [[ $BUILD_PLATFORM == 'Emscripten' ]]
+    then
+        for item in $(dirname $CMAKE_INSTALL_PREFIX/$LIB_OUTPUT)/*.a
+        do
+            file_name=$(basename ${item})
+            if [[ -z ${has_copied[${file_name}]} ]]
+            then
+                # cp ${item} ../../native/$NATIVE_PATH/${file_name/lib/}
+                cp ${item} ../../native/$NATIVE_PATH/$LIB_NAME/${file_name}
+                has_copied[${file_name}]=1
+            fi
+        done
+    else
+        cp $CMAKE_INSTALL_PREFIX/$LIB_OUTPUT ../../native/$NATIVE_PATH
+    fi
 
     popd
 }

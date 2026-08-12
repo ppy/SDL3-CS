@@ -3,11 +3,12 @@
 
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 using static SDL.SDL3;
 
 namespace SDL.Tests
 {
-    public sealed unsafe class MyWindow : IDisposable
+    public sealed unsafe partial class MyWindow : IDisposable
     {
         private bool flash;
         private ObjectHandle<MyWindow> objectHandle { get; }
@@ -89,7 +90,18 @@ namespace SDL.Tests
 
         public void Create()
         {
-            sdlWindowHandle = SDL_CreateWindow("hello"u8, 800, 600, SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY);
+            // context: https://github.com/dotnet/runtime/issues/112262
+            // This workaround will be removed in the future
+            [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+            static extern SDL_Window* SDL_CreateWindow([NativeTypeName("const char *")] byte* title, int w, int h, ulong flags);
+
+            if (OperatingSystem.IsBrowser())
+                fixed (byte* name = "hello"u8)
+                    sdlWindowHandle = SDL_CreateWindow(name, 800, 600, (ulong)(SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY));
+
+            else
+                sdlWindowHandle = SDL3.SDL_CreateWindow("hello"u8, 800, 600, SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY);
+
             renderer = SDL_CreateRenderer(sdlWindowHandle, (Utf8String)null);
         }
 
@@ -229,6 +241,35 @@ namespace SDL.Tests
                 SDL_QuitSubSystem(init_flags);
 
             objectHandle.Dispose();
+        }
+    }
+
+    partial class MyWindow
+    {
+        public async Task RunAsync()
+        {
+            while (run)
+            {
+                if (flash)
+                {
+                    flash = false;
+                    Console.WriteLine("flash!");
+                }
+
+                pollEvents();
+
+                unsafe
+                {
+                    SDL_SetRenderDrawColorFloat(renderer, SDL_sinf(frame) / 2 + 0.5f, SDL_cosf(frame) / 2 + 0.5f, 0.3f, 1.0f);
+                    SDL_RenderClear(renderer);
+                    SDL_RenderPresent(renderer);
+                }
+
+                frame += 0.015f;
+
+                // Cannot await in unsafe blocks
+                await Task.Delay(10);
+            }
         }
     }
 }

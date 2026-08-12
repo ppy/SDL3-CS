@@ -89,6 +89,10 @@
       <PackagePath>runtimes/android-x86/native</PackagePath>
       <Pack>true</Pack>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)..\native\browser-wasm\libSDL3_ttf.a">
+      <PackagePath>runtimes/browser-wasm/native</PackagePath>
+      <Pack>true</Pack>
+    </None>
   </ItemGroup>
 
 </Project>
