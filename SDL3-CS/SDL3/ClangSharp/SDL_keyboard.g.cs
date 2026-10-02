@@ -164,5 +164,8 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER \"SDL.textinput.android.inputtype\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_ANDROID_INPUTTYPE_NUMBER => "SDL.textinput.android.inputtype"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTINPUT_OPENHARMONY_INPUTTYPE_NUMBER \"SDL.textinput.openharmony.inputtype\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTINPUT_OPENHARMONY_INPUTTYPE_NUMBER => "SDL.textinput.openharmony.inputtype"u8;
     }
 }

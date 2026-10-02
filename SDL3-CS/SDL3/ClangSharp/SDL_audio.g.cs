@@ -85,6 +85,9 @@ namespace SDL
         public static extern int* SDL_GetAudioDeviceChannelMap(SDL_AudioDeviceID devid, int* count);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SDL_PropertiesID SDL_GetAudioDeviceProperties(SDL_AudioDeviceID devid);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern SDL_AudioDeviceID SDL_OpenAudioDevice(SDL_AudioDeviceID devid, [NativeTypeName("const SDL_AudioSpec *")] SDL_AudioSpec* spec);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -283,6 +286,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_AUDIO_DEVICE_DEFAULT_RECORDING ((SDL_AudioDeviceID) 0xFFFFFFFEu)")]
         public const SDL_AudioDeviceID SDL_AUDIO_DEVICE_DEFAULT_RECORDING = ((SDL_AudioDeviceID)(0xFFFFFFFEU));
+
+        [NativeTypeName("#define SDL_PROP_AUDIO_DEVICE_UNIQUE_ID_STRING \"SDL.audio.device.unique_id\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_AUDIO_DEVICE_UNIQUE_ID_STRING => "SDL.audio.device.unique_id"u8;
 
         [NativeTypeName("#define SDL_PROP_AUDIOSTREAM_AUTO_CLEANUP_BOOLEAN \"SDL.audiostream.auto_cleanup\"")]
         public static ReadOnlySpan<byte> SDL_PROP_AUDIOSTREAM_AUTO_CLEANUP_BOOLEAN => "SDL.audiostream.auto_cleanup"u8;

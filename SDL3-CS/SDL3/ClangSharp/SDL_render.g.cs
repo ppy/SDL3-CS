@@ -292,6 +292,14 @@ namespace SDL
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetRenderViewportFloat(SDL_Renderer* renderer, [NativeTypeName("const SDL_FRect *")] SDL_FRect* rect);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetRenderViewportFloat(SDL_Renderer* renderer, SDL_FRect* rect);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_RenderViewportSet(SDL_Renderer* renderer);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -305,6 +313,14 @@ namespace SDL
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
         public static extern SDLBool SDL_GetRenderClipRect(SDL_Renderer* renderer, SDL_Rect* rect);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_SetRenderClipRectFloat(SDL_Renderer* renderer, [NativeTypeName("const SDL_FRect *")] SDL_FRect* rect);
+
+        [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("bool")]
+        public static extern SDLBool SDL_GetRenderClipRectFloat(SDL_Renderer* renderer, SDL_FRect* rect);
 
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("bool")]
@@ -538,6 +554,12 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN \"SDL.renderer.create.gpu.shaders_msl\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_CREATE_GPU_SHADERS_MSL_BOOLEAN => "SDL.renderer.create.gpu.shaders_msl"u8;
 
+        [NativeTypeName("#define SDL_PROP_RENDERER_CREATE_METAL_DEVICE_POINTER \"SDL.renderer.create.metal.device\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_CREATE_METAL_DEVICE_POINTER => "SDL.renderer.create.metal.device"u8;
+
+        [NativeTypeName("#define SDL_PROP_RENDERER_CREATE_METAL_COMMAND_QUEUE_POINTER \"SDL.renderer.create.metal.command_queue\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_CREATE_METAL_COMMAND_QUEUE_POINTER => "SDL.renderer.create.metal.command_queue"u8;
+
         [NativeTypeName("#define SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER \"SDL.renderer.create.vulkan.instance\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER => "SDL.renderer.create.vulkan.instance"u8;
 
@@ -606,6 +628,12 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER \"SDL.renderer.d3d12.command_queue\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_D3D12_COMMAND_QUEUE_POINTER => "SDL.renderer.d3d12.command_queue"u8;
+
+        [NativeTypeName("#define SDL_PROP_RENDERER_METAL_DEVICE_POINTER \"SDL.renderer.metal.device\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_METAL_DEVICE_POINTER => "SDL.renderer.metal.device"u8;
+
+        [NativeTypeName("#define SDL_PROP_RENDERER_METAL_COMMAND_QUEUE_POINTER \"SDL.renderer.metal.command_queue\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_RENDERER_METAL_COMMAND_QUEUE_POINTER => "SDL.renderer.metal.command_queue"u8;
 
         [NativeTypeName("#define SDL_PROP_RENDERER_VULKAN_INSTANCE_POINTER \"SDL.renderer.vulkan.instance\"")]
         public static ReadOnlySpan<byte> SDL_PROP_RENDERER_VULKAN_INSTANCE_POINTER => "SDL.renderer.vulkan.instance"u8;
@@ -676,6 +704,21 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER \"SDL.texture.create.metal.pixelbuffer\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_METAL_PIXELBUFFER_POINTER => "SDL.texture.create.metal.pixelbuffer"u8;
 
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_POINTER \"SDL.texture.create.metal.texture\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_POINTER => "SDL.texture.create.metal.texture"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_UV_POINTER \"SDL.texture.create.metal.texture_uv\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_UV_POINTER => "SDL.texture.create.metal.texture_uv"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_U_POINTER \"SDL.texture.create.metal.texture_u\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_U_POINTER => "SDL.texture.create.metal.texture_u"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_V_POINTER \"SDL.texture.create.metal.texture_v\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_V_POINTER => "SDL.texture.create.metal.texture_v"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_USAGE_NUMBER \"SDL.texture.create.metal.texture_usage\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_METAL_TEXTURE_USAGE_NUMBER => "SDL.texture.create.metal.texture_usage"u8;
+
         [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER \"SDL.texture.create.opengl.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_OPENGL_TEXTURE_NUMBER => "SDL.texture.create.opengl.texture"u8;
 
@@ -703,8 +746,20 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER \"SDL.texture.create.vulkan.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_NUMBER => "SDL.texture.create.vulkan.texture"u8;
 
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_U_NUMBER \"SDL.texture.create.vulkan.texture_u\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_U_NUMBER => "SDL.texture.create.vulkan.texture_u"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_V_NUMBER \"SDL.texture.create.vulkan.texture_v\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_VULKAN_TEXTURE_V_NUMBER => "SDL.texture.create.vulkan.texture_v"u8;
+
         [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER \"SDL.texture.create.vulkan.layout\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_VULKAN_LAYOUT_NUMBER => "SDL.texture.create.vulkan.layout"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_VULKAN_USAGE_NUMBER \"SDL.texture.create.vulkan.usage\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_VULKAN_USAGE_NUMBER => "SDL.texture.create.vulkan.usage"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_VULKAN_ANDROID_HARDWARE_BUFFER_POINTER \"SDL.texture.create.vulkan.android_hardware_buffer\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_VULKAN_ANDROID_HARDWARE_BUFFER_POINTER => "SDL.texture.create.vulkan.android_hardware_buffer"u8;
 
         [NativeTypeName("#define SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER \"SDL.texture.create.gpu.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_CREATE_GPU_TEXTURE_POINTER => "SDL.texture.create.gpu.texture"u8;
@@ -757,6 +812,18 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_TEXTURE_D3D12_TEXTURE_V_POINTER \"SDL.texture.d3d12.texture_v\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_D3D12_TEXTURE_V_POINTER => "SDL.texture.d3d12.texture_v"u8;
 
+        [NativeTypeName("#define SDL_PROP_TEXTURE_METAL_TEXTURE_POINTER \"SDL.texture.metal.texture\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_METAL_TEXTURE_POINTER => "SDL.texture.metal.texture"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_METAL_TEXTURE_UV_POINTER \"SDL.texture.metal.texture_uv\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_METAL_TEXTURE_UV_POINTER => "SDL.texture.metal.texture_uv"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_METAL_TEXTURE_U_POINTER \"SDL.texture.metal.texture_u\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_METAL_TEXTURE_U_POINTER => "SDL.texture.metal.texture_u"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_METAL_TEXTURE_V_POINTER \"SDL.texture.metal.texture_v\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_METAL_TEXTURE_V_POINTER => "SDL.texture.metal.texture_v"u8;
+
         [NativeTypeName("#define SDL_PROP_TEXTURE_OPENGL_TEXTURE_NUMBER \"SDL.texture.opengl.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_OPENGL_TEXTURE_NUMBER => "SDL.texture.opengl.texture"u8;
 
@@ -795,6 +862,12 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER \"SDL.texture.vulkan.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_VULKAN_TEXTURE_NUMBER => "SDL.texture.vulkan.texture"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_VULKAN_TEXTURE_U_NUMBER \"SDL.texture.vulkan.texture_u\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_VULKAN_TEXTURE_U_NUMBER => "SDL.texture.vulkan.texture_u"u8;
+
+        [NativeTypeName("#define SDL_PROP_TEXTURE_VULKAN_TEXTURE_V_NUMBER \"SDL.texture.vulkan.texture_v\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_VULKAN_TEXTURE_V_NUMBER => "SDL.texture.vulkan.texture_v"u8;
 
         [NativeTypeName("#define SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER \"SDL.texture.gpu.texture\"")]
         public static ReadOnlySpan<byte> SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER => "SDL.texture.gpu.texture"u8;

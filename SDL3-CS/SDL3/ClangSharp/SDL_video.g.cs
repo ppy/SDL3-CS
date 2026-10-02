@@ -807,11 +807,17 @@ namespace SDL
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER \"SDL.window.create.wayland.wl_surface\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_WL_SURFACE_POINTER => "SDL.window.create.wayland.wl_surface"u8;
 
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WAYLAND_ENABLE_INSETS_BOOLEAN \"SDL.window.create.wayland.enable_insets\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WAYLAND_ENABLE_INSETS_BOOLEAN => "SDL.window.create.wayland.enable_insets"u8;
+
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER \"SDL.window.create.win32.hwnd\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_HWND_POINTER => "SDL.window.create.win32.hwnd"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER \"SDL.window.create.win32.pixel_format_hwnd\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_PIXEL_FORMAT_HWND_POINTER => "SDL.window.create.win32.pixel_format_hwnd"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_WIN32_STYLE_EX_NUMBER \"SDL.window.create.win32.style_ex\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_WIN32_STYLE_EX_NUMBER => "SDL.window.create.win32.style_ex"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER \"SDL.window.create.x11.window\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_CREATE_X11_WINDOW_NUMBER => "SDL.window.create.x11.window"u8;
@@ -842,6 +848,15 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_ANDROID_SURFACE_POINTER \"SDL.window.android.surface\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_ANDROID_SURFACE_POINTER => "SDL.window.android.surface"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_OPENHARMONY_XCOMPONENT_POINTER \"SDL.window.openharmony.xcomponent\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_OPENHARMONY_XCOMPONENT_POINTER => "SDL.window.openharmony.xcomponent"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_OPENHARMONY_WINDOW_POINTER \"SDL.window.openharmony.window\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_OPENHARMONY_WINDOW_POINTER => "SDL.window.openharmony.window"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_OPENHARMONY_SURFACE_POINTER \"SDL.window.openharmony.surface\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_OPENHARMONY_SURFACE_POINTER => "SDL.window.openharmony.surface"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_UIKIT_WINDOW_POINTER \"SDL.window.uikit.window\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_UIKIT_WINDOW_POINTER => "SDL.window.uikit.window"u8;
@@ -929,6 +944,18 @@ namespace SDL
 
         [NativeTypeName("#define SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER \"SDL.window.wayland.xdg_positioner\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WAYLAND_XDG_POSITIONER_POINTER => "SDL.window.wayland.xdg_positioner"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_LEFT_NUMBER \"SDL.window.wayland.border_inset_left\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_LEFT_NUMBER => "SDL.window.wayland.border_inset_left"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_TOP_NUMBER \"SDL.window.wayland.border_inset_top\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_TOP_NUMBER => "SDL.window.wayland.border_inset_top"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_RIGHT_NUMBER \"SDL.window.wayland.border_inset_right\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_RIGHT_NUMBER => "SDL.window.wayland.border_inset_right"u8;
+
+        [NativeTypeName("#define SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_BOTTOM_NUMBER \"SDL.window.wayland.border_inset_bottom\"")]
+        public static ReadOnlySpan<byte> SDL_PROP_WINDOW_WAYLAND_BORDER_INSET_BOTTOM_NUMBER => "SDL.window.wayland.border_inset_bottom"u8;
 
         [NativeTypeName("#define SDL_PROP_WINDOW_X11_DISPLAY_POINTER \"SDL.window.x11.display\"")]
         public static ReadOnlySpan<byte> SDL_PROP_WINDOW_X11_DISPLAY_POINTER => "SDL.window.x11.display"u8;

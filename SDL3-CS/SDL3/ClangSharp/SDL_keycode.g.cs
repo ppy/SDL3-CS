@@ -516,6 +516,9 @@ namespace SDL
         [NativeTypeName("#define SDLK_EXSEL 0x400000a4u")]
         public const uint SDLK_EXSEL = 0x400000a4U;
 
+        [NativeTypeName("#define SDLK_FRONT 0x400000a5u")]
+        public const uint SDLK_FRONT = 0x400000a5U;
+
         [NativeTypeName("#define SDLK_KP_00 0x400000b0u")]
         public const uint SDLK_KP_00 = 0x400000b0U;
 

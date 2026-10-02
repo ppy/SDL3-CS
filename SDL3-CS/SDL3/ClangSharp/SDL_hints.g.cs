@@ -79,6 +79,9 @@ namespace SDL
         [NativeTypeName("#define SDL_HINT_ANDROID_LOW_LATENCY_AUDIO \"SDL_ANDROID_LOW_LATENCY_AUDIO\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ANDROID_LOW_LATENCY_AUDIO => "SDL_ANDROID_LOW_LATENCY_AUDIO"u8;
 
+        [NativeTypeName("#define SDL_HINT_ANDROID_AAUDIO_INPUT_PRESET \"SDL_ANDROID_AAUDIO_INPUT_PRESET\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_ANDROID_AAUDIO_INPUT_PRESET => "SDL_ANDROID_AAUDIO_INPUT_PRESET"u8;
+
         [NativeTypeName("#define SDL_HINT_ANDROID_TRAP_BACK_BUTTON \"SDL_ANDROID_TRAP_BACK_BUTTON\"")]
         public static ReadOnlySpan<byte> SDL_HINT_ANDROID_TRAP_BACK_BUTTON => "SDL_ANDROID_TRAP_BACK_BUTTON"u8;
 
@@ -522,6 +525,9 @@ namespace SDL
 
         [NativeTypeName("#define SDL_HINT_MAC_SCROLL_MOMENTUM \"SDL_MAC_SCROLL_MOMENTUM\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MAC_SCROLL_MOMENTUM => "SDL_MAC_SCROLL_MOMENTUM"u8;
+
+        [NativeTypeName("#define SDL_HINT_MAC_USE_GCMOUSE \"SDL_MAC_USE_GCMOUSE\"")]
+        public static ReadOnlySpan<byte> SDL_HINT_MAC_USE_GCMOUSE => "SDL_MAC_USE_GCMOUSE"u8;
 
         [NativeTypeName("#define SDL_HINT_MAC_PRESS_AND_HOLD \"SDL_MAC_PRESS_AND_HOLD\"")]
         public static ReadOnlySpan<byte> SDL_HINT_MAC_PRESS_AND_HOLD => "SDL_MAC_PRESS_AND_HOLD"u8;
